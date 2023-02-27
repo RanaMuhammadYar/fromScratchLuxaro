@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('title')
-    <title>Test Page</title>
+    <title>Home</title>
 @endsection
 @section('content')
 
