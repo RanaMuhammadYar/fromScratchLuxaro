@@ -26,28 +26,34 @@
                         </div>
                     </div>
                     <div class="user-info">
-                        <a href="javascript:void" id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                            aria-expanded="false"><i class="fa fa-chevron-down me-3"></i> Good afternoon, [Jon Dever] <i
-                                class="fa fa-user-circle" aria-hidden="true"></i></a>
-                        <div class="dropdown-menu p-4 border-top" aria-labelledby="dropdownMenuButton2">
-                            <div class="row">
-                                <div class="col-6">
-                                    <ul class="list-unstyled m-0 p-0">
-                                        <li>My Account | My Profile</li>
-                                        <li>Goldevine: <i class="fa fa-lock"></i> <i class="fa fa-heart"></i></li>
-                                        <li>My Compaigns | Dashboard</li>
-                                    </ul>
-                                </div>
-                                <div class="col-6">
-                                    <ul class="list-unstyled m-0 p-0">
-                                        <li>Luxauro: <i class="fa fa-lock"></i> <i class="fa fa-heart"></i></li>
-                                        <li>My Purchase | My Seller Files</li>
-                                        <li>Gold Metal Guild: <i class="fa fa-comment"></i> <i class="fa fa-user"></i>
-                                        </li>
-                                    </ul>
+                        @if (Auth::check())
+                            <a href="javascript:void" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                aria-expanded="false"><i class="fa fa-chevron-down me-3"></i> Good afternoon, [Jon
+                                Dever] <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                            <div class="dropdown-menu p-4 border-top" aria-labelledby="dropdownMenuButton2">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul class="list-unstyled m-0 p-0">
+                                            <li>My Account | My Profile</li>
+                                            <li>Goldevine: <i class="fa fa-lock"></i> <i class="fa fa-heart"></i></li>
+                                            <li>My Compaigns | Dashboard</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6">
+                                        <ul class="list-unstyled m-0 p-0">
+                                            <li>Luxauro: <i class="fa fa-lock"></i> <i class="fa fa-heart"></i></li>
+                                            <li>My Purchase | My Seller Files</li>
+                                            <li>Gold Metal Guild: <i class="fa fa-comment"></i> <i
+                                                    class="fa fa-user"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <a href="{{ route('login') }}" class="mx-5">Login</a>
+                            <a href="{{ route('register') }}" class="mx-5">Regiter</a>
+                        @endif
                     </div>
                     <ul class="list-unstyled text-uppercase d-flex m-0 p-0">
                         <li class="ms-3 d-none"><a href="javascript:void">login</a></li>
