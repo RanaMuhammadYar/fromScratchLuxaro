@@ -19,6 +19,7 @@ class LuxaroController extends Controller
     public function index(Request $request)
     {
         $products = Product::all();
+        // return  $products;
         return view('frontend.all-page.products', compact('products'));
     }
     public function productDetail(Request $request)
@@ -27,7 +28,7 @@ class LuxaroController extends Controller
         return view('frontend.product_detail', compact('product_detail'));
     }
     public function save_profile_detail(Request $request)
-    {  
+    {
         $type = array(
             "jpg"=>"image",
             "jpeg"=>"image",
@@ -107,9 +108,9 @@ class LuxaroController extends Controller
                 $upload->type = $type[$upload->extension];
                 $upload->file_size = $size;
                 $upload->save();
-                $user->update(["user_profile_image" => $upload->id]); 
-                // print_r($upload);   
-                // dd($user); 
+                $user->update(["user_profile_image" => $upload->id]);
+                // print_r($upload);
+                // dd($user);
             }
         }
         if($request->hasFile('course_certification_document')){
@@ -132,7 +133,7 @@ class LuxaroController extends Controller
                 $size = $request->file('course_certification_document')->getSize();
 
                 // Return MIME type ala mimetype extension
-                $finfo = finfo_open(FILEINFO_MIME_TYPE); 
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
                 $upload->extension = $extension;
                 $upload->file_name = $path;
@@ -140,14 +141,14 @@ class LuxaroController extends Controller
                 $upload->type = $type[$upload->extension];
                 $upload->file_size = $size;
                 $upload->save();
-                $user->update(["course_certification_document" => $upload->id]);   
+                $user->update(["course_certification_document" => $upload->id]);
             }
         }
-      
+
          return back()->with(['user' =>  $user]);
     }
-  
-    
+
+
     public function merchantSuitManagement()
     {
         return view('frontend.suite_management');
@@ -177,8 +178,8 @@ class LuxaroController extends Controller
     {
         return view('frontend.goldevine_projects');
     }
-  
-  
+
+
     public function myProfile()
     {
         $user = User::where('id',auth()->user()->id)->first();
