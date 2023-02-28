@@ -101,6 +101,12 @@ return [
         ],
     ],
 
+    'verification' => [
+        'enabled' => true,
+        'table' => 'users',
+        'expire' => 60,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout

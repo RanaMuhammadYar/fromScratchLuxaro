@@ -26,7 +26,7 @@
 
                                     <div class="mb-3">
                                         <label for="nameInputEmail1" class="form-label mb-0">Name</label>
-                                        <input type="text" class="form-control" value="{{@$user->name}}" name="name" id="nameInputEmail1" aria-describedby="nameHelp">
+                                        <input type="text" class="form-control" value="{{$user->name}}" name="name" id="nameInputEmail1" aria-describedby="nameHelp">
                                         <div class="pincel"></div>
                                     </div>
                                     <div class="mb-3">

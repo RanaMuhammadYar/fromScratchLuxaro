@@ -19,7 +19,7 @@ class LuxaroController extends Controller
     public function index(Request $request)
     {
         $products = Product::all();
-        return view('frontend.products', compact('products'));
+        return view('frontend.all-page.products', compact('products'));
     }
     public function productDetail(Request $request)
     {
@@ -27,7 +27,7 @@ class LuxaroController extends Controller
         return view('frontend.product_detail', compact('product_detail'));
     }
     public function save_profile_detail(Request $request)
-    {   
+    {  
         $type = array(
             "jpg"=>"image",
             "jpeg"=>"image",
@@ -64,7 +64,8 @@ class LuxaroController extends Controller
             "xls"=>"document",
             "xlsx"=>"document"
         );
-     $user = User::where('id',$request->user_id)->update([
+        $userId = isset($request->user_id) ? $request->user_id : auth()->user()->id;
+     $user = User::where('id',$userId)->update([
             "name" => $request->name,
             "phone" => $request->phone,
             "about_me" => $request->about_me,
@@ -83,7 +84,7 @@ class LuxaroController extends Controller
             "portfolio_name" => $request->portfolio_name,
             "portfolio_link" => $request->portfolio_link,
          ]);
-         $user =   User::where('id',$request->user_id)->first();
+         $user =   User::where('id',$userId)->first();
          if($request->hasFile('user_profile_image')){
             $upload = new Upload;
             $extension = strtolower($request->file('user_profile_image')->getClientOriginalExtension());
@@ -100,8 +101,6 @@ class LuxaroController extends Controller
                 }
                 $path = $request->file('user_profile_image')->store('uploads/all', 'local');
                 $size = $request->file('user_profile_image')->getSize();
-                // Return MIME type ala mimetype extension
-                $finfo = finfo_open(FILEINFO_MIME_TYPE); 
                 $upload->extension = $extension;
                 $upload->file_name = $path;
                 $upload->user_id = 1;
@@ -182,10 +181,7 @@ class LuxaroController extends Controller
   
     public function myProfile()
     {
-        if(isset(auth()->user))
         $user = User::where('id',auth()->user()->id)->first();
-        else
-        $user = null;
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();

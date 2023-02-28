@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row col-lg-9 mx-auto gx-5">
             <div class="col-12 col-md-4 gx-0 gx-md-5">
-                @include('frontend.inc.sidepanel')
+                @include('frontend.include.sidebar')
             </div>
             <div class="col-12 col-md-8 gx-0 gx-md-5">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -17,8 +17,9 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
+              
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data" id="choice_form">
+                        <form action="" method="POST" enctype="multipart/form-data" id="choice_form">
                             @csrf
                             <div class="row gx-2">
                                 <div class="col-12 col-md-6">
@@ -53,8 +54,8 @@
 
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <label class="col-md-3 col-from-label">{{translate('Tags')}}</label>
-                                    <input type="text" class="inputfile form-control" data-role="tagsinput" name="tags[]" placeholder="{{ translate('Type and hit enter to add a tag') }}">
+                                    <label class="col-md-3 col-from-label">Tags</label>
+                                    <input type="text" class="inputfile form-control" data-role="tagsinput" name="tags[]" placeholder="Type and hit enter to add a tag">
                                 </div>
                             </div>
                             <!-- <div class="form-group mb-3">
@@ -218,9 +219,9 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="form-group row">
-                                            <label class="col-md-3 col-from-label">{{translate('Tags')}}</label>
+                                            <label class="col-md-3 col-from-label">Tags</label>
                                             <div class="col-md-12">
-                                                <input type="text" class="inputfile form-control" data-role="tagsinput" name="tags[]" placeholder="{{ translate('Type and hit enter to add a tag') }}">
+                                                <input type="text" class="inputfile form-control" data-role="tagsinput" name="tags[]" placeholder="Type and hit enter to add a tag">
                                             </div>
                                         </div>
                                     </div>

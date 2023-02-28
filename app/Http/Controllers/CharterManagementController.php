@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\CharterCategory as ControllersCharterCategory;
 use App\Models\Charter;
 use App\Models\CharterBooking;
 use App\Models\CharterCategory;
