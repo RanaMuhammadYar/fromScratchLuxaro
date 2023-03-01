@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Models\Admin\Category;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ProductCotroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
-        $categories = Category::all();
-        return view('frontend.admin.category.index',compact('categories'));
+        return view('frontend.admin.product.index');
     }
 
     /**
@@ -27,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('frontend.admin.category.create');
+        return view('frontend.admin.product.create');
     }
 
     /**
@@ -38,14 +35,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        if ($request->hasFile('image')) {
-            $path = asset('storage/'.$request->image->store('category'));
-            $category->image = $path;
-        }
-        $category->title = $request->title;
-        $category->save();
-        return redirect()->route('category.index')->with('success','Category created successfully');
+        //
     }
 
     /**
@@ -67,9 +57,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-
-        $category = Category::find($id);
-        return view('frontend.admin.category.edit',compact('category'));
+        //
     }
 
     /**
@@ -81,14 +69,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        if ($request->hasFile('image')) {
-            $path = asset('storage/'.$request->image->store('category'));
-            $category->image = $path;
-        }
-        $category->title = $request->title;
-        $category->save();
-        return redirect()->route('category.index')->with('success','Category updated successfully');
+        //
     }
 
     /**
@@ -99,9 +80,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-
-        Category::find($id)->delete();
-        return redirect()->route('category.index')->with('success','Category deleted successfully');
-
-        }
+        //
+    }
 }

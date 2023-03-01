@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Admin\Category;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\DelivoryOption;
 
-class CategoryController extends Controller
+class DelivoryOptionCotroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
-        $categories = Category::all();
-        return view('frontend.admin.category.index',compact('categories'));
+        $delivoryOptions = DelivoryOption::all();
+        return view('frontend.admin.delivoryoption.index',compact('delivoryOptions'));
+        // return view('frontend.admin.delivoryoption.index');
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('frontend.admin.category.create');
+        return view('frontend.admin.delivoryoption.create');
     }
 
     /**
@@ -38,14 +38,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        if ($request->hasFile('image')) {
-            $path = asset('storage/'.$request->image->store('category'));
-            $category->image = $path;
-        }
-        $category->title = $request->title;
-        $category->save();
-        return redirect()->route('category.index')->with('success','Category created successfully');
+        $validate = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+       DelivoryOption::create($validate);
+         return redirect()->route('delivory-option.index')->with('success','Delivory Option Created Successfully');
     }
 
     /**
@@ -68,8 +66,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
 
-        $category = Category::find($id);
-        return view('frontend.admin.category.edit',compact('category'));
+        $delivoryOption = DelivoryOption::find($id);
+        return view('frontend.admin.delivoryoption.edit',compact('delivoryOption'));
     }
 
     /**
@@ -81,14 +79,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        if ($request->hasFile('image')) {
-            $path = asset('storage/'.$request->image->store('category'));
-            $category->image = $path;
-        }
-        $category->title = $request->title;
-        $category->save();
-        return redirect()->route('category.index')->with('success','Category updated successfully');
+        //
     }
 
     /**
@@ -99,9 +90,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-
-        Category::find($id)->delete();
-        return redirect()->route('category.index')->with('success','Category deleted successfully');
-
-        }
+        //
+    }
 }

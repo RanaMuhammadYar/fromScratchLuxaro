@@ -18,3 +18,24 @@
 <!-- Page JS -->
 <script src="{{ asset('admin/assets/js/dashboards-analytics.js') }}"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+@if (session('success'))
+    <script>
+        swal({
+            title: "Success!",
+            text: "{{ session('success') }}",
+            icon: "success",
+            button: "Ok",
+        });
+    </script>
+@endif
+@if (session('error'))
+    <script>
+        swal({
+            title: "Error!",
+            text: "{{ session('error') }}",
+            icon: "error",
+            button: "Ok",
+        });
+    </script>
+@endif

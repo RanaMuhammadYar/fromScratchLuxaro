@@ -26,3 +26,4 @@
 <!-- Helpers -->
 <script src="{{ asset('admin/assets/vendor/js/helpers.js') }}"></script>
 <script src=" {{ asset('admin/assets/js/config.js') }}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

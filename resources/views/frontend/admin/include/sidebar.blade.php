@@ -23,36 +23,36 @@
         </li>
 
         <!-- Layouts -->
-        <li class="menu-item {{ Request::is('category/create') || Request::is('category') ? 'active open' : '' }}">
+        <li class="menu-item {{ Request::is('category/create') || Request::is('category') || Request::is('delivory-option') || Request::is('delivory-option/create') || Request::is('shipping-type') || Request::is('shipping-type/create') || Request::is('product-type') || Request::is('product-type/create') || Request::is('product') || Request::is('product/create') || Request::is('category/*/edit') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="bx bx-layout mx-1"></i>
                 <div data-i18n="Layouts">Product Management</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('category/create') || Request::is('category')? 'active ' : '' }} ">
+                <li class="menu-item {{ Request::is('category/create') || Request::is('category')|| Request::is('category/*/edit') ? 'active ' : '' }} ">
                     <a href="{{ route('category.index') }}" class="menu-link">
                         <div data-i18n="Without menu">All Category</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="" class="menu-link">
-                        <div data-i18n="Without navbar">All Category</div>
+                <li class="menu-item {{  Request::is('delivory-option') || Request::is('delivory-option/create') ? 'active': '' }}">
+                    <a href="{{ route('delivory-option.index') }}" class="menu-link">
+                        <div data-i18n="Without navbar">All Delivory Option</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-container.html" class="menu-link">
-                        <div data-i18n="Container">Container</div>
+                <li class="menu-item {{ Request::is('shipping-type') || Request::is('shipping-type/create') ? 'active': '' }}">
+                    <a href="{{ route('shipping-type.index') }}" class="menu-link">
+                        <div data-i18n="Container">All Shipping Type</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-fluid.html" class="menu-link">
-                        <div data-i18n="Fluid">Fluid</div>
+                <li class="menu-item {{ Request::is('product-type') || Request::is('product-type/create') ? 'active' : '' }}">
+                    <a href="{{ route('product-type.index') }}" class="menu-link">
+                        <div data-i18n="Fluid">All Product Type</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-blank.html" class="menu-link">
-                        <div data-i18n="Blank">Blank</div>
+                <li class="menu-item {{ Request::is('product') || Request::is('product/create') ? 'active': '' }}">
+                    <a href="{{ route('product.index') }}" class="menu-link">
+                        <div data-i18n="Blank">All Products</div>
                     </a>
                 </li>
             </ul>
