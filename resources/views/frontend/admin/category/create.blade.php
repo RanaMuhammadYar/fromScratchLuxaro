@@ -15,15 +15,21 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Title</label>
-                                    <input type="title" class="form-control" name="title" placeholder="title"
-                                        title="title" />
+                                    <input type="title" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="title"
+                                        title="title" value="{{ old('title') }}" />
+                                    @error('title')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">image </label>
-                                    <input type="file" class="form-control" name="image"
-                                        placeholder="description" title="description" />
+                                    <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" placeholder="description"
+                                        title="description" value="{{ old('image') }}" />
+                                    @error('image')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row py-3">
@@ -37,4 +43,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

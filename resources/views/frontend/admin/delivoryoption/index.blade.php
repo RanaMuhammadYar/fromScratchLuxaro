@@ -40,12 +40,17 @@
                                                     <i class="bx bx-edit-alt me-1 text-success"></i>
                                                     Edit
                                                 </a>
-                                                <a class="dropdown-item" href="javascript:void(0);">
+                                                <a class="dropdown-item" href="{{ route('delivory-option.destroy',$delivory->id) }}"onclick="event.preventDefault();
+                                                    document.getElementById('logout-form{{ $delivory->id}}').submit();">
                                                     <i class="bx bx-trash me-1 text-danger"></i>
                                                     Delete
                                                 </a>
                                             </div>
                                         </div>
+                                        <form id="logout-form{{ $delivory->id}}" action="{{ route('delivory-option.destroy',$delivory->id) }}" method="POST" class="d-none">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Admin\ShippingType;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class ShippingTypeCotroller extends Controller
 {
@@ -14,7 +16,9 @@ class ShippingTypeCotroller extends Controller
      */
     public function index()
     {
-        return view('frontend.admin.shippingtype.index');
+
+        $shippingtypes = ShippingType::all();
+        return view('frontend.admin.shippingtype.index', compact('shippingtypes'));
     }
 
     /**
@@ -35,7 +39,23 @@ class ShippingTypeCotroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Shipping Type not created.');
+        }else{
+            ShippingType::create([
+                'title' => $request->title,
+                'description' => $request->description,
+            ]);
+            return redirect()->route('shipping-type.index')->with('success', 'Shipping Type created successfully.');
+        }
+
+
+
     }
 
     /**
@@ -57,7 +77,8 @@ class ShippingTypeCotroller extends Controller
      */
     public function edit($id)
     {
-        //
+        $shippingtype = ShippingType::find($id);
+        return view('frontend.admin.shippingtype.edit', compact('shippingtype'));
     }
 
     /**
@@ -69,7 +90,21 @@ class ShippingTypeCotroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $validate = Validator::make($request->all(), [
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Shipping Type not updated.');
+        }else{
+            $shippingtype = ShippingType::find($id);
+            $shippingtype->title = $request->title;
+            $shippingtype->description = $request->description;
+            $shippingtype->save();
+            return redirect()->route('shipping-type.index')->with('success', 'Shipping Type updated successfully.');
+        }
     }
 
     /**
@@ -80,6 +115,7 @@ class ShippingTypeCotroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        ShippingType::whereId($id)->delete();
+        return redirect()->route('shipping-type.index')->with('success', 'Shipping Type deleted successfully.');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,7 @@ class CategoryController extends Controller
     {
 
         $categories = Category::all();
-        return view('frontend.admin.category.index',compact('categories'));
+        return view('frontend.admin.category.index', compact('categories'));
     }
 
     /**
@@ -38,15 +39,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        if ($request->hasFile('image')) {
-            $path = asset('storage/'.$request->image->store('category'));
-            $category->image = $path;
+        $validate = Validator::make($request->all(), [
+            'title' => 'required',
+            'image' => 'required',
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Category not created.');
+        } else {
+            $category = new Category();
+            if ($request->hasFile('image')) {
+                $path = asset('storage/' . $request->image->store('category'));
+                $category->image = $path;
+            }
+            $category->title = $request->title;
+            $category->save();
+            return redirect()->route('category.index')->with('success', 'Category created successfully');
         }
-        $category->title = $request->title;
-        $category->save();
-        return redirect()->route('category.index')->with('success','Category created successfully');
-    }
+        }
 
     /**
      * Display the specified resource.
@@ -69,7 +79,7 @@ class CategoryController extends Controller
     {
 
         $category = Category::find($id);
-        return view('frontend.admin.category.edit',compact('category'));
+        return view('frontend.admin.category.edit', compact('category'));
     }
 
     /**
@@ -81,14 +91,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        if ($request->hasFile('image')) {
-            $path = asset('storage/'.$request->image->store('category'));
-            $category->image = $path;
+        $validate = Validator::make($request->all(), [
+            'title' => 'required',
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Category not updated.');
+
+        }else{
+            $category = Category::find($id);
+            if ($request->hasFile('image')) {
+                $path = asset('storage/' . $request->image->store('category'));
+                $category->image = $path;
+            }
+            $category->title = $request->title;
+            $category->save();
+            return redirect()->route('category.index')->with('success', 'Category updated successfully');
         }
-        $category->title = $request->title;
-        $category->save();
-        return redirect()->route('category.index')->with('success','Category updated successfully');
     }
 
     /**
@@ -101,7 +119,6 @@ class CategoryController extends Controller
     {
 
         Category::find($id)->delete();
-        return redirect()->route('category.index')->with('success','Category deleted successfully');
-
-        }
+        return redirect()->route('category.index')->with('success', 'Category deleted successfully');
+    }
 }
