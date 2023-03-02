@@ -21,7 +21,10 @@ class ProductCotroller extends Controller
     public function index()
     {
 
-        return view('frontend.admin.product.index');
+
+
+        $products = Product::with('category', 'productType', 'delivoryOption', 'shippingType','user')->get();
+        return view('frontend.admin.product.index', compact('products'));
     }
 
     /**
@@ -47,7 +50,7 @@ class ProductCotroller extends Controller
     public function store(Request $request)
     {
 
-        
+
         $validate = Validator::make($request->all(), [
             'product_name' => 'required',
             'product_description' => 'required',
@@ -84,7 +87,7 @@ class ProductCotroller extends Controller
             $product->save();
             $tags = explode(",", $request->tags);
             $product->tag($tags);
-            return redirect()->back()->with('success', 'Product Added Successfully');
+            return redirect()->route('product.index')->with('success', 'Product Added Successfully');
         }
     }
 
@@ -107,7 +110,18 @@ class ProductCotroller extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::with('category', 'productType', 'delivoryOption', 'shippingType','user')->find($id);
+        $categories = Category::all();
+        $productType = ProductType::all();
+        $delivoryOption = DelivoryOption::all();
+        $shippingType = ShippingType::all();
+
+        // $tags = $product->tagNames();
+        // return $tags;
+        // $product->tags = implode(",", $tags);
+        // return $product->tags;
+        // echo $product->tags;
+        return view('frontend.admin.product.edit', compact('product', 'categories', 'productType', 'delivoryOption', 'shippingType'));
     }
 
     /**
@@ -119,7 +133,43 @@ class ProductCotroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'product_name' => 'required',
+            'product_description' => 'required',
+            'product_price' => 'required',
+            'product_description'=>'required',
+            'tags'=>'required',
+            'product_type_id' => 'required',
+            'product_category_id' => 'required',
+            'delivory_option_id' => 'required',
+            'shipping_type_id' => 'required',
+            'shipping_charge' => 'required',
+            'status'=>'required',
+            'user_id'=>'required',
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Product Added Failed');
+        } else {
+            $product = Product::find($id);
+            $product->product_name = $request->product_name;
+            $product->product_description = $request->product_description;
+            $product->product_price = $request->product_price;
+            $product->category_id = $request->product_category_id;
+            $product->product_type_id = $request->product_type_id;
+            $product->delivory_option_id = $request->delivory_option_id;
+            $product->shipping_type_id = $request->shipping_type_id;
+            $product->shipping_charge = $request->shipping_charge;
+            $product->status = $request->status;
+            $product->user_id = $request->user_id;
+            if ($request->hasFile('product_image')) {
+                $path = asset('storage/'.$request->product_image->store('product'));
+                $product->image = $path;
+            }
+            $product->save();
+            $tags = explode(",", $request->tags);
+            $product->retag($tags);
+            return redirect()->route('product.index')->with('success', 'Product Added Successfully');
+        }
     }
 
     /**
@@ -130,6 +180,8 @@ class ProductCotroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->route('product.index')->with('success', 'Product Deleted Successfully');
     }
 }

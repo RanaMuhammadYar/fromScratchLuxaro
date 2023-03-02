@@ -115,6 +115,7 @@ class DelivoryOptionCotroller extends Controller
     public function destroy($id)
     {
         $delivoryOption = DelivoryOption::find($id);
+        $delivoryOption->delete();
         return redirect()->route('delivory-option.index')->with('success','Delivory Option Deleted Successfully');
     }
 }

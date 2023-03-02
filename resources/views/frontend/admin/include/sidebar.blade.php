@@ -23,7 +23,7 @@
         </li>
 
         <!-- Layouts -->
-        <li class="menu-item {{ Request::is('category/create') || Request::is('category') || Request::is('delivory-option') || Request::is('delivory-option/create') || Request::is('shipping-type') || Request::is('shipping-type/create') || Request::is('product-type') || Request::is('product-type/create') || Request::is('product') || Request::is('product/create') || Request::is('category/*/edit') || Request::is('delivory-option/*/edit') || Request::is('shipping-type/*/edit') ? 'active open' : '' }}">
+        <li class="menu-item {{ Request::is('category/create') || Request::is('category') || Request::is('delivory-option') || Request::is('delivory-option/create') || Request::is('shipping-type') || Request::is('shipping-type/create') || Request::is('product-type') || Request::is('product-type/create') || Request::is('product') || Request::is('product/create') || Request::is('category/*/edit') || Request::is('delivory-option/*/edit') || Request::is('shipping-type/*/edit') || Request::is('product/*/edit') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="bx bx-layout mx-1"></i>
                 <div data-i18n="Layouts">Product Management</div>
@@ -50,7 +50,7 @@
                         <div data-i18n="Fluid">All Product Type</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::is('product') || Request::is('product/create') ? 'active': '' }}">
+                <li class="menu-item {{ Request::is('product') || Request::is('product/create') || Request::is('product/*/edit') ? 'active': '' }}">
                     <a href="{{ route('product.index') }}" class="menu-link">
                         <div data-i18n="Blank">All Products</div>
                     </a>

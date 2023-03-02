@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DeliveryOption;
-use App\Models\Merchant;
-use App\Models\Product;
-use Illuminate\Http\Request;
-
-use App\Models\CharterCategory;
 use App\Models\City;
-use App\Models\Country;
-use App\Models\State;
-use App\Models\Upload;
 use App\Models\User;
+use App\Models\State;
+
+use App\Models\Upload;
+use App\Models\Country;
+use App\Models\Merchant;
+use Illuminate\Http\Request;
+use App\Models\Admin\Product;
+use App\Models\Admin\Category;
+use App\Models\DeliveryOption;
 
 class LuxaroController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::all();
-        // return  $products;
-        return view('frontend.all-page.products', compact('products'));
+        $categories = Category::all();
+        $products = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status','Active')->limit(15)->get();
+        return view('frontend.all-page.products', compact('products','categories'));
     }
     public function productDetail(Request $request)
     {

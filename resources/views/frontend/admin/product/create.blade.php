@@ -66,7 +66,7 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Tags</label>
                                     <input class="form-control @error('tags') is-invalid @enderror" type="text"
-                                        data-role="tagsinput" name="tags" value="{{ old('tags') }}">
+                                        data-role="tagsinput" name="tags" value="{{ old('tags') }}" placeholder="Tags">
                                     @if ($errors->has('tags'))
                                         <span class="text-danger">{{ $errors->first('tags') }}</span>
                                     @endif
