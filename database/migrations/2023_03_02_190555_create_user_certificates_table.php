@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCharterBookingsTable extends Migration
+class CreateUserCertificatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateCharterBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('charter_bookings', function (Blueprint $table) {
+        Schema::create('user_certificates', function (Blueprint $table) {
             $table->id();
-            $table->string("book_from");
-            $table->string("book_to");
-            $table->string("time_from");
-            $table->string("time_to");
-            $table->string("number_of_guest");
+            $table->string('course_name');
+            $table->string('course_certification_document');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateCharterBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('charter_bookings');
+        Schema::dropIfExists('user_certificates');
     }
 }

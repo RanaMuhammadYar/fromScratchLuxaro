@@ -15,6 +15,7 @@ class CreateCharterCategoriesTable extends Migration
     {
         Schema::create('charter_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }

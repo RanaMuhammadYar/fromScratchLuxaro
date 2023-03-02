@@ -28,44 +28,9 @@ class LuxaroController extends Controller
     }
     public function save_profile_detail(Request $request)
     {  
-        $type = array(
-            "jpg"=>"image",
-            "jpeg"=>"image",
-            "png"=>"image",
-            "svg"=>"image",
-            "webp"=>"image",
-            "gif"=>"image",
-            "mp4"=>"video",
-            "mpg"=>"video",
-            "mpeg"=>"video",
-            "webm"=>"video",
-            "ogg"=>"video",
-            "avi"=>"video",
-            "mov"=>"video",
-            "flv"=>"video",
-            "swf"=>"video",
-            "mkv"=>"video",
-            "wmv"=>"video",
-            "wma"=>"audio",
-            "aac"=>"audio",
-            "wav"=>"audio",
-            "mp3"=>"audio",
-            "zip"=>"archive",
-            "rar"=>"archive",
-            "7z"=>"archive",
-            "doc"=>"document",
-            "txt"=>"document",
-            "docx"=>"document",
-            "pdf"=>"document",
-            "csv"=>"document",
-            "xml"=>"document",
-            "ods"=>"document",
-            "xlr"=>"document",
-            "xls"=>"document",
-            "xlsx"=>"document"
-        );
+        dd($request->all());
         $userId = isset($request->user_id) ? $request->user_id : auth()->user()->id;
-     $user = User::where('id',$userId)->update([
+        $user = User::where('id',$userId)->update([
             "name" => $request->name,
             "phone" => $request->phone,
             "about_me" => $request->about_me,
@@ -83,68 +48,20 @@ class LuxaroController extends Controller
             "course_name" => $request->course_name,
             "portfolio_name" => $request->portfolio_name,
             "portfolio_link" => $request->portfolio_link,
+            "user_profile_image" => ($request->user_profile_image) ?  asset('storage/'.$request->user_profile_image->store('public/user_profile_image')) : '',
+            "course_certification_document" => ($request->course_certification_document) ?  asset('storage/'.$request->course_certification_document->store('public/course_certification_document')) : '',
          ]);
          $user =   User::where('id',$userId)->first();
-         if($request->hasFile('user_profile_image')){
-            $upload = new Upload;
-            $extension = strtolower($request->file('user_profile_image')->getClientOriginalExtension());
-            if(isset($type[$extension])){
-                $upload->file_original_name = null;
-                $arr = explode('.', $request->file('user_profile_image')->getClientOriginalName());
-                for($i=0; $i < count($arr)-1; $i++){
-                    if($i == 0){
-                        $upload->file_original_name .= $arr[$i];
-                    }
-                    else{
-                        $upload->file_original_name .= ".".$arr[$i];
-                    }
-                }
-                $path = $request->file('user_profile_image')->store('uploads/all', 'local');
-                $size = $request->file('user_profile_image')->getSize();
-                $upload->extension = $extension;
-                $upload->file_name = $path;
-                $upload->user_id = 1;
-                $upload->type = $type[$upload->extension];
-                $upload->file_size = $size;
-                $upload->save();
-                $user->update(["user_profile_image" => $upload->id]); 
-                // print_r($upload);   
-                // dd($user); 
-            }
-        }
-        if($request->hasFile('course_certification_document')){
-            $upload = new Upload;
-            $extension = strtolower($request->file('course_certification_document')->getClientOriginalExtension());
-
-            if(isset($type[$extension])){
-                $upload->file_original_name = null;
-                $arr = explode('.', $request->file('course_certification_document')->getClientOriginalName());
-                for($i=0; $i < count($arr)-1; $i++){
-                    if($i == 0){
-                        $upload->file_original_name .= $arr[$i];
-                    }
-                    else{
-                        $upload->file_original_name .= ".".$arr[$i];
-                    }
-                }
-
-                $path = $request->file('course_certification_document')->store('uploads/all', 'local');
-                $size = $request->file('course_certification_document')->getSize();
-
-                // Return MIME type ala mimetype extension
-                $finfo = finfo_open(FILEINFO_MIME_TYPE); 
-
-                $upload->extension = $extension;
-                $upload->file_name = $path;
-                $upload->user_id = 2;
-                $upload->type = $type[$upload->extension];
-                $upload->file_size = $size;
-                $upload->save();
-                $user->update(["course_certification_document" => $upload->id]);   
-            }
-        }
-      
+   
          return back()->with(['user' =>  $user]);
+    }
+    public function myProfile()
+    {
+        $user = User::with('images')->where('id',auth()->user()->id)->first();
+        $countries = Country::all();
+        $states = State::all();
+        $cities = City::all();
+        return view('frontend.all-page.my_profile',compact('user','states','cities','countries'));
     }
   
     
@@ -179,14 +96,7 @@ class LuxaroController extends Controller
     }
   
   
-    public function myProfile()
-    {
-        $user = User::where('id',auth()->user()->id)->first();
-        $countries = Country::all();
-        $states = State::all();
-        $cities = City::all();
-        return view('frontend.all-page.my_profile',compact('user','states','cities','countries'));
-    }
+
     public function fetchState(Request $request)
     {
         $data['states'] = State::where("country_id",$request->country_id)->get(["name", "id"]);

@@ -15,6 +15,7 @@ class CreateDeliveryOptionsTable extends Migration
     {
         Schema::create('delivery_options', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }

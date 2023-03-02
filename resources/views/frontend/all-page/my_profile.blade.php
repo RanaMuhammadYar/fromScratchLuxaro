@@ -16,14 +16,13 @@
                                 <div class="col-12 col-md-5 col-lg-4">
                                     <div class="my-account-image">
                                         <div class="account-image">
-                                            <img id="preview-image-before-upload" src="{{ (isset($user)) ? uploaded_asset(@$user->user_profile_image) : ''}}" alt="preview image" style="max-height: 250px;">
+                                            <img id="preview-image-before-upload" src="{{$user->user_profile_image}}" alt="preview image" style="max-height: 250px;">
                                         </div>
                                         <input type="file" class="inputfile form-control" name="user_profile_image" id="user_profile_image">
                                         <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-7 col-lg-8">
-
                                     <div class="mb-3">
                                         <label for="nameInputEmail1" class="form-label mb-0">Name</label>
                                         <input type="text" class="form-control" value="{{$user->name}}" name="name" id="nameInputEmail1" aria-describedby="nameHelp">
@@ -34,7 +33,6 @@
                                         <input type="date" class="form-control about-me" id="exampleInputtagline" value="{{@$user->date_of_birth}}">
                                         <div class="pincel"></div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="row">
@@ -101,7 +99,7 @@
                                             </select>
                                         </div>
                                         <div class="col-12 col-md-4 mb-3 mb-md-0">
-                                            <button class="btn btn-primary add-more-width" type="button"><span><i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button>
+                                            <!-- <button class="btn btn-primary add-more-width" type="button"><span><i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button> -->
                                         </div>
                                     </div>
                                     <h4 class="mb-1">Professional Experience</h4>
@@ -129,8 +127,8 @@
                                         <div class="pincel"></div>
                                     </div>
                                     <div class=" d-md-flex justify-content-md-start mb-3 mb-md-5">
-                                        <button class="btn btn-primary" type="button"><span>
-                                                <i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button>
+                                        <!-- <button class="btn btn-primary" type="button"><span>
+                                                <i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button> -->
                                     </div>
                                     <h4 class="mb-2">Education Details </h4>
                                     <div class="row">
@@ -146,8 +144,8 @@
                                         </div>
                                     </div>
                                     <div class=" d-md-flex justify-content-md-start mb-3 mb-md-5">
-                                        <button class="btn btn-primary" type="button"><span>
-                                                <i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button>
+                                        <!-- <button class="btn btn-primary" type="button"><span>
+                                                <i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button> -->
                                     </div>
                                     <h4 class="mb-2">Certificates </h4>
                                     <div class="row">
@@ -169,8 +167,8 @@
                                     </div>
                                 </div>
                                 <div class=" d-md-flex justify-content-md-end mb-3 mb-md-4">
-                                    <button class="btn btn-primary" type="button"><span>
-                                            <i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button>
+                                    <!-- <button class="btn btn-primary" type="button"><span>
+                                            <i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button> -->
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label mb-0">Portfolio</label>
@@ -183,8 +181,8 @@
                                     <input type="text" class="form-control" name="portfolio_link" value="{{@$user->portfolio_link}}">
                                 </div>
                                 <div class="d-md-flex justify-content-md-end mb-3 mb-md-4">
-                                    <button class="btn btn-primary" type="button"><span>
-                                            <i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button>
+                                    <!-- <button class="btn btn-primary" type="button"><span>
+                                            <i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button> -->
                                 </div>
                             </div>
                         </div>
@@ -213,7 +211,7 @@
                                             <input type="name" class="form-control " id="nameInputEmail1" aria-describedby="nameHelp">
                                         </div>
                                     </div>
-                                </div> -->
+                         </div> -->
                         <button class="btn  btn-primary">Cancel</button>
                         <button class="btn  btn-primary" type="submit">Save Changes</button>
 

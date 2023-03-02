@@ -8,7 +8,6 @@
     @yield('title')
     @include('frontend.include.style')
 </head>
-
 <body>
     <div id="wrapper">
         @include('frontend.include.header')

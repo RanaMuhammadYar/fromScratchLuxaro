@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CharterManagementController;
 use App\Http\Controllers\LuxaroController;
+use App\Http\Controllers\MerchantController;
 use Illuminate\Support\Facades\Route;
 
 /*

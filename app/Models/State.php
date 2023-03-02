@@ -12,7 +12,7 @@ class State extends Model
     public function country(){
         return $this->belongsTo(Country::class);
     }
-
+    protected $guarded = [];
     public function cities(){
         return $this->hasMany(City::class);
     }

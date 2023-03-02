@@ -3,17 +3,17 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center">
                 @if(strpos(url()->current(),'goldEvine'))
-                <a class="logo" href="{{ route('home') }}"><img src="{{asset('frontend/images/logo.png')}}" class="img-fluid"></a>
-                <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{asset('frontend/images/GoldEvine-logo.png')}}" class="img-fluid"></a>
-                <a class="logo-gold" href="#"><img src="{{asset('frontend/images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
+                <a class="logo" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
+                <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
+                <a class="logo-gold" href="#"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
                 @elseif(strpos(url()->current(),'goldMetal'))
-                <a class="logo" href="{{ route('home') }}"><img style="width: 72%;margin-bottom: 22px;" src="{{asset('frontend/images/logo.png')}}" class="img-fluid"></a>
-                <a class="logo-gold" href="#"><img src="{{asset('frontend/images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
-                <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{asset('frontend/images/GoldEvine-logo.png')}}" class="img-fluid"></a>
+                <a class="logo" href="{{ route('home') }}"><img style="width: 72%;margin-bottom: 22px;" src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
+                <a class="logo-gold" href="#"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
+                <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
                 @else
-                <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{asset('frontend/images/GoldEvine-logo.png')}}" class="img-fluid"></a>
-                <a class="logo" href="{{ route('home') }}"><img src="{{asset('frontend/images/logo.png')}}" class="img-fluid"></a>
-                <a class="logo-gold" href="#"><img src="{{asset('frontend/images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
+                <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
+                <a class="logo" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
+                <a class="logo-gold" href="#"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
                 @endif
             </div>
         </div>
@@ -87,10 +87,11 @@
                     <li><a href="javascript:void">professionals</a></li>
                 </ul>
                 <ul class="list-unstyled m-0 p-0 d-md-flex justify-content-end">
-                    <li><a href="javascript:void">charters</a></li>
+                    <li><a href="{{route('charters')}}">charters</a></li>
                     <li><a href="javascript:void">forums</a></li>
                     <li><a href="javascript:void">Suits</a></li>
                 </ul>
+        
             </nav>
         </div>
 </header>

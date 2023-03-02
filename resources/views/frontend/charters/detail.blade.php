@@ -7,22 +7,22 @@
                 <div class="col-md-6">
                     <div class="detail-slider">
                         <div>
-                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 473px;height: 473px;">
+                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 590px;height: 420px;">
                         </div>
                         <div>
-                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 473px;height: 473px;">
+                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 590px;height: 420px;">
                         </div>
                         <div>
-                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 473px;height: 473px;">
+                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 590px;height: 420px;">
                         </div>
                         <div>
-                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 473px;height: 473px;">
+                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 590px;height: 420px;">
                         </div>
                         <div>
-                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 473px;height: 473px;">
+                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 590px;height: 420px;">
                         </div>
                         <div>
-                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 473px;height: 473px;">
+                            <img src="{{ uploaded_asset($charter_detail->thumbnail_img)}}" class="img-fluid" style="width: 590px;height: 420px;">
                         </div>
                     </div>
                     <div class="detail-nav-slider">
@@ -158,7 +158,7 @@
             </div>
         </div>
     </div>
-    <div class="charter-specs-section mb-3 mb-md-5">
+    <!-- <div class="charter-specs-section mb-3 mb-md-5">
         <div class="container">
             <div class="col-md-10 mx-auto">
                 <div class="row gx-5">
@@ -248,213 +248,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="product-section mb-5 pb-lg-3">
-        <div class="container">
-            <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
-                <h2 class="m-0">You may also like</h2>
-                <div class="d-flex form-holder">
-                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
-                    <!--<form class="page-form flex-fill" action="#">-->
-                        <div class="page-form-holder d-flex">
-                            <label class="form-control rounded-0">Search Filter</label>
-                            <div class="form-field d-flex flex-fill">
-                                <select class="flex-fill border-0 bg-transparent">
-                                    <option>All</option>
-                                    <option>All</option>
-                                    <option>All</option>
-                                </select>
-                            </div>
-                        </div>
-                    <!--</form>-->
-                </div>
-            </div>
-            <div class="slider Charters-slider">
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="{{static_asset('frontend/images/product-img.png')}}" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <strong class="title">Lorem Ipsum</strong>
-                                    <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <i class="fa fa-globe fa-1x mt-2"></i>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <strong class="title">$24.23</strong>
-                                <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="{{static_asset('frontend/images/product-img.png')}}" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <strong class="title">Lorem Ipsum</strong>
-                                    <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <i class="fa fa-globe fa-1x mt-2"></i>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <strong class="title">$24.23</strong>
-                                <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="{{static_asset('frontend/images/product-img.png')}}" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <strong class="title">Lorem Ipsum</strong>
-                                    <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <i class="fa fa-globe fa-1x mt-2"></i>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <strong class="title">$24.23</strong>
-                                <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="{{static_asset('frontend/images/product-img.png')}}" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <strong class="title">Lorem Ipsum</strong>
-                                    <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <i class="fa fa-globe fa-1x mt-2"></i>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <strong class="title">$24.23</strong>
-                                <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="{{static_asset('frontend/images/product-img.png')}}" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <strong class="title">Lorem Ipsum</strong>
-                                    <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <i class="fa fa-globe fa-1x mt-2"></i>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <strong class="title">$24.23</strong>
-                                <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="{{static_asset('frontend/images/product-img.png')}}" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <strong class="title">Lorem Ipsum</strong>
-                                    <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <i class="fa fa-globe fa-1x mt-2"></i>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <strong class="title">$24.23</strong>
-                                <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="{{static_asset('frontend/images/product-img.png')}}" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <strong class="title">Lorem Ipsum</strong>
-                                    <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                                <i class="fa fa-globe fa-1x mt-2"></i>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <strong class="title">$24.23</strong>
-                                <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div> -->
+ 
     <div class="reviews-ratings mb-3 mb-md-5">
         <div class="container">
             <h2 class="mb-4">Reviews & Ratings</h2>

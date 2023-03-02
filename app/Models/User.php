@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
-
+    protected $guarded = [];
     /**
      * The attributes that are mass assignable.
      *
@@ -37,4 +37,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function images()
+    {
+            return $this->hasMany(Upload::class,'id','user_profile_image');
+    }
 }
