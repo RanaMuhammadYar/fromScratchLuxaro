@@ -27,6 +27,8 @@ class Product extends Model
         'user_id',
         'shipping_charge',
         'tags',
+        'status',
+        'multiple_image',
 
     ];
     public function category()
@@ -52,5 +54,5 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    
+
 }

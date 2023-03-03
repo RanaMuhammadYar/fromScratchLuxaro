@@ -3,6 +3,9 @@
     <title>Home</title>
 @endsection
 @section('content')
+    <style>
+
+    </style>
     <div class="banner mb-4">
         <div class="banner-slider">
             <div>
@@ -892,14 +895,21 @@
                 @if ($product->category->title == 'Luxaurolicious')
                     <div>
                         <div class="product-item">
-                            <div class="img-holder">
-                                <img src="{{ $product->image }}" onerror="this.src'{{ asset('images/default.png') }}'"
-                                    class="img-fluid">
-                            </div>
+                            <a
+                                href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
+                                <div class="img-holder">
+                                    <img src="{{ $product->image }}"
+                                        onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                                </div>
+                            </a>
                             <div class="txt-holder">
                                 <div class="d-flex justify-content-between mb-3">
                                     <div>
-                                        <strong class="title">{{ $product->product_name }}</strong>
+                                        <a href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}"
+                                            style="productName" style="color: black;">
+                                            <strong class="title"
+                                                style="color:black">{{ $product->product_name }}</strong>
+                                        </a>
                                         <ul class="list-unstyled m-0 p-0 d-flex stars">
                                             <li class="me-1"><i class="fa fa-star"></i></li>
                                             <li class="me-1"><i class="fa fa-star"></i></li>
@@ -910,10 +920,12 @@
                                     </div>
                                     <i class="fa fa-globe fa-1x mt-2"></i>
                                 </div>
+                                {{-- <input type="hidden" value="1" id="addOrRemove" max="10"> --}}
                                 <div class="d-flex justify-content-between align-items-center">
                                     <strong class="title">${{ $product->product_price }}</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                            class="fa fa-shopping-basket"></i></a>
+                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"  onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
+                                            class="fa fa-shopping-basket"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -955,14 +967,21 @@
             @if ($product->category->title == 'Luxauro Fresh')
                 <div>
                     <div class="product-item">
-                        <div class="img-holder">
-                            <img src="{{ $product->image }}"
-                                onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
-                        </div>
+                        <a
+                            href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
+                            <div class="img-holder">
+                                <img src="{{ $product->image }}"
+                                    onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                            </div>
+                        </a>
                         <div class="txt-holder">
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
-                                    <strong class="title">{{ $product->product_name }}</strong>
+                                    <a href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}"
+                                        style="color:black;">
+                                        <strong class="title"
+                                            style="color:black;">{{ $product->product_name }}</strong>
+                                    </a>
                                     <ul class="list-unstyled m-0 p-0 d-flex stars">
                                         <li class="me-1"><i class="fa fa-star"></i></li>
                                         <li class="me-1"><i class="fa fa-star"></i></li>
@@ -993,7 +1012,9 @@
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                 <h2 class="m-0">Luxauro Library, Forum, & Publishing</h2>
                 <div class="d-flex form-holder">
-                    <a class="btn btn-view rounded-0" href="{{ route('productcategory', ['id' => $product->category->id, 'slug' => Str::slug($product->category->title)]) }}">View All</a>
+                    <a class="btn btn-view rounded-0"
+                        href="{{ route('productcategory', ['id' => $product->category->id, 'slug' => Str::slug($product->category->title)]) }}">View
+                        All</a>
                     <form class="page-form flex-fill" action="#">
                         <div class="page-form-holder d-flex">
                             <label class="form-control rounded-0">Search Filter</label>
@@ -1017,14 +1038,21 @@
         @if ($product->category->title == 'Luxauro Library')
             <div>
                 <div class="product-item">
-                    <div class="img-holder">
-                        <img src="{{ $product->image }}"
-                            onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
-                    </div>
+                    <a
+                        href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
+                        <div class="img-holder">
+                            <img src="{{ $product->image }}"
+                                onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                        </div>
+                    </a>
                     <div class="txt-holder">
                         <div class="d-flex justify-content-between mb-3">
                             <div>
-                                <strong class="title">{{ $product->product_name }}</strong>
+                                <a
+                                    href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
+                                    <strong class="title"
+                                        style="color:black">{{ $product->product_name }}</strong>
+                                </a>
                                 <ul class="list-unstyled m-0 p-0 d-flex stars">
                                     <li class="me-1"><i class="fa fa-star"></i></li>
                                     <li class="me-1"><i class="fa fa-star"></i></li>

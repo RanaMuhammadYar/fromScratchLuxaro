@@ -31,6 +31,7 @@ class CreateProductsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('shipping_charge');
             $table->string('status');
+            $table->string('multiple_image');
             $table->timestamps();
         });
     }

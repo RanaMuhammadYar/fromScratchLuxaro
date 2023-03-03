@@ -38,6 +38,15 @@ class ProductMangeCotroller extends Controller
             $relatedProducts = $product->relatedProducts()->get();
             Cache::put('related_products_'.$id, $relatedProducts, 1440);
         }
-        return view('frontend.all-page.product_detail', compact('products', 'id', 'slug' ,'relatedProducts'));
+        return view('frontend.all-page.category_detail', compact('products', 'id', 'slug' ,'relatedProducts'));
+    }
+
+    public function productDetails(Request $request, $id, $slug)
+    {
+        $product = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('id', $id)->first();
+        $productsdesc = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id','desc')->paginate(15);
+        $productsasc = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id','asc')->paginate(15);
+        $mayyoulike = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->paginate(15);
+        return view('frontend.all-page.product_detail', compact('product', 'id', 'slug' ,'productsdesc', 'productsasc' ,'mayyoulike'));
     }
 }

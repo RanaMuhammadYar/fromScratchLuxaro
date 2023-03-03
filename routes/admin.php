@@ -22,7 +22,8 @@ Route::get('product-suspended',[ProductMangeCotroller::class,'active'])->name('p
 Route::get('product/{id}/{slug}',[ProductMangeCotroller::class,'productcategory'])->name('productcategory');
 Route::get('productsabc/{id}',[ProductMangeCotroller::class,'getRelatedProducts']);
 Route::get('productsabc/{slug}',[ProductMangeCotroller::class,'product']);
+Route::get('product-detail/{id}/{slug}',[ProductMangeCotroller::class,'productDetails'])->name('productDetails');
 
-Route::get('/product-detail',function(){
-    return view('frontend.test');
-});
+// Route::get('/product-detail',function(){
+//     return view('frontend.all-page.product_detail');
+// });

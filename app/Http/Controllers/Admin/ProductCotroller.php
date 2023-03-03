@@ -65,6 +65,7 @@ class ProductCotroller extends Controller
             'product_image' => 'required',
             'status'=>'required',
             'user_id'=>'required',
+            'multiple_image'=>'required',
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Product Added Failed');
@@ -83,6 +84,14 @@ class ProductCotroller extends Controller
             if ($request->hasFile('product_image')) {
                 $path = asset('storage/'.$request->product_image->store('product'));
                 $product->image = $path;
+            }
+            if ($request->hasFile('multiple_image')) {
+                $images = [];
+                foreach ($request->multiple_image as $image) {
+                    $path = asset('storage/'.$image->store('product'));
+                    array_push($images, $path);
+                }
+                $product->multiple_image = json_encode($images);
             }
             $product->save();
             $tags = explode(",", $request->tags);
