@@ -22,7 +22,7 @@
 							<input type="hidden" name="types[]" value="home_slider_images">
 							<input type="hidden" name="types[]" value="home_slider_links">
 							@if (get_setting('home_slider_images') != null)
-								@foreach (json_decode(get_setting('home_slider_images'), true) as $key => $value)
+								@foreach (json_decode(get_setting('home_slider_images'), false) as $key => $value)
 									<div class="row gutters-5">
 										<div class="col-md-5">
 											<div class="form-group">

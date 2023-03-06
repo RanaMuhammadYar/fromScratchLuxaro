@@ -20,7 +20,7 @@ Route::resource('delivory-option',DelivoryOptionCotroller::class);
 Route::resource('shipping-type',ShippingTypeCotroller::class);
 Route::resource('product-type',ProductTypeCotroller::class);
 Route::resource('product',ProductCotroller::class);
-<<<<<<< Updated upstream
+
 Route::get('product-active',[ProductMangeCotroller::class,'suspended'])->name('product.suspended');
 Route::get('product-suspended',[ProductMangeCotroller::class,'active'])->name('product.active');
 Route::get('product/{id}/{slug}',[ProductMangeCotroller::class,'productcategory'])->name('productcategory');
@@ -31,7 +31,7 @@ Route::get('product-detail/{id}/{slug}',[ProductMangeCotroller::class,'productDe
 // Route::get('/product-detail',function(){
 //     return view('frontend.all-page.product_detail');
 // });
-=======
+
 
  // website setting
  Route::group(['prefix' => 'website'], function() {
@@ -100,4 +100,4 @@ Route::controller(BusinessSettingsController::class)->group(function () {
     Route::get('/order-configuration', 'order_configuration')->name('order_configuration.index');
 });
 });
->>>>>>> Stashed changes
+

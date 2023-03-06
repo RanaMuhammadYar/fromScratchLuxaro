@@ -379,13 +379,14 @@ class BusinessSettingsController extends Controller
                 else{
                     $business_settings = new BusinessSetting;
                     $business_settings->type = $type;
-                    if(gettype($request[$type]) == 'array'){
-                        $business_settings->value = json_encode($request[$type]);
-                    }
-                    else {
-                        $business_settings->value = $request[$type];
-                    }
+                    // if(gettype($request[$type]) == 'array'){
+                    //     $business_settings->value = json_encode($request[$type]);
+                    // }
+                    // else {
+                    //     $business_settings->value = $request[$type];
+                    // }
                     $business_settings->lang = $lang;
+                    // dd($business_settings);
                     $business_settings->save();
                 }
             }
