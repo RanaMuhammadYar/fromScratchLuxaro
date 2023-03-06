@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CharterManagementController;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,5 +67,16 @@ Route::get('test', function () {
     return view('frontend.all-page.test');
 });
 Route::post('/product',[ProductController::class,'store'])->name('product.store');
+
+Route::controller(PageController::class)->group(function () {
+    // Policies
+    Route::get('/seller-policy', 'sellerpolicy')->name('sellerpolicy');
+    Route::get('/return-policy', 'returnpolicy')->name('returnpolicy');
+    Route::get('/support-policy', 'supportpolicy')->name('supportpolicy');
+    Route::get('/terms', 'terms')->name('terms');
+    Route::get('/privacy-policy', 'privacypolicy')->name('privacypolicy');
+});
+
+
 
 

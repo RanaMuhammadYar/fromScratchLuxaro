@@ -66,7 +66,7 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Tags</label>
                                     <input class="form-control @error('tags') is-invalid @enderror" type="text"
-                                        data-role="tagsinput" name="tags" value="{{ old('tags') }}">
+                                        data-role="tagsinput" name="tags" value="{{ old('tags') }}" placeholder="Tags">
                                     @if ($errors->has('tags'))
                                         <span class="text-danger">{{ $errors->first('tags') }}</span>
                                     @endif
@@ -77,7 +77,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Product Image </label>
+                                    <label for="exampleFormControlInput1" class="form-label">product thumbnail Image</label>
                                     <input type="file" class="form-control @error('product_image') is-invalid @enderror"
                                         name="product_image" placeholder="Product Image" title="Product Image" />
                                     @if ($errors->has('product_image'))
@@ -172,12 +172,25 @@
                                         <span class="text-danger">{{ $errors->first('shipping_charge') }}</span>
                                     @endif
                                 </div>
-                                <div class="row py-3">
-                                    <div class="col-sm-12 text-end">
-                                        <a href="{{ route('product.index') }}"
-                                            class="btn btn-outline-danger mx-2">Closed</a>
-                                        <button class="btn btn-outline-primary" type="submit">Submit</button>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Product Multiple
+                                            images </label>
+                                        <input type="file" name="multiple_image[]" class="form-control" multiple>
+                                        @if ($errors->has('multiple_image'))
+                                            <span class="text-danger">{{ $errors->first('multiple_image') }}</span>
+                                        @endif
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row py-3">
+                                <div class="col-sm-12 text-end">
+                                    <a href="{{ route('product.index') }}"
+                                        class="btn btn-outline-danger mx-2">Closed</a>
+                                    <button class="btn btn-outline-primary" type="submit">Submit</button>
                                 </div>
                             </div>
                         </div>

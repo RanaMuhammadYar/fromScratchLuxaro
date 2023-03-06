@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Admin\Category;
 use App\Models\Admin\Product as AdminProduct;
 use App\Models\City;
 use App\Models\Country;
@@ -12,9 +14,9 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $products = AdminProduct::all();
-        // return  $products;
-        return view('frontend.all-page.products', compact('products'));
+        $categories = Category::all();
+        $products = AdminProduct::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status','Active')->limit(15)->get();
+        return view('frontend.all-page.products', compact('products','categories'));
     }
     public function productDetail(Request $request)
     {
