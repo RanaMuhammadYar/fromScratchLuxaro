@@ -57,6 +57,37 @@
                 </li>
             </ul>
         </li>
+
+         <!-- Layouts -->
+         <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="bx bx-layout mx-1"></i>
+                <div data-i18n="Layouts">Settings</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-items">
+                    <a href="{{ route('website.header') }}" class="menu-link">
+                        <div data-i18n="Without menu">{{translate('Header')}}</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('website.footer', ['lang'=>  App::getLocale()] ) }}" class="menu-link">
+                        <div data-i18n="Without navbar">{{translate('Footer')}}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('shipping-type') || Request::is('shipping-type/create') || Request::is('shipping-type/*/edit') ? 'active': '' }}">
+                    <a href="{{ route('website.pages', ['lang'=>  App::getLocale()] ) }}" class="menu-link">
+                        <div data-i18n="Container">{{translate('Pages')}}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('product-type') || Request::is('product-type/create') ? 'active' : '' }}">
+                    <a href="{{ route('website.appearance') }}" class="menu-link">
+                        <div data-i18n="Fluid">{{translate('Appearance')}}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <!-- Cards -->
         <li class="menu-item">
             <a href="cards-basic.html" class="menu-link">
