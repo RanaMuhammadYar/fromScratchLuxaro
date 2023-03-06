@@ -117,7 +117,7 @@
                                             if (Auth::check()) {
                                                 $cartorders = \App\Models\Admin\Cart::with('product')
                                                     ->where('user_id', Auth::id())
-                                                    ->where('status', 'Pending')
+                                                    ->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))
                                                     ->count();
                                                 echo $cartorders;
                                             } else {
@@ -139,12 +139,12 @@
                                             if (Auth::check()) {
                                                 $cartorders = \App\Models\Admin\Cart::with('product')
                                                     ->where('user_id', Auth::id())
-                                                    ->where('status', 'Pending')
+                                                    ->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))
                                                     ->get();
                                             } else {
                                                 $cartorders = \App\Models\Admin\Cart::with('product')
                                                     ->where('temp_id', Session::get('temp_id'))
-                                                    ->where('status', 'Pending')
+                                                    ->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))
                                                     ->get();
                                             }
                                         @endphp
@@ -207,9 +207,9 @@
                                                 aria-hidden="true"></i></span><span>Save for later</span>
                                     </div> --}}
 
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <a href="" class="btn btn-out">Checkout</a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 {{-- <div class="luxauro-cart mb-2">
                                     <h3 class="border-bottom d-inline-block mb-1">GoldEvine</h3>

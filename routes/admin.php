@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Admin\BusinessSettingsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProductCotroller;
+use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductTypeCotroller;
-use App\Http\Controllers\Admin\ShippingTypeCotroller;
-use App\Http\Controllers\Admin\DelivoryOptionCotroller;
-use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProductMangeCotroller;
-use App\Http\Controllers\Admin\WebsiteController;
+use App\Http\Controllers\Admin\ShippingTypeCotroller;
 
+use App\Http\Controllers\Admin\DelivoryOptionCotroller;
+use App\Http\Controllers\Admin\BusinessSettingsController;
+use App\Http\Controllers\Admin\CartController;
 
 Route::get('admin-dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
 
@@ -27,8 +28,10 @@ Route::get('product/{id}/{slug}',[ProductMangeCotroller::class,'productcategory'
 Route::get('productsabc/{id}',[ProductMangeCotroller::class,'getRelatedProducts']);
 Route::get('productsabc/{slug}',[ProductMangeCotroller::class,'product']);
 Route::get('product-detail/{id}/{slug}',[ProductMangeCotroller::class,'productDetails'])->name('productDetails');
-Route::post('add-cart',[ProductMangeCotroller::class,'addtocart'])->name('addtocart');
-Route::post('order-destroy',[ProductMangeCotroller::class,'orderdestroy'])->name('orderdestroy');
+Route::get('add-cart',[ProductMangeCotroller::class,'addtocart'])->name('addtocart');
+Route::get('order-destroy',[ProductMangeCotroller::class,'orderdestroy'])->name('orderdestroy');
+
+Route::get('checkout',[CartController::class,'index'])->name('checkout');
 
 // Route::get('/product-detail',function(){
 //     return view('frontend.all-page.product_detail');
@@ -51,7 +54,7 @@ Route::post('order-destroy',[ProductMangeCotroller::class,'orderdestroy'])->name
         Route::get('/custom-pages/destroy/{id}', 'destroy')->name('custom-pages.destroy');
     });
 
-   
+
 Route::controller(PageController::class)->group(function () {
     //mobile app balnk page for webview
     Route::get('/mobile-page/{slug}', 'mobile_custom_page')->name('mobile.custom-pages');
