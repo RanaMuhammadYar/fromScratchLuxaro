@@ -6,19 +6,26 @@
     <style>
 
     </style>
+    @if (get_setting('home_banner1_images') != null)
     <div class="banner mb-4">
         <div class="banner-slider">
+            @php $banner_1_imags = json_decode(get_setting('home_banner1_images')); @endphp
+            @foreach ($banner_1_imags as $key => $value)
             <div>
+                <a href="{{ json_decode(get_setting('home_banner1_links'), true)[$key] }}" class="d-block text-reset">
+                    <img src="{{ static_asset('assets/images/banner.png') }}" data-src="{{ uploaded_asset($banner_1_imags[$key]) }}" alt="{{ env('APP_NAME') }} promo" class="img-fluid lazyload w-100">
+                </a>
+            </div>
+            {{-- <div>
                 <img src="images/banner.png" class="img-fluid">
             </div>
             <div>
                 <img src="images/banner.png" class="img-fluid">
-            </div>
-            <div>
-                <img src="images/banner.png" class="img-fluid">
-            </div>
+            </div> --}}
         </div>
+        @endforeach
     </div>
+    @endif
     <form class="page-form mx-auto mb-5" action="#">
         <div class="page-form-holder d-flex">
             <select class="form-control select-control border-0 rounded-0 flex-fill">

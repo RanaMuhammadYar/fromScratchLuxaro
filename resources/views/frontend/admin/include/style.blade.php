@@ -10,6 +10,7 @@
 
 <!-- Icons. Uncomment required icon fonts -->
 <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/boxicons.css') }}" />
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 <!-- Core CSS -->
 <link rel="stylesheet" href=" {{ asset('admin/assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
