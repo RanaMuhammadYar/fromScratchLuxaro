@@ -33,7 +33,7 @@
         // return false;
         var total = price * quantity;
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "{{ route('addtocart') }}",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -91,7 +91,7 @@
 
     function orderdestroy(destroy_id) {
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "{{ route('orderdestroy') }}",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
