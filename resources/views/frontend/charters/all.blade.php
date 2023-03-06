@@ -93,7 +93,7 @@
                                         <div class="d-flex justify-content-between mb-3">
                                             <div>
                                                 <!-- <strong class="title">Lorem Ipsum</strong> -->
-                                                <strong class="title">{{ $charter->name }}</strong>
+                                                <strong class="title">{{ $charter->charter_name }}</strong>
                                                 <ul class="list-unstyled m-0 p-0 d-flex stars">
                                                     <li class="me-1"><i class="fa fa-star"></i></li>
                                                     <li class="me-1"><i class="fa fa-star"></i></li>

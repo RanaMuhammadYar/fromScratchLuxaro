@@ -15,6 +15,12 @@ class CreateUploadsTable extends Migration
     {
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
+            $table->string('file_original_name')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('extension')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->string('type')->nullable();
+            $table->string('file_size')->nullable();
             $table->timestamps();
         });
     }

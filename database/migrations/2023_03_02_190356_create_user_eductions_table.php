@@ -15,8 +15,10 @@ class CreateUserEductionsTable extends Migration
     {
         Schema::create('user_eductions', function (Blueprint $table) {
             $table->id();
-            $table->string('college_name');
-            $table->string('degree');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('college_name')->nullable();
+            $table->string('degree')->nullable();
             $table->timestamps();
         });
     }

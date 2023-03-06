@@ -15,20 +15,18 @@ class CreateUserDetailsTable extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
-            $table->string('postal_code');
-            $table->string('about_me');
-            $table->string('city_id');
-            $table->string('state_id');
-            $table->string('country_id');
-            $table->string('date_of_birth');
-            $table->string('description');
-            $table->string('language');
-            $table->integer('profession_id');
-            $table->integer('eduction_id');
-            $table->integer('certificate_id');
-            $table->string('portfolio_name');
-            $table->string('portfolio_link');
-            $table->string('user_profile_image');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('about_me')->nullable();
+            $table->string('city_id')->nullable();
+            $table->string('state_id')->nullable();
+            $table->string('country_id')->nullable();
+            $table->string('date_of_birth')->nullable();
+            $table->string('description')->nullable();
+            $table->string('language')->nullable();
+            $table->string('portfolio_name')->nullable();
+            $table->string('portfolio_link')->nullable();
+            $table->string('user_profile_image')->nullable();
             $table->timestamps();
         });
     }

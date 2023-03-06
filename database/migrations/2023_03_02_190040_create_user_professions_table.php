@@ -15,10 +15,12 @@ class CreateUserProfessionsTable extends Migration
     {
         Schema::create('user_professions', function (Blueprint $table) {
             $table->id();
-            $table->string('business_name');
-            $table->string('business_from');
-            $table->string('business_to');
-            $table->string('business_description');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('business_name')->nullable();
+            $table->string('business_from')->nullable();
+            $table->string('business_to')->nullable();
+            $table->string('business_description')->nullable();
             $table->timestamps();
         });
     }

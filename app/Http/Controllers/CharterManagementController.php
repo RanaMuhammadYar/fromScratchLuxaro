@@ -27,9 +27,11 @@ class CharterManagementController extends Controller
 
             $charters = Charter::query()
                 ->when($search, function ($query, $search) {
-                    return $query->where('name', 'like', '%' . $search . '%');
+                    return $query->where('charter_name', 'like', '%' . $search . '%');
                 })
                 ->paginate(5);
+             
+
   
             return view('frontend.charters.all',compact('charters'));
         }
@@ -80,15 +82,15 @@ class CharterManagementController extends Controller
         public function store(Request $request)
         {
             $charter                       = new Charter;
-            $charter->name                 = $request->charter_name;
+            $charter->charter_name                 = $request->charter_name;
             $charter->description          = $request->description;
-            $charter->type                 = $request->charter_type;
+            $charter->charter_type                 = $request->charter_type;
             $charter->max_guests           = $request->max_guests;
             $charter->start_time           = $request->start_time;
             $charter->end_time             = $request->end_time;
             $charter->rate                 = $request->rate;
-            $charter->tags = implode(',', $request->tags);
-            $charter->delivery_id = implode(',', $request->delivery_id);
+            $charter->tags = isset($request->delivery_id) ? implode(',', $request->tags) : '';
+            $charter->delivery_id = isset($request->delivery_id) ?  implode(',', $request->delivery_id) : '';
             $type = array(
                 "jpg"=>"image",
                 "jpeg"=>"image",
@@ -151,7 +153,7 @@ class CharterManagementController extends Controller
                     $upload->type = $type[$upload->extension];
                     $upload->file_size = 3;
                     $upload->save();
-                    $charter->charter_agreement_img = $upload->id;
+                    $charter->charter_agreement = $upload->id;
                     $charter->save();
                 }
                 // return '{}';

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('title')
-    <title>Test Page</title>
+    <title>Home</title>
 @endsection
 @section('content')
 
@@ -52,126 +52,23 @@
             </div>
         </div>
         <div class="row text-center">
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
+        @foreach ( $products as  $product)
+        @foreach ( json_decode($product->charter_category_id) as $charter_category_id )
+                @if ($charter_category_id == 1 || $charter_category_id == 2  )
+                <div class="col-6 col-md-4 col-lg-2 mb-4">
+                    <div class="product-item">
+                        <div class="img-holder">
+                            <img src="{{ isset($product->product_image) ? $product->product_image : asset('images/product-img.png')  }}" onerror="this.src='{{ asset('images/product-img.png') }}'" class="img-fluid" alt="">
+                        </div>
+                        <div class="txt-holder">
+                            <strong class="title">{{ $product->name }}</strong>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Product Category</strong>
-                    </div>
-                </div>
-            </div>
+                @endif
+        @endforeach
+        @endforeach
+
         </div>
     </div>
 </div>
@@ -196,7 +93,25 @@
             </div>
         </div>
         <div class="slider national-shop-slider text-center">
+
+            @foreach ( $products as $product )
+            @foreach (json_decode($product->charter_category_id )  as $charter_category_id)
+            @if ($charter_category_id == 3 || $charter_category_id == 4 || $charter_category_id == 5 )
             <div>
+                <div class="product-item">
+                    <div class="img-holder">
+                        <img src="{{ isset($product->product_image) ? $product->product_image : asset('images/product-img.png')  }}" onerror="this.src='{{ asset('images/product-img.png') }}'" class="img-fluid" alt="">
+                    </div>
+                    <div class="txt-holder">
+                        <strong class="title">{{  $product->name }}</strong>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @endforeach
+            @endforeach
+
+            {{-- <div>
                 <div class="product-item">
                     <div class="img-holder">
                         <img src="images/product-img.png" class="img-fluid">
@@ -255,17 +170,7 @@
                         <strong class="title">Shop Name</strong>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="product-item">
-                    <div class="img-holder">
-                        <img src="images/product-img.png" class="img-fluid">
-                    </div>
-                    <div class="txt-holder">
-                        <strong class="title">Shop Name</strong>
-                    </div>
-                </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
