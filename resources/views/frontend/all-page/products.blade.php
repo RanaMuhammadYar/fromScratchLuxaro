@@ -923,9 +923,10 @@
                                 {{-- <input type="hidden" value="1" id="addOrRemove" max="10"> --}}
                                 <div class="d-flex justify-content-between align-items-center">
                                     <strong class="title">${{ $product->product_price }}</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"  onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
+                                    <button class="btn bg-dark text-white py-1 px-2" href="" onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
                                             class="fa fa-shopping-basket"></i>
-                                    </a>
+                                    </button>
+                                    <input type="hidden" name="" value="1" class="addOrRemove">
                                 </div>
                             </div>
                         </div>
@@ -994,8 +995,9 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <strong class="title">${{ $product->product_price }}</strong>
-                                <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                        class="fa fa-shopping-basket"></i></a>
+                                <button class="btn bg-dark text-white py-1 px-2" href="" onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
+                                    class="fa fa-shopping-basket"></i>
+                            </button>
                             </div>
                         </div>
                     </div>
@@ -1065,8 +1067,9 @@
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <strong class="title">${{ $product->product_price }}</strong>
-                            <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                    class="fa fa-shopping-basket"></i></a>
+                            <button class="btn bg-dark text-white py-1 px-2" href="" onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
+                                class="fa fa-shopping-basket"></i>
+                        </button>
                         </div>
                     </div>
                 </div>

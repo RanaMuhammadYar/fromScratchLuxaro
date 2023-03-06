@@ -3,25 +3,25 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center">
                 @if (strpos(url()->current(), 'goldEvine'))
-                    <a class="logo" href="{{ route('home') }}"><img src="{{ asset('frontend/images/logo.png') }}"
+                    <a class="logo" href="{{ route('home') }}"><img src="{{ asset('images/GoldEvine-logo.png') }}"
                             class="img-fluid"></a>
-                    <a class="logo-gold" href="{{ route('goldEvine') }}"><img
-                            src="{{ asset('frontend/images/GoldEvine-logo.png') }}" class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img src="{{ asset('frontend/images/Gold-Metal-logo.png') }}"
+                    <a class="logo-gold" href="#"><img
+                            src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
+                    <a class="logo-gold" href="#"><img src="{{ asset('images/Gold-Metal-logo.png') }}"
                             class="img-fluid"></a>
                 @elseif(strpos(url()->current(), 'goldMetal'))
                     <a class="logo" href="{{ route('home') }}"><img style="width: 72%;margin-bottom: 22px;"
-                            src="{{ asset('frontend/images/logo.png') }}" class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img src="{{ asset('frontend/images/Gold-Metal-logo.png') }}"
+                            src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
+                    <a class="logo-gold" href="#"><img src="{{ asset('images/Gold-Metal-logo.png') }}"
                             class="img-fluid"></a>
-                    <a class="logo-gold" href="{{ route('goldEvine') }}"><img
-                            src="{{ asset('frontend/images/GoldEvine-logo.png') }}" class="img-fluid"></a>
+                    <a class="logo-gold" href="#"><img
+                            src="{{ asset('images/GoldEvine-logo.png') }}" class="img-fluid"></a>
                 @else
-                    <a class="logo-gold" href="{{ route('goldEvine') }}"><img
-                            src="{{ asset('frontend/images/GoldEvine-logo.png') }}" class="img-fluid"></a>
-                    <a class="logo" href="{{ route('home') }}"><img src="{{ asset('frontend/images/logo.png') }}"
+                    <a class="logo-gold" href="#"><img
+                            src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
+                    <a class="logo" href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}"
                             class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img src="{{ asset('frontend/images/Gold-Metal-logo.png') }}"
+                    <a class="logo-gold" href="#"><img src="{{ asset('images/Gold-Metal-logo.png') }}"
                             class="img-fluid"></a>
                 @endif
             </div>
@@ -97,28 +97,90 @@
                             <a href="#" id="dropdownMenuButton3" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <i class="fa fa-shopping-cart"aria-hidden="true">
+                                    <span class="CartCount">
+                                        @php
+                                            if (Auth::check()) {
+                                                $cartorders = \App\Models\Admin\Cart::with('product')
+                                                    ->where('user_id', Auth::id())
+                                                    ->where('status', 'Pending')
+                                                    ->count();
+                                                echo $cartorders;
+                                            } else {
+                                                $cartorders = \App\Models\Admin\Cart::with('product')
+                                                    ->where('temp_id', Session::get('temp_id'))
+                                                    ->where('status', 'Pending')
+                                                    ->count();
+                                                echo $cartorders;
+                                            }
+                                        @endphp
+                                    </span>
                                 </i>
                             </a>
                             <div class="dropdown-menu p-4 border-top" aria-labelledby="dropdownMenuButton3">
                                 <div class="luxauro-cart mb-2">
                                     <h3 class="border-bottom d-inline-block mb-1">Luxauro</h3>
                                     <div class="catdata">
-                                        {{-- <div class="row">
-                                            <div class="col-5 px-1">
-                                                <span class="mx-2"><i
-                                                        class="fa fa-shopping-cart"aria-hidden="true"></i></span><span>(items
-                                                    in bag)</span>
+                                        @php
+                                            if (Auth::check()) {
+                                                $cartorders = \App\Models\Admin\Cart::with('product')
+                                                    ->where('user_id', Auth::id())
+                                                    ->where('status', 'Pending')
+                                                    ->get();
+                                            } else {
+                                                $cartorders = \App\Models\Admin\Cart::with('product')
+                                                    ->where('temp_id', Session::get('temp_id'))
+                                                    ->where('status', 'Pending')
+                                                    ->get();
+                                            }
+                                        @endphp
+                                        @php
+                                            $total = 0;
+                                        @endphp
+                                        @foreach ($cartorders as $cartorder)
+                                            <div class="row destroy{{ $cartorder->id }}">
+
+                                                <div class="col-5 px-1">
+                                                    <span class="mx-2"><i
+                                                            class="fa fa-shopping-cart"aria-hidden="true"></i></span><span>
+
+                                                                {{ $cartorder->product->product_name }}
+
+                                                            </span>
+                                                </div>
+                                                <div class="col-1 px-1">
+                                                    <span> <i class="fa fa-times"aria-hidden="true" onclick="orderdestroy({{ $cartorder->id }})" style="cursor: pointer;"></i></span>
+                                                </div>
+                                                <div class="col-3 px-1">
+                                                    <span>{{ $cartorder->quantity }}</span>
+                                                </div>
+                                                <div class="col-3 px-1 ">
+                                                    <span
+                                                        class="d-block">=${{ $cartorder->quantity * $cartorder->product->product_price }}
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div class="col-1 px-1">
-                                                <span> <i class="fa fa-times"aria-hidden="true"></i></span>
+                                            @if ($cartorder->quantity * $cartorder->product->product_price == !null)
+                                                @php
+
+                                                    $total = $total + $cartorder->quantity * $cartorder->product->product_price;
+                                                @endphp
+                                            @else
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="totalprice">
+                                        <div class="row px-1">
+                                            <div class="col-8"></div>
+                                            <div class="col-3">
+                                                <span class="mx-1">
+                                                    @if ($total == !null)
+                                                        Total=${{ $total }}
+                                                    @else
+                                                    @endif
+                                                </span>
                                             </div>
-                                            <div class="col-3 px-1">
-                                                <span>(quantity)</span>
-                                            </div>
-                                            <div class="col-3 px-1 ">
-                                                <span class="d-block">= $</span><span>= $ Total</span>
-                                            </div>
-                                        </div> --}}
+                                            <div class="col-1"></div>
+                                        </div>
                                     </div>
 
                                     {{-- <div class="cart-fav mb-0">
@@ -129,6 +191,10 @@
                                         <span class="me-2"><i class="fa fa-bookmark"
                                                 aria-hidden="true"></i></span><span>Save for later</span>
                                     </div> --}}
+
+                                    <div class="row">
+                                        <a href="" class="btn btn-out">Checkout</a>
+                                    </div>
                                 </div>
                                 {{-- <div class="luxauro-cart mb-2">
                                     <h3 class="border-bottom d-inline-block mb-1">GoldEvine</h3>
@@ -173,6 +239,7 @@
                     </ul>
                 </div>
             </div>
+            {{-- {{ dd($cartorders)  }} --}}
             <nav id="nav" class="text-uppercase d-md-flex justify-content-between">
                 <button class="menu-btn d-md-none background-none border-0 bg-transparent"><i
                         class="fa fa-times text-white"></i></button>
@@ -188,4 +255,5 @@
                 </ul>
             </nav>
         </div>
+
 </header>

@@ -23,6 +23,8 @@ Route::get('product/{id}/{slug}',[ProductMangeCotroller::class,'productcategory'
 Route::get('productsabc/{id}',[ProductMangeCotroller::class,'getRelatedProducts']);
 Route::get('productsabc/{slug}',[ProductMangeCotroller::class,'product']);
 Route::get('product-detail/{id}/{slug}',[ProductMangeCotroller::class,'productDetails'])->name('productDetails');
+Route::post('add-cart',[ProductMangeCotroller::class,'addtocart'])->name('addtocart');
+Route::post('order-destroy',[ProductMangeCotroller::class,'orderdestroy'])->name('orderdestroy');
 
 // Route::get('/product-detail',function(){
 //     return view('frontend.all-page.product_detail');

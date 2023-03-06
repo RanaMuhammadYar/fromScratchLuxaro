@@ -70,8 +70,8 @@
                             <div class="quantity-btn d-flex align-items-center mb-3">
                                 <div class="product-details-quantity border rounded d-inline-block me-3">
                                     <span class="input-number-decrement" onclick="decrement()">–</span><input
-                                        class="input-number " type="text" value="1" min="1" max="10"
-                                        id="addOrRemove"><span class="input-number-increment" onclick="increment()">+</span>
+                                        class="input-number addOrRemove" type="text" value="1" min="1" max="10"
+                                        id=""><span class="input-number-increment" onclick="increment()">+</span>
                                 </div>
                                 <div class="">
                                     <button class="btn btn-primary"
@@ -597,48 +597,143 @@
 
         </div>
         <script>
-            function increment() {
-                var value = parseInt(document.getElementById('addOrRemove').value, 10);
-                value = isNaN(value) ? 0 : value;
-                value++;
-                document.getElementById('addOrRemove').value = value;
-            }
+            // function increment() {
+            //     var value = $('.addOrRemove').val();
+            //     value = isNaN(value) ? 0 : value;
+            //     value++;
+            //     $('.addOrRemove').val(value);
+            // }
 
-            function decrement() {
-                var value = parseInt(document.getElementById('addOrRemove').value, 10);
-                value = isNaN(value) ? 0 : value;
-                value < 1 ? value = 1 : '';
-                if (value > 1) {
-                    value--;
-                }
-                document.getElementById('addOrRemove').value = value;
-            }
+            // function decrement() {
+            //     var value = $('.addOrRemove').val();
+            //     value = isNaN(value) ? 0 : value;
+            //     value < 1 ? value = 1 : '';
+            //     if (value > 1) {
+            //         value--;
+            //     }
+            //     $('.addOrRemove').val(value);
+            // }
 
-            function addToCart(product_id, name, price) {
-                var quantity = document.getElementById('addOrRemove').value;
-                var product = {
-                    id: product_id,
-                    name: name,
-                    price: price,
-                    quantity: quantity
-                };
-                sessionStorage.setItem('product', JSON.stringify(product));
-                var allData = JSON.parse(sessionStorage.getItem('product'));
-                if (allData.id == product_id) {
-                    sessionStorage.removeItem('product');
-                    $('.catdata').html('');
-                    // allData.quantity = parseInt(allData.quantity) + parseInt(quantity);
-                }
-                var quentity = allData.quantity;
-                var price = allData.price;
-                var total = quentity * price;
-                $('.catdata').append(
-                    '<div class="row"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
-                    allData.name +
-                    '</span></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true"></i></span></div><div class="col-3 px-1"><span>' +
-                    allData.quantity + '</span></div><div class="col-3 px-1"><span class="d-block">= $' + price +
-                    '</span><span>= $' + total + ' Total</span></div></div>');
-            }
+            // function addToCart(product_id, name, price) {
+
+            //     var quantity = $('.addOrRemove').val();
+            //     var total = price * quantity;
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "{{ route('addtocart') }}",
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         },
+            //         data: {
+            //             product_id: product_id,
+            //             name: name,
+            //             price: price,
+            //             quantity: quantity,
+            //             total: total
+            //         },
+            //         dataType: "json",
+            //         success: function(response) {
+            //             if (response.success == 'Product Already Added To Cart.') {
+            //                 swal({
+            //                     title: "Error!",
+            //                     text: response.success,
+            //                     icon: "error",
+            //                     button: "Ok",
+
+            //                 });
+            //                 return false;
+            //             } else {
+            //                 swal({
+            //                     title: "Success!",
+            //                     text: response.success,
+            //                     icon: "success",
+            //                     button: "Ok",
+            //                 });
+
+            //             }
+
+            //             $('.catdata').append(
+            //                 '<div class="row destroy' + response.id +
+            //                 '"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
+            //                 response.cart.name +
+            //                 '</span></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true" onclick="orderdestroy(' +
+            //                 response.id + ')" ></i></span></div><div class="col-3 px-1"><span>' +
+            //                 response.cart.quantity +
+            //                 '</span></div><div class="col-3 px-1"><span class="d-block">=$' + response.cart
+            //                 .price * response.cart.quantity + '</span></div></div>');
+            //             $('.totalprice').html('');
+            //             $('.totalprice').append(
+            //                 '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
+            //                 response.total + '</span></div><div class="col-1"></div></div>');
+            //             $('.CartCount').html('');
+            //             $('.CartCount').append(response.count);
+
+            //         }
+
+            //     });
+
+
+            // }
+
+            // function orderdestroy(destroy_id) {
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "{{ route('orderdestroy') }}",
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         },
+            //         data: {
+            //             destroy_id: destroy_id,
+            //         },
+            //         dataType: "json",
+            //         success: function(response) {
+
+            //             $('.destroy' + destroy_id + '').html('');
+            //             $('.CartCount').html('');
+            //             $('.CartCount').append(response.count);
+            //             $('.totalprice').html('');
+            //             if (response.total == 0) {} else {
+            //                 $('.totalprice').append(
+            //                     '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
+            //                     response.total + '</span></div><div class="col-1"></div></div>');
+            //             };
+            //             swal({
+            //                 title: "Success!",
+            //                 text: response.success,
+            //                 icon: "success",
+            //                 button: "Ok",
+            //             });
+            //         }
+
+            //     });
+            // }
+
+
+            // function addToCart(product_id, name, price) {
+            //     var quantity = document.getElementById('addOrRemove').value;
+            //     var product = {
+            //         id: product_id,
+            //         name: name,
+            //         price: price,
+            //         quantity: quantity
+            //     };
+            //     sessionStorage.setItem('product', JSON.stringify(product));
+            //     var allData = JSON.parse(sessionStorage.getItem('product'));
+            //     if (allData.id == product_id) {
+            //         sessionStorage.removeItem('product');
+            //         $('.catdata').html('');
+            //         // allData.quantity = parseInt(allData.quantity) + parseInt(quantity);
+            //     }
+            //     var quentity = allData.quantity;
+            //     var price = allData.price;
+            //     var total = quentity * price;
+            //     $('.catdata').append(
+            //         '<div class="row"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
+            //         allData.name +
+            //         '</span></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true"></i></span></div><div class="col-3 px-1"><span>' +
+            //         allData.quantity + '</span></div><div class="col-3 px-1"><span class="d-block">= $' + price +
+            //         '</span><span>= $' + total + ' Total</span></div></div>');
+            // }
 
 
             // function addToCart(product_id, name, price) {
