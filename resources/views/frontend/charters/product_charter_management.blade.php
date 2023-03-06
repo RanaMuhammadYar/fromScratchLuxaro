@@ -238,11 +238,11 @@
                                                             aria-label="Text input with dropdown button">
                                                     </div>
                                                 </div>
-                                                <div class="d-grid d-md-flex justify-content-md-end mb-2">
+                                                <!-- <div class="d-grid d-md-flex justify-content-md-end mb-2">
                                                     <button class="btn btn-primary" type="button"><span><i
                                                                 class="fa fa-plus me-2" aria-hidden="true"></i></span>Add
                                                         More</button>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">

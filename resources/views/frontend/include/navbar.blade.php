@@ -73,6 +73,21 @@
                                             <li> <a href="{{ route('goldMetal') }}">Gold Metal Guild:</a> <i
                                                     class="fa fa-comment"></i> <i class="fa fa-user"></i></li>
                                         </ul>
+                                        
+                                        <ul>
+                                            <li>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                            </li>
+                                        </ul>
+
                                     </div>
                                 </div>
                             </div>
@@ -239,20 +254,20 @@
                     </ul>
                 </div>
             </div>
-            {{-- {{ dd($cartorders)  }} --}}
             <nav id="nav" class="text-uppercase d-md-flex justify-content-between">
                 <button class="menu-btn d-md-none background-none border-0 bg-transparent"><i
                         class="fa fa-times text-white"></i></button>
                 <ul class="list-unstyled m-0 p-0 d-md-flex">
-                    <li><a href="javascript:void">products</a></li>
+                    <li><a href="{{route('home')}}">products</a></li>
                     <li><a href="javascript:void">projects</a></li>
                     <li><a href="javascript:void">professionals</a></li>
                 </ul>
                 <ul class="list-unstyled m-0 p-0 d-md-flex justify-content-end">
-                    <li><a href="javascript:void">charters</a></li>
+                    <li><a href="{{route('charters')}}">charters</a></li>
                     <li><a href="javascript:void">forums</a></li>
                     <li><a href="javascript:void">Suits</a></li>
                 </ul>
+        
             </nav>
         </div>
 

@@ -60,6 +60,7 @@
                 </div>
             </div>
             <div class="row text-center">
+               
                 @foreach ($categories as $category)
                     <div class="col-6 col-md-4 col-lg-2 mb-4">
                         <div class="product-item">

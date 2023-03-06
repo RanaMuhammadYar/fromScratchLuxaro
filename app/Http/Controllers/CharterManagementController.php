@@ -21,9 +21,18 @@ class CharterManagementController extends Controller
          *
          * @return \Illuminate\Http\Response
          */
-        public function index()
+        public function index(Request $request)
         {
-            $charters = Charter::paginate(2);
+            $search = $request->input('search');
+
+            $charters = Charter::query()
+                ->when($search, function ($query, $search) {
+                    return $query->where('charter_name', 'like', '%' . $search . '%');
+                })
+                ->paginate(5);
+             
+
+  
             return view('frontend.charters.all',compact('charters'));
         }
         public function charter_detail(Request $request)
@@ -72,17 +81,16 @@ class CharterManagementController extends Controller
          */
         public function store(Request $request)
         {
-            // dd($request->all());
             $charter                       = new Charter;
-            $charter->name                 = $request->charter_name;
+            $charter->charter_name                 = $request->charter_name;
             $charter->description          = $request->description;
-            $charter->type                 = $request->charter_type;
+            $charter->charter_type                 = $request->charter_type;
             $charter->max_guests           = $request->max_guests;
             $charter->start_time           = $request->start_time;
             $charter->end_time             = $request->end_time;
             $charter->rate                 = $request->rate;
-            $charter->tags = implode(',', $request->tags);
-            $charter->delivery_id = implode(',', $request->delivery_id);
+            $charter->tags = isset($request->delivery_id) ? implode(',', $request->tags) : '';
+            $charter->delivery_id = isset($request->delivery_id) ?  implode(',', $request->delivery_id) : '';
             $type = array(
                 "jpg"=>"image",
                 "jpeg"=>"image",
@@ -139,60 +147,13 @@ class CharterManagementController extends Controller
                     $myimage = $request->charter_agreement->getClientOriginalName();
                     $request->charter_agreement->move(public_path('charters/'), $myimage);
                     $path = 'charters/'.$myimage;
-          
-                    // $path = $request->file('charter_agreement')->store('charters', 'local');
-                    // $size = $request->file('charter_agreement')->getSize();
-    
-                    // // Return MIME type ala mimetype extension
-                    // $finfo = finfo_open(FILEINFO_MIME_TYPE); 
-    
-                    // // Get the MIME type of the file
-                    // $file_mime = finfo_file($finfo, base_path('public/').$path);
-    
-                    // if($type[$extension] == 'image' && get_setting('disable_image_optimization') != 1){
-                    //     try {
-                    //         $img = Image::make($request->file('charter_agreement')->getRealPath())->encode();
-                    //         $height = $img->height();
-                    //         $width = $img->width();
-                    //         if($width > $height && $width > 1500){
-                    //             $img->resize(1500, null, function ($constraint) {
-                    //                 $constraint->aspectRatio();
-                    //             });
-                    //         }elseif ($height > 1500) {
-                    //             $img->resize(null, 800, function ($constraint) {
-                    //                 $constraint->aspectRatio();
-                    //             });
-                    //         }
-                    //         $img->save(base_path('public/').$path);
-                    //         clearstatcache();
-                    //         $size = $img->filesize();
-    
-                    //     } catch (\Exception $e) {
-                    //         //dd($e);
-                    //     }
-                    // }
-                    
-                    if (env('FILESYSTEM_DRIVER') == 's3') {
-                        Storage::disk('s3')->put(
-                            $path,
-                            file_get_contents(base_path('public/').$path),
-                            [
-                                'visibility' => 'public',
-                                'ContentType' =>  $extension == 'svg' ? 'image/svg+xml' : $file_mime
-                            ]
-                        );
-                        if($arr[0] != 'updates') {
-                            unlink(base_path('public/').$path);
-                        }
-                    }
-    
                     $upload->extension = $extension;
                     $upload->file_name = $path;
                     $upload->user_id = 12;
                     $upload->type = $type[$upload->extension];
-                    $upload->file_size = '4';
+                    $upload->file_size = 3;
                     $upload->save();
-                    $charter->charter_agreement_img = $upload->id;
+                    $charter->charter_agreement = $upload->id;
                     $charter->save();
                 }
                 // return '{}';
@@ -212,68 +173,22 @@ class CharterManagementController extends Controller
                             $upload->file_original_name .= ".".$arr[$i];
                         }
                     }
-    
+
                     // $path = $request->file('thumbnail_img')->store('charters/', 'local');
                     $myimage = $request->thumbnail_img->getClientOriginalName();
                     $request->thumbnail_img->move(public_path('charters/'), $myimage);
                     $path = 'charters/'.$myimage;
-                    // $size = $request->file('thumbnail_img')->getSize();
-    
-                    // // Return MIME type ala mimetype extension
-                    // $finfo = finfo_open(FILEINFO_MIME_TYPE); 
-    
-                    // // Get the MIME type of the file
-                    // $file_mime = finfo_file($finfo, base_path('public/').$path);
-    
-                    // if($type[$extension] == 'image' && get_setting('disable_image_optimization') != 1){
-                    //     try {
-                    //         $img = Image::make($request->file('thumbnail_img')->getRealPath())->encode();
-                    //         $height = $img->height();
-                    //         $width = $img->width();
-                    //         if($width > $height && $width > 1500){
-                    //             $img->resize(1500, null, function ($constraint) {
-                    //                 $constraint->aspectRatio();
-                    //             });
-                    //         }elseif ($height > 1500) {
-                    //             $img->resize(null, 800, function ($constraint) {
-                    //                 $constraint->aspectRatio();
-                    //             });
-                    //         }
-                    //         $img->save(base_path('public/').$path);
-                    //         clearstatcache();
-                    //         $size = $img->filesize();
-    
-                    //     } catch (\Exception $e) {
-                    //         //dd($e);
-                    //     }
-                    // }
-                    
-                    if (env('FILESYSTEM_DRIVER') == 's3') {
-                        Storage::disk('s3')->put(
-                            $path,
-                            file_get_contents(base_path('public/').$path),
-                            [
-                                'visibility' => 'public',
-                                'ContentType' =>  $extension == 'svg' ? 'image/svg+xml' : $file_mime
-                            ]
-                        );
-                        if($arr[0] != 'updates') {
-                            unlink(base_path('public/').$path);
-                        }
-                    }
-    
                     $upload->extension = $extension;
                     $upload->file_name = $path;
                     $upload->user_id = 12;
                     $upload->type = $type[$upload->extension];
-                    $upload->file_size = "3MB";
+                    $upload->file_size = 3;
                     $upload->save();
                     $charter->thumbnail_img = $upload->id;
                     $charter->save();
                 }
-                // return '{}';
             }
-            
+         
             $charter->save();
          return redirect('/all_charters');
         }

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LuxaroController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CharterManagementController;
 use App\Http\Controllers\PageController;
@@ -26,10 +26,10 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/myProfile',[App\Http\Controllers\HomeController::class, 'myProfile'])->name('my-profile');
-Route::post('api/fetch-states', [LuxaroController::class, 'fetchState']);
-Route::post('api/fetch-cities', [LuxaroController::class, 'fetchCity']);
+Route::post('api/fetch-states', [UserController::class, 'fetchState']);
+Route::post('api/fetch-cities', [UserController::class, 'fetchCity']);
 
-Route::controller(LuxaroController::class)->group(function () {
+Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/product-detail/{id}', 'productDetail')->name('product-detail');
     Route::get('/goldEvine', 'goldEvine')->name('goldEvine');
