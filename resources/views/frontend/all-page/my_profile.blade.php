@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputtagline" class="form-label mb-0">Birthday</label>
-                                        <input type="date" class="form-control about-me" id="exampleInputtagline" value="{{@$userDetail->date_of_birth}}">
+                                        <input type="date" class="form-control about-me" id="exampleInputtagline" name="date_of_birth" value="{{@$userDetail->date_of_birth}}">
                                         <div class="pincel"></div>
                                     </div>
                                 </div>
@@ -228,9 +228,9 @@
 <script>
     //   $(document).ready(function (e) {
     const dateControl = document.querySelector('input[type="date"]');
-    dateControl.value = `{{ date('Y-m-d',strtotime(@$user->date_of_birth)) }}`;
-    dateControl.value = `{{ date('Y-m-d',strtotime(@$user->business_from)) }}`;
-    dateControl.value = `{{ date('Y-m-d',strtotime(@$user->business_to)) }}`;
+    dateControl.value = `{{ date('Y-m-d',strtotime(@$userDetail->date_of_birth)) }}`;
+    dateControl.value = `{{ date('Y-m-d',strtotime(@$userProfessions->business_from)) }}`;
+    dateControl.value = `{{ date('Y-m-d',strtotime(@$userProfessions->business_to)) }}`;
 
     $('#user_profile_image').change(function() {
 
