@@ -2,29 +2,20 @@
     <div class="logos-header py-2">
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center">
-                @if (strpos(url()->current(), 'goldEvine'))
-                    <a class="logo" href="{{ route('home') }}"><img src="{{ asset('images/GoldEvine-logo.png') }}"
-                            class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img
-                            src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img src="{{ asset('images/Gold-Metal-logo.png') }}"
-                            class="img-fluid"></a>
-                @elseif(strpos(url()->current(), 'goldMetal'))
-                    <a class="logo" href="{{ route('home') }}"><img style="width: 72%;margin-bottom: 22px;"
-                            src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img src="{{ asset('images/Gold-Metal-logo.png') }}"
-                            class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img
-                            src="{{ asset('images/GoldEvine-logo.png') }}" class="img-fluid"></a>
-                @else
-                    <a class="logo-gold" href="#"><img
-                            src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
-                    <a class="logo" href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}"
-                            class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img src="{{ asset('images/Gold-Metal-logo.png') }}"
-                            class="img-fluid"></a>
-                @endif
-            </div>
+            @if(strpos(url()->current(),'goldEvine'))
+            <a class="logo" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
+            <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
+            <a class="logo-gold" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
+            @elseif(strpos(url()->current(),'goldMetal'))
+            <a class="logo" href="{{ route('home') }}"><img style="width: 72%;margin-bottom: 22px;" src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
+            <a class="logo-gold" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
+            <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
+            @else
+            <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
+            <a class="logo" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
+            <a class="logo-gold" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
+            @endif    
+        </div>
         </div>
     </div>
     <div class="nav-section border-top">
