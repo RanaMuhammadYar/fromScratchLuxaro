@@ -5,8 +5,7 @@
                 @if (strpos(url()->current(), 'goldEvine'))
                     <a class="logo" href="{{ route('home') }}"><img src="{{ asset('images/GoldEvine-logo.png') }}"
                             class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img
-                            src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
+                    <a class="logo-gold" href="#"><img src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
                     <a class="logo-gold" href="#"><img src="{{ asset('images/Gold-Metal-logo.png') }}"
                             class="img-fluid"></a>
                 @elseif(strpos(url()->current(), 'goldMetal'))
@@ -14,11 +13,10 @@
                             src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
                     <a class="logo-gold" href="#"><img src="{{ asset('images/Gold-Metal-logo.png') }}"
                             class="img-fluid"></a>
-                    <a class="logo-gold" href="#"><img
-                            src="{{ asset('images/GoldEvine-logo.png') }}" class="img-fluid"></a>
+                    <a class="logo-gold" href="#"><img src="{{ asset('images/GoldEvine-logo.png') }}"
+                            class="img-fluid"></a>
                 @else
-                    <a class="logo-gold" href="#"><img
-                            src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
+                    <a class="logo-gold" href="#"><img src="{{ asset('images/logo.png') }}" class="img-fluid"></a>
                     <a class="logo" href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}"
                             class="img-fluid"></a>
                     <a class="logo-gold" href="#"><img src="{{ asset('images/Gold-Metal-logo.png') }}"
@@ -73,18 +71,19 @@
                                             <li> <a href="{{ route('goldMetal') }}">Gold Metal Guild:</a> <i
                                                     class="fa fa-comment"></i> <i class="fa fa-user"></i></li>
                                         </ul>
-                                        
+
                                         <ul>
                                             <li>
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                                    {{ __('Logout') }}
+                                                </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    class="d-none">
+                                                    @csrf
+                                                </form>
                                             </li>
                                         </ul>
 
@@ -96,7 +95,8 @@
                         <div class="user-info">
 
                             <li class="list-inline-item mr-3 border-right border-left-0 pr-3 pl-0">
-                                <a href="{{ route('login') }}" class="text-white d-inline-block opacity-60 py-2">Login</a>
+                                <a href="{{ route('login') }}"
+                                    class="text-white d-inline-block opacity-60 py-2">Login</a>
                             </li>
                             <li class="list-inline-item">
                                 <a href="{{ route('register') }}"
@@ -116,14 +116,26 @@
                                         @php
                                             if (Auth::check()) {
                                                 $cartorders = \App\Models\Admin\Cart::with('product')
-                                                    ->where('user_id', Auth::id())
-                                                    ->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))
+                                                    ->where(function ($query) {
+                                                        $query
+                                                            ->where('status', 'pending')
+                                                            ->where('user_id', Auth::id())
+                                                            ->orWhere(function ($query) {
+                                                                $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                                                            });
+                                                    })
                                                     ->count();
                                                 echo $cartorders;
                                             } else {
                                                 $cartorders = \App\Models\Admin\Cart::with('product')
-                                                    ->where('temp_id', Session::get('temp_id'))
-                                                    ->where('status', 'Pending')
+                                                    ->where(function ($query) {
+                                                        $query
+                                                            ->where('status', 'pending')
+                                                            ->where('user_id', Auth::id())
+                                                            ->orWhere(function ($query) {
+                                                                $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                                                            });
+                                                    })
                                                     ->count();
                                                 echo $cartorders;
                                             }
@@ -138,13 +150,25 @@
                                         @php
                                             if (Auth::check()) {
                                                 $cartorders = \App\Models\Admin\Cart::with('product')
-                                                    ->where('user_id', Auth::id())
-                                                    ->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))
+                                                    ->where(function ($query) {
+                                                        $query
+                                                            ->where('status', 'pending')
+                                                            ->where('user_id', Auth::id())
+                                                            ->orWhere(function ($query) {
+                                                                $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                                                            });
+                                                    })
                                                     ->get();
                                             } else {
                                                 $cartorders = \App\Models\Admin\Cart::with('product')
-                                                    ->where('temp_id', Session::get('temp_id'))
-                                                    ->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))
+                                                    ->where(function ($query) {
+                                                        $query
+                                                            ->where('status', 'pending')
+                                                            ->where('user_id', Auth::id())
+                                                            ->orWhere(function ($query) {
+                                                                $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                                                            });
+                                                    })
                                                     ->get();
                                             }
                                         @endphp
@@ -158,12 +182,14 @@
                                                     <span class="mx-2"><i
                                                             class="fa fa-shopping-cart"aria-hidden="true"></i></span><span>
 
-                                                                {{ $cartorder->product->product_name }}
+                                                        {{ $cartorder->product->product_name }}
 
-                                                            </span>
+                                                    </span>
                                                 </div>
                                                 <div class="col-1 px-1">
-                                                    <span> <i class="fa fa-times"aria-hidden="true" onclick="orderdestroy({{ $cartorder->id }})" style="cursor: pointer;"></i></span>
+                                                    <span> <i class="fa fa-times"aria-hidden="true"
+                                                            onclick="orderdestroy({{ $cartorder->id }})"
+                                                            style="cursor: pointer;"></i></span>
                                                 </div>
                                                 <div class="col-3 px-1">
                                                     <span>{{ $cartorder->quantity }}</span>
@@ -207,9 +233,9 @@
                                                 aria-hidden="true"></i></span><span>Save for later</span>
                                     </div> --}}
 
-                                    {{-- <div class="row">
-                                        <a href="" class="btn btn-out">Checkout</a>
-                                    </div> --}}
+                                    <div class="row">
+                                        <a href="{{ route('checkout') }}" class="btn btn-primary">Checkout</a>
+                                    </div>
                                 </div>
                                 {{-- <div class="luxauro-cart mb-2">
                                     <h3 class="border-bottom d-inline-block mb-1">GoldEvine</h3>
@@ -258,16 +284,16 @@
                 <button class="menu-btn d-md-none background-none border-0 bg-transparent"><i
                         class="fa fa-times text-white"></i></button>
                 <ul class="list-unstyled m-0 p-0 d-md-flex">
-                    <li><a href="{{route('home')}}">products</a></li>
+                    <li><a href="{{ route('home') }}">products</a></li>
                     <li><a href="javascript:void">projects</a></li>
                     <li><a href="javascript:void">professionals</a></li>
                 </ul>
                 <ul class="list-unstyled m-0 p-0 d-md-flex justify-content-end">
-                    <li><a href="{{route('charters')}}">charters</a></li>
+                    <li><a href="{{ route('charters') }}">charters</a></li>
                     <li><a href="javascript:void">forums</a></li>
                     <li><a href="javascript:void">Suits</a></li>
                 </ul>
-        
+
             </nav>
         </div>
 

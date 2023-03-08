@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     public function header(Request $request)
 	{
 		return view('frontend.admin.website_settings.header');
 	}
 	public function footer(Request $request)
-	{	
+	{
 		$lang = $request->lang;
 		return view('frontend.admin.website_settings.footer', compact('lang'));
 	}

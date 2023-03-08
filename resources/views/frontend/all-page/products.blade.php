@@ -26,7 +26,7 @@
         @endforeach
     </div>
     @endif
-    <form class="page-form mx-auto mb-5" action="#">
+    <form class="page-form mx-auto mb-5 mt-5 pt-5" action="#">
         <div class="page-form-holder d-flex">
             <select class="form-control select-control border-0 rounded-0 flex-fill">
                 <option>All</option>
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="row text-center">
-               
+
                 @foreach ($categories as $category)
                     <div class="col-6 col-md-4 col-lg-2 mb-4">
                         <div class="product-item">

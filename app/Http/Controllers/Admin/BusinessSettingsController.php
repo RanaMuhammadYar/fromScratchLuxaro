@@ -10,6 +10,10 @@ use Artisan;
 
 class BusinessSettingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
     public function general_setting(Request $request)
     {
     	return view('backend.setup_configurations.general_settings');
@@ -39,13 +43,13 @@ class BusinessSettingsController extends Controller
     {
         return view('backend.setup_configurations.google_configuration.google_recaptcha');
     }
-    
-    public function google_map(Request $request) 
+
+    public function google_map(Request $request)
     {
         return view('backend.setup_configurations.google_configuration.google_map');
     }
-    
-    public function google_firebase(Request $request) 
+
+    public function google_firebase(Request $request)
     {
         return view('backend.setup_configurations.google_configuration.google_firebase');
     }
@@ -340,7 +344,7 @@ class BusinessSettingsController extends Controller
         $business_settings->value = json_encode($form);
         if($business_settings->save()){
             Artisan::call('cache:clear');
-            
+
             flash(translate("Verification form updated successfully"))->success();
             return back();
         }
