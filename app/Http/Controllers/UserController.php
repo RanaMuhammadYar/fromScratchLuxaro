@@ -47,7 +47,7 @@ class UserController extends Controller
         {
             $course_certification_document =  $user->userDetails()->first()->course_certification_document;
         }
-        $user->userDetails()->create([
+        $user->userDetails()->updateOrCreate([
             "name" => $request->name,
             "about_me" => $request->about_me,
             "phone" => $request->phone,
@@ -62,17 +62,17 @@ class UserController extends Controller
             "portfolio_link" => $request->portfolio_link,
             "user_profile_image" => $user_profile_image,
         ]);
-        $user->userEducations()->create([
+        $user->userEducations()->updateOrCreate([
             "college_name" => $request->college_name,
             "degree" => $request->degree,
         ]);
-        $user->userProfessions()->create([
+        $user->userProfessions()->updateOrCreate([
             "business_name" => $request->business_name,
             "business_from" => $request->business_from,
             "business_to" => $request->business_to,
             "business_description" => $request->business_description,
         ]);
-        $user->userCertificates()->create([
+        $user->userCertificates()->updateOrCreate([
             "course_name" => $request->course_name,
             "course_certification_document" => $course_certification_document,
         ]);
