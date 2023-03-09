@@ -3,7 +3,26 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
-
+@if (session('success'))
+    <script>
+        swal({
+            title: "Success!",
+            text: "{{ session('success') }}",
+            icon: "success",
+            button: "Ok",
+        });
+    </script>
+@endif
+@if (session('error'))
+    <script>
+        swal({
+            title: "Error!",
+            text: "{{ session('error') }}",
+            icon: "error",
+            button: "Ok",
+        });
+    </script>
+@endif
 
 <script>
     $('.openLuxaroSidebar').click(function(){
@@ -65,6 +84,7 @@
             },
             dataType: "json",
             success: function(response) {
+                console.log(response);
                 if (response.success == 'Product Already Added To Cart.') {
                     swal({
                         title: "Error!",
@@ -73,7 +93,6 @@
                         button: "Ok",
 
                     });
-                    return false;
                 } else {
                     swal({
                         title: "Success!",
@@ -81,24 +100,24 @@
                         icon: "success",
                         button: "Ok",
                     });
-
+                    $('.catdata').append(
+                        '<div class="row destroy' + response.id +
+                        '"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
+                        response.cart.name +
+                        '</span></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true" onclick="orderdestroy(' +
+                        response.id +
+                        ')"style="cursor: pointer;"></i></span></div><div class="col-3 px-1"><span>' +
+                        response.cart.quantity +
+                        '</span></div><div class="col-3 px-1"><span class="d-block">=$' + response.cart
+                        .price * response.cart.quantity + '</span></div></div>');
+                    $('.totalprice').html('');
+                    $('.totalprice').append(
+                        '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
+                        response.total + '</span></div><div class="col-1"></div></div>');
+                    $('.CartCount').html('');
+                    $('.CartCount').append(response.count);
                 }
 
-                $('.catdata').append(
-                    '<div class="row destroy' + response.id +
-                    '"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
-                    response.cart.name +
-                    '</span></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true" onclick="orderdestroy(' +
-                    response.id + ')"style="cursor: pointer;"></i></span></div><div class="col-3 px-1"><span>' +
-                    response.cart.quantity +
-                    '</span></div><div class="col-3 px-1"><span class="d-block">=$' + response.cart
-                    .price * response.cart.quantity + '</span></div></div>');
-                $('.totalprice').html('');
-                $('.totalprice').append(
-                    '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
-                    response.total + '</span></div><div class="col-1"></div></div>');
-                $('.CartCount').html('');
-                $('.CartCount').append(response.count);
 
             }
 
@@ -139,6 +158,57 @@
 
         });
     }
+
+    function orderdestroycheckout(destroy_id, producttotal, deliverycharges) {
+        var destroy_id = destroy_id;
+        var subtotal = $('.luxaurosubtotal').attr('data-subtotal');
+        var shiping = $('.shiping').attr('data-shiping');
+        var overalltotal = $('.overalltotal').attr('data-total');
+        $.ajax({
+            url: "{{ route('order.destroycheckout') }}",
+            method: "GET",
+            data: {
+                destroy_id: destroy_id
+            },
+            success: function(data) {
+                if (data.status == 'success') {
+                    $('.allcartitem' + destroy_id).html('');
+                    var subtotals = subtotal - producttotal;
+                    var shipings = shiping - deliverycharges;
+                    // console.log(shipings);
+                    var overalltotals = overalltotal - producttotal;
+                    $('.luxaurosubtotal').html('$' + subtotals);
+                    $('.shiping').html('$' + shipings);
+                    $('.overalltotal').html('$' + overalltotals);
+                    $('.luxaurosubtotal').attr('data-subtotal', subtotals);
+                    $('.shiping').attr('data-shiping', shipings);
+                    $('.overalltotal').attr('data-total', overalltotals);
+                    $('.destroy' + destroy_id + '').html('');
+                    $('.CartCount').html('');
+                    $('.CartCount').append(data.count);
+                    $('.totalprice').html('');
+                    $('.shipingcharge').val(shipings);
+                    if (data.total == 0) {} else {
+                        $('.totalprice').append(
+                            '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
+                            data.total + '</span></div><div class="col-1"></div></div>');
+                    }
+                    swal({
+                        title: "Success!",
+                        text: data.success,
+                        icon: "success",
+                        button: "Ok",
+                    });
+
+
+                }
+
+            }
+        });
+
+    }
+
+
 
 
     // function addToCart(product_id, name, price) {

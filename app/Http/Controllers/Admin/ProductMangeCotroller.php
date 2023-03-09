@@ -55,9 +55,13 @@ class ProductMangeCotroller extends Controller
 
     public function addtocart(Request $request)
     {
-        $orderallready = Cart::where('product_id', $request->product_id)->where('status', 'Pending')->count();
-        if ($orderallready > 0) {
 
+        if (Auth::check()) {
+            $orderallready = Cart::where('product_id', $request->product_id)->where('status', 'Pending')->where('user_id', Auth::user()->id)->count();
+        } else {
+            $orderallready = Cart::where('product_id', $request->product_id)->where('status', 'Pending')->where('temp_id', session()->get('temp_id'))->count();
+        }
+        if ($orderallready > 0) {
             return response()->json(['success' => 'Product Already Added To Cart.']);
         } else {
             if (Auth::check()) {
@@ -68,9 +72,9 @@ class ProductMangeCotroller extends Controller
                 $cart->total_price = $request->total;
                 $cart->status = 'Pending';
                 $cart->save();
-                $total = Cart::where('user_id', Auth::user()->id )->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->sum('total_price');
-                $count = Cart::where('user_id', Auth::user()->id )->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->count();
-                return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => Auth::user()->id , 'total' => $total , 'count' => $count ,'id'=>  $cart->id]);
+                $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+                $count = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+                return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => Auth::user()->id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id]);
             } else {
                 if (session()->has('temp_id')) {
                     $temp_id = session()->get('temp_id');
@@ -81,9 +85,9 @@ class ProductMangeCotroller extends Controller
                     $cart->total_price = $request->total;
                     $cart->status = 'Pending';
                     $cart->save();
-                    $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->sum('total_price');
-                    $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->count();
-                    return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id , 'total' => $total , 'count' => $count ,'id'=>  $cart->id]);
+                    $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+                    $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+                    return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id]);
                 } else {
                     $temp_id = random_int(1000, 9999);
                     $cart = new Cart();
@@ -94,47 +98,13 @@ class ProductMangeCotroller extends Controller
                     $cart->status = 'Pending';
                     $cart->save();
                     $request->session()->put('temp_id', $temp_id);
-                    $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->sum('total_price');
-                    $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->count();
-                    return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total , 'count' => $count ,'id'=>  $cart->id]);
+                    $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+                    $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+                    return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id]);
                 }
             }
         }
-
-
-
-        // if(Auth::check())
-        // {
-        //     $cart = new Cart();
-        //     $cart->user_id = Auth::user()->id;
-        //     $cart->product_id = $request->product_id;
-        //     $cart->product_quantity = $request->product_quantity;
-        //     $cart->status = 'Pending';
-        //     $cart->save();
-        //     $request->session()->put('temp_id', Auth::user()->id);
-        //     return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all() , 'temp_id' => Auth::user()->id]);
-        // }else{
-        //     $temp_id = random_int(1000, 9999);
-        //     $cart = new Cart();
-        //     $cart->temp_id = $temp_id;
-        //     $cart->product_id = $request->product_id;
-        //     $cart->quantity = $request->quantity;
-        //     $cart->status = 'Pending';
-        //     $cart->save();
-        //     $request->session()->put('temp_id', $temp_id);
-        //     return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all() , 'temp_id' => $temp_id]);
-        // }
-        // if (Auth::check()) {
-
-        //     $temp_id = Auth::user()->id;
-        //     return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all() , 'temp_id' => $temp_id]);
-
-        // }else{
-        //     $temp_id = random_int(10000, 99999);
-        //     return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all() , 'temp_id' => $temp_id]);
-        // }
     }
-
 
     public function orderdestroy(Request $request)
     {
@@ -144,16 +114,14 @@ class ProductMangeCotroller extends Controller
         $cart->delete();
 
         if (Auth::check()) {
-            $total = Cart::where('user_id', Auth::user()->id )->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->sum('total_price');
-            $count = Cart::where('user_id', Auth::user()->id )->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->count();
-            return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total , 'count' => $count]);
-
-        }else{
+            $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+            $count = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+            return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total, 'count' => $count]);
+        } else {
             $temp_id = session()->get('temp_id');
-            $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->sum('total_price');
-            $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id',session()->get('temp_id'))->count();
-            return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total , 'count' => $count]);
+            $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+            $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+            return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total, 'count' => $count]);
         }
-
     }
 }
