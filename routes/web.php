@@ -80,7 +80,11 @@ Route::controller(PageController::class)->group(function () {
 
 Route::get('storage-link', function () {
     Artisan::call('storage:link');
+    Artisan::call('config:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
     return 'Storage link successfully created';
+
 });
 
 
