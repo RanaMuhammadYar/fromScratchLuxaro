@@ -15,7 +15,6 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>QTY</th>
                                 <th>payment type</th>
                                 <th>payment status</th>
                                 <th>shipping charge</th>
@@ -30,23 +29,13 @@
                                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
                                         <strong>{{ $order->user->userDetails->name }}</strong>
                                     </td>
-                                    <td></td>
                                     <td>{{ $order->payment_type }}</td>
                                     <td>{{ $order->payment_status }}</td>
                                     <td>${{ $order->shipping_charge }}</td>
-                                    <td>${{ $order->over_all_total  }}</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href=""><i
-                                                        class="bx bx-edit-alt me-1 text-success"></i> Edit</a>
-                                                <a class="dropdown-item" href=""><i class="bx bx-trash me-1 text-danger"></i> Delete</a>
-                                            </div>
-                                        </div>
+                                    <td>${{ $order->over_all_total }}</td>
+                                    <td><a href="{{ route('order.invoice',$order->id) }}">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

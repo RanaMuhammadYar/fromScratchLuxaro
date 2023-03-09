@@ -20,4 +20,10 @@ class OrderController extends Controller
         return view('frontend.admin.order.index', compact('orders'));
     }
 
+    public function invoice($id)
+    {
+        $order = Order::with('cart', 'user')->where('id', $id)->first();
+        return view('frontend.admin.order.invoice', compact('order'));
+    }
+
 }

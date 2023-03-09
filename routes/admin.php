@@ -38,6 +38,9 @@ Route::get('destroy-checkout', [CartController::class, 'destroycheckout'])->name
 Route::post('payment-type', [CartController::class, 'paymenttype'])->name('order.paymenttype');
 Route::get('order-show', [OrderController::class, 'index'])->name('order.show');
 
+
+Route::get('order-invoice/{id}', [OrderController::class, 'invoice'])->name('order.invoice');
+
 // Route::get('/product-detail',function(){
 //     return view('frontend.all-page.product_detail');
 // });

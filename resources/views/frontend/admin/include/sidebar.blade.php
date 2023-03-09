@@ -89,14 +89,12 @@
             </ul>
         </li>
         <!-- Cards -->
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('order-invoice/*') || Request::is('order-show') ? 'active' : '' }}">
             <a href="{{ route('order.show') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Orders</div>
             </a>
         </li>
-
-
     </ul>
 </aside>
 <!-- / Menu -->
