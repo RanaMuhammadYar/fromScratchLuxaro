@@ -228,6 +228,10 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 }
 
+.btn-outline-secondary {
+  border-color: #CED4DA;
+}
+
 .page-form button[type="submit"] {
 	min-width: 40px;
 	max-width: 40px;
@@ -530,6 +534,10 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 .section-product-charter a {
   text-decoration: none;
   color: #5E5E5E;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .section-product-charter .accordion-button::after {
@@ -1309,3 +1317,115 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     padding: 0 35px;
 	}
 }
+
+/*.input-icon {
+  position: relative;
+}
+.calendar-icon {
+  position: absolute;
+  right: 10px;
+  bottom: 14px;
+  font-size: 10px;
+
+}*/
+
+
+.uploadFile-table {
+    width: 100%;
+    background-color: white;
+    border: 0px solid;
+    color: grey;
+    font-size: 16px;
+    line-height: 44px;
+    overflow: hidden;
+    padding: 13px 10px 15px 10px !important;
+    position: relative;
+    resize: none;
+}
+
+.upload-icon-account-1-table {
+    background-color: #D9D9D9;
+    color: #424242;
+    padding: 14px 10px;
+    border-top-right-radius: 5px;
+    margin-right: 7px;
+    position: absolute;
+    right: -8px;
+    top: 0px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.panel-container {
+         
+     overflow: hidden;
+          
+          /* avoid browser level touch actions */
+          
+        }
+
+        .panel-left {
+          flex: 0 0 auto;
+          padding: 10px;
+          /* width: 300px;
+          min-height: 200px;*/
+          min-width: 150px;
+          white-space: nowrap;
+          overflow-x: hidden;
+        }
+
+        .splitter {
+          flex: 0 0 auto;
+          width: 3px;  
+          background: silver;
+          min-height: 200px;
+          cursor: col-resize;  
+          margin: 0px 35px 0px 25px;
+          display: none;
+        }
+        .panel-right {
+          flex: 1 1 auto;
+/*          padding: 10px;*/
+/*          width: 100%;*/
+/*          min-height: 200px;*/
+/*          min-width: 300px;*/
+          overflow-x: hidden;
+        }
+
+        .panel-right th {
+          font-size: 12px;
+          vertical-align: baseline;
+          color: #777777;
+        }
+
+        .panel-right td {
+          font-size: 14px;
+          color: #777777;
+          vertical-align: center;
+        }
+
+        .panel-right td:last-child{
+          text-align: left;
+        }
+
+        .table-tag ul li {
+          background-color: #24393B;
+          display: flex;
+          padding: 2px 6px 4px 10px;
+          align-items: center;
+          border-radius: 20px;
+          color: #fff;
+          margin: 2px 3px;
+          font-size: 12px;
+        }
+
+         .table-tag ul li a {
+          margin-left: 10px;
+          color: #fff;
+          font-size: 8px;
+         }
+
+         .panel-right .table-tag ul {
+          display: flex;
+         }
