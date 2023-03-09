@@ -6,6 +6,24 @@
 
 
 <script>
+    $('.openLuxaroSidebar').click(function(){
+        $('.common').addClass('close');
+        $('.common').removeClass('show');
+        $('.LuxaroSidebar').addClass('show');
+        $('.LuxaroSidebarbtn').addClass('show');
+    });
+    $('.openGoldEvineSidebar').click(function(){
+        $('.common').addClass('close');
+        $('.common').removeClass('show');
+        $('.GoldEvineSidebar').addClass('show');
+        $('.GoldEvineSidebarbtn').addClass('show');
+    });
+    $('.openGMGSidebar').click(function(){
+        $('.common').addClass('close');
+        $('.common').removeClass('show');
+        $('.GMGSidebar').addClass('show');
+        $('.GMGSidebarbtn').addClass('show');
+    });
     function increment() {
         var value = $('.addOrRemove').val();
         value = isNaN(value) ? 0 : value;

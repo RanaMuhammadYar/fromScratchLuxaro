@@ -15,6 +15,33 @@ $('.banner-slider').slick({
   nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>"
 });
 
+
+$('.explore-slider').slick({
+  slidesToShow: 2,
+  slidesToScroll: 1,
+  infinite: true,
+  dots: false,
+  arrows: true,
+  focusOnSelect: true,
+  autoplay: false,
+  mobileFirst: true,
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+  responsive: [{
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 4,
+      slidesToScroll: 1,
+    }
+  },  {
+    breakpoint: 992,
+    settings: {
+      slidesToShow: 5,
+      slidesToScroll: 1,
+    }
+  }]
+});
+
 $('.slider').slick({
   slidesToShow: 2,
   slidesToScroll: 1,
@@ -37,6 +64,34 @@ $('.slider').slick({
     settings: {
       slidesToShow: 6,
       slidesToScroll: 1,
+    }
+  }]
+});
+
+$('.categories-slider').slick({
+  slidesToShow: 2,
+  slidesToScroll: 1,
+  infinite: true,
+  dots: false,
+  arrows: true,
+  focusOnSelect: true,
+  autoplay: false,
+  mobileFirst: true,
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+  responsive: [{
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 2,
+      slidesToScroll: 1,
+    }
+  },  {
+    breakpoint: 992,
+    settings: {
+      slidesToShow: 4,
+      slidesToScroll: 1,
+         prevArrow:"<button type='button' class='slick-prev'><img src='images/left-arrow.png'></button>",
+          nextArrow:"<button type='button' class='slick-next'><img src='images/right-arrow.png'></button>",
     }
   }]
 });
@@ -76,6 +131,37 @@ $('.detail-nav-slider').slick({
   prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
   nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>"
 });
+
+$('.slider-wrap').slick({
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  arrows: true,
+  dots: true,
+  centerMode: true,
+  variableWidth: true,
+  infinite: true,
+  focusOnSelect: true,
+  cssEase: 'linear',
+  touchMove: true,
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/left-arrow.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/right-arrow.png'></button>",
+  
+ 
+});
+
+
+var imgs = $('.slider-wrap img');
+imgs.each(function(){
+  var item = $(this).closest('.item');
+  item.css({
+    'background-image': 'url(' + $(this).attr('src') + ')', 
+    'background-position': 'center',            
+    '-webkit-background-size': 'cover',
+    'background-size': 'cover', 
+  });
+  $(this).hide();
+});
+
 
 $("input[type=file]").change(function (e) {
   $(this).parents(".uploadFile").find(".filename").text(e.target.files[0].name);

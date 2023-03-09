@@ -1,524 +1,415 @@
-.gmg-language button {
-	font-size: 10px;
-	margin-left: 3px;
-	margin-bottom: 5px;
-	background: #D8D8D8;
-	color: #757575;
-	border: none;
-}
-
-.gmg-language p {
-	font-size: 14px;
-	color: #525252;
-}
-
-.luxauro-gmg-image {
-	position: relative;
-}
-
-.jone-logo {
-	position: absolute;
-	bottom: 20px;
-	right: 15px;
-}
-
-.btn-groups button {
-	font-size: 14px;
-	margin: 5px 0px;
-	background: #D8D8D8;
-	color: #757575;
-	border: none;
-	padding: 8px 10px;
-}
-
-.gmb-subheading h3 {
-	font-size: 20px;
-	font-weight: bold;
-}
-
-.calender-image {
-	background: transparent	;
-	position: relative;
-	background: rgba(255, 255, 255, 0.3);
-	height: auto;
-	width: auto;
-}
-
-.contact-me {
-  position: absolute;
-  bottom: 6%;
-  left: 50%;
-  transform: translate(-50%, -6%);
-  padding: 10px 28px;
-}
-
-.luxauro-gmb-main {
-	padding-top: 0px;
-}
-
-.book-a-solt {
-	padding-top: 25px;
-}
-
-.book-a-solt h4 {
-	font-size: 18px;
-	font-weight: bold;
-}
-
-.view-my-store h4 {
-    font-weight: bold;
-}
-
-.service-overview h5 {
-	font-size: 25px;
-	margin-bottom: 8px;
-}
-.service-overview p {
-	font-size: 14px;
-	color: #4A4A4A;
-}
-
-/*Suite Management*/
-
-.business-section .pincel {
-  position: relative;
-}
-
-.business-section .pincel::after {
-  position: absolute;
-  content: "\f040";
-  font-family: "FontAwesome";
-  right: -30px;
-  bottom: 0;
-  color: #DEDEDE;
-  font-size: 16px;
-  color: #6a6969;
-}
-
-
-.business-section p {
-	font-size: 18px;
-}
-
-.business-logo-image {
-  height: 80px;
-  width: 80px;
-  border-radius: 100%;
-  overflow: hidden;
-  position: relative;
-
-}
-
-.my-business-logo-image {
-  position: relative;
-  display: inline-block;
-}
-
-.my-business-logo-image .upload-logo i {
-  position: absolute;
-	right: -30px;
-	bottom: 1px;
-	background: #D9D9D9;
-	padding: 5px 5px;
-	border-radius: 2px;
-	color: #2D2D2D;
-}
-
-.my-business-banner {
-	position: relative;
-	display: inline-block;
-}
-
-.business-banner {
-	height: 60px;
-  width: 150px;
-  position: relative;
-}
-
-.business-header .upload-logos i {
-	background: #D9D9D9;
-	padding: 15px;
-	border-radius: 2px;
-	color: #2D2D2D;
+.project-categories h2{
+	color: #fff;
 	font-size: 30px;
-	margin-left: 5px;
+	margin-bottom: 15px;
+  font-weight: 600;
+ 
 }
 
-.business-address h5 {
-	font-size: 16px;
-	font-weight: 200;
-}
-
-.transaction-history .form-select {
-  border: 0;
-  width: 32%;
-  margin-left: 20px;
-  font-size: 24px;
-}
-
-.transaction-history .account-name {
-	background: #1E3538;
-	padding: 10px;
+.project-categories p {
 	color: #fff;
-	height: 100px;
-	position: relative;
+	text-transform: capitalize;
 }
 
-.table-bg {
-	background: #F1F1F1;
-	padding: 3px 5px 4px 3px;
-}
-
-.transaction-history .table thead tr {
-	background: #1E3538;
-	color: #fff;
-	font-size: 14px;
-}
-
-.transaction-history .table {
-	font-size: 12px;
+.agriculture {
 	background: #fff;
-
+	height: 130px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.transaction-history .table tr.date {
-		background: #E5E5E5;
-}
-
-.transaction-history .table tr {
-	box-shadow: none;
-}
-
-.transaction-history tr td {
-	padding: 5px 8px;
-}
-
-.transaction-history .table tr td:nth-child(2) {
-    text-align: right;
-}
-
-.transaction-history .table tr td:nth-child(3) {
-    text-align: right;
-}
-
-.pagination .page-link {
-	border: 0px solid #dee2e6;
-	color: #767777;
-}
-
-
-/* payment-management-section  */
-
-.payment-management-section .delete-arrow .arrow-delete {
-	position: relative;
-}
-
-.payment-management-section .arrow-delete::before {
-	position: absolute;
-	content: "\f105 ";
-	font-family: "FontAwesome";
-	right: -11px;
-	top: 0;
-	color: black;
-}
-
-.payment-management-section h2 {
-	font-size: 22px;
-}
-
-.luxauro-subscription-setting p {
+.agriculture p {
+	text-align: center;
+	color: #0009;
+	margin-bottom: 0;
 	font-size: 14px;
 	font-weight: 500;
 }
 
-/* luxauro-subscription-section  */
-
-
-.luxauro-subscription-section h2 {
-	font-size: 22px;
+.agriculture-banners {
+	background-color: #123033;
+	padding: 40px 0px;
 }
 
-.luxauro-subscription-section .nav-pills .nav-link {
-	font-size: 16px;
+.goldevine-work h2 {
+	color: #123033;
+	font-size: 40px;
+	font-weight: 600;
 }
 
-.luxauro-subscription-section .product-item .txt-holder {
-	padding: 15px 5px;
-}
-
-.luxauro-subscription-section .add-to-current > a {
+.goldevine-work p {
+	color: #BAB3BC;
 	font-size: 12px;
-  padding: 0px 4px;
-  background: #13D913;
-  color: #fff;
+	margin-bottom: 0;
 }
 
-.subscriptions-producct .add-to-current-text a {
-	text-transform: capitalize;
+.founder-heading h3 {
+	font-size: 16px;
+	font-weight: 600;
+	color: #123033;
 }
 
-.subscriptions-producct .add-to-current a.btn  {
-	padding: 0px 3px;
-	font-size: 10px;
+.funder-image {
+    width: 50px;
 }
 
-.luxauro-subscription-section .sub-product-image {
-	width: 70px;
-	height: 100%;
+.path-founder {
+	width: 230px;
+	margin: 0px auto;
 }
 
-.luxauro-subscription-current {
-	counter-reset: section;
+.explore-projects {
+	background: #123033;
 }
 
-ul.subscriptions-producct:before {
-	counter-increment: section;
-  content: counter(section) ".";
-  margin-bottom: 25px;
-}
-
-.luxauro-subscription-currents {
-	counter-reset: section;
-}
-
-ul.subscriptions-produccts:before {
-	counter-increment: section;
-  content: counter(section) ".";
-}
-
-.luxauro-product-item a.btn {
-	background: #CFCFCF;
+.explore-projects h2 {
 	color: #fff;
-	padding: 0px 2px;
-	font-size: 14px;
-	margin-bottom: 10px;
+	font-size: 35px;
+	font-weight: 600;
 }
 
-.luxauro-ended ul li {
-	margin: 0px 6px;
+.gold-meta-guild-image {
+	width: 300px;
 }
 
-.setup-merchant-heading {
-	font-size: 22px;
+.gold-meta-subheading h3 {
+	font-size: 35px;
+	color: #123033;
+	font-weight: 600;
+  text-align: center;
+}
+
+.gold-meta-section {
+	background-color: #5ce78c;
+}
+
+.gold-meta-hold h3 {
+	font-size: 25px;
+	font-weight: bold;
+  text-align: center;
+}
+
+.gold {
+	color: #e7d689;
+}
+
+.crowdfunding-section {
+	background-color: #123033;
+}
+
+.crowdfunding-text h4 {
+	font-size: 45px;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+}
+
+.crowdfunding-text-2 h6 {
+	font-size: 25px;
+	color: #fff;
 	font-weight: bold;
 }
 
-
-
-/* luxauro-subscription-section */
-
-/*.luxauro-subscription-section h2 {
-	font-size: 22px;
+.crowdfunding-btn {
+	background-color: #5ce78c;
+	border: 1px solid #5ce78c;
 }
 
-.luxauro-subscription-section .nav-pills .nav-link {
-	font-size: 16px;
+
+.agriculture-banners .slick-next {
+    right: 25px;
 }
 
-.luxauro-subscription-section .product-item .txt-holder {
-	padding: 15px 5px;
+.agriculture-banners .slick-prev {
+    left: 25px;
 }
 
-.luxauro-subscription-section .add-to-current > a {
-	font-size: 12px;
-  padding: 0px 4px;
-  background: #13D913;
-  color: #fff;
-}
-
-.subscriptions-producct .add-to-current-text a {
-	text-transform: capitalize;
-}
-
-.subscriptions-producct .add-to-current a.btn  {
-	padding: 0px 3px;
-	font-size: 10px;
-}
-
-.luxauro-subscription-section .sub-product-image {
-	width: 70px;
-	height: 100%;
-}
-
-.luxauro-subscription-current {
-	counter-reset: section;
-}
-
-ul.subscriptions-producct:before {
-	counter-increment: section;
-  content: counter(section) ".";
-  margin-bottom: 25px;
-}
-
-.luxauro-product-item a.btn {
-	background: #CFCFCF;
+.goldevine-card .card {
+	position: relative;
+	background-color: #123033;
 	color: #fff;
-	padding: 0px 2px;
-	font-size: 14px;
-	margin-bottom: 10px;
-}*/
-
-.luxauro-ended {
-	 width:100%;
-  overflow-x: scroll;
-  white-space: nowrap;
-}
-
-.subscriptions-produccts {
-	display: flex;
-	justify-content: flex-start !important;
-}
-
-@media only screen and (min-width: 767.98px) {
-	.luxauro-gmb-main {
-	padding-top: 80px;
-}
-}
-
-@media only screen and (min-width: 1199.98px) {
-	.subscriptions-producct {
-		display: flex;
-		column-gap: 16px;
-		align-items: flex-end;
-}
-.subscriptions-produccts {
-		display: flex;
-		column-gap: 16px;
-		align-items: flex-start;
-		justify-content: space-between !important;
-}
-.luxauro-ended {
-	 width:100%;
-  overflow-x: auto;
-  white-space: nowrap;
-}
+	border: 0;
+	-webkit-box-shadow: 0px 0px 10px 4px rgba(169,169,169,1);
+	-moz-box-shadow: 0px 0px 10px 4px rgba(169,169,169,1);
+	box-shadow: 0px 0px 10px 4px rgba(169,169,169,1);
+	margin: 0px auto;
+	display: inline-block;
 
 }
 
-.input-number{
-  width: 80px; 
-  padding: 0 12px;
-  vertical-align: top;
+.goldevine-card-image {
+	position: relative;
+		 width: 100%;
+  max-width: 400px;
+}
+
+.goldevine-card .card img {
+display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: transparent;
+  display: inline-block;
+}
+
+.goldevine-card-image:hover .overlay {
+  opacity: 1;
+}
+
+.icon {
+  color: white;
+  font-size: 18px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  -ms-transform: translate(-50%, -25%);
   text-align: center;
+}
+
+a.goldevine-icon > i {
+	background: #5ce78c;
+	color: #fff;
+	padding: 8px;
+	border-radius: 5px;
+  margin: 1px;
+}
+
+.goldevine-card a {
+	opacity: 1 ;
+}
+
+a.goldevine-icon > i:hover {
+	background-color: #fff;
+	color: #5ce78c;
+}
+
+.goldevine-card p {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+
+@media only screen and (min-width: 991.98px) {
+		.project-categories h2{
+			font-size: 45px;
+		   margin-bottom: 22px;
+}
+}
+
+@media only screen and (min-width: 1198.98px) {
+.agriculture-banners .slick-prev, .slick-next {
+    width: 35px;
+    height: 35px;
+}
+
+.agriculture-banners .slick-next {
+    right: -46px;
+}
+
+.agriculture-banners .slick-prev {
+    left: -46px;
+}
+}
+
+
+.wrap-parent-slider .wrap {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  padding: 0 60px;
+  /*background: url('https://t3.ftcdn.net/jpg/01/91/95/30/360_F_191953033_gehQATeDoh5z6PyRDbeKyBZuS83CjMEF.jpg') center no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;*/
+  overflow: hidden;
+}
+
+.wrap-parent-slider .wrap:after {
+  content:'';
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+/*  background: rgba(0,0,0,.5);*/
+}
+
+.wrap-parent-slider .slider-wrap {
+  position: relative;
+  z-index: 200;
+  padding: 0 0px;
+  margin: 0rem auto 4rem;
+ max-width: 1200px;
+  width: 100%;
+}
+
+.wrap-parent-slider .slick-list {
+	padding: 0 !important;
+}
+
+.wrap-parent-slider .slick-arrow {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 50px;
+  line-height: 50px;
+  margin-top: -25px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-family: monospace;
+  font-size: 5rem;
+  z-index: 300;
   outline: none;
 }
 
-.input-number,
-.input-number-decrement,
-.input-number-increment {
-  border: 0px solid #ccc;
-  height: 40px;
-  user-select: none;
+.wrap-parent-slider .slick-prev {
+  left: -50px;
+  text-align: left;
 }
 
-.input-number-decrement,
-.input-number-increment {
-  display: inline-block;
-  width: 30px;
-  line-height: 38px;
-  background: transparent;
-  color: #0009;
-  text-align: center;
-  font-weight: bold;
-  cursor: pointer;
-}
-  .input-number-decrement,
-.input-number-increment:active{
-    background: transparent;
-  }
-
-.input-number-decrement{
-  border-right: none;
-  border-radius: 4px 0 0 4px;
-}
-.input-number-increment{
-  border-left: none;
-  border-radius: 0 4px 4px 0;
+.wrap-parent-slider .slick-next {
+  right: -50px;
+  text-align: right;
 }
 
-.shopping-bag-section h2 {
-	font-size: 23px;
-	'font-weight: bold;
+
+
+.wrap-parent-slider .item.slick-slide {
+  width: 400px;
+  height: 400px !important;
+  transition: transform .4s;
+  position: relative; 
 }
 
-.shopping-bag-component, .shipping-my-order {
-	border: 1px solid #cfcfcf;
-	padding: 10px;
-	border-radius: 4px;
+.wrap-parent-slider .slick-slide:after {
+  content:'';
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.5);
+  transition: transform .4s;
 }
 
-.shopping-bag-component h3 {
-	border-bottom: 1px solid;
-	display: inline-block;
-	line-height: 20px;
-	font-size: 20px;
+.wrap-parent-slider .item.slick-slide {
+  transform: scale(0.7)  translate(640px);
 }
 
-.shopping-bag-component .sub-product-image {
-	max-width: 150px;
+.wrap-parent-slider .item.slick-slide.slick-center + .slick-slide {
+  transform: scale(0.8) translate(-250px);
+  z-index: 10;
 }
 
-.luxauro-product-item-sb ul > li {
-	font-weight: 400;
-	font-size: 15px;
+.wrap-parent-slider .item.slick-slide.slick-center + .slick-slide + .item.slick-slide {
+  transform: scale(0.7)  translate(-640px);
+  z-index: 5;
 }
 
-.shopping-bag-delivery {
-	border: 1px solid #cfcfcf;
-	border-radius: 5px;
-	width: 125px;
-	word-break: break-all;
-	padding: 5px 10px;
-	display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center	;
+.wrap-parent-slider .item.slick-slide.slick-active {
+  transform: scale(0.8) translate(250px);
 }
 
-.shopping-bag-delivery .estimated {
-	font-size: 10px;
-	line-height: 14px;
+.wrap-parent-slider .item.slick-slide.slick-center {
+
+  transform: scale(1);
+  z-index: 30;
 }
 
-.save-for-later {
+.wrap-parent-slider .slick-center:after {
+  opacity: 0;
+}
+
+.card-item-text h6 {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.wrap-parent-slider .item {
 	position: relative;
 }
 
-.save-remove-later {
-	position: relative;
-}
-
-.save-remove-later::after {
-	position: absolute;
-  content: "";
-  height: 15px;
-  width: 2px;
-  background: #a19c9c;
-  right: -12px;
-  top: 4px;
-}
-
-.shopping-bag-payment .payment-titles {
-	font-weight: 500;
-	font-size: 14px;
-}
-
-.shopping-bag-title {
-	font-weight: 500;
-	font-size: 14px;
-}
-
-.dropdown-menu .luxauro-cart {
+.wrap-parent-slider .card-item-text {
+	background-color: #123033;
 	color: #fff;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 15px;
 }
 
-.dropdown-menu .luxauro-cart span {
-	font-size: 12px;
-   color: #cfcfcf;
-   text-transform: lowercase;
+.wrap-parent-slider .slick-dots li button::before {
+  font-size: 8px;
+  color: #000;
+  opacity: 1;
 }
 
-.dropdown-menu .luxauro-cart h3 {
-	font-size: 14px;
-	text-transform: capitalize;
+.wrap-parent-slider .slick-dots li.slick-active button::before {
+  opacity: 1;
+  color: #5ce78c;
+  font-size: 16px;
+}
+
+.wrap-parent-slider .slick-dots li {
+	margin: 0;
+}
+
+.wrap-parent-slider .slick-dots {
+  bottom: -55px;
+  margin-bottom: 0;
+}
+
+.wrap-parent-slider .item:hover .overlay-icon .icon-bottom {
+	opacity: 1;
+}
+
+.overlay-icon .icon-bottom {
+  color: white;
+  font-size: 19px;
+  position: absolute;
+  bottom: 29%;
+  left: 50%;
+  transform: translate(-50%, -29%);
+  -ms-transform: translate(-50%, -25%);
+  text-align: center;
+  background: #123033;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  z-index: 99;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+ }
+
+ .overlay-icon a {
+ 	opacity: 1;
+ }
+
+ .overlay-icon a.goldevine-icon > i {
+  background: #123033;
+  color: #fff;
+  padding: 8px 30px;
+  border-radius: 0px;
+  width: 33%;
+}
+
+.overlay-icon a.goldevine-icon > i:hover {
+	background-color: #5ce78c;
+
 }

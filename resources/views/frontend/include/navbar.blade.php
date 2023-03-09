@@ -3,15 +3,15 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center">
             @if(strpos(url()->current(),'goldEvine'))
-            <a class="logo" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
-            <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
+            <a class="logo-gold" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
+            <a class="logo" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
             <a class="logo-gold" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
             @elseif(strpos(url()->current(),'goldMetal'))
-            <a class="logo" href="{{ route('home') }}"><img style="width: 72%;margin-bottom: 22px;" src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
-            <a class="logo-gold" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
+            <a class="logo-gold" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
+            <a class="logo" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
             <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
             @else
-            <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
+            <a class="logo-gold" href="{{ route('goldEvine')}}"><img  src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
             <a class="logo" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
             <a class="logo-gold" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
             @endif    
@@ -51,31 +51,31 @@
                                                 <li>My Account | My Profile</li>
                                             </a>
 
-                                            <li> <a href="{{ route('goldEvine') }}">Goldevine:</a> <i
+                                            <li> <a href="#" class="openGoldEvineSidebar">Goldevine:</a> <i
                                                     class="fa fa-lock"></i> <i class="fa fa-heart"></i></li>
                                             <li>My Compaigns | Dashboard</li>
                                         </ul>
                                     </div>
                                     <div class="col-6">
                                         <ul class="list-unstyled m-0 p-0">
-                                            <li> <a href="{{ route('home') }}">Luxauro:</a> <i class="fa fa-lock"></i> <i
+                                            <li> <a href="#" class="openLuxaroSidebar">Luxauro:</a> <i class="fa fa-lock"></i> <i
                                                     class="fa fa-heart"></i></li>
                                             <li>My Purchase | My Seller Files</li>
-                                            <li> <a href="{{ route('goldMetal') }}">Gold Metal Guild:</a> <i
+                                            <li> <a href="#" class="openGMGSidebar">Gold Metal Guild:</a> <i
                                                     class="fa fa-comment"></i> <i class="fa fa-user"></i></li>
                                         </ul>
                                         
                                         <ul>
                                             <li>
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                    document.getElementById('logout-form').submit();">
+                                                        {{ __('Logout') }}
+                                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
                                             </li>
                                         </ul>
 

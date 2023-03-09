@@ -385,7 +385,7 @@ class BusinessSettingsController extends Controller
                     // else {
                     //     $business_settings->value = $request[$type];
                     // }
-                    $business_settings->lang = $lang;
+                    // $business_settings->lang = $lang;
                     // dd($business_settings);
                     $business_settings->save();
                 }
