@@ -24,6 +24,57 @@
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Name </label>
+                                    <input type="title" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="title"
+                                        title="title" value="{{ old('title') }}" />
+                                    @error('title')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Donations</label>
+                                    <input type="text" class="form-control @error('donations') is-invalid @enderror" name="donations" placeholder="Donations"
+                                        title="donations" value="{{ old('donations') }}" />
+                                    @error('donations')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Raised</label>
+                                    <input type="text" class="form-control @error('raised') is-invalid @enderror" name="raised" placeholder="Raised"
+                                        title="Raised" value="{{ old('raised') }}" />
+                                    @error('raised')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Raised Percentage</label>
+                                    <input type="text" class="form-control @error('raised_percentage') is-invalid @enderror" name="raised_percentage" placeholder="raised Percentage"
+                                        title="raised_Percentage" value="{{ old('raised_percentage') }}" />
+                                    @error('raised_percentage')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Short Description</label>
+                                    <input type="text" class="form-control @error('short_description') is-invalid @enderror" name="short_description" placeholder="Short Description"
+                                        title="short_description" value="{{ old('short_description') }}" />
+                                    @error('short_description')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">image </label>
                                     <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" placeholder="description"
                                         title="description" value="{{ old('image') }}" />

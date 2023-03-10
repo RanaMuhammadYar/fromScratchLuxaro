@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Models\Admin\Goldevine\Project;
 use App\Models\Admin\Product as AdminProduct;
+use App\Models\Charter;
 
 class UserController extends Controller
 {
@@ -17,8 +18,10 @@ class UserController extends Controller
     {
         $categories = Category::all();
         $products = AdminProduct::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status','Active')->limit(15)->get();
+        $locallaxaro = AdminProduct::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status','Active')->orderby('id','desc')->limit(15)->get();
         $goldevines = Project::where('status','Active')->orderBy('id','desc')->limit(15)->get();
-        return view('frontend.all-page.products', compact('products','categories', 'goldevines'));
+        $luxauro_charters = Charter::orderBy('id','desc')->limit(15)->get();
+        return view('frontend.all-page.products', compact('products','categories', 'goldevines','locallaxaro','luxauro_charters'));
     }
     public function productDetail(Request $request)
     {

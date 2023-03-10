@@ -9,4 +9,5 @@ class Charter extends Model
 {
     use HasFactory;
     public $timestamps = false;
+     
 }
