@@ -200,13 +200,15 @@
                 </div>
             </div>
             <div class="slider gold-evine-slider">
+
+                @foreach ($goldevines as $goldevine )
                 <div>
                     <div class="product-item">
                         <div class="img-holder">
-                            <img src="images/product-img.png" class="img-fluid">
+                            <img src="{{ $goldevine->image }}" onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
                         </div>
                         <div class="txt-holder">
-                            <strong class="title text-center d-block mb-2">Project Title</strong>
+                            <strong class="title text-center d-block mb-2">{!! Str::limit($goldevine->title, 15, ' ...') !!}</strong>
                             <div class="progress rounded-0 mb-1">
                                 <div class="progress-bar rounded-0" role="progressbar" style="width: 75%" aria-valuenow="75"
                                     aria-valuemin="0" aria-valuemax="100"></div>
@@ -216,130 +218,12 @@
                                 <span>XX%</span>
                             </div>
                             <p class="mb-2"># donations</p>
-                            <p class="m-0">Brief project description will go here... (10 words)</p>
+                            <p class="m-0">{!! Str::limit($goldevine->description, 20, ' ...') !!}</p>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="images/product-img.png" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <strong class="title text-center d-block mb-2">Project Title</strong>
-                            <div class="progress rounded-0 mb-1">
-                                <div class="progress-bar rounded-0" role="progressbar" style="width: 75%" aria-valuenow="75"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>sX.XXX raised</span>
-                                <span>XX%</span>
-                            </div>
-                            <p class="mb-2"># donations</p>
-                            <p class="m-0">Brief project description will go here... (10 words)</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="images/product-img.png" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <strong class="title text-center d-block mb-2">Project Title</strong>
-                            <div class="progress rounded-0 mb-1">
-                                <div class="progress-bar rounded-0" role="progressbar" style="width: 75%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>sX.XXX raised</span>
-                                <span>XX%</span>
-                            </div>
-                            <p class="mb-2"># donations</p>
-                            <p class="m-0">Brief project description will go here... (10 words)</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="images/product-img.png" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <strong class="title text-center d-block mb-2">Project Title</strong>
-                            <div class="progress rounded-0 mb-1">
-                                <div class="progress-bar rounded-0" role="progressbar" style="width: 75%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>sX.XXX raised</span>
-                                <span>XX%</span>
-                            </div>
-                            <p class="mb-2"># donations</p>
-                            <p class="m-0">Brief project description will go here... (10 words)</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="images/product-img.png" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <strong class="title text-center d-block mb-2">Project Title</strong>
-                            <div class="progress rounded-0 mb-1">
-                                <div class="progress-bar rounded-0" role="progressbar" style="width: 75%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>sX.XXX raised</span>
-                                <span>XX%</span>
-                            </div>
-                            <p class="mb-2"># donations</p>
-                            <p class="m-0">Brief project description will go here... (10 words)</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="images/product-img.png" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <strong class="title text-center d-block mb-2">Project Title</strong>
-                            <div class="progress rounded-0 mb-1">
-                                <div class="progress-bar rounded-0" role="progressbar" style="width: 75%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>sX.XXX raised</span>
-                                <span>XX%</span>
-                            </div>
-                            <p class="mb-2"># donations</p>
-                            <p class="m-0">Brief project description will go here... (10 words)</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-item">
-                        <div class="img-holder">
-                            <img src="images/product-img.png" class="img-fluid">
-                        </div>
-                        <div class="txt-holder">
-                            <strong class="title text-center d-block mb-2">Project Title</strong>
-                            <div class="progress rounded-0 mb-1">
-                                <div class="progress-bar rounded-0" role="progressbar" style="width: 75%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>sX.XXX raised</span>
-                                <span>XX%</span>
-                            </div>
-                            <p class="mb-2"># donations</p>
-                            <p class="m-0">Brief project description will go here... (10 words)</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
     </div>
