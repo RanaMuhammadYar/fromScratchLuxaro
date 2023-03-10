@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin\Category;
-use App\Models\Admin\Product as AdminProduct;
 use App\Models\City;
-use App\Models\Country;
-use App\Models\State;
 use App\Models\User;
+use App\Models\State;
+use App\Models\Country;
 use Illuminate\Http\Request;
+use App\Models\Admin\Category;
+use App\Models\Admin\Goldevine\Project;
+use App\Models\Admin\Product as AdminProduct;
 
 class UserController extends Controller
 {
@@ -81,10 +82,10 @@ class UserController extends Controller
                  return  $query->first();
         }, 'userEducations', 'userCertificates', 'userProfessions'])
             ->where('id', $userId)->first();
-          
+
         return back()->with(['user' =>  $user]);
     }
-  
+
 
 
     public function merchantSuitManagement()
@@ -114,7 +115,8 @@ class UserController extends Controller
     }
     public function goldEvine()
     {
-        return view('frontend.goldevine_projects');
+        $allprojects = Project::where('status', 'Active')->get();
+        return view('frontend.goldevine.index',compact('allprojects'));
     }
     public function myProfile()
     {

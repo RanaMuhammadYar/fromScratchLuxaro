@@ -24,7 +24,7 @@
 
         <!-- Layouts -->
 
-        <li class="menu-item menu-link">
+        <li class="menu-item menu-link mt-3">
             <div data-i18n="Basic" style="font-size: 12px;">Luxauro Setup </div>
         </li>
         <li
@@ -71,7 +71,7 @@
         <!-- Layouts -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="bx bx-layout mx-1"></i>
+                <i class="bi bi-gear mx-1"></i>
                 <div data-i18n="Layouts">Settings</div>
             </a>
 
@@ -107,10 +107,19 @@
                 <div data-i18n="Basic">Orders</div>
             </a>
         </li>
-
-        <li class="menu-item menu-link">
-            <div data-i18n="Basic" style="font-size: 12px;">Gould win Setup</div>
+        <li class="menu-item menu-link mt-3">
+            <div data-i18n="Basic" style="font-size: 12px;">Goldevine Setup</div>
         </li>
+
+        <li class="menu-item {{ Request::is('admin-goudevine-product') || Request::is('admin-goudevine-product/create') || Request::is('admin-goudevine-product/*/edit') ? 'active' : '' }}">
+            <a href="{{ route('admin-goudevine-product.index') }}" class="menu-link">
+                <i class="bi bi-list-task menu-icon tf-icons"></i>
+                <div data-i18n="Basic">Project Management</div>
+            </a>
+        </li>
+
+
+
     </ul>
 </aside>
 <!-- / Menu -->
