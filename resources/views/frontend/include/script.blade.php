@@ -23,6 +23,23 @@
         });
     </script>
 @endif
+<script>
+    $('#price-filter1,#price-filter2,#price-filter7').on('change', function() {
+        var filterValue = $(this).val();
+        var id = filterValue.substr(filterValue.length - 1);
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('products') }}",
+            data: { price_filter: filterValue },
+            success: function(data) {
+                $('#product-append'+id).html(null);
+                $('#product-append'+id).html(data);    
+                $('#product-append'+id).css({"display": "flex"});
+            }
+        });
+    });
+
+</script>
 
 <script>
     $('.openLuxaroSidebar').click(function(){

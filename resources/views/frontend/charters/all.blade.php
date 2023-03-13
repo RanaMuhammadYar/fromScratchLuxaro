@@ -33,10 +33,10 @@
                     </div>
                     <form class="page-form mx-auto mb-5" action="#">
                         <div class="page-form-holder d-flex">
-                            <select class="form-control select-control border-0 rounded-0 flex-fill">
+                            <select class="form-control border-0 rounded-0 flex-fill">
+                                <!-- <option>All</option>
                                 <option>All</option>
-                                <option>All</option>
-                                <option>All</option>
+                                <option>All</option> -->
                             </select>
 
                             <div class="form-field d-flex flex-fill">

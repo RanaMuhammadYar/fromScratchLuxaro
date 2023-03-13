@@ -14,9 +14,32 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = Category::all();
-        $products = AdminProduct::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status','Active')->limit(15)->get();
-        return view('frontend.all-page.products', compact('products','categories'));
+        $search = $request->input('search');
+        $categories = Category::where('title', 'LIKE', '%'.$search.'%')->get();
+        if(count($categories) <= 0)
+        {
+            $categories = Category::
+            when($search, function ($query, $search) {
+              $query->whereHas('relatedProducts',function ($query) use ($search){
+                  $query->where('product_name', 'LIKE', '%'.$search.'%');
+              });
+          })
+          ->with(['relatedProducts' => function($query) use ($search){
+              $query->where('product_name', 'like', '%'.$search.'%');
+          }])
+          ->get();
+        }            
+        return view('frontend.all-page.products', compact('categories'));
+    }
+    public function products(Request $request)
+    {
+        $cat_id = substr($request->price_filter, -1);
+        $orderby = substr($request->price_filter, 0, -1);
+        $products = AdminProduct::where('category_id',$cat_id)
+                                  ->orderBy('product_price',$orderby)
+                                  ->get();
+        $html = view('frontend.all-page.append_products', ['products' => $products])->render();
+        return $html;
     }
     public function productDetail(Request $request)
     {

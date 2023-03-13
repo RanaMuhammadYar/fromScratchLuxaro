@@ -32,6 +32,7 @@ Route::post('api/fetch-cities', [UserController::class, 'fetchCity']);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+    Route::get('/products', 'products')->name('products');
     Route::get('/product-detail/{id}', 'productDetail')->name('product-detail');
     Route::get('/goldEvine', 'goldEvine')->name('goldEvine');
     Route::get('/goldMetal', 'goldEvine')->name('goldMetal');
