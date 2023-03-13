@@ -35,6 +35,9 @@ Route::get('productsabc/{slug}', [ProductMangeCotroller::class, 'product']);
 Route::get('product-detail/{id}/{slug}', [ProductMangeCotroller::class, 'productDetails'])->name('productDetails');
 Route::get('add-cart', [ProductMangeCotroller::class, 'addtocart'])->name('addtocart');
 Route::get('order-destroy', [ProductMangeCotroller::class, 'orderdestroy'])->name('orderdestroy');
+Route::get('all-local-luxauro', [ProductMangeCotroller::class, 'localluxauro'])->name('localluxauro');
+
+
 
 Route::get('checkout', [CartController::class, 'index'])->name('checkout');
 

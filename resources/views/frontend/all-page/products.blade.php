@@ -336,7 +336,7 @@
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                 <h2 class="m-0">My Local Luxauro</h2>
                 <div class="d-flex form-holder">
-                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                    <a class="btn btn-view rounded-0" href="{{ route('localluxauro') }}">View All</a>
                     <form class="page-form flex-fill" action="#">
                         <div class="page-form-holder d-flex">
                             <label class="form-control rounded-0">Search Filter</label>
@@ -356,14 +356,20 @@
                 @foreach ($locallaxaro as $locallaxar)
                     <div>
                         <div class="product-item">
-                            <div class="img-holder">
-                                <img src="{{ $locallaxar->image }}"
-                                    onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
-                            </div>
+                            <a href="{{ route('productDetails', ['id' => $locallaxar->id, 'slug' => Str::slug($locallaxar->product_name)]) }}"
+                                style="text-decoration: none;color:rgb(32, 32, 32)">
+                                <div class="img-holder">
+                                    <img src="{{ $locallaxar->image }}"
+                                        onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
+                                </div>
+                            </a>
                             <div class="txt-holder">
                                 <div class="d-flex justify-content-between mb-3">
                                     <div>
-                                        <strong class="title">{{ $locallaxar->product_name }}</strong>
+                                        <a href="{{ route('productDetails', ['id' => $locallaxar->id, 'slug' => Str::slug($locallaxar->product_name)]) }}"
+                                            style="text-decoration: none;color:black">
+                                            <strong class="title">{{ $locallaxar->product_name }}</strong>
+                                        </a>
                                         <ul class="list-unstyled m-0 p-0 d-flex stars">
                                             <li class="me-1"><i class="fa fa-star"></i></li>
                                             <li class="me-1"><i class="fa fa-star"></i></li>
@@ -376,8 +382,10 @@
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <strong class="title">${{ $locallaxar->product_price }}</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                            class="fa fa-shopping-basket"></i></a>
+                                    <button class="btn bg-dark text-white py-1 px-2" href=""
+                                        onclick="addToCart('{{ $locallaxar->id }}', '{{ $locallaxar->product_name }}', '{{ $locallaxar->product_price }}')"><i
+                                            class="fa fa-shopping-basket"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -409,23 +417,23 @@
             </div>
             <div class="slider Charters-slider">
 
-                @foreach ($luxauro_charters as $luxauro_charter)
+                {{-- @foreach ($luxauro_charters as $luxauro_charter) --}}
+                @for ($i = 0; $i < 10; $i++)
                     <div>
                         <div class="product-item">
-                            <a href="{{ route('charter_detail', ['id' => $luxauro_charter->id]) }}">
+                            <a href="#">
                                 <div class="img-holder">
-                                    <img src="{{ uploaded_asset($luxauro_charter->thumbnail_img) }}"
-                                        onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
+                                    <img src="" onerror="this.src='{{ asset('images/default.png') }}'"
+                                        class="img-fluid">
                                 </div>
                             </a>
 
                             <div class="txt-holder">
                                 <div class="d-flex justify-content-between mb-3">
                                     <div>
-                                        <a href="{{ route('charter_detail', ['id' => $luxauro_charter->id]) }}"
-                                            style="text-decoration: none; color:black;">
+                                        <a href="#" style="text-decoration: none; color:black;">
 
-                                            <strong class="title">{{ $luxauro_charter->charter_name }}</strong>
+                                            <strong class="title">Test</strong>
                                         </a>
                                         <ul class="list-unstyled m-0 p-0 d-flex stars">
                                             <li class="me-1"><i class="fa fa-star"></i></li>
@@ -438,7 +446,7 @@
                                     <i class="fa fa-globe fa-1x mt-2"></i>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="title">${{ $luxauro_charter->rate }}</strong>
+                                    <strong class="title">$5</strong>
                                     <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
                                             class="fa fa-shopping-basket"></i></a>
                                 </div>
@@ -446,7 +454,9 @@
 
                         </div>
                     </div>
-                @endforeach
+                @endfor
+                {{--  --}}
+                {{-- @endforeach --}}
             </div>
         </div>
         <div class="product-section mb-5 pb-lg-3">
