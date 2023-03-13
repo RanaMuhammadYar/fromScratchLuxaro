@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Cache;
 
 class ProductMangeCotroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
+    }
     public function suspended(Request $request)
     {
         $suspended = Product::find($request->suspended_id);

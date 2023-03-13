@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CharterManagementController;
+use App\Http\Controllers\Vendor\VendorControlController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,8 @@ Route::get('storage-link', function () {
     return 'Storage link successfully created';
 
 });
+
+Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');
 
 
 

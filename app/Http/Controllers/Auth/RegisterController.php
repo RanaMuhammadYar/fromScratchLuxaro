@@ -56,6 +56,9 @@ class RegisterController extends Controller
             'password' => ['required', 'confirmed'],
             'zip_code' =>   ['required', 'numeric'],
             'conditions' => ['required'],
+            'shop_name' => ['string', 'max:255'],
+            'role' => ['required'],
+            'status' => ['required'],
         ]);
     }
 
@@ -67,11 +70,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         if (isset($data['conditions']) && $data['conditions'] == 1) {
             return User::create([
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'zip_code' => $data['zip_code'],
+                'role' => $data['role'],
+                'status' => $data['status'],
+                isset($data['shop_name']) ? 'shop_name' : '' => isset($data['shop_name']) ? $data['shop_name'] : '',
+
             ]);
         } else {
             return redirect()->back()->with('error', 'Please accept the terms and conditions');

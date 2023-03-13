@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Vendor;
 
 use Illuminate\Http\Request;
 use App\Models\Admin\Product;
@@ -11,12 +11,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\DelivoryOption;
 use Illuminate\Support\Facades\Validator;
 
-class ProductCotroller extends Controller
+class VendorProductController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware(['auth','admin']);
+        $this->middleware(['auth','vendor']);
     }
 
     /**
@@ -29,8 +29,8 @@ class ProductCotroller extends Controller
 
 
 
-        $products = Product::with('category', 'productType', 'delivoryOption', 'shippingType','user')->get();
-        return view('frontend.admin.product.index', compact('products'));
+        $products = Product::with('category', 'productType', 'delivoryOption', 'shippingType','user')->where('user_id',auth()->user()->id)->get();
+        return view('frontend.vendor.product.index', compact('products'));
     }
 
     /**
@@ -40,11 +40,12 @@ class ProductCotroller extends Controller
      */
     public function create()
     {
+
         $categories = Category::all();
         $productType = ProductType::all();
         $delivoryOption = DelivoryOption::all();
         $shippingType = ShippingType::all();
-        return view('frontend.admin.product.create', compact('categories', 'productType', 'delivoryOption', 'shippingType'));
+        return view('frontend.vendor.product.create', compact('categories', 'productType', 'delivoryOption', 'shippingType'));
     }
 
     /**
@@ -102,7 +103,7 @@ class ProductCotroller extends Controller
             $product->save();
             $tags = explode(",", $request->tags);
             $product->tag($tags);
-            return redirect()->route('product.index')->with('success', 'Product Added Successfully');
+            return redirect()->route('vendor-product.index')->with('success', 'Product Added Successfully');
         }
     }
 
@@ -130,13 +131,7 @@ class ProductCotroller extends Controller
         $productType = ProductType::all();
         $delivoryOption = DelivoryOption::all();
         $shippingType = ShippingType::all();
-
-        // $tags = $product->tagNames();
-        // return $tags;
-        // $product->tags = implode(",", $tags);
-        // return $product->tags;
-        // echo $product->tags;
-        return view('frontend.admin.product.edit', compact('product', 'categories', 'productType', 'delivoryOption', 'shippingType'));
+        return view('frontend.vendor.product.edit', compact('product', 'categories', 'productType', 'delivoryOption', 'shippingType'));
     }
 
     /**
@@ -148,6 +143,7 @@ class ProductCotroller extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $validate = Validator::make($request->all(), [
             'product_name' => 'required',
             'product_description' => 'required',
@@ -183,7 +179,7 @@ class ProductCotroller extends Controller
             $product->save();
             $tags = explode(",", $request->tags);
             $product->retag($tags);
-            return redirect()->route('product.index')->with('success', 'Product Added Successfully');
+            return redirect()->route('vendor-product.index')->with('success', 'Product Added Successfully');
         }
     }
 
@@ -197,6 +193,6 @@ class ProductCotroller extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect()->route('product.index')->with('success', 'Product Deleted Successfully');
+        return redirect()->route('vendor-product.index')->with('success', 'Product Deleted Successfully');
     }
 }

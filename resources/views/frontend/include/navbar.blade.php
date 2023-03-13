@@ -280,6 +280,11 @@
                     <li><a href="javascript:void">professionals</a></li>
                 </ul>
                 <ul class="list-unstyled m-0 p-0 d-md-flex justify-content-end">
+                   @if (Auth::check())
+                       @if (Auth::user()->role == 'Vendor')
+                           <li><a href="{{ route('vendorDashboard') }}">Vendor Dashboard</a></li>
+                       @endif
+                   @endif
                     <li><a href="{{ route('charters') }}">charters</a></li>
                     <li><a href="javascript:void">forums</a></li>
                     <li><a href="javascript:void">Suits</a></li>

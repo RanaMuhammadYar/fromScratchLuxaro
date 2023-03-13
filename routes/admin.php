@@ -14,8 +14,10 @@ use App\Http\Controllers\Admin\ProductMangeCotroller;
 use App\Http\Controllers\Admin\ShippingTypeCotroller;
 use App\Http\Controllers\Admin\DelivoryOptionCotroller;
 use App\Http\Controllers\Admin\BusinessSettingsController;
+use App\Http\Controllers\Vendor\VendorDashboardController;
 use App\Http\Controllers\Admin\Goldevine\GoldevineMageController;
 use App\Http\Controllers\Admin\Goldevine\ProjectResourceController;
+use App\Http\Controllers\Vendor\VendorProductController;
 
 Route::get('admin-dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -121,3 +123,14 @@ Route::group(['prefix' => 'website'], function () {
         Route::get('/order-configuration', 'order_configuration')->name('order_configuration.index');
     });
 });
+
+
+Route::get('all-vendor', [DashboardController::class, 'allVendor'])->name('allVendor');
+Route::get('allvendor/{id}', [DashboardController::class, 'adminsuspendedVendor'])->name('admin.suspendedVendor');
+
+Route::get('allvendors/{id}', [DashboardController::class, 'adminactiveVendor'])->name('admin.adminactiveVendor');
+
+Route::get('vendor-dashboard', [VendorDashboardController::class, 'vendorDashboard'])->name('vendorDashboard');
+
+Route::resource('vendor-product', VendorProductController::class);
+
