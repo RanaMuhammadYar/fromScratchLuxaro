@@ -26,7 +26,7 @@
                                                 <div class="sub-product-image mb-3 mb-md-4">
                                                     <img src="{{ $allcartorder->product->image }}"
                                                         onerror="this.src='{{ asset('images/default.png') }}'"
-                                                        class="img-fluid" alt="product-img">
+                                                        class="img-fluid" alt="product-img" width="300px;">
                                                 </div>
                                             </li>
                                             <li class="mx-2 mb-2">

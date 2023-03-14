@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Vendor\VendorAccount;
 
 class DashboardController extends Controller
 {
@@ -21,7 +22,7 @@ class DashboardController extends Controller
 
     public function allVendor()
     {
-        $pendingVendors = User::where('role', 'Vendor')->whereIn('status',['Pending','Active','Suspended'])->get();
+        $pendingVendors = User::with('vendor')->where('role', 'Vendor')->whereIn('status',['Pending','Active','Suspended'])->get();
         return view('frontend.admin.vendors.index' , compact('pendingVendors'));
     }
 
@@ -39,6 +40,13 @@ class DashboardController extends Controller
         $vendor->status = 'Suspended';
         $vendor->save();
         return redirect()->back()->with('success','Vendor Suspended Successfully');
+    }
+
+    public function vendorshow(Request $request)
+    {
+        // return $id;
+        $vendor = VendorAccount::with('country','state','delivery')->find($request->id);
+        return response()->json($vendor);
     }
 
 

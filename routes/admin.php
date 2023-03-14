@@ -124,13 +124,3 @@ Route::group(['prefix' => 'website'], function () {
     });
 });
 
-
-Route::get('all-vendor', [DashboardController::class, 'allVendor'])->name('allVendor');
-Route::get('allvendor/{id}', [DashboardController::class, 'adminsuspendedVendor'])->name('admin.suspendedVendor');
-
-Route::get('allvendors/{id}', [DashboardController::class, 'adminactiveVendor'])->name('admin.adminactiveVendor');
-
-Route::get('vendor-dashboard', [VendorDashboardController::class, 'vendorDashboard'])->name('vendorDashboard');
-
-Route::resource('vendor-product', VendorProductController::class);
-

@@ -28,6 +28,12 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::is('account-request') ? 'active' : '' }}">
+            <a href="{{ route('accountRequest') }}" class="menu-link">
+                <i class="bi bi-unlock mx-1"></i>
+                <div data-i18n="Analytics">Acount Request</div>
+            </a>
+        </li>
 
         <!-- Layouts -->
 
