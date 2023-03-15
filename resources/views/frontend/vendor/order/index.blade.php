@@ -54,7 +54,7 @@
                                                 $firstTime = false;
                                             @endphp
                                         @else
-                                            @if ($order->id == session()->get('order_id'))
+                                            @if ($order->id !== session()->get('order_id'))
                                                 <tr>
                                                     <td>
                                                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
@@ -70,6 +70,15 @@
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @else
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>${{ $total += $cart->cart->quantity * $cart->cart->product->product_price }}
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
                                             @endif
                                         @endif
                                     @endif
