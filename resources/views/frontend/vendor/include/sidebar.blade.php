@@ -55,7 +55,7 @@
                 </ul>
             </li>
 
-            <li class="menu-item {{ Request::is('order-invoice/*') || Request::is('order-show') ? 'active' : '' }}">
+            <li class="menu-item {{ Request::is('vendor-order-invoice/*') || Request::is('vendor-orders') ? 'active' : '' }}">
                 <a href="{{ route('vendororders') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-collection"></i>
                     <div data-i18n="Basic">Orders</div>

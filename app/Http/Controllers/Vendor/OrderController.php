@@ -17,7 +17,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with('cart','user')->get();
-        
+        return view('frontend.vendor.order.index', compact('orders'));
 
     }
 

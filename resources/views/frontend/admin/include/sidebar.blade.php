@@ -117,6 +117,13 @@
             </a>
         </li>
 
+        <li class="menu-item {{Request::is('banner') ? 'active' : '' }}">
+            <a href="{{ route('banner.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Banners</div>
+            </a>
+        </li>
+
         <li class="menu-item menu-link mt-3">
             <div data-i18n="Basic" style="font-size: 12px;">Goldevine Setup</div>
         </li>

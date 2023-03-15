@@ -1,6 +1,6 @@
 @extends('frontend.admin.layouts.app')
 @section('title')
-    <title>All Category</title>
+    <title>All Banner</title>
 @endsection
 @section('content')
     <div class="row">
@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header d-flux">
                     <h5 class="d-inline">Table Basic</h5>
-                    <a href="{{ route('category.create') }}" class="btn btn-outline-primary float-end">Create Category</a>
+                    <a href="{{ route('banner.create') }}" class="btn btn-outline-primary float-end">Create Banner</a>
                 </div>
                 <div class="table text-nowrap">
                     <table class="table">
@@ -17,21 +17,29 @@
                             <tr>
                                 <th>Title</th>
                                 <th>image</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @foreach ($categories as $category)
+                            @foreach ($banners as $banner)
                                 <tr>
                                     <td>
                                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                        <strong>{{ $category->title }}</strong>
+                                        <strong>{{ $banner->title }}</strong>
                                     </td>
                                     <td>
-                                        <img src="{{ $category->image }}"
+                                        <img src="{{ $banner->image }}"
                                             onerror="this.src='{{ asset('images/product-img.png') }}'" height="50px"
                                             width="50px" alt="">
 
+                                    </td>
+                                    <td>
+                                        @if ($banner->status == 'active')
+                                            <span class="badge bg-success">Active</span>
+                                        @else
+                                            <span class="badge bg-danger">Suspend</span>
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="dropdown">
@@ -41,15 +49,15 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item"
-                                                    href="{{ route('category.edit', $category->id) }}"><i
-                                                        class="bx bx-edit-alt me-1 text-success"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{ route('category.destroy',$category->id) }}"  onclick="event.preventDefault();
-                                                document.getElementById('logout-form{{ $category->id}}').submit();"><i
+                                                    href="{{ route('banner.edit', $banner->id) }}"><i
+                                                        class="bx bx-edit-alt me-1 text-success"></i> Change Status </a>
+                                                <a class="dropdown-item" href="{{ route('banner.destroy',$banner->id) }}"  onclick="event.preventDefault();
+                                                document.getElementById('logout-form{{ $banner->id}}').submit();"><i
                                                         class="bx bx-trash me-1 text-danger"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>
-                                    <form id="logout-form{{ $category->id}}" action="{{ route('category.destroy',$category->id) }}" method="POST" class="d-none">
+                                    <form id="logout-form{{ $banner->id}}" action="{{ route('banner.destroy',$banner->id) }}" method="POST" class="d-none">
                                         @csrf
                                         @method('DELETE')
                                     </form>

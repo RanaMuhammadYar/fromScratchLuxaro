@@ -114,11 +114,11 @@
                                 </li>
                             </ul>
                         </nav> --}}
-                    <div class="merchant-banners mb-4">
+                    <div class=" mb-4">
                         <div class="container-fluid p-5">
                             <div class="col-md-10 mx-auto">
-                                <div class="merchant-banner-text">
-                                    <h3>(Banner ad for Luxauro, Goledvine, or BNMG)</h3>
+                                <div class="">
+                                    <img src="{{ isset($banner->image) ?  $banner->image : '' }}" onerror="this.src='{{ asset('images/default.png') }}'" alt="" width="100%">
                                 </div>
                             </div>
                         </div>
@@ -251,11 +251,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="merchant-banners mb-4">
+                    <div class="mb-4" style="width: 100%">
                         <div class="container-fluid p-5">
                             <div class="col-md-10 mx-auto">
                                 <div class="merchant-banner-text">
-                                    <h3>(Banner ad for Luxauro, Goledvine, or BNMG)</h3>
+                                    <img src="{{ isset($banner->image) ?  $banner->image : '' }}" onerror="this.src='{{ asset('images/default.png') }}'" alt="" width="100%">
                                 </div>
                             </div>
                         </div>

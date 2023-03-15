@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Models\Admin\Category;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Banner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -44,7 +45,8 @@ class ProductMangeCotroller extends Controller
             $relatedProducts = $product->relatedProducts()->get();
             Cache::put('related_products_' . $id, $relatedProducts, 1440);
         }
-        return view('frontend.all-page.category_detail', compact('products', 'id', 'slug', 'relatedProducts'));
+        $banner = Banner::orderby('id', 'desc')->where('status', 'active')->first();
+        return view('frontend.all-page.category_detail', compact('products', 'id', 'slug', 'relatedProducts', 'banner'));
     }
 
     public function productDetails(Request $request, $id, $slug)

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ProductCotroller;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -24,6 +25,7 @@ Route::resource('shipping-type', ShippingTypeCotroller::class);
 Route::resource('product-type', ProductTypeCotroller::class);
 Route::resource('product', ProductCotroller::class);
 Route::resource('admin-goudevine-product', ProjectResourceController::class);
+Route::resource('banner', BannerController::class);
 
 
 Route::get('product-active', [ProductMangeCotroller::class, 'suspended'])->name('product.suspended');
