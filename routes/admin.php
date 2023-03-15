@@ -9,15 +9,12 @@ use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductTypeCotroller;
-
 use App\Http\Controllers\Admin\ProductMangeCotroller;
 use App\Http\Controllers\Admin\ShippingTypeCotroller;
 use App\Http\Controllers\Admin\DelivoryOptionCotroller;
 use App\Http\Controllers\Admin\BusinessSettingsController;
-use App\Http\Controllers\Vendor\VendorDashboardController;
 use App\Http\Controllers\Admin\Goldevine\GoldevineMageController;
 use App\Http\Controllers\Admin\Goldevine\ProjectResourceController;
-use App\Http\Controllers\Vendor\VendorProductController;
 
 Route::get('admin-dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 

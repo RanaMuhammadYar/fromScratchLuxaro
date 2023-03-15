@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="merchant-name">
-                                <p>Merchant: <u>{{ $product->user->userDetails->name }}</u></p>
+                                <p>Merchant: <u>{{ isset($product->user->userDetails->name) ? $product->user->userDetails->name  : '' }}</u></p>
                             </div>
                             <div class="description-detail d-flex ">
                                 <div class="description-heading">

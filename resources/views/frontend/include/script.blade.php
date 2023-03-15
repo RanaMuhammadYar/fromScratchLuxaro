@@ -63,11 +63,6 @@
     function addToCart(product_id, name, price) {
         var quantity = $('.addOrRemove').val();
 
-        // console.log(quantity);
-        // console.log(product_id);
-        // console.log(name);
-        // console.log(price);
-        // return false;
         var total = price * quantity;
         $.ajax({
             type: "GET",
@@ -84,7 +79,6 @@
             },
             dataType: "json",
             success: function(response) {
-                console.log(response);
                 if (response.success == 'Product Already Added To Cart.') {
                     swal({
                         title: "Error!",

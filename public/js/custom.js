@@ -11,8 +11,8 @@ $('.banner-slider').slick({
   focusOnSelect: true,
   autoplay: false,
   mobileFirst: true,
-  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>"
+  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>"
 });
 
 
@@ -25,8 +25,8 @@ $('.explore-slider').slick({
   focusOnSelect: true,
   autoplay: false,
   mobileFirst: true,
-  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
   responsive: [{
     breakpoint: 768,
     settings: {
@@ -51,8 +51,8 @@ $('.slider').slick({
   focusOnSelect: true,
   autoplay: false,
   mobileFirst: true,
-  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
   responsive: [{
     breakpoint: 768,
     settings: {
@@ -77,8 +77,8 @@ $('.categories-slider').slick({
   focusOnSelect: true,
   autoplay: false,
   mobileFirst: true,
-  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
   responsive: [{
     breakpoint: 768,
     settings: {
@@ -90,8 +90,8 @@ $('.categories-slider').slick({
     settings: {
       slidesToShow: 4,
       slidesToScroll: 1,
-         prevArrow:"<button type='button' class='slick-prev'><img src='images/left-arrow.png'></button>",
-          nextArrow:"<button type='button' class='slick-next'><img src='images/right-arrow.png'></button>",
+         prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
+          nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
     }
   }]
 });
@@ -128,8 +128,8 @@ $('.detail-nav-slider').slick({
   autoplay: false,
   mobileFirst: true,
   asNavFor: '.detail-slider',
-  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>"
+  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>"
 });
 
 $('.slider-wrap').slick({
@@ -143,10 +143,10 @@ $('.slider-wrap').slick({
   focusOnSelect: true,
   cssEase: 'linear',
   touchMove: true,
-  prevArrow:"<button type='button' class='slick-prev'><img src='images/left-arrow.png'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='images/right-arrow.png'></button>",
-  
- 
+  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
+
+
 });
 
 
@@ -154,10 +154,10 @@ var imgs = $('.slider-wrap img');
 imgs.each(function(){
   var item = $(this).closest('.item');
   item.css({
-    'background-image': 'url(' + $(this).attr('src') + ')', 
-    'background-position': 'center',            
+    'background-image': 'url(' + $(this).attr('src') + ')',
+    'background-position': 'center',
     '-webkit-background-size': 'cover',
-    'background-size': 'cover', 
+    'background-size': 'cover',
   });
   $(this).hide();
 });

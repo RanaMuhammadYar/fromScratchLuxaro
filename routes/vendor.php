@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Vendor\AccountController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Vendor\OrderController;
 use App\Http\Controllers\Vendor\VendorProductController;
 use App\Http\Controllers\Vendor\VendorDashboardController;
 
@@ -18,6 +19,11 @@ Route::post('account-request', [AccountController::class, 'accountRequeststore']
 Route::post('account-request-update', [AccountController::class, 'accountRequestupdate'])->name('accountRequestupdate');
 
 Route::get('vendor-show', [DashboardController::class, 'vendorshow'])->name('admin.showVendor');
+
+Route::get('vendor-orders', [OrderController::class, 'index'])->name('vendororders');
+Route::get('vendor-order-invoice/{id}', [OrderController::class, 'invoice'])->name('vendororder.invoice');
+
+
 // country state city
 Route::post('api/fetch-states', [VendorDashboardController::class, 'fetchState']);
 Route::post('api/fetch-cities', [VendorDashboardController::class, 'fetchCity']);

@@ -19,7 +19,7 @@
                                 <th>payment status</th>
                                 <th>shipping charge</th>
                                 <th>total</th>
-                                <th>Actions</th>
+                                <th>INVOICE</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
