@@ -13,6 +13,7 @@ class CartOrder extends Model
     protected $fillable = [
         'cart_id',
         'order_id',
+        'vendor_id',
 
     ];
 

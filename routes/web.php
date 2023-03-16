@@ -92,7 +92,7 @@ Route::get('storage-link', function () {
     return 'Storage link successfully created';
 
 });
-Auth::routes(['verify' => true]); 
+Auth::routes(['verify' => true]);
 
 Route::get('/chatify', [MessagesController::class,'index'])->middleware(['auth'])->name(config('chatify.routes.prefix'));
 
