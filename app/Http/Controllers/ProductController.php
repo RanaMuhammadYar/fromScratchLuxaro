@@ -11,7 +11,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // return $request->all();
+
         $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -48,11 +48,8 @@ class ProductController extends Controller
 
     public function productsearch(Request $request)
     {
-        // return $request->all();
         $search = $request->search;
-        $products = Product::where('status','Active')->where('product_name', 'like', '%' . $search . '%')->paginate(2);
-        // {{ dd($products); }}
+        $products = Product::where('status', 'Active')->where('product_name', 'like', '%' . $search . '%')->paginate(2);
         return view('frontend.all-page.search.index', compact('products'));
-
     }
 }
