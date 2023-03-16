@@ -6,6 +6,7 @@
 <style>
 
 </style>
+@if (get_setting('home_banner1_images') != null)
 <div class="banner mb-4">
     <div class="banner-slider">
         @php $banner_1_imags = json_decode(get_setting('home_banner1_images')); @endphp
@@ -15,53 +16,72 @@
                 <img src="{{ static_asset('assets/images/banner.png') }}" data-src="{{ uploaded_asset($banner_1_imags[$key]) }}" alt="{{ env('APP_NAME') }} promo" class="img-fluid lazyload w-100">
             </a>
         </div>
-        {{-- <div>
-                <img src="images/banner.png" class="img-fluid">
-            </div>
-            <div>
-                <img src="images/banner.png" class="img-fluid">
-            </div> --}}
-    </div>
+    @endforeach
+</div>
+</div>
+@endif
+<form class="page-form mx-auto mb-5 mt-5 pt-5" action="#">
+    <div class="page-form-holder d-flex">
+        <select class="form-control border-0 rounded-0 flex-fill">
+            <!-- <option>All</option>
+                <option>All</option>
+                <option>All</option> -->
+        </select>
+        <!-- <div class="form-field d-flex flex-fill">
+                <input type="search" placeholder="Search..." class="border-0 bg-transparent flex-fill">
+                <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
+            </div> -->
 
-    <div class="product-section mb-4 mt-5 pt-5">
-        <div class="container">
-            <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
-                <h2 class="m-0">Luxauro Global + National</h2>
-                <div class="d-flex form-holder">
-                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
-                    <form class="page-form flex-fill" action="#">
-                        <div class="page-form-holder d-flex">
-                            <label class="form-control rounded-0">Search Filter</label>
-                            <div class="form-field d-flex flex-fill">
-                                <select class="flex-fill border-0 bg-transparent" id="category-filter">
-                                    <option>OrderBy</option>
-                                    <option value="desc">(Z-A)</option>
-                                    <option value="asc">(A-Z)</option>
-                                </select>
-                            </div>
+        <div class="form-field d-flex flex-fill">
+            <form action="{{ route('home') }}" method="GET">
+                <div class="input-group">
+                    <input type="text" class="border-0 bg-transparent flex-fill" name="search" placeholder="Search products...">
+                    <span class="input-group-btn">
+                        <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</form>
+
+
+<div class="product-section mb-4">
+    <div class="container">
+        <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
+            <h2 class="m-0">Luxauro Global + National</h2>
+            <div class="d-flex form-holder">
+                <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
+                <form class="page-form flex-fill" action="#">
+                    <div class="page-form-holder d-flex">
+                        <label class="form-control rounded-0">Search Filter</label>
+                        <div class="form-field d-flex flex-fill">
+                            <select class="flex-fill border-0 bg-transparent" id="category-filter">
+                                <option>OrderBy</option>
+                                <option value="desc">(Z-A)</option>
+                                <option value="asc">(A-Z)</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row text-center" id="append-category">
+
+            @foreach ($categories as $category)
+            <div class="col-6 col-md-4 col-lg-2 mb-4">
+                <div class="product-item">
+                    <a href="{{ route('productcategory', ['id' => $category->id, 'slug' => Str::slug($category->title)]) }}" style="color: #2e2c2c; text-decoration: none;">
+                        <div class="img-holder">
+                            <img src="{{ isset($category->image) ? $category->image : asset('images/product-img.png') }}" onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid" alt="">
+                        </div>
+                        <div class="txt-holder">
+                            <strong class="title">{{ $category->title }}</strong>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="row text-center" id="append-category">
-                @foreach ($categories as $category)
-                    <div class="col-6 col-md-4 col-lg-2 mb-4">
-                        <div class="product-item">
-                            <a href="{{ route('productcategory', ['id' => $category->id, 'slug' => Str::slug($category->title)]) }}"
-                                style="color: #2e2c2c; text-decoration: none;">
-                                <div class="img-holder">
-                                    <img src="{{ isset($category->image) ? $category->image : asset('images/product-img.png') }}"
-                                        onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid"
-                                        alt="">
-                                </div>
-                                <div class="txt-holder">
-                                    <strong class="title">{{ $category->title }}</strong>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
