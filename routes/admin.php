@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\OrderController;

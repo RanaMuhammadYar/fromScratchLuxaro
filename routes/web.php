@@ -94,6 +94,11 @@ Route::get('storage-link', function () {
 });
 Auth::routes(['verify' => true]);
 
+Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');
+
+Route::post('/search-product',[ProductController::class,'productsearch'])->name('productsearch');
+
+
 Route::get('/chatify', [MessagesController::class,'index'])->middleware(['auth'])->name(config('chatify.routes.prefix'));
 
 
@@ -165,10 +170,7 @@ Route::post('/deleteConversation', [MessagesController::class,'deleteConversatio
  */
 Route::post('/deleteMessage', [MessagesController::class,'deleteMessage'])->name('message.delete');
 
-/**
- * Update setting
- */
-Route::post('/updateSettings', [MessagesController::class,'updateSettings'])->name('avatar.update');
+
 
 /**
  * Set active status
@@ -196,8 +198,6 @@ Route::get('/group/{id}', [MessagesController::class,'index'])->name('group');
 Route::get('/{id}', [MessagesController::class,'index'])->name('user');
 // Route::get('/route', function(){ return 'Munaf'; }); // works as a user id
 
-
-Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');
 
 
 
