@@ -89,7 +89,7 @@
         </div>
     </div>
 </div>
-<div class="product-section mb-5 pb-lg-3">
+<!-- <div class="product-section mb-5 pb-lg-3">
     <div class="container">
         <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
             <h2 class="m-0">Luxauro Street, Vintage & Antique Market </h2>
@@ -529,7 +529,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @foreach ($categories as $category)
 <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
     <h2 class="m-0">{{$category->title}}</h2>
