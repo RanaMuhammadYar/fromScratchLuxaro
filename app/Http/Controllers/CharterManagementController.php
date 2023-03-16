@@ -29,10 +29,7 @@ class CharterManagementController extends Controller
                 ->when($search, function ($query, $search) {
                     return $query->where('charter_name', 'like', '%' . $search . '%');
                 })
-                ->paginate(5);
-             
-
-  
+                ->paginate(5);  
             return view('frontend.charters.all',compact('charters'));
         }
         public function charter_detail(Request $request)
@@ -40,6 +37,14 @@ class CharterManagementController extends Controller
             $charter_detail = Charter::where('id',$request->id)->first();
             $charters = Charter::where('id','!=',$request->id)->get();
             return view('frontend.charters.detail',compact('charter_detail','charters'));
+        }
+        public function charter_filter(Request $request)
+        {
+            // $cat_id = substr($request->price_filter, -1);
+            // $orderby = substr($request->price_filter, 0, -1);
+            $charters = Charter::orderBy('rate',$request->price_filter)->get();
+            $html = view('frontend.all-page.append_charters', ['charters' => $charters])->render();
+            return $html;
         }
     
         public function productCharterManagement()

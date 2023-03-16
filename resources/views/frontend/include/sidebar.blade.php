@@ -8,9 +8,11 @@
         <div id="collapseOne" class="accordion-collapse collapse common" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body px-md-3">
                 <ul class="mangement profile p-0 list-unstyled">
+                    @auth
                     <li class="pb-1"><a href="{{route('my-profile')}}">My Profile</a></li>
-                    <li class="pb-1"><a href="{{route('chats')}}">Messages</a></li>
-                    <li class="pb-1"><a href="">My Favorite Products</a></li>
+                    <li class="pb-1"><a href="{{route('chatify')}}">Messages</a></li>
+                    @endauth
+                    <!-- <li class="pb-1"><a href="">My Favorite Products</a></li>
                     <li class="pb-1"><a href="">My product browsing history</a></li>
                     <li class="pb-1"><a href="">My Luxauro transaction history</a></li>
                     <li class="pb-1"><a href="">My product ratings</a></li>
@@ -19,7 +21,7 @@
                     <li class="pb-1"><a href="">My goldevine transaction history</a></li>
                     <li class="pb-1"><a href="">My gmg professional contacts</a></li>
                     <li class="pb-1"><a href="">My gmg transaction history</a></li>
-                    <li class="pb-1"><a href="">My gmg professional ratings</a></li>
+                    <li class="pb-1"><a href="">My gmg professional ratings</a></li> -->
                 </ul>
             </div>
         </div>
@@ -89,11 +91,11 @@
     </div>
     <div class="accordion-item mb-2">
         <h2 class="accordion-header" id="headingSix">
-            <button class="accordion-button collapsed collapse GMGSidebarbtn common" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+            <button class="accordion-button collapsed GMGSidebarbtn common" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
                 GMG PROFESSIONAL SETUP
             </button>
         </h2>
-        <div id="collapseSix " class="accordion-collapse collapse GMGSidebar common" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+        <div id="collapseSix " class="accordion-collapse GMGSidebar common" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
             <div class="accordion-body px-4">
                 <ul class="mangement profile p-0 list-unstyled">
                     <li class="pb-1"><a href="{{route('my-profile')}}">My Profile</a></li>

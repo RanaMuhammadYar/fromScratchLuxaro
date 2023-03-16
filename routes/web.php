@@ -7,7 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CharterManagementController;
-use App\Http\Controllers\Vendor\VendorControlController;
+use App\Http\Controllers\vendor\Chatify\MessagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,10 @@ use App\Http\Controllers\Vendor\VendorControlController;
 //     return view('welcome');
 // });
 
-Auth::routes(['verify' => true]);
+
+
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/myProfile',[App\Http\Controllers\HomeController::class, 'myProfile'])->name('my-profile');
@@ -33,6 +36,7 @@ Route::post('api/fetch-cities', [UserController::class, 'fetchCity']);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+    Route::get('/products', 'products')->name('products');
     Route::get('/product-detail/{id}', 'productDetail')->name('product-detail');
     Route::get('/goldEvines', 'goldEvine')->name('goldEvine');
     Route::get('/goldMetal', 'goldEvine')->name('goldMetal');
@@ -62,6 +66,7 @@ Route::controller(CharterManagementController::class)->group(function () {
     Route::post('/charter_manage', 'store')->name('charter_manage');
     Route::get('/all_charters', 'index')->name('charters');
     Route::get('/charter_detail', 'charter_detail')->name('charter_detail');
+    Route::get('/charter_filter/{id?}', 'charter_filter')->name('charter_filter');
     Route::post('/charter_book', 'charter_book')->name('charter_book');
     Route::get('/product_charter_management', 'productCharterManagement')->name('product_charter_management');
 });
@@ -87,6 +92,110 @@ Route::get('storage-link', function () {
     return 'Storage link successfully created';
 
 });
+Auth::routes(['verify' => true]); 
+
+Route::get('/chatify', [MessagesController::class,'index'])->middleware(['auth'])->name(config('chatify.routes.prefix'));
+
+
+Route::post('/idInfo', [MessagesController::class,'idFetchData']);
+
+/**
+ * Send message route
+ */
+Route::post('/sendMessage', [MessagesController::class,'send'])->name('send.message');
+
+/**
+ * Fetch messages
+ */
+Route::post('/fetchMessages', [MessagesController::class,'fetch'])->name('fetch.messages');
+
+/**
+ * Download attachments route to create a downloadable links
+ */
+Route::get('/download/{fileName}', [MessagesController::class,'download'])->name(config('chatify.attachments.download_route_name'));
+
+/**
+ * Authentication for pusher private channels
+ */
+Route::post('/chat/auth', [MessagesController::class,'pusherAuth'])->name('pusher.auth');
+
+/**
+ * Make messages as seen
+ */
+Route::post('/makeSeen', [MessagesController::class,'seen'])->name('messages.seen');
+
+/**
+ * Get contacts
+ */
+Route::get('/getContacts', [MessagesController::class,'getContacts'])->name('contacts.get');
+
+/**
+ * Update contact item data
+ */
+Route::post('/updateContacts', [MessagesController::class,'updateContactItem'])->name('contacts.update');
+
+
+/**
+ * Star in favorite list
+ */
+Route::post('/star', [MessagesController::class,'favorite'])->name('star');
+
+/**
+ * get favorites list
+ */
+Route::post('/favorites', [MessagesController::class,'getFavorites'])->name('favorites');
+
+/**
+ * Search in messenger
+ */
+Route::get('/search', [MessagesController::class,'search'])->name('search');
+
+/**
+ * Get shared photos
+ */
+Route::post('/shared', [MessagesController::class,'sharedPhotos'])->name('shared');
+
+/**
+ * Delete Conversation
+ */
+Route::post('/deleteConversation', [MessagesController::class,'deleteConversation'])->name('conversation.delete');
+
+/**
+ * Delete Message
+ */
+Route::post('/deleteMessage', [MessagesController::class,'deleteMessage'])->name('message.delete');
+
+/**
+ * Update setting
+ */
+Route::post('/updateSettings', [MessagesController::class,'updateSettings'])->name('avatar.update');
+
+/**
+ * Set active status
+ */
+Route::post('/setActiveStatus', [MessagesController::class,'setActiveStatus'])->name('activeStatus.set');
+
+
+
+
+
+
+/*
+* [Group] view by id
+*/
+Route::get('/group/{id}', [MessagesController::class,'index'])->name('group');
+
+/*
+* user view by id.
+* Note : If you added routes after the [User] which is the below one,
+* it will considered as user id.
+*
+* e.g. - The commented routes below :
+*/
+// Route::get('/route', function(){ return 'Munaf'; }); // works as a route
+Route::get('/{id}', [MessagesController::class,'index'])->name('user');
+// Route::get('/route', function(){ return 'Munaf'; }); // works as a user id
+
 
 Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');
 

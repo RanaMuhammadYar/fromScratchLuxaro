@@ -33,10 +33,10 @@
                     </div>
                     <form class="page-form mx-auto mb-5" action="#">
                         <div class="page-form-holder d-flex">
-                            <select class="form-control select-control border-0 rounded-0 flex-fill">
+                            <select class="form-control border-0 rounded-0 flex-fill">
+                                <!-- <option>All</option>
                                 <option>All</option>
-                                <option>All</option>
-                                <option>All</option>
+                                <option>All</option> -->
                             </select>
 
                             <div class="form-field d-flex flex-fill">
@@ -55,34 +55,6 @@
 
                         <div class="row mb-3">
                             @foreach ($charters as $charter)
-                            <!-- <div class="col-md-auto flex-fill col-12 my-2">
-                                <a href="{{route('charter_detail',['id'=>$charter->id])}}">
-                                    <div class="charter-item">
-                                        <div class="img-holder">
-                                            <img src="{{ uploaded_asset($charter->thumbnail_img)}}" class="img-fluid" style="width:294px;height:294px">
-                                        </div>
-                                        <div class="txt-holder">
-                                            <div class="d-flex justify-content-between mb-3">
-                                                <div>
-                                                    <strong class="title">{{ $charter->name }}</strong>
-                                                    <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <i class="fa fa-globe fa-1x mt-2"></i>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <strong class="title">{{ $charter->rate }}</strong>
-                                                <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div> -->
                             <div class="col-md-auto col-12">
                                 <div class="product-item">
                                     <div class="img-holder">
@@ -141,17 +113,17 @@
                                         <div class="page-form-holder d-flex">
                                             <label class="form-control rounded-0">Search Filter</label>
                                             <div class="form-field d-flex flex-fill">
-                                                <select class="flex-fill border-0 bg-transparent">
-                                                    <option>All</option>
-                                                    <option>All</option>
-                                                    <option>All</option>
-                                                </select>
+                                            <select class="flex-fill border-0 bg-transparent" id="price-filter">
+                                                <option>OrderBy</option>
+                                                <option value="desc">price(max)</option>
+                                                <option value="asc">price(min)</option>
+                                            </select>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="slider Luxauro-fresh-slider product-detail-merchant">
+                            <div class="slider Luxauro-fresh-slider product-detail-merchant" id="charter-append">
                                 @foreach ($charters as $charter)
                                 <div>
                                     <a href="{{route('charter_detail',['id'=>$charter->id])}}">
@@ -196,17 +168,17 @@
                                         <div class="page-form-holder d-flex">
                                             <label class="form-control rounded-0">Search Filter</label>
                                             <div class="form-field d-flex flex-fill">
-                                                <select class="flex-fill border-0 bg-transparent">
-                                                    <option>All</option>
-                                                    <option>All</option>
-                                                    <option>All</option>
-                                                </select>
+                                            <select class="flex-fill border-0 bg-transparent" id="price-filter-like">
+                                                <option>OrderBy</option>
+                                                <option value="desc">price(max)</option>
+                                                <option value="asc">price(min)</option>
+                                            </select>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="slider Luxauro-fresh-slider product-detail-merchant">
+                            <div class="slider Luxauro-fresh-slider product-detail-merchant" id="charter-append-like">
                             @foreach ($charters as $charter)
                                 <div>
                                     <a href="{{route('charter_detail',['id'=>$charter->id])}}">

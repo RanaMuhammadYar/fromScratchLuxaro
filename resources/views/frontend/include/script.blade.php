@@ -23,6 +23,64 @@
         });
     </script>
 @endif
+<script>
+    $('#price-filter1,#price-filter2,#price-filter7').on('change', function() {
+        var filterValue = $(this).val();
+        var id = filterValue.substr(filterValue.length - 1);
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('products') }}",
+            data: { price_filter: filterValue },
+            success: function(data) {
+                $('#product-append'+id).html(null);
+                $('#product-append'+id).html(data);    
+                $('#product-append'+id).css({"display": "flex"});
+            }
+        });
+    });
+    $('#price-filter').on('change', function() {
+        var filterValue = $(this).val();
+        var id = filterValue.substr(filterValue.length - 1);
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('charter_filter') }}",
+            data: { price_filter: filterValue },
+            success: function(data) {
+                $('#charter-append').html(null);
+                $('#charter-append').html(data);    
+                $('#charter-append').css({"display": "flex"});
+            }
+        });
+    });
+    $('#category-filter').on('change', function() {
+        var filterValue = $(this).val();
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('products') }}",
+            data: { category_filter: filterValue },
+            success: function(data) {
+                $('#append-category').html(null);
+                $('#append-category').html(data);    
+                $('#append-category').css({"display": "flex"});
+            }
+        });
+    });
+    $('#price-filter-like').on('change', function() {
+        var filterValue = $(this).val();
+        var id = filterValue.substr(filterValue.length - 1);
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('charter_filter') }}",
+            data: { price_filter: filterValue },
+            success: function(data) {
+                $('#charter-append-like').html(null);
+                $('#charter-append-like').html(data);    
+                $('#charter-append-like').css({"display": "flex"});
+            }
+        });
+    });
+
+</script>
 
 <script>
     $('.openLuxaroSidebar').click(function(){
@@ -132,7 +190,6 @@
             },
             dataType: "json",
             success: function(response) {
-
                 $('.destroy' + destroy_id + '').html('');
                 $('.CartCount').html('');
                 $('.CartCount').append(response.count);
