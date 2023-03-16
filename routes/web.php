@@ -9,9 +9,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CharterManagementController;
 use App\Http\Controllers\vendor\Chatify\MessagesController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -199,6 +196,8 @@ Route::get('/group/{id}', [MessagesController::class,'index'])->name('group');
 Route::get('/{id}', [MessagesController::class,'index'])->name('user');
 // Route::get('/route', function(){ return 'Munaf'; }); // works as a user id
 
+
+Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');
 
 
 

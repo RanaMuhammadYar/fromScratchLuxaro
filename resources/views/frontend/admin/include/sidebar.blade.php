@@ -4,6 +4,7 @@
             <span class="app-brand-logo demo">
             </span>
             <span class="app-brand-text demo menu-text fw-bolder ms-2">Luxauro</span>
+
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -101,17 +102,34 @@
             </ul>
         </li>
         <!-- Cards -->
+        <li class="menu-item {{ Request::is('all-vendor') ? 'active' : '' }}">
+            <a href="{{ route('allVendor') }}" class="menu-link">
+                {{-- <i class=" bx bx-collection"></i> --}}
+                <i class=" menu-icon tf-icons bi bi-person-fill"></i>
+                <div data-i18n="Basic">Vendors</div>
+            </a>
+        </li>
+
         <li class="menu-item {{ Request::is('order-invoice/*') || Request::is('order-show') ? 'active' : '' }}">
             <a href="{{ route('order.show') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Orders</div>
             </a>
         </li>
+
+        <li class="menu-item {{Request::is('banner') ? 'active' : '' }}">
+            <a href="{{ route('banner.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Banners</div>
+            </a>
+        </li>
+
         <li class="menu-item menu-link mt-3">
             <div data-i18n="Basic" style="font-size: 12px;">Goldevine Setup</div>
         </li>
 
-        <li class="menu-item {{ Request::is('admin-goudevine-product') || Request::is('admin-goudevine-product/create') || Request::is('admin-goudevine-product/*/edit') ? 'active' : '' }}">
+        <li
+            class="menu-item {{ Request::is('admin-goudevine-product') || Request::is('admin-goudevine-product/create') || Request::is('admin-goudevine-product/*/edit') ? 'active' : '' }}">
             <a href="{{ route('admin-goudevine-product.index') }}" class="menu-link">
                 <i class="bi bi-list-task menu-icon tf-icons"></i>
                 <div data-i18n="Basic">Project Management</div>

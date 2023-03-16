@@ -1,6 +1,6 @@
 @extends('frontend.admin.layouts.app')
 @section('title')
-    <title>All Product</title>
+    <title>All Orders</title>
 @endsection
 @section('content')
     <div class="row">
@@ -8,7 +8,7 @@
             <!-- Basic Bootstrap Table -->
             <div class="card">
                 <div class="card-header d-flux">
-                    <h5 class="d-inline">All Product</h5>
+                    <h5 class="d-inline">All Orders</h5>
                 </div>
                 <div class="table text-nowrap">
                     <table class="table">
@@ -19,7 +19,7 @@
                                 <th>payment status</th>
                                 <th>shipping charge</th>
                                 <th>total</th>
-                                <th>Actions</th>
+                                <th>INVOICE</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">

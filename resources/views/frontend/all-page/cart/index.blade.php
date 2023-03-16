@@ -16,6 +16,7 @@
                                 @php
                                     $total = 0;
                                     $shipping_charge = 0;
+                                    $subtotal = 0;
                                 @endphp
                                 @foreach ($allcartorders as $allcartorder)
                                     <div class="allcartitem{{ $allcartorder->id }}">
@@ -26,7 +27,7 @@
                                                 <div class="sub-product-image mb-3 mb-md-4">
                                                     <img src="{{ $allcartorder->product->image }}"
                                                         onerror="this.src='{{ asset('images/default.png') }}'"
-                                                        class="img-fluid" alt="product-img">
+                                                        class="img-fluid" alt="product-img" width="300px;">
                                                 </div>
                                             </li>
                                             <li class="mx-2 mb-2">
@@ -35,11 +36,12 @@
                                                     <ul class="list-unstyled m-0 p-0">
                                                         <li>
                                                             <p class="mb-0">
-                                                                {{ $allcartorder->product->user->userDetails->name }}</p>
+                                                                {{ isset($allcartorder->product->user->userDetails->name)?
+                                                                    $allcartorder->product->user->userDetails->name: '' }}</p>
                                                         </li>
                                                         <li>
                                                             <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                                        aria-hidden="true"></i></span>{{ $allcartorder->product->user->userDetails->address }}
+                                                                        aria-hidden="true"></i></span>{{  isset($allcartorder->product->user->userDetails->address)? $allcartorder->product->user->userDetails->address:'' }}
                                                             </p>
                                                         </li>
                                                         <li>
@@ -97,7 +99,8 @@
                                     </div>
 
                                     @php
-                                        $total += $allcartorder->product->product_price * $allcartorder->quantity;
+                                        $subtotal += $allcartorder->product->product_price * $allcartorder->quantity;
+                                        $total += $allcartorder->product->product_price * $allcartorder->quantity + $allcartorder->product->shipping_charge;
                                         $shipping_charge += $allcartorder->product->shipping_charge;
 
                                     @endphp
@@ -473,9 +476,9 @@
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <strong>Luxauro Subtotal</strong>
                                         <strong class="luxaurosubtotal"
-                                            data-subtotal="{{ $total }}">${{ $total }}</strong>
+                                            data-subtotal="{{ $subtotal }}">${{ $subtotal }}</strong>
                                         <input type="hidden"name="luxaurosubtotal"class="luxaurosubtotal"
-                                            data-subtotal="{{ $total }}" value="{{ $total }} ">
+                                            data-subtotal="{{ $subtotal }}" value="{{$subtotal }} ">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <p class="mb-0">Estimated Shipping</p>

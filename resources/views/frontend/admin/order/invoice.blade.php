@@ -22,30 +22,33 @@
                     </div>
                     @php
                         $i = 1;
-                        $allproducts = json_decode($order->cart_id);
                     @endphp
                     <div class="dropdown-divider"></div>
-                    @foreach ($allproducts as $allproduct)
-                        @php
-                            $orders = App\Models\Admin\Cart::with('product')
-                                ->where('id', $allproduct)
-                                ->first();
-                        @endphp
+                    @foreach ($order->cart as $allproduct)
                         <div class="row pt-4">
                             <div class="col-lg-6 ">
                                 <p class="h5 font-weight-bold">Bill From</p>
-                                <address> Street Address: {{ $orders->product->user->userDetails->address }}<br>State , City:
-                                    {{ $orders->product->user->userDetails->state->name }} , {{ $orders->product->user->userDetails->city->name }}<br>Postal Code:
-                                    {{ $orders->product->user->zip_code }} <br>{{ $orders->product->user->email }}
+                                <address> Street Address:
+                                    {{ isset($allproduct->product->user->userDetails->address) ? $allproduct->product->user->userDetails->address : '' }}<br>State
+                                    , City:
+                                    {{ isset($allproduct->product->user->userDetails->state->name) ? $allproduct->product->user->userDetails->state->name : '' }}
+                                    ,
+                                    {{ isset($allproduct->product->user->userDetails->city->name) ? $allproduct->product->user->userDetails->city->name : '' }}<br>Postal
+                                    Code:
+                                    {{isset($allproduct->product->user->zip_code) ?$allproduct->product->user->zip_code: '' }} <br>{{ isset($allproduct->product->user->email) ? $allproduct->product->user->email : '' }}
                                 </address>
                             </div>
                             <div class="col-lg-6 text-end">
                                 <p class="h5 font-weight-bold">Bill To</p>
                                 <address>
-                                    Street Address: {{ $order->user->userDetails->address }}
-                                    <br>State  City: {{ $order->user->userDetails->state->name }} , {{ $order->user->userDetails->city->name }}
+                                    Street Address:
+                                    {{ isset($order->user->userDetails->address) ? $order->user->userDetails->address : '' }}
+                                    <br>State City:
+                                    {{ isset($order->user->userDetails->state->name) ? $order->user->userDetails->state->name : '' }}
+                                    ,
+                                    {{ isset($order->user->userDetails->city->name) ? $order->user->userDetails->city->name : '' }}
                                     <br>Postal Code : {{ $order->user->zip_code }}
-                                     <br>
+                                    <br>
                                     {{ $order->user->email }}
                                     <br>
                                 </address>
@@ -65,38 +68,33 @@
                             </tr>
                             @php
                                 $i = 1;
-                                $allproducts = json_decode($order->cart_id);
+                                $subtotal = 0;
                             @endphp
-                            @foreach ($allproducts as $allproduct)
+                            @foreach ($order->cart as $orders)
                                 <tr>
-                                    {{-- {{ dd($allproduct); }} --}}
-                                    @php
-                                        $orders = App\Models\Admin\Cart::with('product')
-                                            ->where('id', $allproduct)
-                                            ->first();
-                                        // {{ dd($order) }}
-                                    @endphp
                                     <td class="text-center">{{ $i++ }}</td>
                                     <td>
                                         <p class="font-weight-semibold mb-1">
-                                            {{ isset($orders->product->product_name) ? $orders->product->product_name : '' }}
+                                            {{ isset($orders->cart->product->product_name) ? $orders->cart->product->product_name : '' }}
                                         </p>
-                                        {{-- <div class="text-muted">Logo and business cards design</div> --}}
                                     </td>
-                                    <td class="text-center">{{ isset($orders->quantity) ? $orders->quantity : '' }}
-                                    </td>
-                                    <td class="text-end">
-                                        ${{ isset($orders->product->product_price) ? $orders->product->product_price : '' }}
+                                    <td class="text-center">{{ isset($orders->cart->quantity) ? $orders->cart->quantity : '' }}
                                     </td>
                                     <td class="text-end">
-                                        ${{ isset($orders->product->product_price) ? $orders->product->product_price * $orders->quantity : '' }}
+                                        ${{ isset($orders->cart->product->product_price) ? $orders->cart->product->product_price : '' }}
+                                    </td>
+                                    <td class="text-end">
+                                        ${{ isset($orders->cart->product->product_price) ? $orders->cart->product->product_price * $orders->cart->quantity : '' }}
                                     </td>
                                 </tr>
+                                @php
+                                    $subtotal += $orders->cart->product->product_price * $orders->cart->quantity;
+                                @endphp
                             @endforeach
 
                             <tr>
                                 <td colspan="4" class="font-weight-semibold text-end">Subtotal</td>
-                                <td class="text-end">${{ $order->over_all_total }}</td>
+                                <td class="text-end">${{ $subtotal }}</td>
                             </tr>
                             {{-- <tr>
                                 <td colspan="4" class="font-weight-semibold text-end">Vat Rate</td>
@@ -110,7 +108,7 @@
                                 <td colspan="4" class="font-weight-bold text-danger text-uppercase text-end h4 mb-0">
                                     Total Due </td>
                                 <td class="font-weight-bold text-danger text-end h4 mb-0">
-                                    ${{ $order->over_all_total + $order->shipping_charge }}</td>
+                                    ${{ $subtotal + $order->shipping_charge }}</td>
                             </tr>
                             {{-- <tr>
                                 <td colspan="5" class="text-end"> <button type="button" class="btn btn-primary"

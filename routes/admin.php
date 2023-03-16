@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ProductCotroller;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductTypeCotroller;
-
 use App\Http\Controllers\Admin\ProductMangeCotroller;
 use App\Http\Controllers\Admin\ShippingTypeCotroller;
 use App\Http\Controllers\Admin\DelivoryOptionCotroller;
@@ -25,6 +25,7 @@ Route::resource('shipping-type', ShippingTypeCotroller::class);
 Route::resource('product-type', ProductTypeCotroller::class);
 Route::resource('product', ProductCotroller::class);
 Route::resource('admin-goudevine-product', ProjectResourceController::class);
+Route::resource('banner', BannerController::class);
 
 
 Route::get('product-active', [ProductMangeCotroller::class, 'suspended'])->name('product.suspended');
@@ -121,3 +122,4 @@ Route::group(['prefix' => 'website'], function () {
         Route::get('/order-configuration', 'order_configuration')->name('order_configuration.index');
     });
 });
+

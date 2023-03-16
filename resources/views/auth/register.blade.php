@@ -19,7 +19,8 @@
                 <div class="sign-in col-md-9 px-3 px-md-0">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
+                        <input type="hidden" name="role" value="User">
+                        <input type="hidden" name="status" value="Active">
                         <div class="mb-3">
                             <input type="email" class="form-control" placeholder="Email" aria-label="email"
                                 aria-describedby="addon-wrapping @error('email') is-invalid @enderror" name="email"

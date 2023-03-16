@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\Cart;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Admin\Order;
-use Illuminate\Queue\Console\RetryCommand;
+use Illuminate\Http\Request;
+use App\Models\Admin\CartOrder;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Queue\Console\RetryCommand;
 
 class CartController extends Controller
 {
@@ -53,7 +54,6 @@ class CartController extends Controller
     public function paymenttype(Request $request)
     {
         $order = new Order();
-        $order->cart_id = json_encode($request->cart_id);
         $order->payment_type = 'Cash On delivory';
         $order->payment_status = 'Pending';
         $order->status = 'Pending';
@@ -64,6 +64,17 @@ class CartController extends Controller
         $order->over_all_total = $request->overalltotal;
         $order->user_id = Auth::user()->id;
         $order->save();
+        if($order->save())
+        {
+            foreach($request->cart_id as $cart_id)
+            {
+                $cartorder = new CartOrder();
+                $cartorder->cart_id = $cart_id;
+                $cartorder->order_id = $order->id;
+                $cartorder->save();
+            }
+
+        }
         if ($order->save()) {
             foreach ($request->cart_id as $cart_id) {
                 $cart = Cart::find($cart_id);

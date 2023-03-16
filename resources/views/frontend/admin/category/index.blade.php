@@ -1,6 +1,6 @@
 @extends('frontend.admin.layouts.app')
 @section('title')
-    <title>Create Category</title>
+    <title>All Category</title>
 @endsection
 @section('content')
     <div class="row">

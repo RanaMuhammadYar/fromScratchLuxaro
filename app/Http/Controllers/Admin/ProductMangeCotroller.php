@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Models\Admin\Category;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Banner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 
 class ProductMangeCotroller extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth','admin']);
+    // }
     public function suspended(Request $request)
     {
         $suspended = Product::find($request->suspended_id);
@@ -40,7 +45,8 @@ class ProductMangeCotroller extends Controller
             $relatedProducts = $product->relatedProducts()->get();
             Cache::put('related_products_' . $id, $relatedProducts, 1440);
         }
-        return view('frontend.all-page.category_detail', compact('products', 'id', 'slug', 'relatedProducts'));
+        $banner = Banner::orderby('id', 'desc')->where('status', 'active')->first();
+        return view('frontend.all-page.category_detail', compact('products', 'id', 'slug', 'relatedProducts', 'banner'));
     }
 
     public function productDetails(Request $request, $id, $slug)
@@ -56,9 +62,31 @@ class ProductMangeCotroller extends Controller
     public function addtocart(Request $request)
     {
 
+
         if (Auth::check()) {
             $orderallready = Cart::where('product_id', $request->product_id)->where('status', 'Pending')->where('user_id', Auth::user()->id)->count();
+            // $orderallready = \App\Models\Admin\Cart::with('product')
+            //     ->where(function ($query) {
+            //         $query
+            //             ->where('status', 'pending')
+            //             ->where('user_id', Auth::id())
+            //             ->orWhere(function ($query) {
+            //                 $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+            //             });
+            //     })
+            //     ->count();
         } else {
+            // $orderallready = \App\Models\Admin\Cart::with('product')
+            //     ->where(function ($query) {
+            //         $query
+            //             ->where('status', 'pending')
+            //             ->where('user_id', Auth::id())
+            //             ->orWhere(function ($query) {
+            //                 $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+            //             });
+            //     })
+            //     ->count();
+
             $orderallready = Cart::where('product_id', $request->product_id)->where('status', 'Pending')->where('temp_id', session()->get('temp_id'))->count();
         }
         if ($orderallready > 0) {
@@ -72,8 +100,29 @@ class ProductMangeCotroller extends Controller
                 $cart->total_price = $request->total;
                 $cart->status = 'Pending';
                 $cart->save();
-                $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
-                $count = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+                // $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+                $total = \App\Models\Admin\Cart::with('product')
+                    ->where(function ($query) {
+                        $query
+                            ->where('status', 'pending')
+                            ->where('user_id', Auth::id())
+                            ->orWhere(function ($query) {
+                                $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                            });
+                    })
+                    ->sum('total_price');
+                // $count = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+                $count = \App\Models\Admin\Cart::with('product')
+                    ->where(function ($query) {
+                        $query
+                            ->where('status', 'pending')
+                            ->where('user_id', Auth::id())
+                            ->orWhere(function ($query) {
+                                $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                            });
+                    })
+                    ->count();
+
                 return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => Auth::user()->id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id]);
             } else {
                 if (session()->has('temp_id')) {
@@ -85,8 +134,32 @@ class ProductMangeCotroller extends Controller
                     $cart->total_price = $request->total;
                     $cart->status = 'Pending';
                     $cart->save();
-                    $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
-                    $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+
+
+                    $total = \App\Models\Admin\Cart::with('product')
+                        ->where(function ($query) {
+                            $query
+                                ->where('status', 'pending')
+                                ->where('user_id', Auth::id())
+                                ->orWhere(function ($query) {
+                                    $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                                });
+                        })
+                        ->sum('total_price');
+
+                    // $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+
+                    // $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+                    $count = \App\Models\Admin\Cart::with('product')
+                        ->where(function ($query) {
+                            $query
+                                ->where('status', 'pending')
+                                ->where('user_id', Auth::id())
+                                ->orWhere(function ($query) {
+                                    $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                                });
+                        })
+                        ->count();
                     return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id]);
                 } else {
                     $temp_id = random_int(1000, 9999);
@@ -98,8 +171,32 @@ class ProductMangeCotroller extends Controller
                     $cart->status = 'Pending';
                     $cart->save();
                     $request->session()->put('temp_id', $temp_id);
-                    $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
-                    $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+
+                    $total = \App\Models\Admin\Cart::with('product')
+                        ->where(function ($query) {
+                            $query
+                                ->where('status', 'pending')
+                                ->where('user_id', Auth::id())
+                                ->orWhere(function ($query) {
+                                    $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                                });
+                        })
+                        ->sum('total_price');
+                    // $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+
+                    $count = \App\Models\Admin\Cart::with('product')
+                        ->where(function ($query) {
+                            $query
+                                ->where('status', 'pending')
+                                ->where('user_id', Auth::id())
+                                ->orWhere(function ($query) {
+                                    $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                                });
+                        })
+                        ->count();
+                    // $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+
+
                     return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id]);
                 }
             }
@@ -114,21 +211,64 @@ class ProductMangeCotroller extends Controller
         $cart->delete();
 
         if (Auth::check()) {
-            $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
-            $count = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+            $total = \App\Models\Admin\Cart::with('product')
+                ->where(function ($query) {
+                    $query
+                        ->where('status', 'pending')
+                        ->where('user_id', Auth::id())
+                        ->orWhere(function ($query) {
+                            $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                        });
+                })
+                ->sum('total_price');
+
+                $count = \App\Models\Admin\Cart::with('product')
+                ->where(function ($query) {
+                    $query
+                    ->where('status', 'pending')
+                    ->where('user_id', Auth::id())
+                    ->orWhere(function ($query) {
+                        $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                    });
+                })
+                ->count();
+                // $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+            // $count = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
             return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total, 'count' => $count]);
         } else {
+            $total = \App\Models\Admin\Cart::with('product')
+                ->where(function ($query) {
+                    $query
+                        ->where('status', 'pending')
+                        ->where('user_id', Auth::id())
+                        ->orWhere(function ($query) {
+                            $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                        });
+                })
+                ->sum('total_price');
+
+                $count = \App\Models\Admin\Cart::with('product')
+                ->where(function ($query) {
+                    $query
+                    ->where('status', 'pending')
+                    ->where('user_id', Auth::id())
+                    ->orWhere(function ($query) {
+                        $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                    });
+                })
+                ->count();
+
             $temp_id = session()->get('temp_id');
-            $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
-            $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+            // $total = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+            // $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
             return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total, 'count' => $count]);
         }
     }
 
     public function localluxauro(Request $request)
     {
-       $products = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'desc')->get();
-       $relatedProducts = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->get();
+        $products = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'desc')->get();
+        $relatedProducts = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->get();
         return view('frontend.all-page.localproductdetail', compact('products', 'relatedProducts'));
     }
 }
