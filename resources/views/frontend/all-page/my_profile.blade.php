@@ -18,7 +18,7 @@
                                         <div class="account-image">
                                             <img id="preview-image-before-upload" src="{{@$userDetail->user_profile_image}}" alt="preview image" style="max-height: 250px;">
                                         </div>
-                                        <input type="file" class="inputfile form-control" name="user_profile_image" id="user_profile_image">
+                                        <input type="file" class="inputfile form-control" name="user_profile_image" id="user_profile_image" required>
                                         <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                                     <i class="fa fa-cloud-upload upload-icon-account-1" aria-hidden="true"></i>
                                                     <span class="filename">Upload </span>
                                                     <!-- <img id="preview-image-before-upload" src="{{ uploaded_asset(@$user->course_document_img)}}"  alt="preview image" style="max-height: 250px;"> -->
-                                                    <input type="file" class="inputfile form-control" name="course_certification_document">
+                                                    <input type="file" class="inputfile form-control" name="course_certification_document" required>
                                                 </label>
                                             </div>
                                         </div>

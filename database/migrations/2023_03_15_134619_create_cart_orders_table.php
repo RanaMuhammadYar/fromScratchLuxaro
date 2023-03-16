@@ -17,6 +17,7 @@ class CreateCartOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('cart_id');
             $table->unsignedBigInteger('order_id');
+            $table->integer('vendor_id');
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->timestamps();
