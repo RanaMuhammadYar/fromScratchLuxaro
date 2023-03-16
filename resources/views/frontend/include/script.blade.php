@@ -24,7 +24,7 @@
     </script>
 @endif
 <script>
-    $('#price-filter1,#price-filter2,#price-filter7').on('change', function() {
+    $('#price-filter1,#price-filter2,#price-filter3,#price-filter4,#price-filter5,#price-filter6,#price-filter7').on('change', function() {
         var filterValue = $(this).val();
         var id = filterValue.substr(filterValue.length - 1);
         $.ajax({
