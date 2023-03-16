@@ -579,6 +579,7 @@
                     <button class="btn bg-dark text-white py-1 px-2" href="" onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i class="fa fa-shopping-basket"></i>
                     </button>
                     <input type="hidden" name="" value="1" class="addOrRemove">
+                    
                 </div>
             </div>
         </div>

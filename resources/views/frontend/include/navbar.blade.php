@@ -280,9 +280,12 @@
                     <li><a href="javascript:void">professionals</a></li>
                 </ul>
                 <ul class="list-unstyled m-0 p-0 d-md-flex justify-content-end">
-                   @if (Auth::check())
+                @if (Auth::check())
                        @if (Auth::user()->role == 'Vendor')
                            <li><a href="{{ route('vendorDashboard') }}">Vendor Dashboard</a></li>
+                           @elseif (Auth::user()->role == 'Admin')
+                            <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
+                            @else
                        @endif
                    @endif
                     <li><a href="{{ route('charters') }}">charters</a></li>
