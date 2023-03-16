@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Admin\Product;
 
 class ProductController extends Controller
 {
@@ -11,7 +11,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // return $request->all();
+
         $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -44,5 +44,12 @@ class ProductController extends Controller
         $product->shipping_charge = $request->shipping_charge;
         $product->save();
         return redirect()->back()->with('success', 'Product created successfully.');
+    }
+
+    public function productsearch(Request $request)
+    {
+        $search = $request->search;
+        $products = Product::where('status', 'Active')->where('product_name', 'like', '%' . $search . '%')->paginate(2);
+        return view('frontend.all-page.search.index', compact('products'));
     }
 }

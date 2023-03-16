@@ -35,6 +35,7 @@ Route::get('/myProfile',[App\Http\Controllers\HomeController::class, 'myProfile'
 Route::post('api/fetch-states', [UserController::class, 'fetchState']);
 Route::post('api/fetch-cities', [UserController::class, 'fetchCity']);
 Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');
+Route::post('/search-product',[ProductController::class,'productsearch'])->name('productsearch');
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/products', 'products')->name('products');
@@ -197,7 +198,6 @@ Route::controller(MessagesController::class)->group(function () {
     Route::get('/{id}', 'index')->name('user');
     // Route::get('/route', function(){ return 'Munaf'; }); // works as a user id
 });
-
 
 
 
