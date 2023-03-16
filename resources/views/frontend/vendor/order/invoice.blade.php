@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <h2 class="font-weight-bold text-primary">INVOICE</h2>
                     <div>
-                        <h5 class="mb-1">Hi <strong> {{ $order->user->userDetails->name }} </strong></h5>
+                        <h5 class="mb-1">Hi <strong> {{ isset($order->user->userDetails->name)? $order->user->userDetails->name:'' }} </strong></h5>
                     </div>
                     <div class="card-body ps-0 pe-0">
                         <div class="row">
@@ -69,9 +69,10 @@
                             @php
                                 $i = 1;
                                 $subtotal = 0;
+                                $shipping_charge = 0;
+                                $myorders = $order->cart->where('vendor_id', auth()->user()->id);
                             @endphp
-                            @foreach ($order->cart as $orders)
-                                @if ($orders->cart->product->user_id == auth()->user()->id)
+                            @foreach ($myorders as $orders)
                                     <tr>
                                         <td class="text-center">{{ $i++ }}</td>
                                         <td>
@@ -91,8 +92,9 @@
                                     </tr>
                                     @php
                                         $subtotal += $orders->cart->product->product_price * $orders->cart->quantity;
+                                        $shipping_charge += $orders->cart->product->shipping_charge;
+
                                     @endphp
-                                @endif
                             @endforeach
                             <tr>
                                 <td colspan="4" class="font-weight-semibold text-end">Subtotal</td>
@@ -104,13 +106,13 @@
                             </tr> --}}
                             <tr>
                                 <td colspan="4" class="font-weight-semibold text-end">Shiping Charges</td>
-                                <td class="text-end">${{ $orders->cart->product->shipping_charge }}</td>
+                                <td class="text-end">${{ $shipping_charge }}</td>
                             </tr>
                             <tr class="text-danger">
                                 <td colspan="4" class="font-weight-bold text-danger text-uppercase text-end h4 mb-0">
                                     Total Due </td>
                                 <td class="font-weight-bold text-danger text-end h4 mb-0">
-                                    ${{ $subtotal + $orders->cart->product->shipping_charge }}</td>
+                                    ${{ $subtotal + $shipping_charge }}</td>
                             </tr>
                             {{-- <tr>
                                 <td colspan="5" class="text-end"> <button type="button" class="btn btn-primary"

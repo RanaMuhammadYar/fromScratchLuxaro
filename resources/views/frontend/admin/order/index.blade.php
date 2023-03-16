@@ -27,7 +27,7 @@
                                 <tr>
                                     <td>
                                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                        <strong>{{ $order->user->userDetails->name }}</strong>
+                                        <strong>{{ isset($order->user->userDetails->name) ?  $order->user->userDetails->name :'' }}</strong>
                                     </td>
                                     <td>{{ $order->payment_type }}</td>
                                     <td>{{ $order->payment_status }}</td>

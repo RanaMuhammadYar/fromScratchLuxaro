@@ -1,6 +1,6 @@
-@extends('frontend.vendor.layouts.app')
+@extends('frontend.admin.layouts.app')
 @section('title')
-    <title>All Orders</title>
+    <title>My Orders</title>
 @endsection
 @section('content')
     <div class="row">
@@ -8,7 +8,7 @@
             <!-- Basic Bootstrap Table -->
             <div class="card">
                 <div class="card-header d-flux">
-                    <h5 class="d-inline">All Orders</h5>
+                    <h5 class="d-inline">My Orders</h5>
                 </div>
                 <div class="table text-nowrap">
                     <table class="table">
@@ -39,10 +39,10 @@
                                             <td>{{ $order->payment_type }}</td>
                                             <td>{{ $order->payment_status }}</td>
                                             <td>${{ $shiping += $cart->cart->product->shipping_charge }}</td>
-                                            <td>${{ $total += $cart->cart->quantity * $cart->cart->product->product_price + $cart->cart->product->shipping_charge }}
+                                            <td>${{ $total += $cart->cart->quantity * $cart->cart->product->product_price +$cart->cart->product->shipping_charge }}
                                             </td>
                                             <td>
-                                                <a href="{{ route('vendororder.invoice', $order->id) }}">
+                                                <a href="{{ route('order.myorder.invoice', $order->id) }}">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
                                             </td>

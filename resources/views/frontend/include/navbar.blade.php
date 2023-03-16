@@ -283,6 +283,9 @@
                    @if (Auth::check())
                        @if (Auth::user()->role == 'Vendor')
                            <li><a href="{{ route('vendorDashboard') }}">Vendor Dashboard</a></li>
+                           @elseif (Auth::user()->role == 'Admin')
+                            <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
+                            @else
                        @endif
                    @endif
                     <li><a href="{{ route('charters') }}">charters</a></li>

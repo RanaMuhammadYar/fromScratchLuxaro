@@ -113,13 +113,21 @@
         <li class="menu-item {{ Request::is('order-invoice/*') || Request::is('order-show') ? 'active' : '' }}">
             <a href="{{ route('order.show') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Orders</div>
+                <div data-i18n="Basic">All Orders</div>
             </a>
         </li>
 
+        <li class="menu-item {{ Request::is('my-order-invoice/*') || Request::is('my-order') ? 'active' : '' }}">
+            <a href="{{ route('order.myorder') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">My Orders</div>
+            </a>
+        </li>
+
+
         <li class="menu-item {{Request::is('banner') ? 'active' : '' }}">
             <a href="{{ route('banner.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class=" menu-icon tf-icons bi bi-boxes"></i>
                 <div data-i18n="Basic">Banners</div>
             </a>
         </li>

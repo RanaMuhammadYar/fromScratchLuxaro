@@ -9,15 +9,14 @@
                 <div class="card-body">
                     <h2 class="font-weight-bold text-primary">INVOICE</h2>
                     <div>
-                        <h5 class="mb-1">Hi <strong> {{ isset($order->user->userDetails->name) ? $order->user->userDetails->name :'' }} </strong>,</h5> This is the
-                        receipt for a payment of
-                        <strong>${{ $order->over_all_total }}</strong> (USD) for your works
+                        <h5 class="mb-1">Hi <strong> {{ isset($order->user->userDetails->name)? $order->user->userDetails->name:'' }} </strong></h5>
                     </div>
                     <div class="card-body ps-0 pe-0">
                         <div class="row">
                             <div class="col-sm-6"> <span>Payment No.</span><br><strong>INV23456-234</strong> </div>
                             <div class="col-sm-6 text-end"> <span>Payment Date</span><br><strong>{{ date('d-M-Y h:i a') }}
-                                </strong> </div>
+                                </strong>
+                            </div>
                         </div>
                     </div>
                     @php
@@ -35,7 +34,8 @@
                                     ,
                                     {{ isset($allproduct->product->user->userDetails->city->name) ? $allproduct->product->user->userDetails->city->name : '' }}<br>Postal
                                     Code:
-                                    {{isset($allproduct->product->user->zip_code) ?$allproduct->product->user->zip_code: '' }} <br>{{ isset($allproduct->product->user->email) ? $allproduct->product->user->email : '' }}
+                                    {{ isset($allproduct->product->user->zip_code) ? $allproduct->product->user->zip_code : '' }}
+                                    <br>{{ isset($allproduct->product->user->email) ? $allproduct->product->user->email : '' }}
                                 </address>
                             </div>
                             <div class="col-lg-6 text-end">
@@ -69,29 +69,34 @@
                             @php
                                 $i = 1;
                                 $subtotal = 0;
+                                $shipping_charge = 0;
                             @endphp
                             @foreach ($order->cart as $orders)
-                                <tr>
-                                    <td class="text-center">{{ $i++ }}</td>
-                                    <td>
-                                        <p class="font-weight-semibold mb-1">
-                                            {{ isset($orders->cart->product->product_name) ? $orders->cart->product->product_name : '' }}
-                                        </p>
-                                    </td>
-                                    <td class="text-center">{{ isset($orders->cart->quantity) ? $orders->cart->quantity : '' }}
-                                    </td>
-                                    <td class="text-end">
-                                        ${{ isset($orders->cart->product->product_price) ? $orders->cart->product->product_price : '' }}
-                                    </td>
-                                    <td class="text-end">
-                                        ${{ isset($orders->cart->product->product_price) ? $orders->cart->product->product_price * $orders->cart->quantity : '' }}
-                                    </td>
-                                </tr>
-                                @php
-                                    $subtotal += $orders->cart->product->product_price * $orders->cart->quantity;
-                                @endphp
-                            @endforeach
+                                @if ($orders->vendor_id == auth()->user()->id)
+                                    <tr>
+                                        <td class="text-center">{{ $i++ }}</td>
+                                        <td>
+                                            <p class="font-weight-semibold mb-1">
+                                                {{ isset($orders->cart->product->product_name) ? $orders->cart->product->product_name : '' }}
+                                            </p>
+                                        </td>
+                                        <td class="text-center">
+                                            {{ isset($orders->cart->quantity) ? $orders->cart->quantity : '' }}
+                                        </td>
+                                        <td class="text-end">
+                                            ${{ isset($orders->cart->product->product_price) ? $orders->cart->product->product_price : '' }}
+                                        </td>
+                                        <td class="text-end">
+                                            ${{ isset($orders->cart->product->product_price) ? $orders->cart->product->product_price * $orders->cart->quantity : '' }}
+                                        </td>
+                                    </tr>
+                                    @php
+                                        $subtotal += $orders->cart->product->product_price * $orders->cart->quantity;
+                                        $shipping_charge += $orders->cart->product->shipping_charge;
 
+                                    @endphp
+                                @endif
+                            @endforeach
                             <tr>
                                 <td colspan="4" class="font-weight-semibold text-end">Subtotal</td>
                                 <td class="text-end">${{ $subtotal }}</td>
@@ -102,13 +107,13 @@
                             </tr> --}}
                             <tr>
                                 <td colspan="4" class="font-weight-semibold text-end">Shiping Charges</td>
-                                <td class="text-end">${{ $order->shipping_charge }}</td>
+                                <td class="text-end">${{ $shipping_charge }}</td>
                             </tr>
                             <tr class="text-danger">
                                 <td colspan="4" class="font-weight-bold text-danger text-uppercase text-end h4 mb-0">
                                     Total Due </td>
                                 <td class="font-weight-bold text-danger text-end h4 mb-0">
-                                    ${{ $subtotal + $order->shipping_charge }}</td>
+                                    ${{ $subtotal + $shipping_charge }}</td>
                             </tr>
                             {{-- <tr>
                                 <td colspan="5" class="text-end"> <button type="button" class="btn btn-primary"

@@ -37,19 +37,16 @@ Route::get('product-detail/{id}/{slug}', [ProductMangeCotroller::class, 'product
 Route::get('add-cart', [ProductMangeCotroller::class, 'addtocart'])->name('addtocart');
 Route::get('order-destroy', [ProductMangeCotroller::class, 'orderdestroy'])->name('orderdestroy');
 Route::get('all-local-luxauro', [ProductMangeCotroller::class, 'localluxauro'])->name('localluxauro');
-
-
-
 Route::get('checkout', [CartController::class, 'index'])->name('checkout');
-
 Route::get('destroy-checkout', [CartController::class, 'destroycheckout'])->name('order.destroycheckout');
 Route::post('payment-type', [CartController::class, 'paymenttype'])->name('order.paymenttype');
 Route::get('order-show', [OrderController::class, 'index'])->name('order.show');
+Route::get('my-order', [OrderController::class, 'myorder'])->name('order.myorder');
+Route::get('my-order-invoice/{id}', [OrderController::class, 'myorderinvoice'])->name('order.myorder.invoice');
+
 
 
 Route::get('order-invoice/{id}', [OrderController::class, 'invoice'])->name('order.invoice');
-
-
 Route::get('project/suspended', [GoldevineMageController::class, 'projectsuspended'])->name('project.suspended');
 Route::get('project/active', [GoldevineMageController::class, 'projectactive'])->name('project.active');
 

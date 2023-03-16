@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin\Cart;
 use App\Models\Admin\Order;
 use Illuminate\Http\Request;
+use App\Models\Admin\Product;
 use App\Models\Admin\CartOrder;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,30 @@ class CartController extends Controller
 
     public function paymenttype(Request $request)
     {
+
+        // foreach ($request->cart_id as $cart_id){
+        //     $carts = Cart::find($cart_id);
+        //     session()->put('vendor_id', $carts->product->user_id);
+        //     $firstTime = true;
+        //     if($firstTime)
+        //     {
+        //         echo "first time";
+
+        //         $firstTime = false;
+        //     }else{
+        //         if($carts->product->user_id !== session()->get('vendor_id') ){
+        //             echo "same";
+
+        //         }else{
+        //             echo "not same";
+
+        //         }
+        //     }
+
+        //     // dd($carts->product->user_id);
+        // }
+        // {{ dd(session()->forget('vendor_id')); }}
+
         $order = new Order();
         $order->payment_type = 'Cash On delivory';
         $order->payment_status = 'Pending';
@@ -64,16 +89,15 @@ class CartController extends Controller
         $order->over_all_total = $request->overalltotal;
         $order->user_id = Auth::user()->id;
         $order->save();
-        if($order->save())
-        {
-            foreach($request->cart_id as $cart_id)
-            {
+        if ($order->save()) {
+            foreach ($request->cart_id as $cart_id) {
+                $carts = Cart::find($cart_id);
                 $cartorder = new CartOrder();
                 $cartorder->cart_id = $cart_id;
                 $cartorder->order_id = $order->id;
+                $cartorder->vendor_id = $carts->product->user_id;
                 $cartorder->save();
             }
-
         }
         if ($order->save()) {
             foreach ($request->cart_id as $cart_id) {
