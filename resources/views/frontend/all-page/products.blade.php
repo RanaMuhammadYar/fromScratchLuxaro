@@ -57,7 +57,7 @@
         <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
             <h2 class="m-0">Luxauro Global + National</h2>
             <div class="d-flex form-holder">
-                <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
                 <form class="page-form flex-fill" action="#">
                     <div class="page-form-holder d-flex">
                         <label class="form-control rounded-0">Search Filter</label>

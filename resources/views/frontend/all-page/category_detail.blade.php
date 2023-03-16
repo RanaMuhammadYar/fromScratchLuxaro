@@ -35,7 +35,7 @@
                             </div>
                         </div> --}}
                     </div>
-                    <form class="page-form mx-auto mb-5" action="#">
+                    <!-- <form class="page-form mx-auto mb-5" action="#">
                         <div class="page-form-holder d-flex">
                             <select class="form-control select-control border-0 rounded-0 flex-fill">
                                 <option>All</option>
@@ -48,7 +48,7 @@
                                         class="fa fa-search"></i></button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
                     <div class="Luxaurolicious-slider ">
                         <div class="row mb-3">
 
@@ -128,8 +128,8 @@
                             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                                 <h2 class="m-0">Related items</h2>
                                 <div class="d-flex form-holder">
-                                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
-                                    <form class="page-form flex-fill" action="#">
+                                    <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
+                                    <!-- <form class="page-form flex-fill" action="#">
                                         <div class="page-form-holder d-flex">
                                             <label class="form-control rounded-0">Search Filter</label>
                                             <div class="form-field d-flex flex-fill">
@@ -140,7 +140,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </form>
+                                    </form> -->
                                 </div>
                             </div>
                             <div class="slider Luxauro-fresh-slider product-detail-merchant">
@@ -193,8 +193,8 @@
                             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                                 <h2 class="m-0">You may also like</h2>
                                 <div class="d-flex form-holder">
-                                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
-                                    <form class="page-form flex-fill" action="#">
+                                    <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
+                                    <!-- <form class="page-form flex-fill" action="#">
                                         <div class="page-form-holder d-flex">
                                             <label class="form-control rounded-0">Search Filter</label>
                                             <div class="form-field d-flex flex-fill">
@@ -205,7 +205,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </form>
+                                    </form> -->
                                 </div>
                             </div>
                             <div class="slider Luxauro-fresh-slider product-detail-merchant">
