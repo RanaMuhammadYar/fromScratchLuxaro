@@ -1,5 +1,5 @@
        @foreach ($products as $product)
-       <div class="slick-slide slick-current slick-active" style="width: 225px;" data-slick-index="0" aria-hidden="false" tabindex="0">
+       <div class="slick-slide slick-current slick-active" style="width: 225px;margin: 0 12px;" data-slick-index="0" aria-hidden="false" tabindex="0">
            <div class="product-item">
                <a href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
                    <div class="img-holder">
