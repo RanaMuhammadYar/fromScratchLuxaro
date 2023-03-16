@@ -1,6 +1,6 @@
 @extends('frontend.vendor.layouts.app')
 @section('title')
-    <title>Vendor Dashboard</title>
+    <title>Vendor Products</title>
 @endsection
 
 @section('content')

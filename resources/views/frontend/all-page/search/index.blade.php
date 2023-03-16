@@ -1,9 +1,11 @@
 @extends('frontend.layouts.app')
 @section('title')
-    <title>Home</title>
+    <title>
+        Product Search
+    </title>
 @endsection
 @section('content')
-    <div class="inner-content">
+    <div class="inner-content mt-5 pt-3">
         <div class="product-page-section">
             <div class="col-12 col-md-10 mx-auto">
                 <div class="product-section mb-5 pb-lg-3">
@@ -11,15 +13,14 @@
                         <div class="d-md-flex justify-content-between align-items-center flex-wrap mb-3">
                             <div class="mb-3 mb-md-0">
                                 <ol class="breadcrumb mb-1">
-                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                    @foreach ($products as $product)
-                                        <li class="breadcrumb-item active" aria-current="page">
-                                            {{ $product->category->title }} </li>
-                                    @break
-                                @endforeach
-                            </ol>
-                            <h2>
-                                {{-- Search results - "[Search terms]" --}}
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home </a></li>
+                                        / Search results - ( {{ $products->count() }} )
+                                    <li class="breadcrumb-item active" aria-current="page">
+
+                                </ol>
+                            </div>
+
+                            {{-- Search results - "[Search terms]" --}}
                         </div>
                         {{-- <div class="mb-3 mb-md-0">
                             <h2 style="font-size: 20px;">Search results - #### </h2>
@@ -35,20 +36,21 @@
                             </div>
                         </div> --}}
                     </div>
-                    <!-- <form class="page-form mx-auto mb-5" action="#">
-                        <div class="page-form-holder d-flex">
-                            <select class="form-control select-control border-0 rounded-0 flex-fill">
+                    {{-- <form class="page-form mx-auto mb-5" action="{{ route('productsearch') }}" method="post">
+                        @csrf
+                        <div class="page-form-holder d-flex"> --}}
+                            {{-- <select class="form-control select-control border-0 rounded-0 flex-fill">
                                 <option>All</option>
                                 <option>All</option>
                                 <option>All</option>
-                            </select>
-                            <div class="form-field d-flex flex-fill">
-                                <input type="search" placeholder="Search..." class="border-0 bg-transparent flex-fill">
+                            </select> --}}
+                            {{-- <div class="form-field d-flex flex-fill">
+                                <input type="search" placeholder="Search..." name="search" class="border-0 bg-transparent flex-fill">
                                 <button type="submit" class="bg-transparent border-0 flex-fill"><i
                                         class="fa fa-search"></i></button>
                             </div>
                         </div>
-                    </form> -->
+                    </form> --}}
                     <div class="Luxaurolicious-slider ">
                         <div class="row mb-3">
 
@@ -59,8 +61,7 @@
                                             href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
                                             <div class="img-holder">
                                                 <img src="{{ $product->image }}"
-                                                    onerror="this.src'{{ asset('images/default.png') }}'"
-                                                    class="img-fluid">
+                                                    onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
                                             </div>
                                         </a>
                                         <div class="txt-holder">
@@ -95,6 +96,9 @@
                             @endforeach
                         </div>
                     </div>
+                    <div class="d-flex justify-content-center mt-2">
+                        {!! $products->appends(Request::all())->links() !!}
+                    </div>
                     {{-- <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
                                 <li class="page-item">
@@ -114,11 +118,13 @@
                                 </li>
                             </ul>
                         </nav> --}}
-                    <div class=" mb-4">
+                    {{-- <div class=" mb-4">
                         <div class="container-fluid p-5">
                             <div class="col-md-10 mx-auto">
                                 <div class="">
-                                    <img src="{{ isset($banner->image) ?  $banner->image : '' }}" onerror="this.src='{{ asset('images/default.png') }}'" alt="" width="100%">
+                                    <img src="{{ isset($banner->image) ? $banner->image : '' }}"
+                                        onerror="this.src='{{ asset('images/default.png') }}'" alt=""
+                                        width="100%">
                                 </div>
                             </div>
                         </div>
@@ -128,8 +134,8 @@
                             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                                 <h2 class="m-0">Related items</h2>
                                 <div class="d-flex form-holder">
-                                    <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
-                                    <!-- <form class="page-form flex-fill" action="#">
+                                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                                    <form class="page-form flex-fill" action="#">
                                         <div class="page-form-holder d-flex">
                                             <label class="form-control rounded-0">Search Filter</label>
                                             <div class="form-field d-flex flex-fill">
@@ -140,7 +146,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </form> -->
+                                    </form>
                                 </div>
                             </div>
                             <div class="slider Luxauro-fresh-slider product-detail-merchant">
@@ -193,8 +199,8 @@
                             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                                 <h2 class="m-0">You may also like</h2>
                                 <div class="d-flex form-holder">
-                                    <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
-                                    <!-- <form class="page-form flex-fill" action="#">
+                                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                                    <form class="page-form flex-fill" action="#">
                                         <div class="page-form-holder d-flex">
                                             <label class="form-control rounded-0">Search Filter</label>
                                             <div class="form-field d-flex flex-fill">
@@ -205,14 +211,15 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </form> -->
+                                    </form>
                                 </div>
                             </div>
                             <div class="slider Luxauro-fresh-slider product-detail-merchant">
                                 @foreach ($relatedProducts as $relatedProduct)
                                     <div>
                                         <div class="product-item">
-                                            <a href="{{ route('productDetails', ['id' => $relatedProduct->id, 'slug' => Str::slug($relatedProduct->product_name)]) }}">
+                                            <a
+                                                href="{{ route('productDetails', ['id' => $relatedProduct->id, 'slug' => Str::slug($relatedProduct->product_name)]) }}">
                                                 <div class="img-holder">
                                                     <img src="{{ $relatedProduct->image }}"
                                                         onerror="this.src'{{ asset('images/default.png') }}'"
@@ -226,14 +233,14 @@
                                                             style="color:black;">
                                                             <strong
                                                                 class="title">{{ $relatedProduct->product_name }}</strong>
-                                                            </a>
-                                                            <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                            </ul>
+                                                        </a>
+                                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
+                                                            <li class="me-1"><i class="fa fa-star"></i></li>
+                                                            <li class="me-1"><i class="fa fa-star"></i></li>
+                                                            <li class="me-1"><i class="fa fa-star"></i></li>
+                                                            <li class="me-1"><i class="fa fa-star"></i></li>
+                                                            <li class="me-1"><i class="fa fa-star"></i></li>
+                                                        </ul>
                                                     </div>
                                                     <i class="fa fa-globe fa-1x mt-2"></i>
                                                 </div>
@@ -255,17 +262,19 @@
                         <div class="container-fluid p-5">
                             <div class="col-md-10 mx-auto">
                                 <div class="merchant-banner-text">
-                                    <img src="{{ isset($banner->image) ?  $banner->image : '' }}" onerror="this.src='{{ asset('images/default.png') }}'" alt="" width="100%">
+                                    <img src="{{ isset($banner->image) ? $banner->image : '' }}"
+                                        onerror="this.src='{{ asset('images/default.png') }}'" alt=""
+                                        width="100%">
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
     <div class="street-img">
         <img src="{{ asset('images/img1.png') }}" class="img-fluid">
     </div>
-</div>
+    </div>
 @endsection
