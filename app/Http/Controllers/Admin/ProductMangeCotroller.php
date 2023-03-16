@@ -124,4 +124,11 @@ class ProductMangeCotroller extends Controller
             return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total, 'count' => $count]);
         }
     }
+
+    public function localluxauro(Request $request)
+    {
+       $products = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'desc')->get();
+       $relatedProducts = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->get();
+        return view('frontend.all-page.localproductdetail', compact('products', 'relatedProducts'));
+    }
 }

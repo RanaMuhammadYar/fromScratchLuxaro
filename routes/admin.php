@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\ProductMangeCotroller;
 use App\Http\Controllers\Admin\ShippingTypeCotroller;
 use App\Http\Controllers\Admin\DelivoryOptionCotroller;
 use App\Http\Controllers\Admin\BusinessSettingsController;
+use App\Http\Controllers\Admin\Goldevine\GoldevineMageController;
+use App\Http\Controllers\Admin\Goldevine\ProjectResourceController;
 
 Route::get('admin-dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -22,6 +24,8 @@ Route::resource('delivory-option', DelivoryOptionCotroller::class);
 Route::resource('shipping-type', ShippingTypeCotroller::class);
 Route::resource('product-type', ProductTypeCotroller::class);
 Route::resource('product', ProductCotroller::class);
+Route::resource('admin-goudevine-product', ProjectResourceController::class);
+
 
 Route::get('product-active', [ProductMangeCotroller::class, 'suspended'])->name('product.suspended');
 Route::get('product-suspended', [ProductMangeCotroller::class, 'active'])->name('product.active');
@@ -31,6 +35,9 @@ Route::get('productsabc/{slug}', [ProductMangeCotroller::class, 'product']);
 Route::get('product-detail/{id}/{slug}', [ProductMangeCotroller::class, 'productDetails'])->name('productDetails');
 Route::get('add-cart', [ProductMangeCotroller::class, 'addtocart'])->name('addtocart');
 Route::get('order-destroy', [ProductMangeCotroller::class, 'orderdestroy'])->name('orderdestroy');
+Route::get('all-local-luxauro', [ProductMangeCotroller::class, 'localluxauro'])->name('localluxauro');
+
+
 
 Route::get('checkout', [CartController::class, 'index'])->name('checkout');
 
@@ -41,10 +48,11 @@ Route::get('order-show', [OrderController::class, 'index'])->name('order.show');
 
 Route::get('order-invoice/{id}', [OrderController::class, 'invoice'])->name('order.invoice');
 
-// Route::get('/product-detail',function(){
-//     return view('frontend.all-page.product_detail');
-// });
 
+Route::get('project/suspended', [GoldevineMageController::class, 'projectsuspended'])->name('project.suspended');
+Route::get('project/active', [GoldevineMageController::class, 'projectactive'])->name('project.active');
+
+Route::get('project/detail/{id}/{slug}', [GoldevineMageController::class, 'projectdetail'])->name('project.detail');
 
 // website setting
 Route::group(['prefix' => 'website'], function () {

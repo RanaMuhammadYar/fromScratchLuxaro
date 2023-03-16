@@ -14,7 +14,7 @@
             <a class="logo-gold" href="{{ route('goldEvine')}}"><img  src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
             <a class="logo" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
             <a class="logo-gold" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
-            @endif    
+            @endif
         </div>
         </div>
     </div>
@@ -135,7 +135,7 @@
                                     </span>
                                 </i>
                             </a>
-                            <div class="dropdown-menu p-4 border-top" aria-labelledby="dropdownMenuButton3">
+                            <div class="dropdown-menu p-4 border-top" aria-labelledby="dropdownMenuButton3" style="color: rgb(213, 207, 207)" >
                                 <div class="luxauro-cart mb-2">
                                     <h3 class="border-bottom d-inline-block mb-1">Luxauro</h3>
                                     <div class="catdata">
@@ -169,7 +169,6 @@
                                         @endphp
                                         @foreach ($cartorders as $cartorder)
                                             <div class="row destroy{{ $cartorder->id }}">
-
                                                 <div class="col-5 px-1">
                                                     <span class="mx-2"><i
                                                             class="fa fa-shopping-cart"aria-hidden="true"></i></span><span>

@@ -62,15 +62,17 @@
                     <div class="page-form-holder d-flex">
                         <label class="form-control rounded-0">Search Filter</label>
                         <div class="form-field d-flex flex-fill">
-                            <select class="flex-fill border-0 bg-transparent">
-                                <option value="price">price</option>
-                            </select>
+                        <select class="flex-fill border-0 bg-transparent" id="category-filter">
+                                <option>OrderBy</option>
+                                <option value="desc">(Z-A)</option>
+                                <option value="asc">(A-Z)</option>
+                         </select>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="row text-center">
+        <div class="row text-center" id="append-category">
 
             @foreach ($categories as $category)
             <div class="col-6 col-md-4 col-lg-2 mb-4">
@@ -154,6 +156,12 @@
                             <strong class="title">$24.23</strong>
                             <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
                         </div>
+                        <i class="fa fa-globe fa-1x mt-2"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <strong class="title">$24.23</strong>
+                        <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
+                                class="fa fa-shopping-basket"></i></a>
                     </div>
                 </div>
             </div>
@@ -565,12 +573,12 @@
                             <li class="me-1"><i class="fa fa-star"></i></li>
                         </ul>
                     </div>
-                    <i class="fa fa-globe fa-1x mt-2"></i>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <strong class="title">${{ $product->product_price }}</strong>
                     <button class="btn bg-dark text-white py-1 px-2" href="" onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i class="fa fa-shopping-basket"></i>
                     </button>
+                    <input type="hidden" name="" value="1" class="addOrRemove">
                 </div>
             </div>
         </div>

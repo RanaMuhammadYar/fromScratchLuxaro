@@ -70,8 +70,9 @@
                             <div class="quantity-btn d-flex align-items-center mb-3">
                                 <div class="product-details-quantity border rounded d-inline-block me-3">
                                     <span class="input-number-decrement" onclick="decrement()">–</span><input
-                                        class="input-number addOrRemove" type="text" value="1" min="1" max="10"
-                                        id=""><span class="input-number-increment" onclick="increment()">+</span>
+                                        class="input-number addOrRemove" type="text" value="1" min="1"
+                                        max="10" id=""><span class="input-number-increment"
+                                        onclick="increment()">+</span>
                                 </div>
                                 <div class="">
                                     <button class="btn btn-primary"
@@ -92,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="merchant-name">
-                                <p>Merchant: [<u>{{ $product->user->email }}</u>]</p>
+                                <p>Merchant: <u>{{ $product->user->userDetails->name }}</u></p>
                             </div>
                             <div class="description-detail d-flex ">
                                 <div class="description-heading">
@@ -132,14 +133,18 @@
                     @foreach ($productsasc as $productasc)
                         <div>
                             <div class="product-item">
-                                <div class="img-holder">
-                                    <img src="{{ $productasc->image }}"
-                                        onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
-                                </div>
+                                <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}">
+                                    <div class="img-holder">
+                                        <img src="{{ $productasc->image }}"
+                                            onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                                    </div>
+                                </a>
                                 <div class="txt-holder">
                                     <div class="d-flex justify-content-between mb-3">
                                         <div>
-                                            <strong class="title">{{ $productasc->product_name }}</strong>
+                                            <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}" style="color: black">
+                                                <strong class="title">{{ $productasc->product_name }}</strong>
+                                            </a>
                                             <ul class="list-unstyled m-0 p-0 d-flex stars">
                                                 <li class="me-1"><i class="fa fa-star"></i></li>
                                                 <li class="me-1"><i class="fa fa-star"></i></li>
@@ -151,9 +156,11 @@
                                         <i class="fa fa-globe fa-1x mt-2"></i>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <strong class="title">${{ $productasc->product_price }} </strong>
-                                        <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                                class="fa fa-shopping-basket"></i></a>
+                                        <strong class="title">${{ $productasc->product_price }}</strong>
+                                        <button class="btn bg-dark text-white py-1 px-2"
+                                            onclick="addToCart('{{ $productasc->id }}', '{{ $productasc->product_name }}', '{{ $productasc->product_price }}')"><i
+                                                class="fa fa-shopping-basket"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -162,109 +169,6 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="charter-specs-section mb-3 mb-md-5">
-            <div class="container">
-                <div class="col-md-10 mx-auto">
-                    <div class="row gx-5">
-                        <div class="col-md-7">
-                            <div class="row">
-                                <div class="col-md-7 mb-3 mb-md-4">
-                                    <img src="images/charter-img.png" class="img-fluid w-100">
-                                </div>
-                                <div class="col-md-5 mb-3 mb-md-4">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                        It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged</p>
-                                </div>
-                                <div class="col-md-5 mb-3 mb-md-4">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                        It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged</p>
-                                </div>
-                                <div class="col-md-7 mb-3 mb-md-4">
-                                    <img src="images/charter-img.png" class="img-fluid w-100">
-                                </div>
-                                <div class="col-md-7 mb-3 mb-md-4">
-                                    <img src="images/charter-img.png" class="img-fluid w-100">
-                                </div>
-                                <div class="col-md-5 mb-3 mb-md-4">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                        It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <h3 class="mb-4">Specifications</h3>
-                            <h4 class="mb-3">General</h4>
-                            <table class="w-100 mb-5">
-                                <tr>
-                                    <td>Model Series Name</td>
-                                    <td>My Buddy D</td>
-                                </tr>
-                                <tr>
-                                    <td>Model Number</td>
-                                    <td>POR 1376</td>
-                                </tr>
-                                <tr>
-                                    <td>Primary Meterial</td>
-                                    <td>Wood</td>
-                                </tr>
-                                <tr>
-                                    <td>Primary Meterial SubType</td>
-                                    <td>Partical Board</td>
-                                </tr>
-                                <tr>
-                                    <td>Delivery Condition</td>
-                                    <td>DIY(Do-it-Yourself)</td>
-                                </tr>
-                                <tr>
-                                    <td>Suitable For</td>
-                                    <td>Study & Home Office</td>
-                                </tr>
-                                <tr>
-                                    <td>Compatible Laptop Size</td>
-                                    <td>17 cm</td>
-                                </tr>
-                                <tr>
-                                    <td>Foldable</td>
-                                    <td>Yes</td>
-                                </tr>
-                                <tr>
-                                    <td>Adjustable Height</td>
-                                    <td>Yes</td>
-                                </tr>
-                            </table>
-                            <h4 class="mb-3">Demensions</h4>
-                            <table class="w-100">
-                                <tr>
-                                    <td>Width</td>
-                                    <td>60 cm</td>
-                                </tr>
-                                <tr>
-                                    <td>Height</td>
-                                    <td>80 cm</td>
-                                </tr>
-                                <tr>
-                                    <td>Depth</td>
-                                    <td>40 cm</td>
-                                </tr>
-                                <tr>
-                                    <td>Weight</td>
-                                    <td>4.98 kg</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
         <div class="product-section mb-5 pb-lg-3 mt-3">
             <div class="container">
                 <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
@@ -286,17 +190,18 @@
                     </div>
                 </div>
                 <div class="slider Charters-slider">
-                    @foreach ($mayyoulike as $products)
+                    {{-- @foreach ($mayyoulike as $products) --}}
+                    @for ($i = 0; $i < 10; $i++)
                         <div>
                             <div class="product-item">
                                 <div class="img-holder">
-                                    <img src="{{ $products->image }}"
-                                        onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                                    <img src="Test" onerror="this.src='{{ asset('images/default.png') }}'"
+                                        class="img-fluid">
                                 </div>
                                 <div class="txt-holder">
                                     <div class="d-flex justify-content-between mb-3">
                                         <div>
-                                            <strong class="title">{{ $products->product_name }}</strong>
+                                            <strong class="title">Test</strong>
                                             <ul class="list-unstyled m-0 p-0 d-flex stars">
                                                 <li class="me-1"><i class="fa fa-star"></i></li>
                                                 <li class="me-1"><i class="fa fa-star"></i></li>
@@ -308,14 +213,16 @@
                                         <i class="fa fa-globe fa-1x mt-2"></i>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <strong class="title">${{ $products->product_price }}</strong>
-                                        <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                                class="fa fa-shopping-basket"></i></a>
+                                        <strong class="title">$100</strong>
+                                        <button class="btn bg-dark text-white py-1 px-2"><i
+                                                class="fa fa-shopping-basket"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @endfor
+                    {{-- @endforeach --}}
                 </div>
             </div>
         </div>
@@ -344,14 +251,18 @@
                     @foreach ($productsdesc as $productsdescs)
                         <div>
                             <div class="product-item">
-                                <div class="img-holder">
-                                    <img src="{{ $productsdescs->image }}"
+                                <a href="{{ route('productDetails', ['id' => $productsdescs->id, 'slug' => Str::slug($productsdescs->product_name)]) }}">
+                                    <div class="img-holder">
+                                        <img src="{{ $productsdescs->image }}"
                                         onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
-                                </div>
+                                    </div>
+                                </a>
                                 <div class="txt-holder">
                                     <div class="d-flex justify-content-between mb-3">
                                         <div>
-                                            <strong class="title">{{ $productsdescs->product_name }}</strong>
+                                            <a href="{{ route('productDetails', ['id' => $productsdescs->id, 'slug' => Str::slug($productsdescs->product_name)]) }}" style="color: black">
+                                                <strong class="title">{{ $productsdescs->product_name }}</strong>
+                                            </a>
                                             <ul class="list-unstyled m-0 p-0 d-flex stars">
                                                 <li class="me-1"><i class="fa fa-star"></i></li>
                                                 <li class="me-1"><i class="fa fa-star"></i></li>
@@ -364,8 +275,10 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <strong class="title">${{ $productsdescs->product_price }}</strong>
-                                        <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                                class="fa fa-shopping-basket"></i></a>
+                                        <button class="btn bg-dark text-white py-1 px-2"
+                                            onclick="addToCart('{{ $productsdescs->id }}', '{{ $productsdescs->product_name }}', '{{ $productsdescs->product_price }}')"><i
+                                                class="fa fa-shopping-basket"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -375,225 +288,6 @@
 
                 </div>
             </div>
-            {{-- <div class="reviews-ratings mb-3 mb-md-5">
-            <div class="container">
-                <h2 class="mb-4">Reviews & Ratings</h2>
-                <img src="images/review-img.png" class="img-fluid">
-            </div>
-        </div> --}}
-            {{-- <div class="product-section mb-5 pb-lg-3">
-            <div class="container">
-                <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
-                    <h2 class="m-0">You may also like</h2>
-                    <div class="d-flex form-holder">
-                        <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
-                        <form class="page-form flex-fill" action="#">
-                            <div class="page-form-holder d-flex">
-                                <label class="form-control rounded-0">Search Filter</label>
-                                <div class="form-field d-flex flex-fill">
-                                    <select class="flex-fill border-0 bg-transparent">
-                                        <option>All</option>
-                                        <option>All</option>
-                                        <option>All</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="slider Charters-slider">
-                    <div>
-                        <div class="product-item">
-                            <div class="img-holder">
-                                <img src="images/product-img.png" class="img-fluid">
-                            </div>
-                            <div class="txt-holder">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <div>
-                                        <strong class="title">Lorem Ipsum</strong>
-                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
-                                    <i class="fa fa-globe fa-1x mt-2"></i>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="title">$24.23</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                            class="fa fa-shopping-basket"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="img-holder">
-                                <img src="images/product-img.png" class="img-fluid">
-                            </div>
-                            <div class="txt-holder">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <div>
-                                        <strong class="title">Lorem Ipsum</strong>
-                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
-                                    <i class="fa fa-globe fa-1x mt-2"></i>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="title">$24.23</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                            class="fa fa-shopping-basket"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="img-holder">
-                                <img src="images/product-img.png" class="img-fluid">
-                            </div>
-                            <div class="txt-holder">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <div>
-                                        <strong class="title">Lorem Ipsum</strong>
-                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
-                                    <i class="fa fa-globe fa-1x mt-2"></i>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="title">$24.23</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                            class="fa fa-shopping-basket"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="img-holder">
-                                <img src="images/product-img.png" class="img-fluid">
-                            </div>
-                            <div class="txt-holder">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <div>
-                                        <strong class="title">Lorem Ipsum</strong>
-                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
-                                    <i class="fa fa-globe fa-1x mt-2"></i>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="title">$24.23</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                            class="fa fa-shopping-basket"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="img-holder">
-                                <img src="images/product-img.png" class="img-fluid">
-                            </div>
-                            <div class="txt-holder">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <div>
-                                        <strong class="title">Lorem Ipsum</strong>
-                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
-                                    <i class="fa fa-globe fa-1x mt-2"></i>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="title">$24.23</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                            class="fa fa-shopping-basket"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="img-holder">
-                                <img src="images/product-img.png" class="img-fluid">
-                            </div>
-                            <div class="txt-holder">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <div>
-                                        <strong class="title">Lorem Ipsum</strong>
-                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
-                                    <i class="fa fa-globe fa-1x mt-2"></i>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="title">$24.23</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                            class="fa fa-shopping-basket"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="img-holder">
-                                <img src="images/product-img.png" class="img-fluid">
-                            </div>
-                            <div class="txt-holder">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <div>
-                                        <strong class="title">Lorem Ipsum</strong>
-                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
-                                    <i class="fa fa-globe fa-1x mt-2"></i>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="title">$24.23</strong>
-                                    <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                            class="fa fa-shopping-basket"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
 
         </div>
         <script>

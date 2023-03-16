@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin\Category;
-use App\Models\Admin\Product as AdminProduct;
 use App\Models\City;
-use App\Models\Country;
-use App\Models\State;
 use App\Models\User;
+use App\Models\State;
+use App\Models\Country;
 use Illuminate\Http\Request;
+use App\Models\Admin\Category;
+use App\Models\Admin\Goldevine\Project;
+use App\Models\Admin\Product as AdminProduct;
+use App\Models\Charter;
 
 class UserController extends Controller
 {
@@ -28,11 +30,20 @@ class UserController extends Controller
               $query->where('product_name', 'like', '%'.$search.'%');
           }])
           ->get();
-        }            
-        return view('frontend.all-page.products', compact('categories'));
+        }   
+        $locallaxaro = AdminProduct::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status','Active')->orderby('id','desc')->limit(15)->get();
+        $goldevines = Project::where('status','Active')->orderBy('id','desc')->limit(15)->get();
+        $luxauro_charters = Charter::orderBy('id','desc')->limit(15)->get();     
+        return view('frontend.all-page.products', compact('categories','goldevines','locallaxaro','luxauro_charters'));
     }
     public function products(Request $request)
     {
+        if(isset($request->category_filter))
+        {
+            $categories = Category::orderBy('title',$request->category_filter)->get();
+            $html = view('frontend.all-page.append_category', ['categories' => $categories])->render();
+            return $html;      
+        }
         $cat_id = substr($request->price_filter, -1);
         $orderby = substr($request->price_filter, 0, -1);
         $products = AdminProduct::where('category_id',$cat_id)
@@ -104,10 +115,10 @@ class UserController extends Controller
                  return  $query->first();
         }, 'userEducations', 'userCertificates', 'userProfessions'])
             ->where('id', $userId)->first();
-          
+
         return back()->with(['user' =>  $user]);
     }
-  
+
 
 
     public function merchantSuitManagement()
@@ -137,7 +148,11 @@ class UserController extends Controller
     }
     public function goldEvine()
     {
-        return view('frontend.goldevine_projects');
+        $allprojects = Project::where('status', 'Active')->get();
+        $newprojects = Project::where('status', 'Active')->orderBy('id', 'desc')->limit(15)->get();
+        $trandingProjects = Project::where('status', 'Active')->orderBy('id', 'asc')->get();
+        // return dd($trandingProjects);
+        return view('frontend.goldevine.index',compact('allprojects','newprojects','trandingProjects'));
     }
     public function myProfile()
     {

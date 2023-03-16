@@ -184,9 +184,9 @@ if (!function_exists('format_price')) {
         } else {
             $fomated_price = number_format($price, get_setting('no_of_decimals'), ',', '.');
         }
-      
-      
-              // Minimize the price 
+
+
+              // Minimize the price
         if($isMinimize){
             $temp =number_format( $price/1000000000,get_setting('no_of_decimals'),".","");
 
@@ -235,7 +235,7 @@ if (!function_exists('discount_in_percentage')) {
 //Shows Price on page based on carts
 if (!function_exists('cart_product_price')) {
     function cart_product_price($cart_product, $product, $formatted = true, $tax = true)
-    {   
+    {
         if($product->auction_product == 0){
             $str = '';
             if ($cart_product['variation'] != null) {
@@ -244,9 +244,9 @@ if (!function_exists('cart_product_price')) {
             $price = 0;
             $product_stock = $product->stocks->where('variant', $str)->first();
             if($product_stock) {
-                $price = $product_stock->price; 
+                $price = $product_stock->price;
             }
-            
+
 
             //discount calculation
             $discount_applicable = false;
@@ -271,8 +271,8 @@ if (!function_exists('cart_product_price')) {
         else{
             $price = $product->bids->max('amount');
         }
-            
-        //calculation of taxes 
+
+        //calculation of taxes
         if($tax){
             $taxAmount = 0;
             foreach ($product->taxes as $product_tax) {
@@ -282,12 +282,12 @@ if (!function_exists('cart_product_price')) {
                 elseif($product_tax->tax_type == 'amount'){
                     $taxAmount += $product_tax->tax;
                 }
-            } 
+            }
             $price += $taxAmount;
         }
 
-        if ($formatted) { 
-            return format_price(convert_price($price)); 
+        if ($formatted) {
+            return format_price(convert_price($price));
         } else {
             return $price;
         }
@@ -297,13 +297,13 @@ if (!function_exists('cart_product_price')) {
 
 if (!function_exists('cart_product_tax')) {
     function cart_product_tax($cart_product, $product, $formatted = true)
-    {       
+    {
             $str = '';
             if ($cart_product['variation'] != null) {
                 $str = $cart_product['variation'];
-            } 
+            }
             $product_stock = $product->stocks->where('variant', $str)->first();
-            $price = $product_stock->price; 
+            $price = $product_stock->price;
 
             //discount calculation
             $discount_applicable = false;
@@ -325,7 +325,7 @@ if (!function_exists('cart_product_tax')) {
                 }
             }
 
-            //calculation of taxes 
+            //calculation of taxes
             $tax = 0;
             foreach ($product->taxes as $product_tax) {
                 if($product_tax->tax_type == 'percent'){
@@ -335,9 +335,9 @@ if (!function_exists('cart_product_tax')) {
                     $tax += $product_tax->tax;
                 }
             }
- 
-            if ($formatted) { 
-                return format_price(convert_price($tax)); 
+
+            if ($formatted) {
+                return format_price(convert_price($tax));
             } else {
                 return $tax;
             }
@@ -347,18 +347,18 @@ if (!function_exists('cart_product_tax')) {
 
 if (!function_exists('cart_product_discount')) {
     function cart_product_discount($cart_product, $product, $formatted = false)
-    {       
+    {
             $str = '';
             if ($cart_product['variation'] != null) {
                 $str = $cart_product['variation'];
-            } 
+            }
             $product_stock = $product->stocks->where('variant', $str)->first();
-            $price = $product_stock->price; 
+            $price = $product_stock->price;
 
             //discount calculation
             $discount_applicable = false;
             $discount = 0;
-            
+
             if ($product->discount_start_date == null) {
                 $discount_applicable = true;
             }
@@ -375,33 +375,33 @@ if (!function_exists('cart_product_discount')) {
                     $discount = $product->discount;
                 }
             }
- 
-            if ($formatted) { 
-                return format_price(convert_price($discount)); 
+
+            if ($formatted) {
+                return format_price(convert_price($discount));
             } else {
                 return $discount;
             }
 
     }
-} 
+}
 
 // all discount
 if (!function_exists('carts_product_discount')) {
     function carts_product_discount($cart_products, $formatted = false)
-    {        
+    {
             $discount = 0;
             foreach ($cart_products as $key => $cart_product) {
                 $str = '';
                 $product = \App\Models\Product::find($cart_product['product_id']);
                 if ($cart_product['variation'] != null) {
                     $str = $cart_product['variation'];
-                } 
+                }
                 $product_stock = $product->stocks->where('variant', $str)->first();
-                $price = $product_stock->price; 
+                $price = $product_stock->price;
 
                 //discount calculation
                 $discount_applicable = false;
-                
+
                 if ($product->discount_start_date == null) {
                     $discount_applicable = true;
                 }
@@ -420,18 +420,18 @@ if (!function_exists('carts_product_discount')) {
                 }
             }
 
-            if ($formatted) { 
-                return format_price(convert_price($discount)); 
+            if ($formatted) {
+                return format_price(convert_price($discount));
             } else {
                 return $discount;
             }
 
     }
-} 
+}
 
 if (!function_exists('carts_coupon_discount')) {
     function carts_coupon_discount($code, $formatted = false)
-    {        
+    {
         $coupon = Coupon::where('code', $code)->first();
         $coupon_discount = 0;
         if ($coupon != null) {
@@ -447,7 +447,7 @@ if (!function_exists('carts_coupon_discount')) {
                         $subtotal = 0;
                         $tax = 0;
                         $shipping = 0;
-                        foreach ($carts as $key => $cartItem) { 
+                        foreach ($carts as $key => $cartItem) {
                             $product = Product::find($cartItem['product_id']);
                             $subtotal += cart_product_price($cartItem, $product, false, false) * $cartItem['quantity'];
                             $tax += cart_product_tax($cartItem, $product,false) * $cartItem['quantity'];
@@ -466,8 +466,8 @@ if (!function_exists('carts_coupon_discount')) {
                             }
 
                         }
-                    } elseif ($coupon->type == 'product_base') { 
-                        foreach ($carts as $key => $cartItem) { 
+                    } elseif ($coupon->type == 'product_base') {
+                        foreach ($carts as $key => $cartItem) {
                             $product = Product::find($cartItem['product_id']);
                             foreach ($coupon_details as $key => $coupon_detail) {
                                 if ($coupon_detail->product_id == $cartItem['product_id']) {
@@ -480,16 +480,16 @@ if (!function_exists('carts_coupon_discount')) {
                             }
                         }
                     }
-                
-                } 
-            } 
-            
+
+                }
+            }
+
             if($coupon_discount > 0){
                 Cart::where('user_id', Auth::user()->id)
                     ->where('owner_id', $coupon->user_id)
                     ->update(
                     [
-                        'discount' => $coupon_discount / count($carts), 
+                        'discount' => $coupon_discount / count($carts),
                     ]
                 );
             }else{
@@ -498,17 +498,17 @@ if (!function_exists('carts_coupon_discount')) {
                     ->update(
                     [
                         'discount' => 0,
-                        'coupon_code' => null, 
+                        'coupon_code' => null,
                     ]
-                ); 
+                );
             }
-        } 
-        
-        if ($formatted) { 
-            return format_price(convert_price($coupon_discount)); 
+        }
+
+        if ($formatted) {
+            return format_price(convert_price($coupon_discount));
         } else {
             return $coupon_discount;
-        } 
+        }
     }
 }
 
@@ -808,7 +808,7 @@ function getShippingCost($carts, $index, $carrier = '')
     $admin_product_total_price = 0;
     $seller_product_total_weight = array();
     $seller_product_total_price = array();
-    
+
     $cartItem = $carts[$index];
     $product = Product::find($cartItem['product_id']);
 
@@ -832,7 +832,7 @@ function getShippingCost($carts, $index, $carrier = '')
             $price = 0;
             if (isset($seller_products[$item_product->user_id])) {
                 $product_ids = $seller_products[$item_product->user_id];
-                
+
                 // For carrier wise shipping
                 if($shipping_type == 'carrier_wise_shipping'){
                     $weight += $seller_product_total_weight[$item_product->user_id];
@@ -853,7 +853,7 @@ function getShippingCost($carts, $index, $carrier = '')
             }
         }
     }
-    
+
     if ($shipping_type == 'flat_rate') {
         return get_setting('flat_rate_shipping_cost') / count($carts);
     } elseif ($shipping_type == 'seller_wise_shipping') {
@@ -878,7 +878,7 @@ function getShippingCost($carts, $index, $carrier = '')
         if($carrier == null || $user_zone == 0){
             return 0;
         }
-        
+
         $carrier = Carrier::find($carrier);
         if ($carrier->carrier_ranges->first()) {
             $carrier_billing_type   = $carrier->carrier_ranges->first()->billing_type;
@@ -889,7 +889,7 @@ function getShippingCost($carts, $index, $carrier = '')
                 $itemsWeightOrPrice = $carrier_billing_type == 'weight_based' ? $seller_product_total_weight[$product->user_id] : $seller_product_total_price[$product->user_id];
             }
         }
-        
+
         foreach($carrier->carrier_ranges as $carrier_range){
             if($itemsWeightOrPrice >= $carrier_range->delimiter1 && $itemsWeightOrPrice < $carrier_range->delimiter2){
                 $carrier_price = $carrier_range->carrier_range_prices->where('zone_id',$user_zone)->first()->price;
@@ -1283,7 +1283,7 @@ if (!function_exists('get_url_params')) {
     {
         $query_str = parse_url($url, PHP_URL_QUERY);
         parse_str($query_str, $query_params);
-        
+
         return $query_params[$key] ?? '';
     }
 }
