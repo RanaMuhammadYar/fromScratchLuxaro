@@ -1,15 +1,17 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-    <div class="app-brand demo">
+    <div class="mt-2 d-flex justify-content-around">
+        @if (auth()->user()->status == 'Active')
+      <span class="">Status:</span>  <span class="badge rounded-pill bg-success mx-3">{{ auth()->user()->status }}</span><br>
+        @else
+       <span>Status:</span> <span class="badge rounded-pill bg-danger mx-3">{{ auth()->user()->status }}</span><br>
+        @endif
+    </div>
+        <div class="app-brand demo pt-0 mt-0">
         <a href="{{ route('vendorDashboard') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
             </span>
             <span class="app-brand-text demo menu-text fw-bolder ms-2">{{ auth()->user()->shop_name }}</span>
         </a>
-        @if (auth()->user()->status == 'Active')
-            <span class="badge rounded-pill bg-success mx-3">{{ auth()->user()->status }}</span><br>
-        @else
-            <span class="badge rounded-pill bg-danger mx-3">{{ auth()->user()->status }}</span><br>
-        @endif
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>

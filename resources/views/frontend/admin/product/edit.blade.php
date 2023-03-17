@@ -173,6 +173,19 @@
                                         <span class="text-danger">{{ $errors->first('shipping_charge') }}</span>
                                     @endif
                                 </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Product Multiple
+                                                images </label>
+                                            <input type="file" name="multiple_image[]" class="form-control" multiple>
+                                            @if ($errors->has('multiple_image'))
+                                                <span class="text-danger">{{ $errors->first('multiple_image') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row py-3">
                                     <div class="col-sm-12 text-end">
                                         <a href="{{ route('product.index') }}"

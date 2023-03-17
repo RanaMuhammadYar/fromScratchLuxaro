@@ -84,7 +84,7 @@ class ProjectResourceController extends Controller
     public function edit($id)
     {
         $project = Project::find($id);
-        return view('frontend.admin.goldevine.edit',compact('project'));
+        return view('frontend.admin.goldevine.project.edit',compact('project'));
     }
 
     /**
