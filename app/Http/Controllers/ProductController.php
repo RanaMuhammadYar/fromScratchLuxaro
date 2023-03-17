@@ -49,7 +49,7 @@ class ProductController extends Controller
     public function productsearch(Request $request)
     {
         $search = $request->search;
-        $products = Product::where('status', 'Active')->where('product_name', 'like', '%' . $search . '%')->paginate(2);
+        $products = Product::where('status', 'Active')->where('product_name', 'like', '%' . $search . '%')->paginate(20);
         return view('frontend.all-page.search.index', compact('products'));
     }
 }

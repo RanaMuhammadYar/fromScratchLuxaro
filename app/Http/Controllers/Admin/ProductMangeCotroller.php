@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 
+
 class ProductMangeCotroller extends Controller
 {
     // public function __construct()
@@ -271,4 +272,13 @@ class ProductMangeCotroller extends Controller
         $relatedProducts = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->get();
         return view('frontend.all-page.localproductdetail', compact('products', 'relatedProducts'));
     }
+
+
+    public function allcategory()
+    {
+        $categories = Category::with('products')->get();
+        // dd($categories);
+        return view('frontend.all-page.category.index', compact('categories'));
+    }
+
 }

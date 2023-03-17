@@ -10,6 +10,7 @@ use App\Models\Admin\ShippingType;
 use App\Models\Admin\DelivoryOption;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Product extends Model
 {

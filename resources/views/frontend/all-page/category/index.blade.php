@@ -54,50 +54,57 @@
                     <div class="Luxaurolicious-slider ">
                         <div class="row mb-3">
 
-                            @foreach ($products as $product)
-                                <div class="col-md-2  col-12 my-2">
-                                    <div class="product-item">
-                                        <a
-                                            href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
-                                            <div class="img-holder">
-                                                <img src="{{ $product->image }}"
-                                                    onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                            @foreach ($categories as $category)
+                            @isset($category->product->id)
+                            <div class="col-md-2  col-12 my-2">
+                                <div class="product-item">
+                                    <a
+                                        href="{{ route('productDetails', ['id' => $category->product->id, 'slug' => Str::slug($category->product->product_name)]) }}">
+                                        <div class="img-holder">
+                                            <img src="{{ $category->image }}"
+                                                onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
+                                        </div>
+                                    </a>
+                                    <div class="txt-holder">
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <div>
+                                                <a href="{{ route('productDetails', ['id' => $category->product->id, 'slug' => Str::slug($category->product->product_name)]) }}"
+                                                    style="color: black;">
+                                                    <strong class="title">{{ $$category->product->product_name }}</strong>
+                                                </a>
+                                                <ul class="list-unstyled m-0 p-0 d-flex stars">
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                </ul>
                                             </div>
-                                        </a>
-                                        <div class="txt-holder">
-                                            <div class="d-flex justify-content-between mb-3">
-                                                <div>
-                                                    <a href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}"
-                                                        style="color: black;">
-                                                        <strong class="title">{{ $product->product_name }}</strong>
-                                                    </a>
-                                                    <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <i class="fa fa-globe fa-1x mt-2"></i>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <strong class="title">${{ $product->product_price }}</strong>
-                                                <button class="btn bg-dark text-white py-1 px-2"
-                                                    onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
-                                                        class="fa fa-shopping-basket"></i>
+                                            <i class="fa fa-globe fa-1x mt-2"></i>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            {{-- <strong class="title">${{ $product->product_price }}</strong> --}}
+                                            {{-- <button class="btn bg-dark text-white py-1 px-2"
+                                                onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
+                                                    class="fa fa-shopping-basket"></i>
 
-                                                </button>
-                                                <input type="hidden" name="" value="1" class="addOrRemove">
-                                            </div>
+                                            </button> --}}
+                                            {{-- <input type="hidden" name="" value="1" class="addOrRemove"> --}}
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            @endisset
                             @endforeach
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-2">
-                        {!! $products->appends(Request::all())->links() !!}
+                        @foreach ($categories as $category )
+                        @isset($category->product->id)
+                        {!! $categories->links() !!}
+                        @endisset
+                        @break
+                        @endforeach
                     </div>
                     {{-- <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">

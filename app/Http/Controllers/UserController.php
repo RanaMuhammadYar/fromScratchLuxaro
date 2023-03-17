@@ -30,10 +30,10 @@ class UserController extends Controller
               $query->where('product_name', 'like', '%'.$search.'%');
           }])
           ->get();
-        }   
+        }
         $locallaxaro = AdminProduct::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status','Active')->orderby('id','desc')->limit(15)->get();
         $goldevines = Project::where('status','Active')->orderBy('id','desc')->limit(15)->get();
-        $luxauro_charters = Charter::orderBy('id','desc')->limit(15)->get();     
+        $luxauro_charters = Charter::orderBy('id','desc')->limit(15)->get();
         return view('frontend.all-page.products', compact('categories','goldevines','locallaxaro','luxauro_charters'));
     }
     public function products(Request $request)
@@ -42,7 +42,7 @@ class UserController extends Controller
         {
             $categories = Category::orderBy('title',$request->category_filter)->get();
             $html = view('frontend.all-page.append_category', ['categories' => $categories])->render();
-            return $html;      
+            return $html;
         }
         $cat_id = substr($request->price_filter, -1);
         $orderby = substr($request->price_filter, 0, -1);

@@ -47,7 +47,7 @@
                                 <input type="password" class="form-control" placeholder="Retype Password"
                                     aria-label="Retypepassword" aria-describedby="addon-wrapping"
                                     name="password_confirmation" required autocomplete="new-password">
-                                    @error('zip_code')
+                                @error('zip_code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -60,7 +60,8 @@
 
                         </div>
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" required value="1" name="conditions">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" required value="1"
+                                name="conditions">
                             <label class="form-check-label" for="exampleCheck1">By register you agree to the <strong>Term &
                                     Conditions.</strong></label>
                         </div>

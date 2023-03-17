@@ -5,6 +5,7 @@ namespace App\Models\Admin;
 use App\Models\Admin\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Category extends Model
 {
@@ -19,4 +20,9 @@ class Category extends Model
     {
         return $this->hasMany(Product::class,'category_id','id');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class , 'category_id' , 'id');
+    }
+
 }
