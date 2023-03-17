@@ -38,7 +38,9 @@ Route::get('vendor-register', [VendorControlController::class, 'register'])->nam
 Route::post('/search-product',[ProductController::class,'productsearch'])->name('productsearch');
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::get('/products', 'products')->name('products');
+    Route::get('/appendProducts', 'appendProducts')->name('appendProducts');
+    Route::get('/appendLocalLuxauro', 'appendLocalLuxauro')->name('appendLocalLuxauro');
+    Route::get('/appendCategories', 'appendCategories')->name('appendCategories');
     Route::get('/product-detail/{id}', 'productDetail')->name('product-detail');
     Route::get('/goldEvines', 'goldEvine')->name('goldEvine');
     Route::get('/goldMetal', 'goldEvine')->name('goldMetal');
@@ -68,7 +70,7 @@ Route::controller(CharterManagementController::class)->group(function () {
     Route::post('/charter_manage', 'store')->name('charter_manage');
     Route::get('/all_charters', 'index')->name('charters');
     Route::get('/charter_detail', 'charter_detail')->name('charter_detail');
-    Route::get('/charter_filter/{id?}', 'charter_filter')->name('charter_filter');
+    Route::get('/appendCharters', 'appendCharters')->name('appendCharters');
     Route::post('/charter_book', 'charter_book')->name('charter_book');
     Route::get('/product_charter_management', 'productCharterManagement')->name('product_charter_management');
 });

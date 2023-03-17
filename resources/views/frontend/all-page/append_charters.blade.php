@@ -1,5 +1,5 @@
 @foreach ($charters as $charter)
-<div class="slick-slide slick-current slick-active" style="width: 160px;margin: 0 12px;" data-slick-index="0" aria-hidden="false" tabindex="0">
+<div class="slick-slide slick-current slick-active" style="width: 225px;margin: 0 12px;" data-slick-index="0" aria-hidden="false" tabindex="0">
     <a href="{{route('charter_detail',['id'=>$charter->id])}}">
         <div class="product-item">
             <div class="img-holder">

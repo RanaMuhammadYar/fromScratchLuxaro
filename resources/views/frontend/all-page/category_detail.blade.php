@@ -25,31 +25,11 @@
                                 @endforeach
                             </ol>
                         </div>
-
-                        {{-- Search results - "[Search terms]" --}}
                     </div>
-                    {{-- <div class="mb-3 mb-md-0">
-                            <h2 style="font-size: 20px;">Search results - #### </h2>
-                            <div class="d-flex align-items-center justify-content-end">
-                                <label>Result per page</label>
-                                <select class="form-select ms-3" aria-label="Default select example"
-                                    style="width: 75px;">
-                                    <option selected></option>
-                                    <option value="1">10</option>
-                                    <option value="2">20</option>
-                                    <option value="3">30</option>
-                                </select>
-                            </div>
-                        </div> --}}
                 </div>
                 <form class="page-form mx-auto mb-5" action="{{ route('productsearch') }}" method="post">
                     @csrf
                     <div class="page-form-holder d-flex">
-                        {{-- <select class="form-control select-control border-0 rounded-0 flex-fill">
-                        <option>All</option>
-                        <option>All</option>
-                        <option>All</option>
-                    </select> --}}
                         <div class="form-field d-flex flex-fill">
                             <input type="search" placeholder="Search..." name="search" class="border-0 bg-transparent flex-fill">
                             <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
@@ -133,7 +113,7 @@
                         <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                             <h2 class="m-0">Related items</h2>
                             <div class="d-flex form-holder">
-                                <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                                <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
                                 <form class="page-form flex-fill" action="#">
                                     <div class="page-form-holder d-flex">
                                         <label class="form-control rounded-0">Search Filter</label>
@@ -191,7 +171,7 @@
                         <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                             <h2 class="m-0">You may also like</h2>
                             <div class="d-flex form-holder">
-                                <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                                <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
                                 <form class="page-form flex-fill" action="#">
                                     <div class="page-form-holder d-flex">
                                         <label class="form-control rounded-0">Search Filter</label>

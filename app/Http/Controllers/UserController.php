@@ -36,14 +36,8 @@ class UserController extends Controller
         $luxauro_charters = Charter::orderBy('id','desc')->limit(15)->get();
         return view('frontend.all-page.products', compact('categories','goldevines','locallaxaro','luxauro_charters'));
     }
-    public function products(Request $request)
+    public function appendProducts(Request $request)
     {
-        if(isset($request->category_filter))
-        {
-            $categories = Category::orderBy('title',$request->category_filter)->get();
-            $html = view('frontend.all-page.append_category', ['categories' => $categories])->render();
-            return $html;
-        }
         $cat_id = substr($request->price_filter, -1);
         $orderby = substr($request->price_filter, 0, -1);
         $products = AdminProduct::where('category_id',$cat_id)
@@ -51,6 +45,19 @@ class UserController extends Controller
                                   ->get();
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;
+    }
+    public function appendLocalLuxauro(Request $request)
+    {
+        $orderby = substr($request->products, 0, -1);
+        $products = AdminProduct::orderBy('product_price',$orderby)->limit(6)->get();
+        $html = view('frontend.all-page.append_products', ['products' => $products])->render();
+        return $html;
+    }
+    public function appendCategories(Request $request)
+    {
+            $categories = Category::orderBy('title',$request->category_filter)->get();
+            $html = view('frontend.all-page.append_category', ['categories' => $categories])->render();
+            return $html;
     }
     public function productDetail(Request $request)
     {

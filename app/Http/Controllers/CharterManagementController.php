@@ -38,11 +38,11 @@ class CharterManagementController extends Controller
             $charters = Charter::where('id','!=',$request->id)->get();
             return view('frontend.charters.detail',compact('charter_detail','charters'));
         }
-        public function charter_filter(Request $request)
+        public function appendCharters(Request $request)
         {
             // $cat_id = substr($request->price_filter, -1);
             // $orderby = substr($request->price_filter, 0, -1);
-            $charters = Charter::orderBy('rate',$request->price_filter)->get();
+            $charters = Charter::orderBy('rate',$request->charter)->get();
             $html = view('frontend.all-page.append_charters', ['charters' => $charters])->render();
             return $html;
         }
