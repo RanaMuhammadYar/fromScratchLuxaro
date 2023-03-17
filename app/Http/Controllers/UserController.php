@@ -161,10 +161,10 @@ class UserController extends Controller
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();
-        $userDetail = $user->userDetails()->first();
-        $userEducations = $user->userEducations()->first();
-        $userCertificates = $user->userCertificates()->first();
-        $userProfessions = $user->userProfessions()->first();
+        $userDetail = $user->userDetails()->latest()->first();
+        $userEducations = $user->userEducations()->latest()->first();
+        $userCertificates = $user->userCertificates()->latest()->first();
+        $userProfessions = $user->userProfessions()->latest()->first();
         return view('frontend.all-page.my_profile',compact('user','states','cities','countries',
          'userDetail','userEducations','userCertificates','userProfessions'));
     }

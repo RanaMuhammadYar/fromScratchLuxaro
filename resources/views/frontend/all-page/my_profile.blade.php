@@ -18,7 +18,7 @@
                                         <div class="account-image">
                                             <img id="preview-image-before-upload" src="{{@$userDetail->user_profile_image}}" alt="preview image" style="max-height: 250px;">
                                         </div>
-                                        <input type="file" class="inputfile form-control" name="user_profile_image" id="user_profile_image" required>
+                                        <input type="file" class="inputfile form-control" name="user_profile_image" id="user_profile_image">
                                         <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
                                     </div>
                                 </div>

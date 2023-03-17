@@ -22,17 +22,17 @@
 @endif
 <form class="page-form mx-auto mb-5 mt-5 pt-5" action="#">
     <div class="page-form-holder d-flex">
-        <select class="form-control border-0 rounded-0 flex-fill">
+        <!-- <select class="form-control border-0 rounded-0 flex-fill"> -->
             <!-- <option>All</option>
                 <option>All</option>
                 <option>All</option> -->
-        </select>
+        <!-- </select> -->
         <!-- <div class="form-field d-flex flex-fill">
                 <input type="search" placeholder="Search..." class="border-0 bg-transparent flex-fill">
                 <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
             </div> -->
 
-        <div class="form-field d-flex flex-fill">
+        <!-- <div class="form-field d-flex flex-fill">
             <form action="{{ route('home') }}" method="GET">
                 <div class="input-group">
                     <input type="text" class="border-0 bg-transparent flex-fill" name="search" placeholder="Search products...">
@@ -41,7 +41,7 @@
                     </span>
                 </div>
             </form>
-        </div>
+        </div> -->
     </div>
 </form>
 
