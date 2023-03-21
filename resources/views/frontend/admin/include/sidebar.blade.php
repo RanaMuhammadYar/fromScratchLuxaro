@@ -18,7 +18,7 @@
         <!-- Dashboard -->
         <li class="menu-item {{ Request::is('admin-dashboard') ? 'active' : '' }}">
             <a href="{{ route('admin.dashboard') }}" class="menu-link">
-                <i class="mx-1 bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons mx-1 bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
@@ -31,7 +31,7 @@
         <li
             class="menu-item {{ Request::is('category/create') || Request::is('category') || Request::is('delivory-option') || Request::is('delivory-option/create') || Request::is('shipping-type') || Request::is('shipping-type/create') || Request::is('product-type') || Request::is('product-type/create') || Request::is('product') || Request::is('product/create') || Request::is('category/*/edit') || Request::is('delivory-option/*/edit') || Request::is('shipping-type/*/edit') || Request::is('product/*/edit') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="bx bx-layout mx-1"></i>
+                <i class=" bx bx-layout mx-1"></i>
                 <div data-i18n="Layouts">Product Management</div>
             </a>
 
@@ -72,7 +72,7 @@
         <!-- Layouts -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="bi bi-gear mx-1"></i>
+                <i class="menu-icon tf-icons bi bi-gear "></i>
                 <div data-i18n="Layouts">Settings</div>
             </a>
 
@@ -125,9 +125,9 @@
         </li>
 
 
-        <li class="menu-item {{Request::is('banner') ? 'active' : '' }}">
+        <li class="menu-item {{ Request::is('banner') ? 'active' : '' }}">
             <a href="{{ route('banner.index') }}" class="menu-link">
-                <i class=" menu-icon tf-icons bi bi-boxes"></i>
+                <i class="menu-icon tf-icons bi bi-boxes"></i>
                 <div data-i18n="Basic">Banners</div>
             </a>
         </li>
@@ -136,13 +136,39 @@
             <div data-i18n="Basic" style="font-size: 12px;">Goldevine Setup</div>
         </li>
 
-        <li
+
+
+        <li class="menu-item {{ Request::is('admin-goudevine-product/create') || Request::is('admin-goudevine-product') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="bi bi-projector mx-1"></i>
+                <div data-i18n="Layouts">Project Management</div>
+            </a>
+
+            <ul class="menu-sub">
+
+                {{-- <li
+                    class="menu-item {{ Request::is('goldevine-category/create') || Request::is('category') || Request::is('category/*/edit') ? 'active ' : '' }} ">
+                    <a href="{{ route('goldevine-category.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">All Category</div>
+                    </a>
+                </li> --}}
+
+                <li
+                    class="menu-item {{ Request::is('admin-goudevine-product/create') || Request::is('category') || Request::is('admin-goudevine-product') ? 'active ' : '' }} ">
+                    <a href="{{ route('admin-goudevine-product.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">All Project</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- <li
             class="menu-item {{ Request::is('admin-goudevine-product') || Request::is('admin-goudevine-product/create') || Request::is('admin-goudevine-product/*/edit') ? 'active' : '' }}">
             <a href="{{ route('admin-goudevine-product.index') }}" class="menu-link">
                 <i class="bi bi-list-task menu-icon tf-icons"></i>
                 <div data-i18n="Basic">Project Management</div>
             </a>
-        </li>
+        </li> --}}
 
 
 

@@ -18,11 +18,10 @@ class CreateCartsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('quantity');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('temp_id')->nullable();
+            $table->unsignedBigInteger('user_id')->default(0);
+            $table->integer('temp_id')->default(0);
             $table->string('status')->default('Pending');
-            $table->integer('total_price')->nullable();
+            $table->integer('total_price')->default(0);
             $table->timestamps();
         });
     }
