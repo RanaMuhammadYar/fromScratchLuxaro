@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header d-flux">
                     <h5 class="d-inline">All Project</h5>
-                    <a href="{{ route('admin-goudevine-product.create') }}" class="btn btn-outline-primary float-end">Create
+                    <a href="{{ route('admin-goudevine-project.create') }}" class="btn btn-outline-primary float-end">Create
                         Project</a>
                 </div>
                 <div class="table text-nowrap">
@@ -46,7 +46,7 @@
                                     </td>
                                     <td>{!! Str::limit($project->description, 20, ' ...') !!}</td>
                                     <td>
-                                        <img src="{{ $project->image }}"
+                                        <img src="{{ $project->feature_image }}"
                                             onerror="this.src='{{ asset('images/product-img.png') }}'" height="50px"
                                             width="50px" alt="">
 
@@ -78,10 +78,10 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item"
-                                                    href="{{ route('admin-goudevine-product.edit', $project->id) }}"><i
+                                                    href="{{ route('admin-goudevine-project.edit', $project->id) }}"><i
                                                         class="bx bx-edit-alt me-1 text-success"></i> Edit</a>
                                                 <a class="dropdown-item"
-                                                    href="{{ route('admin-goudevine-product.destroy', $project->id) }}"
+                                                    href="{{ route('admin-goudevine-project.destroy', $project->id) }}"
                                                     onclick="event.preventDefault();
                                                 document.getElementById('logout-form{{ $project->id }}').submit();"><i
                                                         class="bx bx-trash me-1 text-danger"></i> Delete</a>
@@ -89,7 +89,7 @@
                                         </div>
                                     </td>
                                     <form id="logout-form{{ $project->id }}"
-                                        action="{{ route('admin-goudevine-product.destroy', $project->id) }}" method="POST"
+                                        action="{{ route('admin-goudevine-project.destroy', $project->id) }}" method="POST"
                                         class="d-none">
                                         @csrf
                                         @method('DELETE')

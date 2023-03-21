@@ -138,7 +138,7 @@
 
 
 
-        <li class="menu-item {{ Request::is('admin-goudevine-product/create') || Request::is('admin-goudevine-product') ? 'active open' : '' }}">
+        <li class="menu-item {{ Request::is('admin-goudevine-project/create') || Request::is('admin-goudevine-project') || Request::is('admin-goudevine-project/*/edit') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="bi bi-projector mx-1"></i>
                 <div data-i18n="Layouts">Project Management</div>
@@ -154,8 +154,8 @@
                 </li> --}}
 
                 <li
-                    class="menu-item {{ Request::is('admin-goudevine-product/create') || Request::is('category') || Request::is('admin-goudevine-product') ? 'active ' : '' }} ">
-                    <a href="{{ route('admin-goudevine-product.index') }}" class="menu-link">
+                    class="menu-item {{ Request::is('admin-goudevine-project/create')  || Request::is('admin-goudevine-project') || Request::is('admin-goudevine-project/*/edit') ? 'active ' : '' }} ">
+                    <a href="{{ route('admin-goudevine-project.index') }}" class="menu-link">
                         <div data-i18n="Without menu">All Project</div>
                     </a>
                 </li>
