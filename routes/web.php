@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CharterManagementController;
 use App\Http\Controllers\vendor\Chatify\MessagesController;
 use App\Http\Controllers\Vendor\VendorControlController;
+use App\Http\Livewire\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,10 @@ Route::get('/myProfile', [App\Http\Controllers\HomeController::class, 'myProfile
 Route::post('api/fetch-states', [UserController::class, 'fetchState']);
 Route::post('api/fetch-cities', [UserController::class, 'fetchCity']);
 Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');
+Route::get('goldEvines/founderRegister', [VendorControlController::class, 'register'])->name('founderRegister');
+Route::get('goldMetal/professionalRegister', [VendorControlController::class, 'register'])->name('founderRegister');
 Route::post('/search-product',[ProductController::class,'productsearch'])->name('productsearch');
+Route::get('/products', Product::class);
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/appendProducts', 'appendProducts')->name('appendProducts');
