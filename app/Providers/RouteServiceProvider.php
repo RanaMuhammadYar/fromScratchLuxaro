@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/';
+    public const HOME = '/luxauro';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -28,17 +28,15 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
         Route::middleware('web')
-        ->group(base_path('routes/web.php'));
+            ->group(base_path('routes/web.php'));
         $this->routes(function () {
-                Route::middleware('web')
+            Route::middleware('web')
                 ->group(base_path('routes/admin.php'));
-                Route::middleware('web')
+            Route::middleware('web')
                 ->group(base_path('routes/vendor.php'));
-
             Route::prefix('api')
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
-             
         });
     }
 

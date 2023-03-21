@@ -28,9 +28,30 @@
                 <div class="col-12 col-md-3 mb-3">
                     <strong class="title d-block mb-4">Footer Menulist-2</strong>
                     <ul class="m-0">
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
-                        <li><a href="{{ route('vendorRegister') }}">Vendor Register</a></li>
+                       
+                          @auth
+                          <li>
+                            <a  href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                          </li>
+                          @else
+                          @if (strpos(url()->current(), 'luxauro'))
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                          @endif
+                           
+                            @if (strpos(url()->current(), 'goldEvines'))
+                            <li><a href="{{ route('founderRegister') }}">Founder Register</a></li>
+                            @elseif(strpos(url()->current(), 'goldMetal'))
+                            <li><a href="{{ route('professionalRegister') }}">Professional Register</a></li>
+                            @else
+                            <li><a href="{{ route('vendorRegister') }}">Vendor Register</a></li>
+                            @endif
+                          @endauth
                     </ul>
                 </div>
                 <div class="col-12 col-md-3 mb-3">

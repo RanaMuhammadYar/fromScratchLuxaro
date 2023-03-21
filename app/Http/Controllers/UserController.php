@@ -42,6 +42,7 @@ class UserController extends Controller
         $orderby = substr($request->price_filter, 0, -1);
         $products = AdminProduct::where('category_id',$cat_id)
                                   ->orderBy('product_price',$orderby)
+                                  ->limit(6)
                                   ->get();
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;
