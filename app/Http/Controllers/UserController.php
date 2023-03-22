@@ -11,6 +11,7 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Goldevine\Project;
 use App\Models\Admin\Product as AdminProduct;
 use App\Models\Charter;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -123,6 +124,7 @@ class UserController extends Controller
                  return  $query->first();
         }, 'userEducations', 'userCertificates', 'userProfessions'])
             ->where('id', $userId)->first();
+        Session::flash('message', 'Profile  Updated Successfully!'); 
 
         return back()->with(['user' =>  $user]);
     }

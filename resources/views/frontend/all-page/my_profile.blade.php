@@ -8,6 +8,9 @@
                 @include('frontend.include.sidebar')
             </div>
             <div class="col-12 col-md-7 gx-0 gx-md-1 gx-lg-5 px-lg-3">
+                @if (\Session::has('message'))
+                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                @endif
                     <form action="{{route('save_profile_detail')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="my-account-section">

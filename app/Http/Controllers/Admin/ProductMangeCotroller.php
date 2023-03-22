@@ -52,10 +52,10 @@ class ProductMangeCotroller extends Controller
 
     public function productDetails(Request $request, $id, $slug)
     {
-        $product = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('id', $id)->first();
-        $productsdesc = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'desc')->paginate(15);
-        $productsasc = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'asc')->paginate(15);
-        $mayyoulike = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->paginate(15);
+        $product = Product::with('ratings','category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('id', $id)->first();
+        $productsdesc = Product::with('ratings','category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'desc')->paginate(15);
+        $productsasc = Product::with('ratings','category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'asc')->paginate(15);
+        $mayyoulike = Product::with('ratings','category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->paginate(15);
         return view('frontend.all-page.product_detail', compact('product', 'id', 'slug', 'productsdesc', 'productsasc', 'mayyoulike'));
     }
 
