@@ -68,7 +68,7 @@
                                     <label for="exampleFormControlTextarea1" class="form-label">Tags</label>
                                     <input class="form-control  @error('tags') is-invalid @enderror" type="text"
                                         data-role="tagsinput" name="tags"
-                                        value=" @foreach ($project->tags as $alltags) {{ $alltags->name.'' }} @endforeach"
+                                        value=" @foreach ($project->tags as $alltags) {{ $alltags }} @endforeach"
                                         placeholder="Tags">
                                     @if ($errors->has('tags'))
                                         <span class="text-danger">{{ $errors->first('tags') }}</span>
@@ -79,10 +79,10 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Feature Image</label>
-                                    <input type="file" class="form-control @error('feature_image') is-invalid @enderror"
+                                    <input type="file" class="form-control @error('feature_image_project') is-invalid @enderror"
                                         name="feature_image_project" placeholder="description" title="description"
-                                        value="{{ old('feature_image') }}" />
-                                    @error('feature_image')
+                                        value="{{ old('feature_image_project') }}" />
+                                    @error('feature_image_project')
                                         <span class="text-danger mt-2">{{ $message }}</span>
                                     @enderror
                                 </div>

@@ -2,13 +2,16 @@
 
 namespace App\Models\Admin\Goldevine;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Admin\Goldevine\Project;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProjectBenefit extends Model
 {
     use HasFactory;
-
+    protected $table = 'project_benefits';
+    protected $dates = ['estimated_delivery_date'];
     protected $fillable = [
         'benefit_name',
         'price',

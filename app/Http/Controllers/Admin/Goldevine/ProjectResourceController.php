@@ -117,7 +117,7 @@ class ProjectResourceController extends Controller
                     $benefit->save();
                 }
                 if ($benefit->save()) {
-                    return redirect()->back()->with('success', 'Project created successfully');
+                    return redirect()->route('admin-goudevine-project.index')->with('success', 'Project created successfully');
                 } else {
                     return redirect()->back()->with('error', 'Something went wrong');
                 }
@@ -145,7 +145,7 @@ class ProjectResourceController extends Controller
     public function edit($id)
     {
         $project = Project::with('projectBenefits')->find($id);
-        // dd($project);
+        // dd($project->tags);
         return view('frontend.admin.goldevine.project.edit', compact('project'));
     }
 
@@ -188,21 +188,16 @@ class ProjectResourceController extends Controller
         $project->user_id = auth()->user()->id;
         $project->save();
         $tags = explode(",", $request->tags);
-        $project->tags()->sync($request->tags);
+        $project->retag($tags);
         if ($project->save()) {
             // dd($request->all());
             foreach ($request->benefit_name as $key => $value) {
                 if ($request->benefit_id[$key] == null || $request->benefit_id[$key] == 0 || $request->benefit_id[$key] == '') {
-                    dd($request->feature_image[$key]);
                     $benefit = new ProjectBenefit();
                 } else {
                     $benefit = ProjectBenefit::find($request->benefit_id[$key]);
-                    // dd($request->benefit_id[$key]);
                 }
-                // $benefit = ProjectBenefit::find($request->benefit_id[$key]);
-                if ($request->hasFile('feature_image')) {
-                    // dd($benefit);
-                    // dd($request->feature_image[$key]);
+                if ($request->hasFile('feature_image'.$key)) {
                     $path = asset('storage/' . $request->feature_image[$key]->store('project'));
                     $benefit->feature_image = $path;
                 }
@@ -233,7 +228,7 @@ class ProjectResourceController extends Controller
             //     $benefit->save();
             // }
             if ($benefit->save()) {
-                return redirect()->back()->with('success', 'Project created successfully');
+                return redirect()->route('admin-goudevine-project.index')->with('success', 'Project created successfully');
             } else {
                 return redirect()->back()->with('error', 'Something went wrong');
             }
@@ -251,6 +246,6 @@ class ProjectResourceController extends Controller
         $project = Project::find($id);
         $project->projectBenefits->each->delete();
         $project->delete();
-        return redirect()->back()->with('success', 'Project Deleted Successfully');
+        return redirect()->route('admin-goudevine-project.index')->with('success', 'Project Deleted Successfully');
     }
 }

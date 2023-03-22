@@ -32,7 +32,7 @@ class UserController extends Controller
           ->get();
         }
         $locallaxaro = AdminProduct::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status','Active')->orderby('id','desc')->limit(15)->get();
-        $goldevines = Project::where('status','Active')->orderBy('id','desc')->limit(15)->get();
+        $goldevines = Project::with('projectBenefits')->where('status','Active')->orderBy('id','desc')->limit(15)->get();
         $luxauro_charters = Charter::orderBy('id','desc')->limit(15)->get();
         return view('frontend.all-page.products', compact('categories','goldevines','locallaxaro','luxauro_charters'));
     }

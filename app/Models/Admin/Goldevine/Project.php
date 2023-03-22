@@ -61,8 +61,8 @@ class Project extends Model
     {
         return $this->tagNames();
     }
-    public function tags()
-    {
-        return $this->belongsToMany('App\Tag', 'post_tag');
-    }
+    // public function tags()
+    // {
+    //     return $this->belongsToMany('App\Tag', 'post_tag');
+    // }
 }

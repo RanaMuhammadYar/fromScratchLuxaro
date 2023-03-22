@@ -123,3 +123,5 @@ Route::group(['prefix' => 'website'], function () {
     });
 });
 
+Route::get('product-detail/{id}/{slug}', [ProductMangeCotroller::class, 'productDetails'])->name('productDetails');
+
