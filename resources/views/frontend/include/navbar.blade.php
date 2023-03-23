@@ -2,20 +2,29 @@
     <div class="logos-header py-2">
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center">
-            @if(strpos(url()->current(),'goldEvine'))
-            <a class="logo-gold" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
-            <a class="logo" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
-            <a class="logo-gold" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
-            @elseif(strpos(url()->current(),'goldMetal'))
-            <a class="logo-gold" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
-            <a class="logo" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
-            <a class="logo-gold" href="{{ route('goldEvine')}}"><img src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
-            @else
-            <a class="logo-gold" href="{{ route('goldEvine')}}"><img  src="{{static_asset('images/GoldEvine-logo.png')}}" class="img-fluid"></a>
-            <a class="logo" href="{{ route('home') }}"><img src="{{static_asset('images/logo.png')}}" class="img-fluid"></a>
-            <a class="logo-gold" href="{{ route('goldMetal')}}"><img src="{{static_asset('images/Gold-Metal-logo.png')}}" class="img-fluid"></a>
-            @endif
-        </div>
+                @if (strpos(url()->current(), 'goldEvine'))
+                    <a class="logo-gold" href="{{ route('home') }}"><img src="{{ static_asset('images/logo.png') }}"
+                            class="img-fluid"></a>
+                    <a class="logo" href="{{ route('goldEvine') }}"><img
+                            src="{{ static_asset('images/GoldEvine-logo.png') }}" class="img-fluid"></a>
+                    <a class="logo-gold" href="{{ route('goldMetal') }}"><img
+                            src="{{ static_asset('images/Gold-Metal-logo.png') }}" class="img-fluid"></a>
+                @elseif(strpos(url()->current(), 'goldMetal'))
+                    <a class="logo-gold" href="{{ route('home') }}"><img src="{{ static_asset('images/logo.png') }}"
+                            class="img-fluid"></a>
+                    <a class="logo" href="{{ route('goldMetal') }}"><img
+                            src="{{ static_asset('images/Gold-Metal-logo.png') }}" class="img-fluid"></a>
+                    <a class="logo-gold" href="{{ route('goldEvine') }}"><img
+                            src="{{ static_asset('images/GoldEvine-logo.png') }}" class="img-fluid"></a>
+                @else
+                    <a class="logo-gold" href="{{ route('goldEvine') }}"><img
+                            src="{{ static_asset('images/GoldEvine-logo.png') }}" class="img-fluid"></a>
+                    <a class="logo" href="{{ route('home') }}"><img src="{{ static_asset('images/logo.png') }}"
+                            class="img-fluid"></a>
+                    <a class="logo-gold" href="{{ route('goldMetal') }}"><img
+                            src="{{ static_asset('images/Gold-Metal-logo.png') }}" class="img-fluid"></a>
+                @endif
+            </div>
         </div>
     </div>
     <div class="nav-section border-top">
@@ -28,9 +37,10 @@
                         <a class="dropdown-toggle1" href="javascript:void" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-search"></i></a>
                         <div class="dropdown-menu border-top" aria-labelledby="dropdownMenuButton1">
-                            <form action="{{ route('productsearch') }}" method="post" class="d-flex mx-3 border rounded bg-white">
+                            <form action="{{ Request::is('goldEvines') || Request::is('project-search') ? route('projectsearch') : route('productsearch') }}" method="post"
+                                class="d-flex mx-3 border rounded bg-white">
                                 @csrf
-                                <input type="search" name="search" placeholder="Product Search..."
+                                <input type="search" name="search" placeholder="{{ Request::is('goldEvines') || Request::is('project-search') ? ' Project Search... ' : 'Product Search...' }}"
                                     class="border-0 flex-fill">
                                 <button type="submit" class="border"><i class="fa fa-search"></i></button>
                             </form>
@@ -38,11 +48,15 @@
                     </div>
                     @auth
                         <div class="user-info">
-
                             <a href="javascript:void" id="dropdownMenuButton2" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fa fa-chevron-down me-3"></i> Good<i class="fa fa-user-circle"
-                                    aria-hidden="true"></i></a>
+                                <i
+                                    class="fa fa-chevron-down me-2"></i>{{ isset(auth()->user()->userDetails) ? auth()->user()->userDetails->name : '' }}
+                                <img src="{{ isset(auth()->user()->userDetails->user_profile_image) ? auth()->user()->userDetails->user_profile_image : '' }}"
+                                    onerror="this.src='{{ asset('images/avatar.png') }}'" class="mt-2" alt="" style="border-radius: 50%" width="25px:">
+                                {{-- <i class="fa fa-user-circle ms-1"
+                                    aria-hidden="true"></i> --}}
+                            </a>
                             <div class="dropdown-menu p-4 border-top" id="dropdown" aria-labelledby="dropdownMenuButton2">
                                 <div class="row">
                                     <div class="col-6">
@@ -59,8 +73,8 @@
                                     </div>
                                     <div class="col-6">
                                         <ul class="list-unstyled m-0 p-0">
-                                            <li> <a href="#" class="openLuxaroSidebar">Luxauro:</a> <i class="fa fa-lock"></i> <i
-                                                    class="fa fa-heart"></i></li>
+                                            <li> <a href="#" class="openLuxaroSidebar">Luxauro:</a> <i
+                                                    class="fa fa-lock"></i> <i class="fa fa-heart"></i></li>
                                             <li>My Purchase | My Seller Files</li>
                                             <li> <a href="#" class="openGMGSidebar">Gold Metal Guild:</a> <i
                                                     class="fa fa-comment"></i> <i class="fa fa-user"></i></li>
@@ -71,10 +85,11 @@
                                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
                                                                     document.getElementById('logout-form').submit();">
-                                                        {{ __('Logout') }}
-                                                    </a>
+                                                    {{ __('Logout') }}
+                                                </a>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    class="d-none">
                                                     @csrf
                                                 </form>
                                             </li>
@@ -113,6 +128,7 @@
                                                         $query
                                                             ->where('status', 'pending')
                                                             ->where('user_id', Auth::id())
+                                                            ->where('temp_id', '!=', null)
                                                             ->orWhere(function ($query) {
                                                                 $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
                                                             });
@@ -136,7 +152,8 @@
                                     </span>
                                 </i>
                             </a>
-                            <div class="dropdown-menu p-4 border-top" aria-labelledby="dropdownMenuButton3" style="color: rgb(213, 207, 207)" >
+                            <div class="dropdown-menu p-4 border-top" aria-labelledby="dropdownMenuButton3"
+                                style="color: rgb(213, 207, 207)">
                                 <div class="luxauro-cart mb-2">
                                     <h3 class="border-bottom d-inline-block mb-1">Luxauro</h3>
                                     <div class="catdata">
@@ -281,14 +298,14 @@
                     <li><a href="javascript:void">professionals</a></li>
                 </ul>
                 <ul class="list-unstyled m-0 p-0 d-md-flex justify-content-end">
-                @if (Auth::check())
-                       @if (Auth::user()->role == 'Vendor')
-                           <li><a href="{{ route('vendorDashboard') }}">Vendor Dashboard</a></li>
-                           @elseif (Auth::user()->role == 'Admin')
+                    @if (Auth::check())
+                        @if (Auth::user()->role == 'Vendor')
+                            <li><a href="{{ route('vendorDashboard') }}">Vendor Dashboard</a></li>
+                        @elseif (Auth::user()->role == 'Admin')
                             <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
-                            @else
-                       @endif
-                   @endif
+                        @else
+                        @endif
+                    @endif
                     <li><a href="{{ route('charters') }}">charters</a></li>
                     <li><a href="javascript:void">forums</a></li>
                     <li><a href="javascript:void">Suits</a></li>

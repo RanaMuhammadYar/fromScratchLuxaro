@@ -133,6 +133,7 @@ class ProductMangeCotroller extends Controller
                     $cart->product_id = $request->product_id;
                     $cart->quantity = $request->quantity;
                     $cart->total_price = $request->total;
+                    $cart->user_id = "0";
                     $cart->status = 'Pending';
                     $cart->save();
 

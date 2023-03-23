@@ -25,7 +25,7 @@ Route::resource('delivory-option', DelivoryOptionCotroller::class);
 Route::resource('shipping-type', ShippingTypeCotroller::class);
 Route::resource('product-type', ProductTypeCotroller::class);
 Route::resource('product', ProductCotroller::class);
-Route::resource('admin-goudevine-product', ProjectResourceController::class);
+Route::resource('admin-goudevine-project', ProjectResourceController::class);
 Route::resource('banner', BannerController::class);
 
 
@@ -122,4 +122,6 @@ Route::group(['prefix' => 'website'], function () {
         Route::get('/order-configuration', 'order_configuration')->name('order_configuration.index');
     });
 });
+
+Route::get('product-detail/{id}/{slug}', [ProductMangeCotroller::class, 'productDetails'])->name('productDetails');
 

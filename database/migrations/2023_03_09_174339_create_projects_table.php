@@ -16,9 +16,20 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('short_description');
+            $table->string('project_category');
+            $table->string('feature_image');
+            $table->longText('gallery_image');
+            $table->string('video_link');
+            $table->string('start_date');
+            $table->string('end_date');
+            $table->string('minimum_pledge_amount');
+            $table->string('maximum_pledge_amount');
+            $table->string('project_funding_goal');
+            $table->string('recommended_pledge_amount');
+            $table->string('location');
             $table->longText('description');
-            $table->string('image');
-            $table->string('status');
+            $table->string('status')->default('Pending');
             $table->string('slug');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
