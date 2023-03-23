@@ -37,10 +37,10 @@
                         <a class="dropdown-toggle1" href="javascript:void" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-search"></i></a>
                         <div class="dropdown-menu border-top" aria-labelledby="dropdownMenuButton1">
-                            <form action="{{ route('productsearch') }}" method="post"
+                            <form action="{{ Request::is('goldEvines') || Request::is('project-search') ? route('projectsearch') : route('productsearch') }}" method="post"
                                 class="d-flex mx-3 border rounded bg-white">
                                 @csrf
-                                <input type="search" name="search" placeholder="Product Search..."
+                                <input type="search" name="search" placeholder="{{ Request::is('goldEvines') || Request::is('project-search') ? ' Project Search... ' : 'Product Search...' }}"
                                     class="border-0 flex-fill">
                                 <button type="submit" class="border"><i class="fa fa-search"></i></button>
                             </form>

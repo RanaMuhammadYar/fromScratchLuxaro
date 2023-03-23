@@ -45,6 +45,7 @@
                                         <option value="Target Date">Target Date</option>
                                         <option value="Target Goal & Date">Target Goal & Date</option>
                                         <option value="Campaign Never Ends">Campaign Never Ends</option>
+                                        <option value="Featured">Featured</option>
                                     </select>
                                     @error('project_category')
                                         <span class="text-danger mt-2">{{ $message }}</span>
@@ -127,7 +128,7 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Minimum Pledge Amount</label>
-                                    <input type="text"
+                                    <input type="number"
                                         class="form-control @error('minimum_pledge_amount') is-invalid @enderror"
                                         name="minimum_pledge_amount" placeholder="Minimum Pledge Amount"
                                         title="Minimum Pledge Amount" value="{{ old('minimum_pledge_amount') }}" />
@@ -140,7 +141,7 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Maximum Pledge Amount</label>
-                                    <input type="text"
+                                    <input type="number"
                                         class="form-control @error('maximum_pledge_amount') is-invalid @enderror"
                                         name="maximum_pledge_amount" placeholder="Maximum Pledge Amount"
                                         title="Maximum Pledge Amount" value="{{ old('maximum_pledge_amount') }}" />
@@ -153,7 +154,7 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Project Funding Goal</label>
-                                    <input type="text"
+                                    <input type="number"
                                         class="form-control @error('project_funding_goal') is-invalid @enderror"
                                         name="project_funding_goal" placeholder="Project Funding Goal"
                                         title="Project Funding Goal" value="{{ old('project_funding_goal') }}" />
@@ -166,7 +167,7 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Recommended Pledge
                                         Amount</label>
-                                    <input type="text"
+                                    <input type="number"
                                         class="form-control @error('recommended_pledge_amount') is-invalid @enderror"
                                         name="recommended_pledge_amount" placeholder="Recommended Pledge Amount"
                                         title="Recommended Pledge Amount"
@@ -214,7 +215,7 @@
                                 <div class="col-md-4 col-sm-12">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Price</label>
-                                        <input type="text" class="form-control" name="price[]" placeholder="Price"
+                                        <input type="number" class="form-control" name="price[]" placeholder="Price"
                                             title="Price" value="" />
                                     </div>
                                 </div>
@@ -223,7 +224,7 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Benefit MSRP
                                         </label>
-                                        <input type="text" class="form-control" name="benefit_msrp[]"
+                                        <input type="number" class="form-control" name="benefit_msrp[]"
                                             placeholder="Benefit MSRP" title="benefit_msrp" value="" />
                                     </div>
                                 </div>
@@ -251,7 +252,7 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Quantity
                                         </label>
-                                        <input type="numeber" min="1" class="form-control" name="quantity[]"
+                                        <input type="number" min="1" class="form-control" name="quantity[]"
                                             placeholder="Quantity" title="Quantity" value="" />
                                     </div>
                                 </div>
@@ -261,7 +262,7 @@
                                         <label for="exampleFormControlInput1" class="form-label">Benefit Short
                                             Description
                                         </label>
-                                        <input type="test" class="form-control" name="short_description[]"
+                                        <input type="text" class="form-control" name="short_description[]"
                                             placeholder="Benefit Short Description" title="Benefit Short Description"
                                             value="" />
                                     </div>
@@ -303,7 +304,7 @@
                 var id = Math.floor(Math.random() * 90000) + 10000;
                 var html = '';
                 html = '<div class="row mt-4" id="addnewbenefits' + id +
-                    '"> <div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Benefit Name</label> <input type="text" class="form-control" name="benefit_name[]" placeholder="Benefit Name" title="benefit_name" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Price</label> <input type="text" class="form-control" name="price[]" placeholder="Price" title="Price" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Benefit MSRP </label> <input type="text" class="form-control" name="benefit_msrp[]" placeholder="Benefit MSRP" title="benefit_msrp" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Feature Image </label> <input type="file" class="form-control" name="feature_image[]" placeholder="Feature Image" title="Feature Image" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Estimated Delivery Date </label> <input type="date" class="form-control" name="estimated_delivery_date[]" placeholder="Estimated Delivery Date" title="Estimated Delivery Date" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Quantity </label> <input type="numeber" min="1" class="form-control" name="quantity[]" placeholder="Quantity" title="Quantity" value=""/> </div></div><div class="col-md-10 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Benefit Short Description </label> <input type="test" class="form-control" name="short_description[]" placeholder="Benefit Short Description" title="Benefit Short Description" value=""/> </div></div><div class="col-md-2 col-sm-12"> <div class="mb-3 mt-4 pt-2"> <button class="btn btn-outline-danger" type="button" onclick="generateId(' +
+                    '"> <div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Benefit Name</label> <input type="text" class="form-control" name="benefit_name[]" placeholder="Benefit Name" title="benefit_name" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Price</label> <input type="number" class="form-control" name="price[]" placeholder="Price" title="Price" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Benefit MSRP </label> <input type="number" class="form-control" name="benefit_msrp[]" placeholder="Benefit MSRP" title="benefit_msrp" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Feature Image </label> <input type="file" class="form-control" name="feature_image[]" placeholder="Feature Image" title="Feature Image" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Estimated Delivery Date </label> <input type="date" class="form-control" name="estimated_delivery_date[]" placeholder="Estimated Delivery Date" title="Estimated Delivery Date" value=""/> </div></div><div class="col-md-4 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Quantity </label> <input type="number" min="1" class="form-control" name="quantity[]" placeholder="Quantity" title="Quantity" value=""/> </div></div><div class="col-md-10 col-sm-12"> <div class="mb-3"> <label for="exampleFormControlInput1" class="form-label">Benefit Short Description </label> <input type="test" class="form-control" name="short_description[]" placeholder="Benefit Short Description" title="Benefit Short Description" value=""/> </div></div><div class="col-md-2 col-sm-12"> <div class="mb-3 mt-4 pt-2"> <button class="btn btn-outline-danger" type="button" onclick="generateId(' +
                     id + ')">- Remove Benefit</button> </div></div><hr></div>';
                 $('.addnewbenefit').append(html);
 

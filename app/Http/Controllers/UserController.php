@@ -155,11 +155,14 @@ class UserController extends Controller
     }
     public function goldEvine()
     {
+
         $allprojects = Project::where('status', 'Active')->get();
         $newprojects = Project::where('status', 'Active')->orderBy('id', 'desc')->limit(15)->get();
         $trandingProjects = Project::where('status', 'Active')->orderBy('id', 'asc')->get();
+        $nearlythereProjects = Project::where('status', 'Active')->inRandomOrder()->limit(15)->get();
+        $featuredProjects = Project::where('status', 'Active')->where('project_category','Featured')->limit(15)->get();
         // return dd($trandingProjects);
-        return view('frontend.goldevine.index',compact('allprojects','newprojects','trandingProjects'));
+        return view('frontend.goldevine.index',compact('allprojects','newprojects','trandingProjects','nearlythereProjects','featuredProjects'));
     }
     public function myProfile()
     {

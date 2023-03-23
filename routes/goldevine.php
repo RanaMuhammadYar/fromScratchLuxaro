@@ -10,8 +10,9 @@ use App\Http\Controllers\Admin\Goldevine\ProjectManageController;
 
 
 Route::resource('goldevine-category', GoldevineCategoryController::class);
-Route::get('project-detail/{id}/{slug}',[ProjectManageController::class,'projectDetail'])->name('projectDetail');
+Route::get('project-detail/{id}/{slug}', [ProjectManageController::class, 'projectDetail'])->name('projectDetail');
 
-Route::get('project-checkout/{id}',[ProjectManageController::class,'projectcheckout'])->name('projectcheckout');
+Route::get('project-checkout/{id}', [ProjectManageController::class, 'projectcheckout'])->name('projectcheckout');
 
-Route::post('project-checkout',[ProjectManageController::class,'projectcheckoutstore'])->name('projectcheckoutstore');
+Route::post('project-checkout', [ProjectManageController::class, 'projectcheckoutstore'])->name('projectcheckoutstore');
+Route::any('project-search', [ProjectManageController::class, 'projectsearch'])->name('projectsearch');

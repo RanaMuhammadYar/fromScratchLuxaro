@@ -3,16 +3,6 @@
     <title>{{ $project->title }} </title>
 @endsection
 @section('content')
-    @php
-        $totalproject = App\Models\Admin\Goldevine\Project::where('user_id', $project->user_id)->count();
-        $total_amount = App\Models\Admin\Goldevine\GoldevineOrder::where('project_id', $project->id)->sum('total_price');
-        $donations = App\Models\Admin\Goldevine\GoldevineOrder::where('project_id', $project->id)->count();
-        $percentage = 0;
-        $current = $project->project_funding_goal;
-        if ($total_amount > 0) {
-            $percentage = ($total_amount / $current) * 100;
-        }
-    @endphp
     <div class="inner-content">
         <div class="project-details-pagesmain mt-5 mb-4 pt-md-4">
             <div class="container">
@@ -27,10 +17,10 @@
                             {{ isset($project->user->userDetails->name) ? $project->user->userDetails->name : '' }}</p>
                     </div>
                     <div class="by-project me-3">
-                        <p class="mb-0">{{ $totalproject }} Projects</p>
+                        <p class="mb-0">{{ totalproject($project->user_id) }} Projects</p>
                     </div>
                     <div class="by-fav-projects">
-                        <p class="mb-0">{{ $totalproject - 1 }} favorite Project</p>
+                        <p class="mb-0">{{ totalproject($project->user_id) - 1 }} favorite Project</p>
                     </div>
                 </div>
                 <div class="row">
@@ -72,26 +62,27 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Raised:</span>
-                            <span>{{ $percentage }}%</span>
+                            <span>{{ persentage($project->id) }}%</span>
                         </div>
                         <div class="progress rounded-0 mb-2">
-                            <div class="progress-bar rounded-0" role="progressbar" style="width:{{ $percentage }}%"
-                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar rounded-0" role="progressbar"
+                                style="width:{{ persentage($project->id) }}%" aria-valuenow="75" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex flex-column mb-3">
                             <span><strong>Goal: ${{ number_format($project->project_funding_goal) }}</strong></span>
                         </div>
                         <div class="backers d-flex">
                             <div class="backers-number me-5 mx-2">
-                                <span><strong>${{ number_format($total_amount) }}</strong></span>
+                                <span><strong>${{ number_format(totalamout($project->id)) }}</strong></span>
                                 <span>Pledged</span>
                             </div>
                             <div class="backers-number me-5">
-                                <span><strong>{{ number_format($donations) }}</strong></span>
+                                <span><strong>{{ number_format(donation($project->id)) }}</strong></span>
                                 <span>Backers</span>
                             </div>
                             <div class="backers-number">
-                                <span><strong>{{ $totalDaysLeft }}</strong></span>
+                                <span><strong>{{ leftdays($project->id) }}</strong></span>
                                 <span>Days Left</span>
                             </div>
                         </div>
@@ -128,27 +119,24 @@
                     </div> --}}
 
                     @foreach ($project->projectBenefits as $benefit)
-                        @php
-                            $backers = App\Models\Admin\Goldevine\GoldevineOrder::where('project_id', $project->id)->where('benefit_id', $benefit->id)->count();
-                        @endphp
                         <div>
                             <div class="product-item">
                                 <div class="gold-img-holder mb-3">
                                     <span>{{ $benefit->benefit_name }}</span>
-                                    <span>${{ $benefit->price }}</span>
+                                    <span>${{ number_format($benefit->price) }}</span>
                                 </div>
                                 <div class="img-holder">
                                     <img src="{{ $benefit->feature_image }}"
                                         onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
                                 </div>
                                 <div class="txt-holder">
-                                    <p>{{ Str::words($benefit->short_description, 20, '...')  }}</p>
+                                    <p>{{ Str::words($benefit->short_description, 20, '...') }}</p>
                                     <div class="d-flex flex-column mb-2">
                                         <span><strong>{{ isset($benefit->estimated_delivery_date) ? $benefit->estimated_delivery_date->format('F d') : '' }}</strong></span>
                                         <span>Estimated Delivery</span>
                                     </div>
                                     <p class="mb-2 color-saceem"><span class="fa_user"><i class="fa fa-user-circle-o me-2"
-                                                aria-hidden="true"></i></span>{{ $backers }} Backers</p>
+                                                aria-hidden="true"></i></span>{{ backer($benefit->id) }} Backers</p>
                                     <p class="m-0 color-saceem"><Span class=""><i class="fa fa-shield me-2"
                                                 aria-hidden="true"></i></Span>10, 000 benefits left</p>
                                 </div>
@@ -187,25 +175,25 @@
                                     </div>
                                     <div class="txt-holder p-3">
                                         <div class="d-flex flex-wrap align-items-center mb-3">
-                                            <span class="me-2"><button
-                                                    class="btn btn-primary btn-sm rounded-0 py-1 px-2">HOSPITALITY</button></span>
+                                            <span class="me-2"><a
+                                                    class="btn btn-primary btn-sm rounded-0 py-1 px-2" href="{{ route('projectDetail', ['id' => $randdomproject->id, 'slug' => $randdomproject->slug]) }}">HOSPITALITY</a></span>
                                             <span class="me-2"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                            <span>0 Days Left</span>
+                                            <span>{{ leftdays($randdomproject->id) }} Days Left</span>
                                         </div>
                                         <div class="d-flex flex-column mb-4">
-                                            <span><strong>Cheap Test Project 2</strong></span>
+                                            <span><strong>Cheap Test Project {{ totalproject($randdomproject->user_id) }}</strong></span>
                                         </div>
-                                        <p class="present-project mb-2">Present Project: LuxxSton Resort</p>
+                                        <p class="present-project mb-2">Present Project: {{ isset($randdomproject->user->userDetails->name ) ? $randdomproject->user->userDetails->name :''  }} </p>
                                         <div class="d-flex justify-content-between">
-                                            <span>Raised: $10.00</span>
-                                            <span>100.00%</span>
+                                            <span>Raised:${{ number_format(totalamout($randdomproject->id)) }}</span>
+                                            <span>{{ persentage($randdomproject->id) }}%</span>
                                         </div>
                                         <div class="progress rounded-0 mb-2">
-                                            <div class="progress-bar rounded-0" role="progressbar" style="width: 100%"
+                                            <div class="progress-bar rounded-0" role="progressbar" style="width: {{  persentage($randdomproject->id) }}%"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <div class="d-flex flex-column mb-2">
-                                            <span><strong>Goal: $10.00</strong></span>
+                                            <span><strong>Goal: ${{ $randdomproject->project_funding_goal  }}</strong></span>
                                         </div>
                                     </div>
                                 </div>

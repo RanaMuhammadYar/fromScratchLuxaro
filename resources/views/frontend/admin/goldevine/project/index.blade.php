@@ -31,6 +31,7 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
+                                <th>Category</th>
                                 <th>Description</th>
                                 <th>image</th>
                                 <th>Status</th>
@@ -44,13 +45,15 @@
                                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
                                         <strong>{{ $project->title }}</strong>
                                     </td>
-                                    <td>{!! Str::limit($project->description, 20, ' ...') !!}</td>
+                                    <td>{{ $project->project_category }}</td>
+                                    <td>{!! Str::limit($project->short_description, 20, ' ...') !!}</td>
                                     <td>
                                         <img src="{{ $project->feature_image }}"
                                             onerror="this.src='{{ asset('images/product-img.png') }}'" height="50px"
                                             width="50px" alt="">
 
                                     </td>
+
                                     <td>
                                         @if ($project->status == 'Active')
                                             <span class="badge rounded-pill bg-success">{{ $project->status }}</span><br>

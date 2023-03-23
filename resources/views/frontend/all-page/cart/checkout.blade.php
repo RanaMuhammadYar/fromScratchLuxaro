@@ -141,7 +141,7 @@
                                                                     class="d-block"></span> Thurs, Feb 16</span> --}}
                                                             <p class="mb-0">
                                                                 <strong
-                                                                    class="shopping-bag-title">${{ $projectBenefit->price }}</strong>
+                                                                    class="shopping-bag-title">${{ number_format($projectBenefit->price) }}</strong>
                                                             </p>
                                                         </div>
                                                         <div class="shopping-bag-delivery ">
@@ -167,11 +167,11 @@
                                     </li>
                                     <li>
                                         <div class="shopping-bag-payment">
-                                            <span class="payment-titles">${{ $projectBenefit->price }}</span>
+                                            <span class="payment-titles">${{ number_format($projectBenefit->price) }}</span>
                                             <span class="px-1"> x </span>
                                             <span class="border rounded px-1">{{ $projectBenefit->quantity }} </span>
                                             <span>=</span>
-                                            <span class="payment-titles">${{ $projectBenefit->price * $projectBenefit->quantity }}</span>
+                                            <span class="payment-titles">${{  number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -522,7 +522,7 @@
                                  <div class="shopping-bag-my-order mb-5">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <strong>Goldevine Subtotal</strong>
-                                    <strong>${{ $projectBenefit->price * $projectBenefit->quantity }}</strong>
+                                    <strong>${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</strong>
                                 </div>
                                 {{-- <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="mb-0">Estimated Shipping</p>
@@ -535,7 +535,7 @@
                                 <hr>
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="payment-titles">Total</span>
-                                    <span class="payment-titles">${{ $projectBenefit->price * $projectBenefit->quantity }}</span>
+                                    <span class="payment-titles">${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
                                 </div>
 
                                 <input type="hidden" name="total" value="{{ $projectBenefit->price * $projectBenefit->quantity }}">

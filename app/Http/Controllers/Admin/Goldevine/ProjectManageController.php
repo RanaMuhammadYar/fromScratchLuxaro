@@ -14,11 +14,8 @@ class ProjectManageController extends Controller
     public function projectDetail($id, $slug)
     {
         $project = Project::with('projectBenefits')->where('id', $id)->where('status', 'Active')->first();
-        $futureDate = Carbon::create($project->end_date);
-        $currentDate = Carbon::now();
-        $totalDaysLeft = $currentDate->diffInDays($futureDate);
         $randdomprojects = Project::where('id', '!=', $id)->where('status', 'Active')->inRandomOrder()->limit(15)->get();
-        return view('frontend.all-page.goldevine.projectdetail', compact('project', 'totalDaysLeft', 'randdomprojects'));
+        return view('frontend.all-page.goldevine.projectdetail', compact('project', 'randdomprojects'));
     }
 
     public function projectcheckout($id)
@@ -30,7 +27,6 @@ class ProjectManageController extends Controller
 
     public function projectcheckoutstore(Request $request)
     {
-        // return $request->all();
 
         $goldevineorder = new GoldevineOrder();
         $goldevineorder->benefit_id = $request->benefit_id;
@@ -44,5 +40,12 @@ class ProjectManageController extends Controller
         $goldevineorder->user_id = auth()->user()->id;
         $goldevineorder->save();
         return redirect()->route('home')->with('success', 'Order Placed Successfully');
+    }
+
+    public function projectsearch(Request $request)
+    {
+        $search = $request->search;
+        $projectsearches = Project::where('title', 'LIKE', "%{$search}%")->where('status', 'Active')->paginate(15);
+        return view('frontend.all-page.search.goldevinesearch', compact('projectsearches'));
     }
 }
