@@ -7,7 +7,7 @@
                     <div class="relative z-10 h-auto p-4 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7">
                         @auth
                             <div class="w-full space-y-5">
-                                <p class="font-medium text-blue-500 uppercase">
+                                <p class="font-medium text-black-500 uppercase">
                                     Rate this product
                                 </p>
                             </div>
@@ -63,7 +63,7 @@
                                 <div class="mb-8 text-center text-gray-600">
                                     You need to login in order to be able to rate the product!
                                 </div>
-                                <a href="/register"
+                                <a href="{{ route('register') }}"
                                     class="block px-5 py-2 mx-auto font-medium text-center text-gray-600 bg-white border rounded-lg shadow-sm focus:outline-none hover:bg-gray-100" 
                                 >Register</a>
                             </div>

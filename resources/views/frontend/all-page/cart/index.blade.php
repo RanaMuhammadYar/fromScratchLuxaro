@@ -97,12 +97,10 @@
                                             </li>
                                         </ul>
                                     </div>
-
                                     @php
                                         $subtotal += $allcartorder->product->product_price * $allcartorder->quantity;
                                         $total += $allcartorder->product->product_price * $allcartorder->quantity + $allcartorder->product->shipping_charge;
                                         $shipping_charge += $allcartorder->product->shipping_charge;
-
                                     @endphp
                                 @endforeach
 
@@ -287,187 +285,187 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="shopping-bag-component luxauro-subscription-currents mb-3">
-                            <h3 class="mb-4">Gold Metal Guild</h3>
-                            <ul
-                                class="subscriptions-produccts mb-4 p-0 list-unstyled d-flex align-items-self-start justify-content-between flex-wrap">
-                                <li>
-                                    <div class="sub-product-image mb-3 mb-md-4">
-                                        <img src="images/about01.png" class="img-fluid" alt="product-img">
-                                    </div>
-                                </li>
-                                <li class="mx-2 mb-2"><strong>GMG Professional Gold Seal Special Title</strong>
-                                    <div>
-                                        <ul class="list-unstyled m-0 p-0">
-                                            <li>
-                                                <p class="mb-0">Solid by merchant_username01</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                            aria-hidden="true"></i></span>[Merchant Location]</p>
-                                            </li>
-                                            <li>
-                                                <p>[Product short description] Lorem ipsum is simply elit.</p>
-                                            </li>
-                                            <li>
-                                                <div class="shopping-bag-pickup d-flex">
-                                                    <div class="shopping-bag-delivery me-3">
-                                                        <strong class="shopping-bag-title">Delivery</strong>
-                                                        <span class="estimated mb-2">Estimated Arrival:<span
-                                                                class="d-block"></span> Thurs, Feb 16</span>
-                                                        <p class="mb-0"><strong class="shopping-bag-title">$20</strong>
-                                                        </p>
+                            </div>
+                            <div class="shopping-bag-component luxauro-subscription-currents mb-3">
+                                <h3 class="mb-4">Gold Metal Guild</h3>
+                                <ul
+                                    class="subscriptions-produccts mb-4 p-0 list-unstyled d-flex align-items-self-start justify-content-between flex-wrap">
+                                    <li>
+                                        <div class="sub-product-image mb-3 mb-md-4">
+                                            <img src="images/about01.png" class="img-fluid" alt="product-img">
+                                        </div>
+                                    </li>
+                                    <li class="mx-2 mb-2"><strong>GMG Professional Gold Seal Special Title</strong>
+                                        <div>
+                                            <ul class="list-unstyled m-0 p-0">
+                                                <li>
+                                                    <p class="mb-0">Solid by merchant_username01</p>
+                                                </li>
+                                                <li>
+                                                    <p class="mb-2"><span><i class="fa fa-map-marker me-2"
+                                                                aria-hidden="true"></i></span>[Merchant Location]</p>
+                                                </li>
+                                                <li>
+                                                    <p>[Product short description] Lorem ipsum is simply elit.</p>
+                                                </li>
+                                                <li>
+                                                    <div class="shopping-bag-pickup d-flex">
+                                                        <div class="shopping-bag-delivery me-3">
+                                                            <strong class="shopping-bag-title">Delivery</strong>
+                                                            <span class="estimated mb-2">Estimated Arrival:<span
+                                                                    class="d-block"></span> Thurs, Feb 16</span>
+                                                            <p class="mb-0"><strong class="shopping-bag-title">$20</strong>
+                                                            </p>
+                                                        </div>
+                                                        <div class="shopping-bag-delivery ">
+                                                            <p class="mb-0"><strong
+                                                                    class="shopping-bag-title">Pickup</strong></p>
+                                                            <p class="mb-0"><strong class="shopping-bag-title">Free</strong>
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="shopping-bag-delivery ">
-                                                        <p class="mb-0"><strong
-                                                                class="shopping-bag-title">Pickup</strong></p>
-                                                        <p class="mb-0"><strong class="shopping-bag-title">Free</strong>
-                                                        </p>
+                                                </li>
+                                                <li>
+                                                    <hr>
+                                                </li>
+                                                <li>
+                                                    <div class="save-for-later d-flex">
+                                                        <p class="save-remove-later me-4 mb-0">Save for later</p>
+                                                        <p class="mb-0">Remove</p>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <hr>
-                                            </li>
-                                            <li>
-                                                <div class="save-for-later d-flex">
-                                                    <p class="save-remove-later me-4 mb-0">Save for later</p>
-                                                    <p class="mb-0">Remove</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="shopping-bag-payment">
-                                        <span class="payment-titles">$24.43</span>
-                                        <span class="px-1"> x </span>
-                                        <span class="border rounded px-1">3</span>
-                                        <span>=</span>
-                                        <span class="payment-titles">$73.97</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul
-                                class="subscriptions-produccts mb-md-4 p-0 list-unstyled d-flex align-items-self-start flex-wrap justify-content-between">
-                                <li>
-                                    <div class="sub-product-image mb-3 mb-md-4">
-                                        <img src="images/about01.png" class="img-fluid" alt="product-img">
-                                    </div>
-                                </li>
-                                <li class="mx-2 mb-2"><strong>GMG Professional Gold Seal Special Title</strong>
-                                    <div>
-                                        <ul class="list-unstyled m-0 p-0">
-                                            <li>
-                                                <p class="mb-0">Solid by merchant_username02</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                            aria-hidden="true"></i></span>[Merchant Location]</p>
-                                            </li>
-                                            <li>
-                                                <p>[Product short description] Lorem ipsum is simply elit.</p>
-                                            </li>
-                                            <li>
-                                                <div class="shopping-bag-pickup d-flex">
-                                                    <div class="shopping-bag-delivery me-3">
-                                                        <strong class="shopping-bag-title">Delivery</strong>
-                                                        <span class="estimated mb-2">Estimated Arrival:<span
-                                                                class="d-block"></span> Thurs, Feb 16</span>
-                                                        <p class="mb-0"><strong class="shopping-bag-title">$20</strong>
-                                                        </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="shopping-bag-payment">
+                                            <span class="payment-titles">$24.43</span>
+                                            <span class="px-1"> x </span>
+                                            <span class="border rounded px-1">3</span>
+                                            <span>=</span>
+                                            <span class="payment-titles">$73.97</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul
+                                    class="subscriptions-produccts mb-md-4 p-0 list-unstyled d-flex align-items-self-start flex-wrap justify-content-between">
+                                    <li>
+                                        <div class="sub-product-image mb-3 mb-md-4">
+                                            <img src="images/about01.png" class="img-fluid" alt="product-img">
+                                        </div>
+                                    </li>
+                                    <li class="mx-2 mb-2"><strong>GMG Professional Gold Seal Special Title</strong>
+                                        <div>
+                                            <ul class="list-unstyled m-0 p-0">
+                                                <li>
+                                                    <p class="mb-0">Solid by merchant_username02</p>
+                                                </li>
+                                                <li>
+                                                    <p class="mb-2"><span><i class="fa fa-map-marker me-2"
+                                                                aria-hidden="true"></i></span>[Merchant Location]</p>
+                                                </li>
+                                                <li>
+                                                    <p>[Product short description] Lorem ipsum is simply elit.</p>
+                                                </li>
+                                                <li>
+                                                    <div class="shopping-bag-pickup d-flex">
+                                                        <div class="shopping-bag-delivery me-3">
+                                                            <strong class="shopping-bag-title">Delivery</strong>
+                                                            <span class="estimated mb-2">Estimated Arrival:<span
+                                                                    class="d-block"></span> Thurs, Feb 16</span>
+                                                            <p class="mb-0"><strong class="shopping-bag-title">$20</strong>
+                                                            </p>
+                                                        </div>
+                                                        <div class="shopping-bag-delivery ">
+                                                            <p class="mb-0"><strong
+                                                                    class="shopping-bag-title">Pickup</strong></p>
+                                                            <p class="mb-0"><strong class="shopping-bag-title">Free</strong>
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="shopping-bag-delivery ">
-                                                        <p class="mb-0"><strong
-                                                                class="shopping-bag-title">Pickup</strong></p>
-                                                        <p class="mb-0"><strong class="shopping-bag-title">Free</strong>
-                                                        </p>
+                                                </li>
+                                                <li>
+                                                    <hr>
+                                                </li>
+                                                <li>
+                                                    <div class="save-for-later d-flex">
+                                                        <p class="save-remove-later me-4 mb-0">Save for later</p>
+                                                        <p class="mb-0">Remove</p>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <hr>
-                                            </li>
-                                            <li>
-                                                <div class="save-for-later d-flex">
-                                                    <p class="save-remove-later me-4 mb-0">Save for later</p>
-                                                    <p class="mb-0">Remove</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="shopping-bag-payment">
-                                        <span class="payment-titles">$24.43</span>
-                                        <span class="px-1"> x </span>
-                                        <span class="border rounded px-1">3</span>
-                                        <span>=</span>
-                                        <span class="payment-titles">$73.97</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul
-                                class="subscriptions-produccts mb-0 p-0 list-unstyled d-flex align-items-self-start justify-content-between flex-wrap">
-                                <li>
-                                    <div class="sub-product-image mb-3 mb-md-4">
-                                        <img src="images/about01.png" class="img-fluid" alt="product-img">
-                                    </div>
-                                </li>
-                                <li class="mx-2 mb-2"><strong>GMG Professional Gold Seal Special Title</strong>
-                                    <div>
-                                        <ul class="list-unstyled m-0 p-0">
-                                            <li>
-                                                <p class="mb-0">Solid by merchant_username03</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                            aria-hidden="true"></i></span>[Merchant Location]</p>
-                                            </li>
-                                            <li>
-                                                <p>[Product short description] Lorem ipsum is simply elit.</p>
-                                            </li>
-                                            <li>
-                                                <div class="shopping-bag-pickup d-flex">
-                                                    <div class="shopping-bag-delivery me-3">
-                                                        <strong class="shopping-bag-title">Delivery</strong>
-                                                        <span class="estimated mb-2">Estimated Arrival:<span
-                                                                class="d-block"></span> Thurs, Feb 16</span>
-                                                        <p class="mb-0"><strong class="shopping-bag-title">$20</strong>
-                                                        </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="shopping-bag-payment">
+                                            <span class="payment-titles">$24.43</span>
+                                            <span class="px-1"> x </span>
+                                            <span class="border rounded px-1">3</span>
+                                            <span>=</span>
+                                            <span class="payment-titles">$73.97</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul
+                                    class="subscriptions-produccts mb-0 p-0 list-unstyled d-flex align-items-self-start justify-content-between flex-wrap">
+                                    <li>
+                                        <div class="sub-product-image mb-3 mb-md-4">
+                                            <img src="images/about01.png" class="img-fluid" alt="product-img">
+                                        </div>
+                                    </li>
+                                    <li class="mx-2 mb-2"><strong>GMG Professional Gold Seal Special Title</strong>
+                                        <div>
+                                            <ul class="list-unstyled m-0 p-0">
+                                                <li>
+                                                    <p class="mb-0">Solid by merchant_username03</p>
+                                                </li>
+                                                <li>
+                                                    <p class="mb-2"><span><i class="fa fa-map-marker me-2"
+                                                                aria-hidden="true"></i></span>[Merchant Location]</p>
+                                                </li>
+                                                <li>
+                                                    <p>[Product short description] Lorem ipsum is simply elit.</p>
+                                                </li>
+                                                <li>
+                                                    <div class="shopping-bag-pickup d-flex">
+                                                        <div class="shopping-bag-delivery me-3">
+                                                            <strong class="shopping-bag-title">Delivery</strong>
+                                                            <span class="estimated mb-2">Estimated Arrival:<span
+                                                                    class="d-block"></span> Thurs, Feb 16</span>
+                                                            <p class="mb-0"><strong class="shopping-bag-title">$20</strong>
+                                                            </p>
+                                                        </div>
+                                                        <div class="shopping-bag-delivery ">
+                                                            <p class="mb-0"><strong
+                                                                    class="shopping-bag-title">Pickup</strong></p>
+                                                            <p class="mb-0"><strong class="shopping-bag-title">Free</strong>
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="shopping-bag-delivery ">
-                                                        <p class="mb-0"><strong
-                                                                class="shopping-bag-title">Pickup</strong></p>
-                                                        <p class="mb-0"><strong class="shopping-bag-title">Free</strong>
-                                                        </p>
+                                                </li>
+                                                <li>
+                                                    <hr>
+                                                </li>
+                                                <li>
+                                                    <div class="save-for-later d-flex">
+                                                        <p class="save-remove-later me-4 mb-0">Save for later</p>
+                                                        <p class="mb-0">Remove</p>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <hr>
-                                            </li>
-                                            <li>
-                                                <div class="save-for-later d-flex">
-                                                    <p class="save-remove-later me-4 mb-0">Save for later</p>
-                                                    <p class="mb-0">Remove</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="shopping-bag-payment">
-                                        <span class="payment-titles">$24.43</span>
-                                        <span class="px-1"> x </span>
-                                        <span class="border rounded px-1">3</span>
-                                        <span>=</span>
-                                        <span class="payment-titles">$73.97</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> --}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="shopping-bag-payment">
+                                            <span class="payment-titles">$24.43</span>
+                                            <span class="px-1"> x </span>
+                                            <span class="border rounded px-1">3</span>
+                                            <span>=</span>
+                                            <span class="payment-titles">$73.97</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div> --}}
                         </div>
                         <div class="col-12 col-md-4">
                             <h2>My Shopping Bag</h2>

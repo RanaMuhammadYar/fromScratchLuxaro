@@ -312,6 +312,5 @@
             </div>
 
         </div>
-        <livewire:product-ratings :product="$product">
-        {{-- <livewire:'livewire.product-ratings, ['product' => $product], key($product->id)) --}}
+          @livewire('product-ratings', ['product' => $product], key($product->id))
     @endsection
