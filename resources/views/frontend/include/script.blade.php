@@ -3,6 +3,7 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
+
 @if (session('success'))
     <script>
         swal({
@@ -24,6 +25,9 @@
     </script>
 @endif
 <script>
+    setTimeout(function() {
+    $('.alert').fadeOut('fast');
+}, 3000); 
     function appendProducts(selectObject){
         var filterValue = selectObject.value;
         var id = filterValue.substr(filterValue.length - 1);
@@ -83,6 +87,7 @@
 </script>
 
 <script>
+    $('.alert').alert()
     $('.openLuxaroSidebar').click(function(){
         $('.common').addClass('close');
         $('.common').removeClass('show');

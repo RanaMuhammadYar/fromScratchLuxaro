@@ -58,13 +58,18 @@
                             <h2 class="mb-1">{{ $product->product_name }}</h2>
                             <div class="details-review d-flex align-items-center mb-1">
                                 <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                    <li class="me-1"><i class="fa fa-star"></i></li>
-                                    <li class="me-1"><i class="fa fa-star"></i></li>
-                                    <li class="me-1"><i class="fa fa-star"></i></li>
-                                    <li class="me-1"><i class="fa fa-star"></i></li>
-                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                    @php
+                                       $size = (int)$product->ratings()->avg('rating');
+                                       $unstart = 5-$size;
+                                    @endphp
+                                    @for ($i=0;$i<$size;$i++)
+                                        <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
+                                    @endfor
+                                    @for ($i=0;$i<$unstart;$i++)
+                                       <li class="me-1"><i class="fa fa-star"></i></li>
+                                     @endfor
                                 </ul>
-                                <span class="small">4.2 (Based on 16 Reviews)</span>
+                                <span class="small">{{ round($product->ratings()->avg('rating'), 1).'(Based on '.$product->ratings()->count().'Reviews)' }} </span>
                             </div>
                             <p class="price my-2">${{ $product->product_price }}</p>
                             <div class="quantity-btn d-flex align-items-center mb-3">
@@ -112,7 +117,7 @@
             <div class="container">
                 <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                     <h2 class="m-0">You may also like</h2>
-                    <div class="d-flex form-holder">
+                    {{-- <div class="d-flex form-holder">
                         <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
                         <form class="page-form flex-fill" action="#">
                             <div class="page-form-holder d-flex">
@@ -126,10 +131,9 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="slider Charters-slider">
-
                     @foreach ($productsasc as $productasc)
                         <div>
                             <div class="product-item">
@@ -146,11 +150,16 @@
                                                 <strong class="title">{{ $productasc->product_name }}</strong>
                                             </a>
                                             <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
+                                                @php
+                                                   $size = (int)$productasc->ratings()->avg('rating');
+                                                   $unstart = 5-$size;
+                                                @endphp
+                                                @for ($i=0;$i<$size;$i++)
+                                                    <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
+                                                @endfor
+                                                @for ($i=0;$i<$unstart;$i++)
+                                                   <li class="me-1"><i class="fa fa-star"></i></li>
+                                                 @endfor
                                             </ul>
                                         </div>
                                         <i class="fa fa-globe fa-1x mt-2"></i>
@@ -173,7 +182,7 @@
             <div class="container">
                 <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                     <h2 class="m-0">More from this suite</h2>
-                    <div class="d-flex form-holder">
+                    {{-- <div class="d-flex form-holder">
                         <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
                         <form class="page-form flex-fill" action="#">
                             <div class="page-form-holder d-flex">
@@ -187,42 +196,50 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="slider Charters-slider">
-                    {{-- @foreach ($mayyoulike as $products) --}}
-                    @for ($i = 0; $i < 10; $i++)
-                        <div>
-                            <div class="product-item">
+                    @foreach ($mayyoulike as $productasc)
+                    <div>
+                        <div class="product-item">
+                            <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}">
                                 <div class="img-holder">
-                                    <img src="Test" onerror="this.src='{{ asset('images/default.png') }}'"
-                                        class="img-fluid">
+                                    <img src="{{ $productasc->image }}"
+                                        onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
                                 </div>
-                                <div class="txt-holder">
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div>
-                                            <strong class="title">Test</strong>
-                                            <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <i class="fa fa-globe fa-1x mt-2"></i>
+                            </a>
+                            <div class="txt-holder">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}" style="color: black">
+                                            <strong class="title">{{ $productasc->product_name }}</strong>
+                                        </a>
+                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
+                                            @php
+                                               $size = (int)$productasc->ratings()->avg('rating');
+                                               $unstart = 5-$size;
+                                            @endphp
+                                            @for ($i=0;$i<$size;$i++)
+                                                <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
+                                            @endfor
+                                            @for ($i=0;$i<$unstart;$i++)
+                                               <li class="me-1"><i class="fa fa-star"></i></li>
+                                             @endfor
+                                        </ul>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <strong class="title">$100</strong>
-                                        <button class="btn bg-dark text-white py-1 px-2"><i
-                                                class="fa fa-shopping-basket"></i>
-                                        </button>
-                                    </div>
+                                    <i class="fa fa-globe fa-1x mt-2"></i>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <strong class="title">${{ $productasc->product_price }}</strong>
+                                    <button class="btn bg-dark text-white py-1 px-2"
+                                        onclick="addToCart('{{ $productasc->id }}', '{{ $productasc->product_name }}', '{{ $productasc->product_price }}')"><i
+                                            class="fa fa-shopping-basket"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    @endfor
-                    {{-- @endforeach --}}
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -230,7 +247,7 @@
             <div class="container">
                 <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                     <h2 class="m-0">You may also like</h2>
-                    <div class="d-flex form-holder">
+                    {{-- <div class="d-flex form-holder">
                         <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
                         <form class="page-form flex-fill" action="#">
                             <div class="page-form-holder d-flex">
@@ -244,7 +261,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="slider product-slider">
 
@@ -264,11 +281,16 @@
                                                 <strong class="title">{{ $productsdescs->product_name }}</strong>
                                             </a>
                                             <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
+                                                @php
+                                                   $size = (int)$productsdescs->ratings()->avg('rating');
+                                                   $unstart = 5-$size;
+                                                @endphp
+                                                @for ($i=0;$i<$size;$i++)
+                                                    <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
+                                                @endfor
+                                                @for ($i=0;$i<$unstart;$i++)
+                                                   <li class="me-1"><i class="fa fa-star"></i></li>
+                                                 @endfor
                                             </ul>
                                         </div>
                                         <i class="fa fa-globe fa-1x mt-2"></i>
@@ -290,192 +312,5 @@
             </div>
 
         </div>
-        <script>
-            // function increment() {
-            //     var value = $('.addOrRemove').val();
-            //     value = isNaN(value) ? 0 : value;
-            //     value++;
-            //     $('.addOrRemove').val(value);
-            // }
-
-            // function decrement() {
-            //     var value = $('.addOrRemove').val();
-            //     value = isNaN(value) ? 0 : value;
-            //     value < 1 ? value = 1 : '';
-            //     if (value > 1) {
-            //         value--;
-            //     }
-            //     $('.addOrRemove').val(value);
-            // }
-
-            // function addToCart(product_id, name, price) {
-
-            //     var quantity = $('.addOrRemove').val();
-            //     var total = price * quantity;
-            //     $.ajax({
-            //         type: "POST",
-            //         url: "{{ route('addtocart') }}",
-            //         headers: {
-            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //         },
-            //         data: {
-            //             product_id: product_id,
-            //             name: name,
-            //             price: price,
-            //             quantity: quantity,
-            //             total: total
-            //         },
-            //         dataType: "json",
-            //         success: function(response) {
-            //             if (response.success == 'Product Already Added To Cart.') {
-            //                 swal({
-            //                     title: "Error!",
-            //                     text: response.success,
-            //                     icon: "error",
-            //                     button: "Ok",
-
-            //                 });
-            //                 return false;
-            //             } else {
-            //                 swal({
-            //                     title: "Success!",
-            //                     text: response.success,
-            //                     icon: "success",
-            //                     button: "Ok",
-            //                 });
-
-            //             }
-
-            //             $('.catdata').append(
-            //                 '<div class="row destroy' + response.id +
-            //                 '"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
-            //                 response.cart.name +
-            //                 '</span></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true" onclick="orderdestroy(' +
-            //                 response.id + ')" ></i></span></div><div class="col-3 px-1"><span>' +
-            //                 response.cart.quantity +
-            //                 '</span></div><div class="col-3 px-1"><span class="d-block">=$' + response.cart
-            //                 .price * response.cart.quantity + '</span></div></div>');
-            //             $('.totalprice').html('');
-            //             $('.totalprice').append(
-            //                 '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
-            //                 response.total + '</span></div><div class="col-1"></div></div>');
-            //             $('.CartCount').html('');
-            //             $('.CartCount').append(response.count);
-
-            //         }
-
-            //     });
-
-
-            // }
-
-            // function orderdestroy(destroy_id) {
-            //     $.ajax({
-            //         type: "POST",
-            //         url: "{{ route('orderdestroy') }}",
-            //         headers: {
-            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //         },
-            //         data: {
-            //             destroy_id: destroy_id,
-            //         },
-            //         dataType: "json",
-            //         success: function(response) {
-
-            //             $('.destroy' + destroy_id + '').html('');
-            //             $('.CartCount').html('');
-            //             $('.CartCount').append(response.count);
-            //             $('.totalprice').html('');
-            //             if (response.total == 0) {} else {
-            //                 $('.totalprice').append(
-            //                     '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
-            //                     response.total + '</span></div><div class="col-1"></div></div>');
-            //             };
-            //             swal({
-            //                 title: "Success!",
-            //                 text: response.success,
-            //                 icon: "success",
-            //                 button: "Ok",
-            //             });
-            //         }
-
-            //     });
-            // }
-
-
-            // function addToCart(product_id, name, price) {
-            //     var quantity = document.getElementById('addOrRemove').value;
-            //     var product = {
-            //         id: product_id,
-            //         name: name,
-            //         price: price,
-            //         quantity: quantity
-            //     };
-            //     sessionStorage.setItem('product', JSON.stringify(product));
-            //     var allData = JSON.parse(sessionStorage.getItem('product'));
-            //     if (allData.id == product_id) {
-            //         sessionStorage.removeItem('product');
-            //         $('.catdata').html('');
-            //         // allData.quantity = parseInt(allData.quantity) + parseInt(quantity);
-            //     }
-            //     var quentity = allData.quantity;
-            //     var price = allData.price;
-            //     var total = quentity * price;
-            //     $('.catdata').append(
-            //         '<div class="row"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
-            //         allData.name +
-            //         '</span></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true"></i></span></div><div class="col-3 px-1"><span>' +
-            //         allData.quantity + '</span></div><div class="col-3 px-1"><span class="d-block">= $' + price +
-            //         '</span><span>= $' + total + ' Total</span></div></div>');
-            // }
-
-
-            // function addToCart(product_id, name, price) {
-            //     var quantity = parseInt(document.getElementById('addOrRemove').value, 10);
-            //     var product = {
-            //         id: product_id,
-            //         name: name,
-            //         price: price,
-            //         quantity: quantity
-            //     };
-            //     var existingProducts = sessionStorage.getItem('products');
-            //     if (existingProducts) {
-            //         existingProducts = JSON.parse(existingProducts);
-            //         // Check if product with the same ID already exists
-            //         var index = existingProducts.findIndex(function(p) {
-            //             return p.id == product_id;
-            //         });
-            //         if (index !== -1) {
-            //             // Update the quantity of existing product
-            //             existingProducts[index].quantity += quantity;
-            //         } else {
-            //             // Add new product to the array
-            //             existingProducts.push(product);
-            //         }
-            //         sessionStorage.setItem('products', JSON.stringify(existingProducts));
-            //     } else {
-            //         // Add first product to the session
-            //         sessionStorage.setItem('products', JSON.stringify([product]));
-            //     }
-            //     var products = JSON.parse(sessionStorage.getItem('products'));
-            //     var total = 0;
-            //     $('.catdata').html(''); // Clear existing products
-            //     products.forEach(function(p) {
-            //         var subtotal = p.price * p.quantity;
-            //         total += subtotal;
-            //         $('.catdata').append(
-            //             '<div class="row"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
-            //             p.name +
-            //             '</span></div><div class="col-1 px-1"><span class="remove-product" data-id="' +
-            //             p.id +
-            //             '"><i class="fa fa-times" aria-hidden="true"></i></span></div><div class="col-3 px-1"><span>' +
-            //             p.quantity + '</span></div><div class="col-3 px-1"><span class="d-block">= $' + p.price +
-            //             '</span><span>= $' + subtotal.toFixed(2) + ' Total</span></div></div>');
-            //     });
-            //     $('.catdata').append(
-            //         '<div class="row"><div class="col-12 px-1 text-right"><span class="d-block"><strong>Total: $' + total
-            //         .toFixed(2) +
-            //         '</strong></span></div></div>');
-            // }
-        </script>
+          @livewire('product-ratings', ['product' => $product], key($product->id))
     @endsection

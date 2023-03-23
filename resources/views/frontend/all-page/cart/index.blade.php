@@ -99,12 +99,10 @@
                                             </li>
                                         </ul>
                                     </div>
-
                                     @php
                                         $subtotal += $allcartorder->product->product_price * $allcartorder->quantity;
                                         $total += $allcartorder->product->product_price * $allcartorder->quantity + $allcartorder->product->shipping_charge;
                                         $shipping_charge += $allcartorder->product->shipping_charge;
-
                                     @endphp
                                 @endforeach
 

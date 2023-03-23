@@ -108,16 +108,16 @@
                             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                                 <h2 class="m-0">Related items</h2>
                                 <div class="d-flex form-holder">
-                                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                                    {{-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> --}}
                                     <form class="page-form flex-fill" action="#">
                                         <div class="page-form-holder d-flex">
                                             <label class="form-control rounded-0">Search Filter</label>
                                             <div class="form-field d-flex flex-fill">
-                                            <select class="flex-fill border-0 bg-transparent" id="price-filter">
-                                                <option>OrderBy</option>
-                                                <option value="desc">price(max)</option>
-                                                <option value="asc">price(min)</option>
-                                            </select>
+                                                <select class="flex-fill border-0 bg-transparent" id="price-filter" onchange="appendCharters(this)">
+                                                    <option>OrderBy</option>
+                                                    <option value="desc">price(max)</option>
+                                                    <option value="asc">price(min)</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </form>
@@ -152,7 +152,6 @@
                                             </div>
                                         </div>
                                     </a>
-
                                 </div>
                                 @endforeach
                             </div>
@@ -162,13 +161,13 @@
                         <div class="container">
                             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                                 <h2 class="m-0">You may also like</h2>
-                                <div class="d-flex form-holder">
+                                {{-- <div class="d-flex form-holder">
                                     <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
                                     <form class="page-form flex-fill" action="#">
                                         <div class="page-form-holder d-flex">
                                             <label class="form-control rounded-0">Search Filter</label>
                                             <div class="form-field d-flex flex-fill">
-                                            <select class="flex-fill border-0 bg-transparent" id="price-filter-like">
+                                            <select class="flex-fill border-0 bg-transparent" onchange="appendCharters(this)">
                                                 <option>OrderBy</option>
                                                 <option value="desc">price(max)</option>
                                                 <option value="asc">price(min)</option>
@@ -176,10 +175,10 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
                             </div>
-                            <div class="slider Luxauro-fresh-slider product-detail-merchant" id="charter-append-like">
-                            @foreach ($charters as $charter)
+                            <div class="slider Luxauro-fresh-slider product-detail-merchant" >
+                               @foreach ($charters as $charter)
                                 <div>
                                     <a href="{{route('charter_detail',['id'=>$charter->id])}}">
                                         <div class="product-item">
@@ -207,7 +206,6 @@
                                             </div>
                                         </div>
                                     </a>
-
                                 </div>
                                 @endforeach
                             </div>
@@ -230,9 +228,4 @@
         <img src="{{asset('frontend/images/img1.png')}}" class="img-fluid">
     </div>
 </div>
-<!-- <script>
-    document.getElementById('pagination').onchange = function() { 
-        window.location = "{{ route('charters')}}?page=" + this.value; 
-    }; 
-</script> -->
 @endsection

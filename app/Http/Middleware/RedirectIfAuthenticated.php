@@ -19,11 +19,19 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, ...$guards)
     {
         $guards = empty($guards) ? [null] : $guards;
-
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // return redirect(RouteServiceProvider::HOME);
+                if (strpos(url()->previous(), 'goldEvines/founderRegister'))
+                {
+                    return redirect()->route('goldEvine');
+                }
+                if (strpos(url()->previous(), 'goldMetal/professionalRegister'))
+                {
+                    return redirect()->route('goldMetal');
+                }
             }
+         
         }
 
         return $next($request);
