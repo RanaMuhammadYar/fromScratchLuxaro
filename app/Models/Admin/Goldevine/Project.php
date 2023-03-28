@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Admin\Golevine\FounderDetail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model
@@ -61,8 +62,9 @@ class Project extends Model
     {
         return $this->tagNames();
     }
-    // public function tags()
-    // {
-    //     return $this->belongsToMany('App\Tag', 'post_tag');
-    // }
+
+    public function FounderDetail()
+    {
+        return $this->hasOne(FounderDetail::class,'project_id','id');
+    }
 }

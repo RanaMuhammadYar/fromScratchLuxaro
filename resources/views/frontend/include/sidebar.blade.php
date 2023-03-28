@@ -61,6 +61,8 @@
                     <li class="pb-1"><a href="">my saved payment methods</a></li>
                     <li class="pb-1"><a href="">preference</a></li>
                     <li class="pb-1"><a href="">setting</a></li>
+                    <li class="pb-1 active"><a href="{{ route('createProject') }}">Project Create</a></li>
+                    <li class="pb-1 active"><a href="{{ route('allprojects') }}">My Project</a></li>
                 </ul>
             </div>
         </div>
@@ -95,7 +97,7 @@
                 GMG PROFESSIONAL SETUP
             </button>
         </h2>
-        <div id="collapseSix " class="accordion-collapse GMGSidebar common" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+        <div id="collapseSix" class="accordion-collapse GMGSidebar common" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
             <div class="accordion-body px-4">
                 <ul class="mangement profile p-0 list-unstyled">
                     <li class="pb-1"><a href="{{route('my-profile')}}">My Profile</a></li>

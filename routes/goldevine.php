@@ -11,8 +11,16 @@ use App\Http\Controllers\Admin\Goldevine\ProjectManageController;
 
 Route::resource('goldevine-category', GoldevineCategoryController::class);
 Route::get('project-detail/{id}/{slug}', [ProjectManageController::class, 'projectDetail'])->name('projectDetail');
-
 Route::get('project-checkout/{id}', [ProjectManageController::class, 'projectcheckout'])->name('projectcheckout');
-
 Route::post('project-checkout', [ProjectManageController::class, 'projectcheckoutstore'])->name('projectcheckoutstore');
 Route::any('project-search', [ProjectManageController::class, 'projectsearch'])->name('projectsearch');
+
+// Myprofile Admin pnal |Route:
+
+Route::get('create-project', [ProjectManageController::class, 'create'])->name('createProject');
+Route::post('create-project', [ProjectManageController::class, 'store'])->name('storeProjectgoldevine');
+Route::get('all-project', [ProjectManageController::class, 'allProject'])->name('allprojects');
+Route::get('edit-project/{id}', [ProjectManageController::class, 'edit'])->name('editProject');
+Route::post('edit-project', [ProjectManageController::class, 'update'])->name('updateProject');
+
+

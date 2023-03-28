@@ -1,4 +1,3 @@
-<script type="text/javascript" src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
@@ -26,86 +25,105 @@
 @endif
 <script>
     setTimeout(function() {
-    $('.alert').fadeOut('fast');
-}, 3000); 
-    function appendProducts(selectObject){
+        $('.alert').fadeOut('fast');
+    }, 3000);
+
+    function appendProducts(selectObject) {
         var filterValue = selectObject.value;
         var id = filterValue.substr(filterValue.length - 1);
         $.ajax({
             type: 'GET',
             url: "{{ route('appendProducts') }}",
-            data: { price_filter: filterValue },
+            data: {
+                price_filter: filterValue
+            },
             success: function(data) {
-                $('#product-append'+id).html(null);
-                $('#product-append'+id).html(data);    
-                $('#product-append'+id).css({"display": "flex"});
+                $('#product-append' + id).html(null);
+                $('#product-append' + id).html(data);
+                $('#product-append' + id).css({
+                    "display": "flex"
+                });
             }
         });
     }
-    function appendCategories(selectObject){
+
+    function appendCategories(selectObject) {
         var filterValue = selectObject.value;
         var id = filterValue.substr(filterValue.length - 1);
         $.ajax({
             type: 'GET',
             url: "{{ route('appendCategories') }}",
-            data: { category_filter: filterValue },
+            data: {
+                category_filter: filterValue
+            },
             success: function(data) {
                 $('#category-append').html(null);
-                $('#category-append').html(data);    
-                $('#category-append').css({"display": "flex"});
+                $('#category-append').html(data);
+                $('#category-append').css({
+                    "display": "flex"
+                });
             }
         });
     }
-    function appendCharters(selectObject){
+
+    function appendCharters(selectObject) {
         var filterValue = selectObject.value;
         $.ajax({
             type: 'GET',
             url: "{{ route('appendCharters') }}",
-            data: { charter: filterValue },
+            data: {
+                charter: filterValue
+            },
             success: function(data) {
                 $('#charter-append').html(null);
-                $('#charter-append').html(data);    
-                $('#charter-append').css({"display": "flex"});
+                $('#charter-append').html(data);
+                $('#charter-append').css({
+                    "display": "flex"
+                });
             }
         });
     }
-    function appendLocalLuxauro(selectObject){
+
+    function appendLocalLuxauro(selectObject) {
         var filterValue = selectObject.value;
         $.ajax({
             type: 'GET',
             url: "{{ route('appendLocalLuxauro') }}",
-            data: { products: filterValue },
+            data: {
+                products: filterValue
+            },
             success: function(data) {
                 $('#local-luxaro-append').html(null);
-                $('#local-luxaro-append').html(data);    
-                $('#local-luxaro-append').css({"display": "flex"});
+                $('#local-luxaro-append').html(data);
+                $('#local-luxaro-append').css({
+                    "display": "flex"
+                });
             }
         });
     }
-
-
 </script>
 
 <script>
     $('.alert').alert()
-    $('.openLuxaroSidebar').click(function(){
+    $('.openLuxaroSidebar').click(function() {
         $('.common').addClass('close');
         $('.common').removeClass('show');
         $('.LuxaroSidebar').addClass('show');
         $('.LuxaroSidebarbtn').addClass('show');
     });
-    $('.openGoldEvineSidebar').click(function(){
+    $('.openGoldEvineSidebar').click(function() {
         $('.common').addClass('close');
         $('.common').removeClass('show');
         $('.GoldEvineSidebar').addClass('show');
         $('.GoldEvineSidebarbtn').addClass('show');
     });
-    $('.openGMGSidebar').click(function(){
+    $('.openGMGSidebar').click(function() {
         $('.common').addClass('close');
         $('.common').removeClass('show');
         $('.GMGSidebar').addClass('show');
         $('.GMGSidebarbtn').addClass('show');
     });
+
     function increment() {
         var value = $('.addOrRemove').val();
         value = isNaN(value) ? 0 : value;
@@ -263,51 +281,10 @@
         });
 
     }
+</script>
 
-
-
-
-    // function addToCart(product_id, name, price) {
-    //     var quantity = parseInt(document.getElementById('addOrRemove').value, 10);
-    //     var product = {
-    //         id: product_id,
-    //         name: name,
-    //         price: price,
-    //         quantity: quantity
-    //     };
-    //     var existingProducts = sessionStorage.getItem('products');
-    //     if (existingProducts) {
-    //         existingProducts = JSON.parse(existingProducts);
-    //         var index = existingProducts.findIndex(function(p) {
-    //             return p.id == product_id;
-    //         });
-    //         if (index !== -1) {
-    //             existingProducts[index].quantity += quantity;
-    //         } else {
-    //             existingProducts.push(product);
-    //         }
-    //         sessionStorage.setItem('products', JSON.stringify(existingProducts));
-    //     } else {
-    //         sessionStorage.setItem('products', JSON.stringify([product]));
-    //     }
-    //     var products = JSON.parse(sessionStorage.getItem('products'));
-    //     var total = 0;
-    //     $('.catdata').html('');
-    //     products.forEach(function(p) {
-    //         var subtotal = p.price * p.quantity;
-    //         total += subtotal;
-    //         $('.catdata').append(
-    //             '<div class="row"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
-    //             p.name +
-    //             '</span></div><div class="col-1 px-1"><span class="remove-product" data-id="' +
-    //             p.id +
-    //             '"><i class="fa fa-times" aria-hidden="true"></i></span></div><div class="col-3 px-1"><span>' +
-    //             p.quantity + '</span></div><div class="col-3 px-1"><span class="d-block">= $' + p.price +
-    //             '</span><span>= $' + subtotal.toFixed(2) + ' Total</span></div></div>');
-    //     });
-    //     $('.catdata').append(
-    //         '<div class="row"><div class="col-12 px-1 text-right"><span class="d-block"><strong>Total: $' + total
-    //         .toFixed(2) +
-    //         '</strong></span></div></div>');
-    // }
+<script>
+    $(document).ready(function() {
+        CKEDITOR.replace('description');
+    });
 </script>

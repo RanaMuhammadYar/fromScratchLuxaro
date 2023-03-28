@@ -124,7 +124,7 @@ class UserController extends Controller
                  return  $query->first();
         }, 'userEducations', 'userCertificates', 'userProfessions'])
             ->where('id', $userId)->first();
-        Session::flash('message', 'Profile  Updated Successfully!'); 
+        Session::flash('message', 'Profile  Updated Successfully!');
 
         return back()->with(['user' =>  $user]);
     }
@@ -169,6 +169,14 @@ class UserController extends Controller
     }
     public function myProfile()
     {
+        $projects = Project::with('user')->where('user_id',auth()->user()->id)->get();
+        return view('frontend.all-page.goldevineprofile',compact('projects'));
+
+
+    }
+
+    public function myaccount()
+    {
         $user =   User::with('userDetails','userEducations', 'userCertificates', 'userProfessions')
        ->where('id', auth()->user()->id)->first();
         $countries = Country::all();
@@ -199,7 +207,7 @@ class UserController extends Controller
     }
     public function contactUs()
     {
-        return view('frontend.contact_us');
+        return view('frontend.contactUs.index');
     }
     public function aboutUs()
     {
