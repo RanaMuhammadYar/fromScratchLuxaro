@@ -28,6 +28,6 @@ class GoldevineMageController extends Controller
     public function projectdetail($id)
     {
         $project = Project::find($id);
-        return view('frontend.admin.goldevine.projectdetail', compact('project'));
+        return view('frontend.goldevine.project.detail', compact('project'));
     }
 }
