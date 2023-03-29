@@ -25,11 +25,14 @@ class CreateFounderDetailsTable extends Migration
             $table->string('ein');
             $table->string('bank_account');
             $table->string('cart_number');
-            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('project_id')->nullable();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('project_branch_id')->nullable();
+            $table->foreign('project_branch_id')->references('id')->on('project_branches')->onDelete('cascade');
             $table->string('term_conditions');
+
             $table->timestamps();
         });
     }

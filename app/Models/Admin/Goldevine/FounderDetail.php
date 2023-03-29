@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin\Golevine;
+namespace App\Models\Admin\Goldevine;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,4 +23,9 @@ class FounderDetail extends Model
         'project_id',
         'user_id',
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

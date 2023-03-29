@@ -8,7 +8,7 @@ use App\Models\Vendor\Country;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Goldevine\Project;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Admin\Golevine\FounderDetail;
+use App\Models\Admin\Goldevine\FounderDetail;
 use App\Models\Admin\Goldevine\GoldevineOrder;
 use App\Models\Admin\Goldevine\ProjectBenefit;
 
@@ -131,7 +131,6 @@ class ProjectManageController extends Controller
             $project->country = $request->country;
             $project->location = $request->location;
             $project->status = 'Pending';
-            $project->slug = $request->title;
             $project->user_id = auth()->user()->id;
             $project->save();
             $tags = explode(",", $request->tags);
@@ -185,14 +184,12 @@ class ProjectManageController extends Controller
     public function edit($id)
     {
         $project = Project::with('projectBenefits', 'FounderDetail')->find($id);
-        // dd($project);
         $countries = Country::all();
         return view('frontend.all-page.project.edit', compact('countries', 'project'));
     }
 
     public function update(Request $request)
     {
-        // return $request->all();
 
         $validate = Validator::make($request->all(), [
             'title' => 'required',
@@ -277,7 +274,6 @@ class ProjectManageController extends Controller
             $project->country = $request->country;
             $project->location = $request->location;
             $project->status = 'Pending';
-            $project->slug = $request->title;
             $project->user_id = auth()->user()->id;
             $project->save();
             $tags = explode(",", $request->tags);
@@ -291,10 +287,16 @@ class ProjectManageController extends Controller
                         $projectbenefit = ProjectBenefit::find($request->benefit_id[$key]);
                     }
                     //  echo $projectbenefit . $key;
+
+
+
+
+
                     if ($request->hasFile('feature_image')) {
                         $path = asset('storage/' . $request->feature_image[$key]->store('project/feature_image'));
                         $projectbenefit->feature_image = $path;
                     }
+
                     $projectbenefit->project_id = $project->id;
                     $projectbenefit->benefit_name = $request->benefit_title[$key];
                     $projectbenefit->price = $request->benefit_price[$key];

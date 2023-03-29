@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Admin\Golevine\FounderDetail;
+use App\Models\Admin\Goldevine\FounderDetail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model

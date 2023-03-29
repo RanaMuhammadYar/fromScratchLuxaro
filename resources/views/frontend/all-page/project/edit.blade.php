@@ -334,7 +334,7 @@
                                                         </div>
 
                                                         <div class="col-12 col-md-6 mb-3 mb-md-0">
-                                                            <label>Feature Image</label>
+                                                            <label>Feature Image <span class="text-danger">*</span> </label>
                                                             <label class="uploadFile border rounded">
                                                                 <i class="fa fa-cloud-upload upload-icon-account-1"
                                                                     aria-hidden="true"></i>
@@ -401,7 +401,7 @@
                                                             </div>
 
                                                             <div class="col-12 col-md-6 mb-3 mb-md-0">
-                                                                <label>Feature Image</label>
+                                                                <label>Feature Image <span class="text-danger">*</span></label>
                                                                 <label class="uploadFile border rounded">
                                                                     <i class="fa fa-cloud-upload upload-icon-account-1"
                                                                         aria-hidden="true"></i>
@@ -655,7 +655,7 @@
         function addNewBenefit() {
             var tempid = Math.floor(Math.random() * 100000);
             var html = '<div class="benefit' + tempid +
-                '"><div class="row gx-5 mb-0 mb-md-3 mt-2"> <div class="col-12 col-md-6 mb-3 mb-md-0"><input type="hidden" name="benefit_id[]"> <label for="" class="form-label mb-0">Benefit Title</label> <input type="text" class="form-control" name="benefit_title[]"> </div><div class="col-12 col-md-6 mb-3 mb-md-0"> <label for="" class="form-label mb-0">Benefit Price</label> <input type="number" class="form-control" name="benefit_price[]"> </div></div><div class="row gx-5 mb-0 mb-md-3 mt-2"> <div class="col-12 col-md-6 mb-3 mb-md-0"> <label for="" class="form-label mb-0">Benefit MSRP</label> <input type="text" class="form-control" name="benefit_msrp[]"> <div class="pincel"></div></div><div class="col-12 col-md-6 mb-3 mb-md-0" > <label>Feature Image</label> <label class="uploadFile border rounded"> <i class="fa fa-cloud-upload upload-icon-account-1" aria-hidden="true"></i> <span class="filename">file</span> <input type="file" class="inputfile form-control" required name="feature_image[]"/> </label> </div></div><div class="mb-3"> <label for="" class="form-label mb-0">Benefit Short Description</label> <input type="text" class="form-control" name="short_description[]"> <div class="pincel"></div></div><div class="row gx-5 mb-0 mb-md-3"> <div class="col-12 col-md-6 mb-3 mb-md-0"> <label for="" class="form-label mb-0">Estimated Delivery Date</label> <input type="date" class="form-control" name="delivery_date[]"> </div><div class="col-12 col-md-6 mb-3 mb-md-0"> <label for="" class="form-label mb-0">Quantity</label> <input type="number" class="form-control" name="quantity[]"> </div></div><div class="row"> <div class="col-8"></div><div class="col-4"> <button class="btn btn-danger" onclick="removebenift(' +
+                '"><div class="row gx-5 mb-0 mb-md-3 mt-2"> <div class="col-12 col-md-6 mb-3 mb-md-0"><input type="hidden" name="benefit_id[]"> <label for="" class="form-label mb-0">Benefit Title</label> <input type="text" class="form-control" name="benefit_title[]"> </div><div class="col-12 col-md-6 mb-3 mb-md-0"> <label for="" class="form-label mb-0">Benefit Price</label> <input type="number" class="form-control" name="benefit_price[]"> </div></div><div class="row gx-5 mb-0 mb-md-3 mt-2"> <div class="col-12 col-md-6 mb-3 mb-md-0"> <label for="" class="form-label mb-0">Benefit MSRP</label> <input type="text" class="form-control" name="benefit_msrp[]"> <div class="pincel"></div></div><div class="col-12 col-md-6 mb-3 mb-md-0" > <label>Feature Image <span class="text-danger">*</span></label> <label class="uploadFile border rounded"> <i class="fa fa-cloud-upload upload-icon-account-1" aria-hidden="true"></i> <span class="filename">file</span> <input type="file" class="inputfile form-control" required name="feature_image[]"/> </label> </div></div><div class="mb-3"> <label for="" class="form-label mb-0">Benefit Short Description</label> <input type="text" class="form-control" name="short_description[]"> <div class="pincel"></div></div><div class="row gx-5 mb-0 mb-md-3"> <div class="col-12 col-md-6 mb-3 mb-md-0"> <label for="" class="form-label mb-0">Estimated Delivery Date</label> <input type="date" class="form-control" name="delivery_date[]"> </div><div class="col-12 col-md-6 mb-3 mb-md-0"> <label for="" class="form-label mb-0">Quantity</label> <input type="number" class="form-control" name="quantity[]"> </div></div><div class="row"> <div class="col-8"></div><div class="col-4"> <button class="btn btn-danger" onclick="removebenift(' +
                 tempid + ')"> - Remove a Benefit</button></div></div><hr class="m-3"></div>';
             $('.addbenefitappend').append(html);
 

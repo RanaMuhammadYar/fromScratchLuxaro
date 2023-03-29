@@ -11,8 +11,8 @@ $('.banner-slider').slick({
   focusOnSelect: true,
   autoplay: false,
   mobileFirst: true,
-  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>"
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>"
 });
 
 
@@ -25,8 +25,8 @@ $('.explore-slider').slick({
   focusOnSelect: true,
   autoplay: false,
   mobileFirst: true,
-  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
   responsive: [{
     breakpoint: 768,
     settings: {
@@ -42,7 +42,7 @@ $('.explore-slider').slick({
   }]
 });
 
-$('.slider').slick({
+$('.slider').slick({ 
   slidesToShow: 2,
   slidesToScroll: 1,
   infinite: true,
@@ -51,8 +51,8 @@ $('.slider').slick({
   focusOnSelect: true,
   autoplay: false,
   mobileFirst: true,
-  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
   responsive: [{
     breakpoint: 768,
     settings: {
@@ -68,6 +68,32 @@ $('.slider').slick({
   }]
 });
 
+$('.gv-featured-project-slider').slick({ 
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  infinite: true,
+  dots: false,
+  arrows: true,
+  focusOnSelect: true,
+  autoplay: false,
+  mobileFirst: true,
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+  responsive: [{
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 2,
+      slidesToScroll: 1,
+    }
+  },  {
+    breakpoint: 992,
+    settings: {
+      slidesToShow: 2,
+      slidesToScroll: 1,
+    }
+  }]
+});
+
 $('.categories-slider').slick({
   slidesToShow: 2,
   slidesToScroll: 1,
@@ -77,13 +103,8 @@ $('.categories-slider').slick({
   focusOnSelect: true,
   autoplay: false,
   mobileFirst: true,
-<<<<<<< Updated upstream
-  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
-=======
-  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('goldevine/images/arrow-left.png') }}'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src=' {{ asset('goldevine/images/arrow-next.png') }}'></button>",
->>>>>>> Stashed changes
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
   responsive: [{
     breakpoint: 768,
     settings: {
@@ -95,13 +116,34 @@ $('.categories-slider').slick({
     settings: {
       slidesToShow: 4,
       slidesToScroll: 1,
-<<<<<<< Updated upstream
-         prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
-          nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
-=======
-      prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('goldevine/images/arrow-left.png') }}'></button>",
-      nextArrow:"<button type='button' class='slick-next'><img src=' {{ asset('goldevine/images/arrow-next.png') }}'></button>",
->>>>>>> Stashed changes
+         prevArrow:"<button type='button' class='slick-prev'><img src='images/left-arrow.png'></button>",
+          nextArrow:"<button type='button' class='slick-next'><img src='images/right-arrow.png'></button>",
+    }
+  }]
+});
+
+$('.project-page-slider').slick({
+  slidesToShow: 2,
+  slidesToScroll: 1,
+  infinite: true,
+  dots: false,
+  arrows: true,
+  focusOnSelect: true,
+  autoplay: false,
+  mobileFirst: true,
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+  responsive: [{
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 2,
+      slidesToScroll: 1,
+    }
+  },  {
+    breakpoint: 992,
+    settings: {
+      slidesToShow: 4,
+      slidesToScroll: 1,
     }
   }]
 });
@@ -138,13 +180,34 @@ $('.detail-nav-slider').slick({
   autoplay: false,
   mobileFirst: true,
   asNavFor: '.detail-slider',
-<<<<<<< Updated upstream
-  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>"
-=======
-  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('goldevine/images/arrow-left.png') }}'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src=' {{ asset('goldevine/images/arrow-next.png') }}'></button>",
->>>>>>> Stashed changes
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>"
+});
+
+$('.detail-slider-gv').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  infinite: true,
+  dots: false,
+  arrows: false,
+  focusOnSelect: true,
+  autoplay: false,
+  mobileFirst: true,
+  asNavFor: '.detail-nav-slider-gv',
+});
+
+$('.detail-nav-slider-gv').slick({
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  infinite: true,
+  dots: false,
+  arrows: true,
+  focusOnSelect: true,
+  autoplay: false,
+  mobileFirst: true,
+  asNavFor: '.detail-slider-gv',
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>"
 });
 
 $('.slider-wrap').slick({
@@ -158,15 +221,10 @@ $('.slider-wrap').slick({
   focusOnSelect: true,
   cssEase: 'linear',
   touchMove: true,
-<<<<<<< Updated upstream
-  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('images/arrow-left.png') }}'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src='{{ asset('images/arrow-next.png') }}'></button>",
-=======
-  prevArrow:"<button type='button' class='slick-prev'><img src='{{ asset('goldevine/images/arrow-left.png') }}'></button>",
-  nextArrow:"<button type='button' class='slick-next'><img src=' {{ asset('goldevine/images/arrow-next.png') }}'></button>",
->>>>>>> Stashed changes
-
-
+  prevArrow:"<button type='button' class='slick-prev'><img src='images/left-arrow.png'></button>",
+  nextArrow:"<button type='button' class='slick-next'><img src='images/right-arrow.png'></button>",
+  
+ 
 });
 
 
@@ -174,10 +232,10 @@ var imgs = $('.slider-wrap img');
 imgs.each(function(){
   var item = $(this).closest('.item');
   item.css({
-    'background-image': 'url(' + $(this).attr('src') + ')',
-    'background-position': 'center',
+    'background-image': 'url(' + $(this).attr('src') + ')', 
+    'background-position': 'center',            
     '-webkit-background-size': 'cover',
-    'background-size': 'cover',
+    'background-size': 'cover', 
   });
   $(this).hide();
 });
