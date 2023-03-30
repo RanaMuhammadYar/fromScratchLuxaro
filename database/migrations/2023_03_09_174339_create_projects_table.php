@@ -32,6 +32,7 @@ class CreateProjectsTable extends Migration
             $table->string('status')->default('Pending');
             $table->string('slug');
             $table->unsignedBigInteger('user_id');
+            $table->string('add_to_favirate')->nullable();
             // $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
             $table->timestamps();
         });

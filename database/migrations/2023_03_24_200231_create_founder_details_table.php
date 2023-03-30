@@ -30,9 +30,6 @@ class CreateFounderDetailsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('project_branch_id')->nullable();
-            $table->foreign('project_branch_id')->references('id')->on('project_branches')->onDelete('cascade');
-            $table->string('term_conditions');
-
             $table->timestamps();
         });
     }

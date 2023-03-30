@@ -17,7 +17,6 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Description</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -26,9 +25,8 @@
                                 <tr>
                                     <td>
                                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                        <strong>{{ $delivory->title }}</strong>
+                                        <strong>{{ $delivory->name }}</strong>
                                     </td>
-                                    <td>{{ $delivory->description }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
