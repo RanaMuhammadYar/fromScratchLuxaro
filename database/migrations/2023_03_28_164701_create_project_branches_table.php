@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectsTable extends Migration
+class CreateProjectBranchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('project_branches', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('short_description');
@@ -21,8 +21,8 @@ class CreateProjectsTable extends Migration
             $table->string('feature_image');
             $table->longText('gallery_image');
             $table->string('video_link');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('minimum_pledge_amount');
             $table->string('maximum_pledge_amount');
             $table->string('project_funding_goal');
@@ -32,8 +32,9 @@ class CreateProjectsTable extends Migration
             $table->string('status')->default('Pending');
             $table->string('slug');
             $table->unsignedBigInteger('user_id');
-            $table->string('add_to_favirate')->nullable();
-            // $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
+            $table->unsignedBigInteger('project_id');
+            $table->foreign('project_id')->references('id')->on('projects')->delete('cascade');
             $table->timestamps();
         });
     }
@@ -45,6 +46,6 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('project_branches');
     }
 }

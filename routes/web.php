@@ -34,7 +34,8 @@ use App\Http\Livewire\Product;
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/myProfile', [App\Http\Controllers\HomeController::class, 'myProfile'])->name('my-profile');
+Route::get('/my-Profile', [App\Http\Controllers\HomeController::class, 'myProfile'])->name('my-profile');
+Route::get('/my-account', [App\Http\Controllers\HomeController::class, 'myaccount'])->name('my-account');
 Route::post('api/fetch-states', [UserController::class, 'fetchState']);
 Route::post('api/fetch-cities', [UserController::class, 'fetchCity']);
 
@@ -53,7 +54,8 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/merchant-suits', 'merchantSuits')->name('merchant-suits');
     Route::get('/suite-management', 'merchantSuitManagement')->name('suite-management');
     Route::get('/payment-management', 'merchantPaymentManagement')->name('payment-management');
-    Route::get('/myProfile', 'myProfile')->name('my-profile');
+    Route::get('/my-profile', 'myProfile')->name('myprofile');
+    Route::get('/my-account', 'myaccount')->name('myaccount');
     Route::post('/save_profile_detail', 'save_profile_detail')->name('save_profile_detail');
     // Route::get('/sign_in', 'login')->name('sign_in');
     // Route::get('/create_account', 'createAccount')->name('create_account');
@@ -192,3 +194,4 @@ Route::controller(MessagesController::class)->group(function () {
     // Route::get('/{id}', 'index')->name('user');
     // Route::get('/route', function(){ return 'Munaf'; }); // works as a user id
 });
+

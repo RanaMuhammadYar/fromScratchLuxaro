@@ -116,7 +116,8 @@
                                     class="subscriptions-produccts mb-4 p-0 list-unstyled d-flex align-items-self-start justify-content-between flex-wrap">
                                     <li>
                                         <div class="sub-product-image mb-3 mb-md-4">
-                                            <img src="{{ $projectBenefit->project->feature_image}}" width="200px" class="img-fluid" alt="product-img">
+                                            <img src="{{ $projectBenefit->project->feature_image }}" width="200px"
+                                                class="img-fluid" alt="product-img">
                                         </div>
                                         {{-- {{ dd($projectBenefit) }} --}}
                                     </li>
@@ -124,14 +125,18 @@
                                         <div>
                                             <ul class="list-unstyled m-0 p-0">
                                                 <li>
-                                                    <p class="mb-0">Solid by {{ $projectBenefit->project->user->userDetails->name  }}</p>
+                                                    <p class="mb-0">Solid by
+                                                        {{ $projectBenefit->project->user->userDetails->name }}</p>
                                                 </li>
                                                 <li>
                                                     <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                                aria-hidden="true"></i></span>{{ $projectBenefit->project->user->userDetails->address }} </p>
+                                                                aria-hidden="true"></i></span>{{ $projectBenefit->project->user->userDetails->address }}
+                                                    </p>
                                                 </li>
                                                 <li>
-                                                    <p> Description: {{ Str::words($projectBenefit->project->short_description, 10, '...') }}</p>
+                                                    <p> Description:
+                                                        {{ Str::words($projectBenefit->project->short_description, 10, '...') }}
+                                                    </p>
                                                 </li>
                                                 <li>
                                                     <div class="shopping-bag-pickup d-flex">
@@ -157,9 +162,14 @@
                                                     <hr>
                                                 </li>
                                                 <li>
-                                                    <div class="save-for-later d-flex">
-                                                        {{-- <p class="save-remove-later me-4 mb-0">Save for later</p> --}}
-                                                        <a class="mb-0" href="{{ route('home') }}" style="color: rgb(61, 60, 60)">Remove</a>
+                                                    <div class="save-for-later d-flex mt-1">
+                                                        <button type="button">
+                                                            <p class="save-remove-later me-4 mb-0"
+                                                                onclick="addToFavirate({{ $projectBenefit->project->id }})">
+                                                                Save for later</p>
+                                                        </button>
+                                                        <a class="mb-0" href="{{ route('home') }}"
+                                                            style="color: rgb(61, 60, 60)">Remove</a>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -171,7 +181,8 @@
                                             <span class="px-1"> x </span>
                                             <span class="border rounded px-1">{{ $projectBenefit->quantity }} </span>
                                             <span>=</span>
-                                            <span class="payment-titles">${{  number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
+                                            <span
+                                                class="payment-titles">${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -519,33 +530,35 @@
                                     <button type="submit" class="btn btn-primary d-block w-100">LUXAURO CHECKOUT</button>
                                 </div> --}}
 
-                                 <div class="shopping-bag-my-order mb-5">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <strong>Goldevine Subtotal</strong>
-                                    <strong>${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</strong>
-                                </div>
-                                {{-- <div class="d-flex align-items-center justify-content-between mb-2">
+                                <div class="shopping-bag-my-order mb-5">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <strong>Goldevine Subtotal</strong>
+                                        <strong>${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</strong>
+                                    </div>
+                                    {{-- <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="mb-0">Estimated Shipping</p>
                                     <p class="mb-0">$40.00</p>
                                 </div> --}}
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <p class="mb-0">Sales Tax</p>
-                                    <p class="mb-0">Calculated at Checkout</p>
-                                </div>
-                                <hr>
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="payment-titles">Total</span>
-                                    <span class="payment-titles">${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
-                                </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <p class="mb-0">Sales Tax</p>
+                                        <p class="mb-0">Calculated at Checkout</p>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <span class="payment-titles">Total</span>
+                                        <span
+                                            class="payment-titles">${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
+                                    </div>
 
-                                <input type="hidden" name="total" value="{{ $projectBenefit->price * $projectBenefit->quantity }}">
-                                <input type="hidden" name="benefit_id" value="{{$projectBenefit->id }}">
-                                <input type="hidden" name="quantity" value="{{ $projectBenefit->quantity }}">
-                                <input type="hidden" name="project_id" value="{{ $projectBenefit->project_id }}">
+                                    <input type="hidden" name="total"
+                                        value="{{ $projectBenefit->price * $projectBenefit->quantity }}">
+                                    <input type="hidden" name="benefit_id" value="{{ $projectBenefit->id }}">
+                                    <input type="hidden" name="quantity" value="{{ $projectBenefit->quantity }}">
+                                    <input type="hidden" name="project_id" value="{{ $projectBenefit->project_id }}">
 
-                                <button class="btn btn-primary d-block w-100" type="submit">GOLDEVINE CHECKOUT</button>
-                            </div>
-                            {{-- <div class="shopping-bag-my-order mb-5">
+                                    <button class="btn btn-primary d-block w-100" type="submit">GOLDEVINE CHECKOUT</button>
+                                </div>
+                                {{-- <div class="shopping-bag-my-order mb-5">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <strong>Gold Metal Guild Subtotal</strong>
                                     <strong>$174.95</strong>
@@ -574,4 +587,19 @@
             </div>
         </div>
     </div>
+    <script>
+        function addToFavirate(id) {
+            $.ajax({
+                url: "{{ route('addToFavirate') }}",
+                type: "GET",
+                data: {
+                    "project_id": id,
+                },
+                success: function(response) {
+                    swal("Success", response.success, "success");
+
+                }
+            });
+        }
+    </script>
 @endsection

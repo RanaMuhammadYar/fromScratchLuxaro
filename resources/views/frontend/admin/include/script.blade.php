@@ -42,6 +42,6 @@
 
 <script>
     $(document).ready(function() {
-        CKEDITOR.replace('description');
+        CKEDITOR.replace('descriptions');
     });
 </script>

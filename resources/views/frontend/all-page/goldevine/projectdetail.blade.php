@@ -3,6 +3,26 @@
     <title>{{ $project->title }} </title>
 @endsection
 @section('content')
+    <style>
+        .nav-pills .nav-link.active,
+        .nav-pills .show>.nav-link {
+            font-size: 14px;
+            background: #123033;
+            border-color: #123033;
+            padding: 0.45rem 1.2rem;
+        }
+
+        .nav-pills .nav-link {
+            background: 0 0;
+            font-size: 14px;
+            color: white;
+            border-color: #123033;
+            background: #123033;
+            padding: 0.45rem 1.2rem;
+            border: 0;
+            margin: 2px;
+        }
+    </style>
     <div class="inner-content">
         <div class="project-details-pagesmain mt-5 mb-4 pt-md-4">
             <div class="container">
@@ -20,7 +40,7 @@
                         <p class="mb-0">{{ totalproject($project->user_id) }} Projects</p>
                     </div>
                     <div class="by-fav-projects">
-                        <p class="mb-0">{{ totalproject($project->user_id) - 1 }} favorite Project</p>
+                        <p class="mb-0">{{ favoriteProject() }} favorite Project</p>
                     </div>
                 </div>
                 <div class="row">
@@ -145,23 +165,122 @@
                             </div>
                         </div>
                     @endforeach
-
-
-
                 </div>
                 <div class="details-page-section-2 mb-5 pb-lg-3">
                     <div class="btn-groups mb-2">
-                        <button class="btn btn-primary mb-1 select-benefits">Backgrounds</button>
-                        <button class="btn btn-primary mb-1 select-benefits">FAQs</button>
-                        <button class="btn btn-primary mb-1 select-benefits">Updates</button>
-                        <button class="btn btn-primary mb-1 select-benefits">Comments</button>
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active btn btn-primary mb-1 select-benefits" id="pills-home-tab"
+                                    data-bs-toggle="pill" data-bs-target="#pills-background" type="button" role="tab"
+                                    aria-controls="pills-home" aria-selected="true">Backgrounds</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-faqs" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="true">FAQs</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-updates" type="button" role="tab"
+                                    aria-controls="pills-contact" aria-selected="false">Updates</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-comments" type="button" role="tab"
+                                    aria-controls="pills-contact" aria-selected="false">Comments</button>
+                            </li>
+
+                        </ul>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-12">
-                            <h2>A Closer Look</h2>
-                            <p>
-                                {!! $project->description !!}
-                            </p>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-background" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
+                                    {!! $project->description !!}
+                                </div>
+                                <div class="tab-pane fade" id="pills-faqs" role="tabpanel"
+                                    aria-labelledby="pills-profile-tab">
+
+                                    <div class="section-faqs">
+                                        <div class="container">
+                                            <div class="col-md-10 mx-auto">
+                                                <div class="accordion" id="accordionExample">
+
+                                                    <div class="accordion-item mb-2">
+                                                        <h2 class="accordion-header" id="headingOne">
+                                                            <button class="accordion-button" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                                aria-expanded="true" aria-controls="collapseOne">
+                                                                Consectuetur adipiscing elit, sed do eiusomed tempore
+                                                                incididunt ut labore et dolor magna aliqua.Ut enim cd minin
+                                                                veniam.
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                                            aria-labelledby="headingOne"
+                                                            data-bs-parent="#accordionExample">
+                                                            <div class="accordion-body">
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                                    Quas facere veritatis quam deserunt expedita iste
+                                                                    dolorum natus placeat tempora voluptate recusandae at
+                                                                    cumque,
+                                                                    ratione earum voluptates maiores eveniet sint quibusdam,
+                                                                    tenetur vel qui.
+                                                                    Architecto ad molestiae eaque possimus rem a autem illum
+                                                                    omnis dolore eligendi doloremque laboriosam animi,
+                                                                    ex sint hic veritatis aspernatur accusamus quia
+                                                                    accusantium eum! Voluptas voluptates maxime,
+                                                                    recusandae debitis, iure officia neque sint error
+                                                                    blanditiis laudantium minus?</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item mb-2">
+                                                        <h2 class="accordion-header" id="headingTwo">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                                Consectuetur adipiscing elit, sed do eiusomed tempore
+                                                                incididunt ut labore et dolor magna aliqua.Ut enim cd minin
+                                                                veniam.
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapseTwo" class="accordion-collapse collapse"
+                                                            aria-labelledby="headingTwo"
+                                                            data-bs-parent="#accordionExample">
+                                                            <div class="accordion-body">
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                                    Quas facere veritatis quam deserunt expedita iste
+                                                                    dolorum natus placeat tempora voluptate recusandae at
+                                                                    cumque,
+                                                                    ratione earum voluptates maiores eveniet sint quibusdam,
+                                                                    tenetur vel qui.
+                                                                    Architecto ad molestiae eaque possimus rem a autem illum
+                                                                    omnis dolore eligendi doloremque laboriosam animi,
+                                                                    ex sint hic veritatis aspernatur accusamus quia
+                                                                    accusantium eum! Voluptas voluptates maxime,
+                                                                    recusandae debitis, iure officia neque sint error
+                                                                    blanditiis laudantium minus?</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-updates" role="tabpanel"
+                                    aria-labelledby="pills-contact-tab">
+                                    <h2>This is Update </h2>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus corrupti quaerat repellat earum ex, minima nemo perferendis id nobis, sit et praesentium voluptate aut, asperiores ullam dolores a. Cum.
+                                </div>
+                                <div class="tab-pane fade" id="pills-comments" role="tabpanel"
+                                    aria-labelledby="pills-contact-tab">
+                                    <h2>This is Comments </h2>
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio, numquam error debitis atque ducimus cumque tenetur quisquam minus, culpa magnam et? Eaque at nam mollitia illo corrupti placeat. Quasi, quis!
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <h2 class="text-center mb-3">More Gold Vine Projects</h2>
@@ -175,25 +294,30 @@
                                     </div>
                                     <div class="txt-holder p-3">
                                         <div class="d-flex flex-wrap align-items-center mb-3">
-                                            <span class="me-2"><a
-                                                    class="btn btn-primary btn-sm rounded-0 py-1 px-2" href="{{ route('projectDetail', ['id' => $randdomproject->id, 'slug' => $randdomproject->slug]) }}">HOSPITALITY</a></span>
+                                            <span class="me-2"><a class="btn btn-primary btn-sm rounded-0 py-1 px-2"
+                                                    href="{{ route('projectDetail', ['id' => $randdomproject->id, 'slug' => $randdomproject->slug]) }}">HOSPITALITY</a></span>
                                             <span class="me-2"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                             <span>{{ leftdays($randdomproject->id) }} Days Left</span>
                                         </div>
                                         <div class="d-flex flex-column mb-4">
-                                            <span><strong>Cheap Test Project {{ totalproject($randdomproject->user_id) }}</strong></span>
+                                            <span><strong>Cheap Test Project
+                                                    {{ totalproject($randdomproject->user_id) }}</strong></span>
                                         </div>
-                                        <p class="present-project mb-2">Present Project: {{ isset($randdomproject->user->userDetails->name ) ? $randdomproject->user->userDetails->name :''  }} </p>
+                                        <p class="present-project mb-2">Present Project:
+                                            {{ isset($randdomproject->user->userDetails->name) ? $randdomproject->user->userDetails->name : '' }}
+                                        </p>
                                         <div class="d-flex justify-content-between">
                                             <span>Raised:${{ number_format(totalamout($randdomproject->id)) }}</span>
                                             <span>{{ persentage($randdomproject->id) }}%</span>
                                         </div>
                                         <div class="progress rounded-0 mb-2">
-                                            <div class="progress-bar rounded-0" role="progressbar" style="width: {{  persentage($randdomproject->id) }}%"
-                                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar rounded-0" role="progressbar"
+                                                style="width: {{ persentage($randdomproject->id) }}%" aria-valuenow="100"
+                                                aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <div class="d-flex flex-column mb-2">
-                                            <span><strong>Goal: ${{ $randdomproject->project_funding_goal  }}</strong></span>
+                                            <span><strong>Goal:
+                                                    ${{ $randdomproject->project_funding_goal }}</strong></span>
                                         </div>
                                     </div>
                                 </div>

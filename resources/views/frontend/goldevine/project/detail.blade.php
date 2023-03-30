@@ -1,8 +1,9 @@
-@extends('frontend.layouts.app')
+@extends('frontend.goldevine.layouts.app')
 @section('title')
     <title>Project detail</title>
 @endsection
 @section('content')
+
     <div class="inner-content">
         <div class="project-details-pagesmain mt-5 mb-4 pt-md-4">
             <div class="container">

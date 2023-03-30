@@ -132,7 +132,7 @@
                                         @foreach ($delivoryOption as $delivoryOp)
                                             <option value="{{ $delivoryOp->id }}"
                                                 {{ $delivoryOp->id == old('delivory_option_id') ? 'selected' : '' }}>
-                                                {{ $delivoryOp->title }}</option>
+                                                {{ $delivoryOp->name }}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('delivory_option_id'))

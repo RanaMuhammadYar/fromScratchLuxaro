@@ -16,15 +16,12 @@ class ProductController extends Controller
          $categories = Category::all();
          $delivery_options = DeliveryOption::all();
          $product_types = ProductType::all();
-        //  ,'deliveryOption','shippingType'
          $products = Product::with('categories','deliveryOption','shippingType')->get();
-        //  foreach ($products as $key => $value) {
-        //     dd($value->shippingType);
-        //  }
-       
+
+
          return view('frontend.charters.product_management',compact('products','product_types','categories','delivery_options'));
     }
-   
+
     public function productUpload(Request $request)
     {
         // dd($request->all());

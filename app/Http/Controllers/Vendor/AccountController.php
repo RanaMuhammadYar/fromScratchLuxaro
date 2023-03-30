@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\DelivoryOption;
 use App\Models\Vendor\VendorAccount;
 use Illuminate\Support\Facades\Validator;
-
 class AccountController extends Controller
 {
     public function accountRequest()

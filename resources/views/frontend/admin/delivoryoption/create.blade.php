@@ -12,22 +12,12 @@
                     <form action="{{ route('delivory-option.store') }}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 col-sm-12">
+                            <div class="col-md-12 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Title</label>
-                                    <input type="title" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="title"
-                                        title="title" value="{{ old('title') }}" />
-                                    @error('title')
-                                        <span class="text-danger mt-2">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Description</label>
-                                    <input type="description" class="form-control @error('description') is-invalid @enderror" name="description"
-                                        placeholder="description" title="description" value="{{ old('description') }}" />
-                                    @error('description')
+                                    <input type="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="name"
+                                        title="name" value="{{ old('name') }}" />
+                                    @error('name')
                                         <span class="text-danger mt-2">{{ $message }}</span>
                                     @enderror
                                 </div>

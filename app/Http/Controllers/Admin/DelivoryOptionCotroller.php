@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\DelivoryOption;
+use App\Models\Admin\DeliveryOption;
 use Illuminate\Support\Facades\Validator;
 
 class DelivoryOptionCotroller extends Controller
@@ -20,7 +20,7 @@ class DelivoryOptionCotroller extends Controller
      */
     public function index()
     {
-        $delivoryOptions = DelivoryOption::all();
+        $delivoryOptions = DeliveryOption::all();
         return view('frontend.admin.delivoryoption.index',compact('delivoryOptions'));
     }
 
@@ -42,16 +42,16 @@ class DelivoryOptionCotroller extends Controller
      */
     public function store(Request $request)
     {
+
+
         $validate = Validator::make($request->all(), [
-            'title' => 'required',
-            'description' => 'required',
+            'name' => 'required',
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Delivory Option not created.');
         }else{
-            DelivoryOption::create([
-                'title' => $request->title,
-                'description' => $request->description,
+            DeliveryOption::create([
+                'name' => $request->name,
             ]);
             return redirect()->route('delivory-option.index')->with('success', 'Delivory Option created successfully.');
         }
@@ -77,7 +77,7 @@ class DelivoryOptionCotroller extends Controller
     public function edit($id)
     {
 
-        $delivoryOption = DelivoryOption::find($id);
+        $delivoryOption = DeliveryOption::find($id);
         return view('frontend.admin.delivoryoption.edit',compact('delivoryOption'));
     }
 
@@ -92,17 +92,15 @@ class DelivoryOptionCotroller extends Controller
     {
 
         $validate = Validator::make($request->all(), [
-            'title' => 'required',
-            'description' => 'required',
+            'name' => 'required',
         ]);
 
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Delivory Option not created.');
         }else{
 
-            $delivoryOption = DelivoryOption::find($id);
-            $delivoryOption->title = $request->title;
-            $delivoryOption->description = $request->description;
+            $delivoryOption = DeliveryOption::find($id);
+            $delivoryOption->name = $request->name;
             $delivoryOption->save();
             return redirect()->route('delivory-option.index')->with('success','Delivory Option Updated Successfully');
         }
@@ -118,7 +116,7 @@ class DelivoryOptionCotroller extends Controller
      */
     public function destroy($id)
     {
-        $delivoryOption = DelivoryOption::find($id);
+        $delivoryOption = DeliveryOption::find($id);
         $delivoryOption->delete();
         return redirect()->route('delivory-option.index')->with('success','Delivory Option Deleted Successfully');
     }

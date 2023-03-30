@@ -31,26 +31,6 @@
                             </form>
                         </div>
                     </div>
-                    <form class="page-form mx-auto mb-5" action="#">
-                        <div class="page-form-holder d-flex">
-                            <select class="form-control border-0 rounded-0 flex-fill">
-                                <!-- <option>All</option>
-                                <option>All</option>
-                                <option>All</option> -->
-                            </select>
-
-                            <div class="form-field d-flex flex-fill">
-                                <form action="{{ route('charters') }}" method="GET">
-                                    <div class="input-group">
-                                        <input type="text" class="border-0 bg-transparent flex-fill" name="search" placeholder="Search products...">
-                                        <span class="input-group-btn">
-                                            <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </form>
                     <div class="Luxaurolicious-slider ">
 
                         <div class="row mb-3">

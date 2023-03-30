@@ -37,10 +37,12 @@
                         <a class="dropdown-toggle1" href="javascript:void" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-search"></i></a>
                         <div class="dropdown-menu border-top" aria-labelledby="dropdownMenuButton1">
-                            <form action="{{ Request::is('goldEvines') || Request::is('project-search') ? route('projectsearch') : route('productsearch') }}" method="post"
-                                class="d-flex mx-3 border rounded bg-white">
+                            <form
+                                action="{{ Request::is('goldEvines') || Request::is('project-search') ? route('projectsearch') : route('productsearch') }}"
+                                method="post" class="d-flex mx-3 border rounded bg-white">
                                 @csrf
-                                <input type="search" name="search" placeholder="{{ Request::is('goldEvines') || Request::is('project-search') ? ' Project Search... ' : 'Product Search...' }}"
+                                <input type="search" name="search"
+                                    placeholder="{{ Request::is('goldEvines') || Request::is('project-search') ? ' Project Search... ' : 'Product Search...' }}"
                                     class="border-0 flex-fill">
                                 <button type="submit" class="border"><i class="fa fa-search"></i></button>
                             </form>
@@ -53,7 +55,8 @@
                                 <i
                                     class="fa fa-chevron-down me-2"></i>{{ isset(auth()->user()->userDetails) ? auth()->user()->userDetails->name : '' }}
                                 <img src="{{ isset(auth()->user()->userDetails->user_profile_image) ? auth()->user()->userDetails->user_profile_image : '' }}"
-                                    onerror="this.src='{{ asset('images/avatar.png') }}'" class="mt-2" alt="" style="border-radius: 50%" width="25px:">
+                                    onerror="this.src='{{ asset('images/avatar.png') }}'" class="mt-2" alt=""
+                                    style="border-radius: 50%" width="25px:">
                                 {{-- <i class="fa fa-user-circle ms-1"
                                     aria-hidden="true"></i> --}}
                             </a>
@@ -61,10 +64,15 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <ul class="list-unstyled m-0 p-0">
-                                            <a href="{{ route('my-profile') }}">
-
-                                                <li>My Account | My Profile</li>
-                                            </a>
+                                            <li>
+                                                <a href="{{ route('myaccount') }}">
+                                                    My Account
+                                                    |
+                                                </a>
+                                                <a href="{{ route('myprofile') }}">
+                                                    My Profile
+                                                </a>
+                                            </li>
 
                                             <li> <a href="#" class="openGoldEvineSidebar">Goldevine:</a> <i
                                                     class="fa fa-lock"></i> <i class="fa fa-heart"></i></li>

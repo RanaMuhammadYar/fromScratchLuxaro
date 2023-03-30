@@ -3,7 +3,13 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
-define('LARAVEL_START', microtime(true));
+// define('LARAVEL_START', microtime(true));
+// $allowedOrigins = ['http://localhost', 'http://localhost:8000'];
+// $origin = $_SERVER['HTTP_ORIGIN'];
+// header("Access-Control-Allow-Origin:http://localhost:8000");
+// header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+// header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +22,8 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
-    require __DIR__.'/../storage/framework/maintenance.php';
+if (file_exists(__DIR__ . '/../storage/framework/maintenance.php')) {
+    require __DIR__ . '/../storage/framework/maintenance.php';
 }
 
 /*
@@ -31,7 +37,7 @@ if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +50,9 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+
+
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
