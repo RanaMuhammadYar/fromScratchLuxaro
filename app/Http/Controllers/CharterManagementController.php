@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Admin\DeliveryOption;
 use App\Models\Charter;
 use App\Models\CharterBooking;
 use App\Models\Upload;
@@ -36,7 +38,10 @@ class CharterManagementController extends Controller
         }
         public function charter_management(Request $request)
         {
-            return view('frontend.charters.charter_management');
+            $charters = Charter::all();
+            $charter_categories = CharterCategory::all();
+            $delivery_options = DeliveryOption::all();
+            return view('frontend.charters.charter_management',compact('charters','delivery_options'));
         }
         public function appendCharters(Request $request)
         {
