@@ -32,7 +32,7 @@ class CreateProjectsTable extends Migration
             $table->string('status')->default('Pending');
             $table->string('slug');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
             $table->timestamps();
         });
     }

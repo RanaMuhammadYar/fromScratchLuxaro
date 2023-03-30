@@ -33,22 +33,23 @@ class Product extends Model
         'multiple_image',
 
     ];
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class,'category_products');
     }
+    
     public function productType()
     {
         return $this->belongsTo(ProductType::class);
     }
 
-    public function delivoryOption()
+    public function deliveryOption()
     {
-        return $this->belongsTo(DelivoryOption::class);
+        return $this->belongsToMany(DeliveryOption::class,'product_delivery_options');
     }
     public function shippingType()
     {
-        return $this->belongsTo(ShippingType::class);
+        return $this->belongsToMany(ShippingType::class,'product_shippings');
     }
 
     public function user()

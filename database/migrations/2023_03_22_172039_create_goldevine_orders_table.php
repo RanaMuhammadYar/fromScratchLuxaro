@@ -16,11 +16,11 @@ class CreateGoldevineOrdersTable extends Migration
         Schema::create('goldevine_orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('benefit_id');
-            $table->foreign('benefit_id')->references('id')->on('project_benefits')->onDelete('cascade');
+            // $table->foreign('benefit_id')->references('id')->on('project_benefits')->onDelete('cascade');
             $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            // $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('total_price');
             $table->string('quantity');
             $table->string('order_status')->default('Pending');

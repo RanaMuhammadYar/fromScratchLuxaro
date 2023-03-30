@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserEductionsTable extends Migration
+class CreateProductShippingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateUserEductionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_eductions', function (Blueprint $table) {
+        Schema::create('product_shippings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('college_name')->nullable();
-            $table->string('degree')->nullable();
+            $table->string('shipping_type_id');
+            $table->string('product_id');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateUserEductionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_eductions');
+        Schema::dropIfExists('product_shippings');
     }
 }

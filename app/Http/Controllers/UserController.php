@@ -32,7 +32,7 @@ class UserController extends Controller
           }])
           ->get();
         }
-        $locallaxaro = AdminProduct::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status','Active')->orderby('id','desc')->limit(15)->get();
+        $locallaxaro = AdminProduct::with('categories', 'productType', 'deliveryOption', 'user')->where('status','Active')->orderby('id','desc')->limit(15)->get();
         $goldevines = Project::with('projectBenefits')->where('status','Active')->orderBy('id','desc')->limit(15)->get();
         $luxauro_charters = Charter::orderBy('id','desc')->limit(15)->get();
         return view('frontend.all-page.products', compact('categories','goldevines','locallaxaro','luxauro_charters'));
@@ -41,10 +41,14 @@ class UserController extends Controller
     {
         $cat_id = substr($request->price_filter, -1);
         $orderby = substr($request->price_filter, 0, -1);
-        $products = AdminProduct::where('category_id',$cat_id)
-                                  ->orderBy('product_price',$orderby)
-                                  ->limit(6)
-                                  ->get();
+        $categories = Category::where('id',$cat_id)->first();
+        // $products = AdminProduct::where('category_id',$cat_id)
+        //                           ->orderBy('product_price',$orderby)
+        //                           ->limit(6)
+        //                           ->get();
+        $cat = Category::where('id',$cat_id)->first();
+        $products = $cat->products();
+        dd($products->toArray());
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;
     }

@@ -182,8 +182,6 @@ class LuxaroController extends Controller
     {
         return view('frontend.goldevine_projects');
     }
-
-
     public function myProfile()
     {
         $user = User::where('id',auth()->user()->id)->first();

@@ -5,7 +5,7 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DelivoryOption extends Model
+class DeliveryOption extends Model
 {
     use HasFactory;
 
@@ -13,4 +13,8 @@ class DelivoryOption extends Model
         'title',
         'description',
     ];
+    public function products()
+    {
+        return $this->belongsToMany(Product::class,'product_delivery_options');
+    }
 }
