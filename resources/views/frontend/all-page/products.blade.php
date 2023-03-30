@@ -31,7 +31,7 @@
                                             <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
                                         </div> -->
 
-            <!-- <div class="form-field d-flex flex-fill">
+                              <!-- <div class="form-field d-flex flex-fill">
                                         <form action="{{ route('home') }}" method="GET">
                                             <div class="input-group">
                                                 <input type="text" class="border-0 bg-transparent flex-fill" name="search" placeholder="Search products...">
@@ -43,8 +43,6 @@
                                     </div> -->
         </div>
     </form>
-
-
     <div class="product-section mb-4">
         <div class="container">
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
@@ -121,8 +119,8 @@
                             <div class="form-field d-flex flex-fill">
                                 <select class="flex-fill border-0 bg-transparent" onchange="appendLocalLuxauro(this)">
                                     <option>OrderBy</option>
-                                    <option value="desc{{ $category->id }}">price(max)</option>
-                                    <option value="asc{{ $category->id }}">price(min)</option>
+                                    <option value="desc{{ @$category->id }}">price(max)</option>
+                                    <option value="asc{{ @$category->id }}">price(min)</option>
                                 </select>
                             </div>
                         </div>
@@ -229,7 +227,6 @@
             </div>
         </div>
     </div>
-
     <div class="product-section mb-5 pb-lg-3">
         <div class="container">
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
@@ -286,8 +283,6 @@
                 @endforeach
             </div>
         </div>
-
-
         @foreach ($categories as $category)
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                 <h2 class="m-0">{{ $category->title }}</h2>
@@ -310,7 +305,7 @@
                 </div>
             </div>
             <div class="slider Luxauro-library-slider" id="product-append{{ $category->id }}">
-                @foreach ($category->relatedProducts as $product)
+                @foreach ($category->products as $product)
                     <div>
                         <div class="product-item" style="margin: 0 12px;">
                             <a

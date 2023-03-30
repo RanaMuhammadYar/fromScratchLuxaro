@@ -7,6 +7,9 @@
                 @include('frontend.include.sidebar')
             </div>
             <div class="col-12 col-md-7 gx-0 gx-md-1 gx-lg-5 px-lg-5">
+                @if (\Session::has('message'))
+                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                @endif
                 <div class="my-account-section">
                     <h2>Setup Your Merchant Account (1/2)</h2>
                     <div class="mb-2"><strong>Business Information</strong></div>
@@ -14,34 +17,35 @@
                         @csrf
                         <div class="mb-3">
                             <label for="" class="form-label mb-0">Business Name</label>
-                            <input type="text" required name="business_name" class="form-control">
+                            <input type="text" required name="business_name" value="{{ @$merchant_detail->business_name }}" class="form-control" value="">
                             <div class="pincel"></div>
                         </div>
+                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                         <div class="mb-3">
                             <label class="uploadFile border rounded">
                                 <i class="fa fa-cloud-upload upload-icon-account-1" aria-hidden="true"></i>
                                 <span class="filename">Upload Business Logo</span>
-                                <input type="file" name="business_logo" class="inputfile form-control" required>
+                                <input type="file" name="business_logo"  class="inputfile form-control">
                             </label>
                         </div>
                         <div class="mb-3">
                             <label class="uploadFile border rounded">
                                 <i class="fa fa-cloud-upload upload-icon-account-1" aria-hidden="true"></i>
                                 <span class="filename">Upload Your Store Header</span>
-                                <input type="file" class="inputfile form-control" name="store_header" required>
+                                <input type="file" class="inputfile form-control" name="store_header">
                             </label>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label mb-0">Business Adress</label>
-                            <input type="text" required name="business_address" class="form-control">
+                            <input type="text" required name="business_address" value="{{ @$merchant_detail->business_address }}" class="form-control">
                             <div class="pincel"></div>
                         </div>
                         <div class="mb-3">
                             <label for="">Country</label>
                             <select class="form-select" name="country" id="country_id">
-                            @foreach ($countries as $country)
-                                <option value="{{$country->id}}">{{$country->name}}</option>
-                             @endforeach
+                                @foreach ($countries as $country)
+                                    <option value="{{@$country->id}}" {{ @$country->id == @$merchant_detail->country ? 'selected' : '' }}>{{$country->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="row gx-2 mb-0 mb-md-3">
@@ -58,41 +62,41 @@
                             </div>
                             <div class="col-12 col-md-3 mb-3 mb-md-0">
                                 <label for="" class="form-label mb-0">Zip Code</label>
-                                <input type="text" required name="zip_code" class="form-control">
+                                <input type="text" required name="zip_code" value="{{ @$merchant_detail->zip_code }}" class="form-control">
                                 <div class="pincel"></div>
                             </div>
                         </div>
                         
                         <div class="mb-3">
                             <label for="" class="form-label mb-0">Business Email</label>
-                            <input type="email" name="business_email" class="form-control">
+                            <input type="email" name="business_email" value="{{ @$merchant_detail->business_email }}" class="form-control">
                             <div class="pincel"></div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label mb-0">Business Website</label>
-                            <input type="text" required name="business_website" class="form-control">
+                            <input type="text" required name="business_website" value="{{ @$merchant_detail->business_website }}" class="form-control">
                             <div class="pincel"></div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label mb-0">Business Phone</label>
-                            <input type="text" required name="business_phone" class="form-control" placeholder="xxx-xxx-xxxx">
+                            <input type="text" required name="business_phone" value="{{ @$merchant_detail->business_phone }}" class="form-control" placeholder="xxx-xxx-xxxx">
                             <div class="pincel"></div>
                         </div>
                         <div class="row gx-3 mb-0 mb-md-3">
                             <div class="col-12 col-md-6 mb-3 mb-md-0">
                                 <label for="" class="form-label mb-0">EIN</label>
-                                <input type="text" required class="form-control" name="ein" placeholder="xx-xxxxxxx">
+                                <input type="text" required class="form-control" name="ein" value="{{ @$merchant_detail->ein }}" placeholder="xx-xxxxxxx">
                                 <div class="pincel"></div>
                             </div>
                             <div class="col-12 col-md-6 mb-3 mb-md-0">
                                 <label for="" class="form-label mb-0">Bank Account Number</label>
-                                <input type="text" required name="bank_account_number" class="form-control">
+                                <input type="text" required name="bank_account_number" value="{{ @$merchant_detail->bank_account_number }}" class="form-control">
                                 <div class="pincel"></div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label mb-0">Credit Card Number</label>
-                            <input type="text" required name="credit_card_number" class="form-control">
+                            <input type="text" required name="credit_card_number" value="{{ @$merchant_detail->credit_card_number }}"  class="form-control">
                             <div class="pincel"></div>
                         </div>
                         <button class="btn btn-primary text-uppercase">Cancel</button>
@@ -106,9 +110,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        var country_id = `{{ @$user->country }}`;
-        var state_id = `{{ @$user->state }}`;
-        var city_id = `{{ @$user->city }}`;
+        var country_id = `{{ @$merchant_detail->country }}`;
+        var state_id = `{{ @$merchant_detail->state }}`;
+        var city_id = `{{ @$merchant_detail->city }}`;
         if (country_id) {
             var idCountry = country_id;
             $("#state-id").html('');

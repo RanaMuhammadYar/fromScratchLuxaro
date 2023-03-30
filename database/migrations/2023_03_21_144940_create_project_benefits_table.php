@@ -23,9 +23,9 @@ class CreateProjectBenefitsTable extends Migration
             $table->string('quantity');
             $table->longText('short_description');
             $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects')->delete('cascade');
+            // $table->foreign('project_id')->references('id')->on('projects')->delete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
 
             $table->timestamps();
         });

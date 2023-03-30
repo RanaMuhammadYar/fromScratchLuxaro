@@ -20,9 +20,9 @@ class CreateVendorAccountsTable extends Migration
             $table->string('upload_your_store_header')->nullable();
             $table->string('address');
             $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+            // $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->unsignedBigInteger('state_id');
-            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
+            // $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
             $table->string('city');
             $table->string('email');
             $table->string('business_website');
@@ -33,7 +33,7 @@ class CreateVendorAccountsTable extends Migration
             $table->string('description');
             $table->string('kind_of_business'); 
             $table->unsignedBigInteger('delivery_id');
-            $table->foreign('delivery_id')->references('id')->on('delivory_options')->onDelete('cascade');
+            // $table->foreign('delivery_id')->references('id')->on('delivory_options')->onDelete('cascade');
             $table->string('social_media_link')->nullable();
             $table->string('owner_name')->nullable();
             $table->string('owner_image')->nullable();
@@ -41,7 +41,7 @@ class CreateVendorAccountsTable extends Migration
             $table->string('ethic')->nullable();
             $table->string('philosophy')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

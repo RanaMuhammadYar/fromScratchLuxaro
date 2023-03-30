@@ -16,7 +16,7 @@ class CreateUserProfessionsTable extends Migration
         Schema::create('user_professions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('business_name')->nullable();
             $table->string('business_from')->nullable();
             $table->string('business_to')->nullable();

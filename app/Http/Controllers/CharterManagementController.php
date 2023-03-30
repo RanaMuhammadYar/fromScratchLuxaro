@@ -1,12 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\CharterCategory as ControllersCharterCategory;
 use App\Models\Charter;
 use App\Models\CharterBooking;
-use App\Models\CharterCategory;
-use App\Models\DeliveryOption;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 
@@ -38,6 +34,10 @@ class CharterManagementController extends Controller
             $charters = Charter::where('id','!=',$request->id)->get();
             return view('frontend.charters.detail',compact('charter_detail','charters'));
         }
+        public function charter_management(Request $request)
+        {
+            return view('frontend.charters.charter_management');
+        }
         public function appendCharters(Request $request)
         {
             // $cat_id = substr($request->price_filter, -1);
@@ -47,12 +47,7 @@ class CharterManagementController extends Controller
             return $html;
         }
     
-        public function productCharterManagement()
-        {
-             $charter_categories = CharterCategory::all();
-             $delivery_options = DeliveryOption::all();
-             return view('frontend.charters.product_charter_management',compact('charter_categories','delivery_options'));
-        }
+       
         public function charter_book(Request $request)
         {
            CharterBooking::create([

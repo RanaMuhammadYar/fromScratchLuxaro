@@ -8,6 +8,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CharterManagementController;
+use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\vendor\Chatify\MessagesController;
 use App\Http\Controllers\Vendor\VendorControlController;
 use App\Http\Livewire\Product;
@@ -39,6 +40,7 @@ Route::post('api/fetch-cities', [UserController::class, 'fetchCity']);
 
 Route::post('/search-product',[ProductController::class,'productsearch'])->name('productsearch');
 Route::controller(UserController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
     Route::get('/luxauro', 'index')->name('home');
     Route::get('/appendProducts', 'appendProducts')->name('appendProducts');
     Route::get('/appendLocalLuxauro', 'appendLocalLuxauro')->name('appendLocalLuxauro');
@@ -77,12 +79,16 @@ Route::controller(CharterManagementController::class)->group(function () {
     Route::get('/charter_detail', 'charter_detail')->name('charter_detail');
     Route::get('/appendCharters', 'appendCharters')->name('appendCharters');
     Route::post('/charter_book', 'charter_book')->name('charter_book');
-    Route::get('/product_charter_management', 'productCharterManagement')->name('product_charter_management');
+    Route::get('/charter_management', 'charter_management')->name('charter_management');
+});
+Route::controller(ProductController::class)->group(function () {
+    Route::post('/productUpload', 'productUpload')->name('productUpload');
+    Route::get('/product_management', 'productManagement')->name('product_management');
 });
 Route::get('test', function () {
     return view('frontend.all-page.test');
 });
-Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+
 
 Route::controller(PageController::class)->group(function () {
     // Policies

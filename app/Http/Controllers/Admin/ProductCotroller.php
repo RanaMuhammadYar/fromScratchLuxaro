@@ -8,7 +8,7 @@ use App\Models\Admin\Category;
 use App\Models\Admin\ProductType;
 use App\Models\Admin\ShippingType;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\DelivoryOption;
+use App\Models\DeliveryOption;
 use Illuminate\Support\Facades\Validator;
 
 class ProductCotroller extends Controller
@@ -26,9 +26,6 @@ class ProductCotroller extends Controller
      */
     public function index()
     {
-
-
-
         $products = Product::with('category', 'productType', 'delivoryOption', 'shippingType','user')->get();
         return view('frontend.admin.product.index', compact('products'));
     }
@@ -42,7 +39,7 @@ class ProductCotroller extends Controller
     {
         $categories = Category::all();
         $productType = ProductType::all();
-        $delivoryOption = DelivoryOption::all();
+        $delivoryOption = DeliveryOption::all();
         $shippingType = ShippingType::all();
         return view('frontend.admin.product.create', compact('categories', 'productType', 'delivoryOption', 'shippingType'));
     }
@@ -55,8 +52,6 @@ class ProductCotroller extends Controller
      */
     public function store(Request $request)
     {
-
-
         $validate = Validator::make($request->all(), [
             'product_name' => 'required',
             'product_description' => 'required',
@@ -128,7 +123,7 @@ class ProductCotroller extends Controller
         $product = Product::with('category', 'productType', 'delivoryOption', 'shippingType','user')->find($id);
         $categories = Category::all();
         $productType = ProductType::all();
-        $delivoryOption = DelivoryOption::all();
+        $delivoryOption = DeliveryOption::all();
         $shippingType = ShippingType::all();
 
         // $tags = $product->tagNames();

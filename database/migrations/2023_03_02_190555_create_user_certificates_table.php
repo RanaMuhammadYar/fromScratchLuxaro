@@ -16,7 +16,7 @@ class CreateUserCertificatesTable extends Migration
         Schema::create('user_certificates', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('course_name')->nullable();
             $table->string('course_certification_document')->nullable();
             $table->timestamps();
