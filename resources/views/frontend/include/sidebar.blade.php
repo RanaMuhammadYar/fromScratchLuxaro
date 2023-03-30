@@ -78,8 +78,10 @@
                     <li class="pb-1"><a href="{{route('merchant_account_first_step')}}">Lusauro Merchant Application Form (1/2)</a></li>
                     <li class="pb-1"><a href="">Review & Submit Lusauro Merchant Application</a></li>
                     <li class="pb-1"><a href="">Confirmation Code</a></li>
-                    <li class="pb-1"><a href="{{route('product_management')}}"><strong>Product / Charter
+                    <li class="pb-1"><a href="{{route('product_management')}}"><strong>Product
                                                             Management</strong></a></li>
+                    <li class="pb-1"><a href="{{route('charter_management')}}"><strong>Charter
+                        Management</strong></a></li>
                     <li class="pb-1"><a href="{{route('payment-management')}}">Payment Management</a></li>
                     <li class="pb-1"><a href="{{route('suite-management')}}">suite Management</a></li>
                     <li class="pb-1"><a href="">Transaction history</a></li>
