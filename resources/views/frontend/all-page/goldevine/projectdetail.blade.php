@@ -40,7 +40,7 @@
                         <p class="mb-0">{{ totalproject($project->user_id) }} Projects</p>
                     </div>
                     <div class="by-fav-projects">
-                        <p class="mb-0">{{ totalproject($project->user_id) - 1 }} favorite Project</p>
+                        <p class="mb-0">{{ favoriteProject() }} favorite Project</p>
                     </div>
                 </div>
                 <div class="row">

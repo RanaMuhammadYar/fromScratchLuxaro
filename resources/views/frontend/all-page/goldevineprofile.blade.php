@@ -57,62 +57,63 @@
                             </div>
                             <div class="luxauro-subscription-current luxauro-ended">
                                 @foreach ($projects as $project)
-                                <ul class="subscriptions-producct mb-4 p-0 list-unstyled d-flex flex-wrap">
-                                    <li>
-                                        <div class="sub-product-image mb-3 me-2">
-                                            <img src="{{ $project->feature_image }}" onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid" alt="product-img"
-                                                width="90px;">
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <strong>{{ $project->title }}</strong>
-                                        <div class="luxauro-product-item mb-3 me-2">
-                                            <div class="by-user mb-2">
-                                                <span>by {{ isset($project->user->userDetails->name) ? $project->user->userDetails->name :'' }}</span>
-                                                <span class="mx-2"><i class="fa fa-map-marker"
-                                                        aria-hidden="true"></i></span>
-                                                <span>{{ $project->location }}</span>
+                                    <ul class="subscriptions-producct mb-4 p-0 list-unstyled d-flex flex-wrap">
+                                        <li>
+                                            <div class="sub-product-image mb-3 me-2">
+                                                <img src="{{ $project->feature_image }}"
+                                                    onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid"
+                                                    alt="product-img" width="90px;">
                                             </div>
-                                            <div class="progres-circle d-flex justify-content-between">
-                                                <div class="bar">
-                                                    <div class="row">
-                                                        <div class="col-md-3 col-sm-6">
-                                                            <div class="progress blue">
-                                                                <span class="progress-left">
-                                                                    <span class="progress-bar"></span>
-                                                                </span>
-                                                                <span class="progress-right">
-                                                                    <span class="progress-bar"></span>
-                                                                </span>
-                                                                <div class="progress-value text-dark">{{ persentage($project->id) }}%</div>
+                                        </li>
+                                        <li>
+                                            <strong>{{ $project->title }}</strong>
+                                            <div class="luxauro-product-item mb-3 me-2">
+                                                <div class="by-user mb-2">
+                                                    <span>by
+                                                        {{ isset($project->user->userDetails->name) ? $project->user->userDetails->name : '' }}</span>
+                                                    <span class="mx-2"><i class="fa fa-map-marker"
+                                                            aria-hidden="true"></i></span>
+                                                    <span>{{ $project->location }}</span>
+                                                </div>
+                                                <div class="progres-circle d-flex justify-content-between">
+                                                    <div class="bar">
+                                                        <div class="row">
+                                                            <div class="col-md-3 col-sm-6">
+
+                                                                <div role="progressbar"
+                                                                    aria-valuenow="{{ persentage($project->id) }}"
+                                                                    aria-valuemin="0" aria-valuemax="100"
+                                                                    style="--value:{{ persentage($project->id) }}">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="funds ">
-                                                    <span class="d-block mb-2 mx-2">${{ number_format(totalamout($project->id)) }}</span>
-                                                    <span class="d-block">funds Rasied</span>
-                                                </div>
-                                                <div class="funds mx-2">
-                                                    <span class="d-block mb-2">${{ number_format($project->project_funding_goal) }}</span>
-                                                    <span class="d-block">funding Goal</span>
-                                                </div>
-                                                <div class="funds mx-2">
-                                                    <span class="d-block mb-2">{{ leftdays($project->id) }}</span>
-                                                    <span class="d-block">Day Left</span>
+                                                    <div class="funds ">
+                                                        <span
+                                                            class="d-block mb-2 mx-2">${{ number_format(totalamout($project->id)) }}</span>
+                                                        <span class="d-block">funds Rasied</span>
+                                                    </div>
+                                                    <div class="funds mx-2">
+                                                        <span
+                                                            class="d-block mb-2">${{ number_format($project->project_funding_goal) }}</span>
+                                                        <span class="d-block">funding Goal</span>
+                                                    </div>
+                                                    <div class="funds mx-2">
+                                                        <span class="d-block mb-2">{{ leftdays($project->id) }}</span>
+                                                        <span class="d-block">Day Left</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
+                                        </li>
 
-                                    <li>
-                                        <div class="luxauro-product-item">
-                                            <a href="{{ route('editProject',$project->id) }}">
-                                                <button class="btn btn-primary text-uppercase mx-3">Edit</button>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        <li>
+                                            <div class="luxauro-product-item">
+                                                <a href="{{ route('editProject', $project->id) }}">
+                                                    <button class="btn btn-primary text-uppercase mx-3">Edit</button>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 @endforeach
 
                             </div>

@@ -31,7 +31,8 @@ class Project extends Model
         'status',
         'slug',
         'user_id',
-        'tags'
+        'tags',
+        'add_to_favirate',
     ];
 
 

@@ -27,6 +27,7 @@ use App\Utility\SendSMSUtility;
 use App\Utility\CategoryUtility;
 use App\Models\SellerPackagePayment;
 use App\Utility\NotificationUtility;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\Goldevine\Project;
 use App\Http\Resources\V2\CarrierCollection;
 use App\Http\Controllers\AffiliateController;
@@ -1305,7 +1306,6 @@ function persentage($id)
     $percentage = 0;
     if ($total > 0 && $current > 0) {
         $percentage = $total / $current * 100;
-
     }
     return $percentage;
 }
@@ -1317,7 +1317,7 @@ function donation($id)
 
 function totalproject($id)
 {
-    return Project::where('user_id',$id)->count();
+    return Project::where('user_id', $id)->count();
 }
 
 function leftdays($id)
@@ -1334,6 +1334,14 @@ function backer($id)
     return GoldevineOrder::where('benefit_id', $id)->count();
 }
 
-function banner(){
-    return Banner::orderBy('id','desc')->where('status','Active')->first();
+function banner()
+{
+    return Banner::orderBy('id', 'desc')->where('status', 'Active')->first();
+}
+
+function favoriteProject()
+{
+    $user = Auth::user();
+    $favorite = Project::where('add_to_favirate', $user->id)->where('status', 'Active')->count();
+    return $favorite;
 }

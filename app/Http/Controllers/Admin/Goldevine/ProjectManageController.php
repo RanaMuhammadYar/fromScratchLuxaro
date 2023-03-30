@@ -30,18 +30,43 @@ class ProjectManageController extends Controller
 
     public function projectcheckoutstore(Request $request)
     {
+        $Project = Project::find($request->project_id);
+        $findinggoal = $Project->project_funding_goal;
+        $total = totalamout($request->project_id);
+        $newtotal = $total + $request->total;
+        echo $newtotal."newtotal"."<br>";
+        echo $findinggoal."findinggoal"."<br>";
+        // return "OK";
 
-        $goldevineorder = new GoldevineOrder();
-        $goldevineorder->benefit_id = $request->benefit_id;
-        $goldevineorder->user_id = $request->user_id;
-        $goldevineorder->total_price = $request->total;
-        $goldevineorder->quantity = $request->quantity;
-        $goldevineorder->project_id = $request->project_id;
-        $goldevineorder->order_status = 'Pending';
-        $goldevineorder->payment_status = 'Pending';
-        $goldevineorder->payment_method = 'Cash On Delivery';
-        $goldevineorder->user_id = auth()->user()->id;
-        $goldevineorder->save();
+        // $total = $request->total;
+        if ($findinggoal < $newtotal) {
+            return redirect()->back()->with('error', 'You can not order more than project funding goal');
+        }else{
+            $goldevineorder = new GoldevineOrder();
+            $goldevineorder->benefit_id = $request->benefit_id;
+            $goldevineorder->user_id = $request->user_id;
+            $goldevineorder->total_price = $request->total;
+            $goldevineorder->quantity = $request->quantity;
+            $goldevineorder->project_id = $request->project_id;
+            $goldevineorder->order_status = 'Pending';
+            $goldevineorder->payment_status = 'Pending';
+            $goldevineorder->payment_method = 'Cash On Delivery';
+            $goldevineorder->user_id = auth()->user()->id;
+            $goldevineorder->save();
+            return redirect()->route('home')->with('success', 'Order Placed Successfully');
+        }
+
+        // $goldevineorder = new GoldevineOrder();
+        // $goldevineorder->benefit_id = $request->benefit_id;
+        // $goldevineorder->user_id = $request->user_id;
+        // $goldevineorder->total_price = $request->total;
+        // $goldevineorder->quantity = $request->quantity;
+        // $goldevineorder->project_id = $request->project_id;
+        // $goldevineorder->order_status = 'Pending';
+        // $goldevineorder->payment_status = 'Pending';
+        // $goldevineorder->payment_method = 'Cash On Delivery';
+        // $goldevineorder->user_id = auth()->user()->id;
+        // $goldevineorder->save();
         return redirect()->route('home')->with('success', 'Order Placed Successfully');
     }
 
@@ -327,5 +352,14 @@ class ProjectManageController extends Controller
             }
         }
         return redirect()->route('allprojects')->with('success', 'Project Updated Successfully');
+    }
+
+    public function addToFavirate(Request $request)
+    {
+
+        $project = Project::find($request->project_id);
+        $project->add_to_favirate = auth()->user()->id;
+        $project->save();
+        return response()->json(['success' => 'Project Added To Favorite']);
     }
 }
