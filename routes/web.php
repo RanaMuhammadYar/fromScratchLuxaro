@@ -71,8 +71,8 @@ Route::get('goldEvines/founderRegister', [RegisterController::class, 'showRegist
 Route::get('goldMetal/professionalRegister', [RegisterController::class, 'showRegistrationForm'])->name('professionalRegister');
 
 Route::controller(MerchantController::class)->group(function () {
-    Route::get('/merchant_account1', 'merchantAccountFirstStep')->name('merchant_account_first_step');
-    Route::post('/merchant_account2', 'merchantAccountSecondStep')->name('merchant_account_second_step');
+    Route::get('/merchant-account', 'merchantAccountFirstStep')->name('merchant_account_first_step');
+    Route::post('/merchant-account', 'merchantAccountSecondStep')->name('merchant_account_second_step');
     Route::post('/save_merchant_account', 'saveMerchantAccount')->name('save_merchant_account');
 });
 Route::controller(CharterManagementController::class)->group(function () {

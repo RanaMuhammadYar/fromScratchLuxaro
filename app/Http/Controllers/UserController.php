@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
+
 use App\Models\User;
-use App\Models\State;
-use App\Models\Country;
+use App\Models\Charter;
+use App\Models\Vendor\City;
+use App\Models\Vendor\State;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
+use App\Models\Vendor\Country;
+use App\Models\MerchantApplication;
 use App\Models\Admin\Goldevine\Project;
-use App\Models\Admin\Product as AdminProduct;
-use App\Models\Charter;
 use Illuminate\Support\Facades\Session;
+use App\Models\Admin\Product as AdminProduct;
 
 class UserController extends Controller
 {
@@ -137,7 +139,8 @@ class UserController extends Controller
 
     public function merchantSuitManagement()
     {
-        return view('frontend.suite_management');
+        $suite = MerchantApplication::where('user_id', auth()->user()->id)->first();
+        return view('frontend.suite_management', compact('suite'));
     }
 
     public function merchantPaymentManagement()
