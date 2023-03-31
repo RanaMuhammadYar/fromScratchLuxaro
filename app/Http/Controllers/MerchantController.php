@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
-use App\Models\Country;
-use App\Models\DeliveryOption;
-use App\Models\MerchantDetail;
-use App\Models\State;
 use App\Models\Upload;
+use App\Models\Vendor\City;
+use App\Models\Vendor\State;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Models\MerchantDetail;
+use App\Models\Vendor\Country;
+use App\Models\Admin\DeliveryOption;
+use App\Models\MerchantApplication;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class MerchantController extends Controller
 {
@@ -21,58 +23,94 @@ class MerchantController extends Controller
         $states = State::all();
         $cities = City::all();
         $merchant_detail = MerchantDetail::where('user_id', auth()->user()->id)->first();
-        return view('frontend.all-page.merchant_account_first_step', compact('merchant_detail', 'states', 'cities', 'countries'));
+        $delivery_options = DeliveryOption::all();
+        // return $delivery_options;
+        return view('frontend.all-page.merchant_account', compact('merchant_detail', 'states', 'cities', 'countries', 'delivery_options'));
     }
     public function merchantAccountSecondStep(Request $request)
     {
-        //    dd($request->all());
-        // dd($request->except('_token','store_header', 'business_logo'));
-        if (MerchantDetail::where('user_id', auth()->user()->id)->exists()) {
-             MerchantDetail::where('user_id', auth()->user()->id)->update($request->except('_token'));
-            $merchant = MerchantDetail::where('user_id', auth()->user()->id)->first();
-            if ($request->store_header != null) {
-                $arr = explode('.', $request->store_header);
-                $upload = Upload::create([
-                    'file_original_name' => null, 'file_name' => $request->store_header, 'user_id' => $merchant->id, 'extension' => $arr[1],
-                    'type' => isset($type[$arr[1]]) ?  $type[$arr[1]] : "others", 'file_size' => 0
-                ]);
-                $merchant->store_header_logo = $upload->id;
-                $merchant->save();
-            }
-            if ($request->business_logo != null) {
-                $arr = explode('.', $request->business_logo);
-                $upload = Upload::create([
-                    'file_original_name' => null, 'file_name' => $request->business_logo, 'user_id' => $merchant->id, 'extension' => $arr[1],
-                    'type' => isset($type[$arr[1]]) ?  $type[$arr[1]] : "others", 'file_size' => 0
-                ]);
-                $merchant->upload_business_logo = $upload->id;
-                $merchant->save();
-            }
+        // return $request->all();
+
+        $validation = Validator::make($request->all(), [
+            'business_name' => 'required',
+            'business_address' => 'required',
+            'country_id' => 'required',
+            'state_id' => 'required',
+            'city_id' => 'required',
+            'zip_code' => 'required',
+            'business_email' => 'required',
+            'business_website' => 'required',
+            'phone_number' => 'required',
+            'ein' => 'required',
+            'bank_account_number' => 'required',
+            'credit_card_number' => 'required',
+            'description_about_us' => 'required',
+            'business_run' => 'required',
+            'delivery_id' => 'required',
+            'team_memeber_name' => 'required',
+            'business_logo' => 'required',
+            'store_header' => 'required',
+            'team_memeber_image' => 'required',
+
+        ]);
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation)->withInput()->with('error', 'Please fill up all the fields');
         } else {
-            $merchant = MerchantDetail::create($request->all());
-            if ($request->store_header != null) {
-                $arr = explode('.', $request->store_header);
-                $upload = Upload::create([
-                    'file_original_name' => null, 'file_name' => $request->store_header, 'user_id' => $merchant->id, 'extension' => $arr[1],
-                    'type' => isset($type[$arr[1]]) ?  $type[$arr[1]] : "others", 'file_size' => 0
-                ]);
-                $merchant->store_header_logo = $upload->id;
-                $merchant->save();
+
+            $merchant = new MerchantApplication();
+            $merchant->business_name = $request->business_name;
+            $merchant->business_address = $request->business_address;
+            $merchant->country_id = $request->country_id;
+            $merchant->state_id = $request->state_id;
+            $merchant->city_id = $request->city_id;
+            $merchant->zip_code = $request->zip_code;
+            $merchant->business_email = $request->business_email;
+            $merchant->business_website = $request->business_website;
+            $merchant->phone_number = $request->phone_number;
+            $merchant->ein = $request->ein;
+            $merchant->bank_account_number = $request->bank_account_number;
+            $merchant->credit_card_number = $request->credit_card_number;
+            $merchant->description_about_us = $request->description_about_us;
+            $merchant->business_run = $request->business_run;
+            $merchant->delivery_id = $request->delivery_id;
+            $merchant->social_media_link = json_encode($request->social_media_link);
+            $merchant->owner_name = json_encode($request->owner_name);
+            $merchant->owner_introduce = $request->owner_introduce;
+            $merchant->team_memeber_name = json_encode($request->team_memeber_name);
+            $merchant->history = $request->history;
+            $merchant->ethic = $request->ethic;
+            $merchant->philosophy = $request->philosophy;
+            $merchant->status = 'Pending';
+            $merchant->user_id = auth()->user()->id;
+
+            if ($request->hasFile('business_logo')) {
+                $path = asset('storage/' . $request->file('business_logo')->store('public/merchant_logo'));
+                $merchant->business_logo = $path;
             }
-            if ($request->business_logo != null) {
-                $arr = explode('.', $request->business_logo);
-                $upload = Upload::create([
-                    'file_original_name' => null, 'file_name' => $request->business_logo, 'user_id' => $merchant->id, 'extension' => $arr[1],
-                    'type' => isset($type[$arr[1]]) ?  $type[$arr[1]] : "others", 'file_size' => 0
-                ]);
-                $merchant->upload_business_logo = $upload->id;
-                $merchant->save();
+            if ($request->hasFile('store_header')) {
+                $path = asset('storage/' . $request->file('store_header')->store('public/merchant_header'));
+                $merchant->store_header = $path;
             }
+            if ($request->hasFile('owner_image')) {
+
+                $owner_image = [];
+                foreach ($request->owner_image as $key => $value) {
+                    $path = asset('storage/' . $request->file('owner_image')[$key]->store('public/owner_image'));
+                    array_push($owner_image, $path);
+                }
+                $merchant->owner_image = json_encode($owner_image);
+            }
+            if ($request->hasFile('team_memeber_image')) {
+                $team_memeber_image = [];
+                foreach ($request->team_memeber_image as $key => $value) {
+                    $path = asset('storage/' . $request->file('team_memeber_image')[$key]->store('public/merchant_team_member'));
+                    array_push($team_memeber_image, $path);
+                }
+                $merchant->team_memeber_image = json_encode($team_memeber_image);
+            }
+            $merchant->save();
+            return redirect()->back()->with('success', 'Your application has been submitted successfully');
         }
-        $request->session()->put('merchant', $merchant);
-        $delivery_options = DeliveryOption::all();
-        $merchant_detail = MerchantDetail::where('user_id', auth()->user()->id)->first();
-        return view('frontend.all-page.merchant_account_second_step', compact('merchant_detail', 'delivery_options'));
     }
     public function saveMerchantAccount(Request $request)
     {

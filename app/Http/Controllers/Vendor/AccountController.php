@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\Admin;
 use App\Models\Vendor\Country;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\DelivoryOption;
+use App\Models\Admin\DeliveryOption;
 use App\Models\Vendor\VendorAccount;
 use Illuminate\Support\Facades\Validator;
+
 class AccountController extends Controller
 {
     public function accountRequest()
@@ -17,7 +18,7 @@ class AccountController extends Controller
         $allreadyexistdata = VendorAccount::where('user_id', auth()->user()->id)->first();
         $allreadyexist = VendorAccount::where('user_id', auth()->user()->id)->count();
         $countries = Country::all();
-        $delivoryoptions = DelivoryOption::all();
+        $delivoryoptions = DeliveryOption::all();
         if ($allreadyexist > 0) {
             return view('frontend.vendor.account.index', compact('countries', 'delivoryoptions', 'allreadyexistdata'));
         } else {
