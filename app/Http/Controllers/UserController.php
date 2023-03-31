@@ -47,8 +47,8 @@ class UserController extends Controller
         //                           ->limit(6)
         //                           ->get();
         $cat = Category::where('id',$cat_id)->first();
-        $products = $cat->products();
-        dd($products->toArray());
+        $products = $cat->products()->orderBy('product_price',$orderby)->get();
+        // dd($products->get());
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;
     }

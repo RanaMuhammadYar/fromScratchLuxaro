@@ -39,7 +39,6 @@ class CharterManagementController extends Controller
         public function charter_management(Request $request)
         {
             $charters = Charter::all();
-            $charter_categories = CharterCategory::all();
             $delivery_options = DeliveryOption::all();
             return view('frontend.charters.charter_management',compact('charters','delivery_options'));
         }
@@ -195,7 +194,7 @@ class CharterManagementController extends Controller
             }
          
             $charter->save();
-         return redirect('/all_charters');
+         return redirect()->route('charter_management');
         }
     
         /**

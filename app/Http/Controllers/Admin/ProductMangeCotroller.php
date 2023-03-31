@@ -37,13 +37,18 @@ class ProductMangeCotroller extends Controller
 
     public function productcategory(Request $request, $id, $slug)
     {
-        $products = Product::with('category', 'productType', 'delivoryOption', 'shippingType', 'user')->where('status', 'Active')->where('category_id', $id)->paginate(15);
+        $products = Product::with('categories', 'productType', 'delivoryOption', 'shippingType', 'user')
+                             ->where('status', 'Active')
+                             ->where('category_id', $id)
+                             ->paginate(15);
 
         if (Cache::has('related_products_' . $id)) {
-            $relatedProducts = Cache::get('related_products_' . $id);
+            // $relatedProducts = Cache::get('related_products_' . $id);
+            $product = Category::with('products')->where('id',$id)->first();
+            $relatedProducts = $product->products()->get();
         } else {
-            $product = Category::find($id);
-            $relatedProducts = $product->relatedProducts()->get();
+            $product = Category::with('products')->where('id',$id)->first();
+            $relatedProducts = $product->products()->get();
             Cache::put('related_products_' . $id, $relatedProducts, 1440);
         }
         $banner = Banner::orderby('id', 'desc')->where('status', 'active')->first();

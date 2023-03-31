@@ -24,7 +24,6 @@ class ProductController extends Controller
 
     public function productUpload(Request $request)
     {
-        // dd($request->all());
         $product = new Product();
         $product->product_name = $request->product_name;
         $product->sku = $request->sku;
@@ -34,10 +33,10 @@ class ProductController extends Controller
         $product->is_auction = $request->is_auction;
         $product->product_description = $request->product_description;
         $product->product_price = $request->product_price;
-        // $product->category_id = $request->category_id;
         $product->product_type = $request->product_type_id;
-        // $product->delivery_option_id = $request->delivery_option_id;
-        // $product->shipping_type_id = $request->shipping_type_id;
+        $product->msrf = $request->msrf;
+        $product->quantity = $request->quantity;
+        $product->serial_number = $request->serial_number;
         $product->shipping_charge = $request->shipping_charge;
         $product->status = "Active";
         $product->user_id = $request->user_id;
@@ -50,43 +49,8 @@ class ProductController extends Controller
         $product->tag($tags);
         $product->categories()->sync($request->category_id);
         $product->deliveryOption()->sync($request->delivery_option_id);
-        // $product->productType()->sync($request->product_type_id);
-
         $product->shippingType()->sync($request->shipping_type_id);
         return redirect()->route('product.index')->with('success', 'Product Added Successfully');
-
-        // $request->validate([
-        //     'name' => 'required',
-        //     'price' => 'required',
-        //     'description' => 'required',
-        //     'from_charter_side' => 'required',
-        //     'type' => 'required',
-        //     'thumbnail_img' => 'required',
-        //     'tags' => 'required',
-        //     'charter_category_id' => 'required',
-        //     'delivery_option_id' => 'required',
-        //     'shipping_type' => 'required',
-        //     'shipping_charge' => 'required',
-
-        // ]);
-
-        // $product = new Product;
-        // if ($request->hasFile('thumbnail_img')) {
-        //     $path = asset('storage/' . $request->thumbnail_img->store('productImage'));
-        //     $product->product_image = $path;
-        // }
-        // $product->name = $request->name;
-        // $product->price = $request->price;
-        // $product->description = $request->description;
-        // $product->from_charter_side = $request->from_charter_side;
-        // $product->type = $request->type;
-        // $product->tags = json_encode($request->tags);
-        // $product->charter_category_id = json_encode($request->charter_category_id);
-        // $product->delivery_option_id = json_encode($request->delivery_option_id);
-        // $product->shipping_type = json_encode($request->shipping_type);
-        // $product->shipping_charge = $request->shipping_charge;
-        // $product->save();
-        // return redirect()->back()->with('success', 'Product created successfully.');
     }
 
     public function productsearch(Request $request)

@@ -88,7 +88,7 @@
         <div class="container">
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                 <h2 class="m-0">Luxauro Street, Vintage & Antique Market </h2>
-                <div class="d-flex form-holder">
+                {{-- <div class="d-flex form-holder">
                     <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
                     <form class="page-form flex-fill" action="#">
                         <div class="page-form-holder d-flex">
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -227,11 +227,11 @@
             </div>
         </div>
     </div>
-    <div class="product-section mb-5 pb-lg-3">
+    <div class="container product-section mb-5 pb-lg-3">
         <div class="container">
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                 <h2 class="m-0">Gold Evine</h2>
-                <div class="d-flex form-holder">
+                {{-- <div class="d-flex form-holder">
                     <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
                     <form class="page-form flex-fill" action="#">
                         <div class="page-form-holder d-flex">
@@ -245,10 +245,10 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> --}}
             </div>
             <div class="slider gold-evine-slider">
-                @foreach ($goldevines as $goldevine)
+                @forelse ($goldevines as $goldevine)
                     @php
                         $total_amount = App\Models\Admin\Goldevine\GoldevineOrder::where('project_id', $goldevine->id)->sum('total_price');
                         $donations = App\Models\Admin\Goldevine\GoldevineOrder::where('project_id', $goldevine->id)->count();
@@ -280,7 +280,11 @@
                             </div>
                         </a>
                     </div>
-                @endforeach
+                 @empty
+                 <div class="container">
+                             No GoldEvine Project
+                 </div>
+                @endforelse
             </div>
         </div>
         @foreach ($categories as $category)

@@ -74,7 +74,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="text-area">
+                                    <div class="text-area mb-3">
                                         <label for="exampleInputPassword1">Charter Description</label>
                                         <textarea class="form-control mb-4" name="description" placeholder="Message..." id="exampleFormControlTextarea1" rows="3"></textarea>
                                     </div>
@@ -196,143 +196,57 @@
                                             <th scope="col">Type</th>
                                             <th scope="col">Deposit</th>
                                             <th scope="col">Rate</th>
-                                            <th scope="col">Day/Hr</th>
+                                            {{-- <th scope="col">Day/Hr</th> --}}
                                             <th scope="col">Description</th>
                                             <th scope="col">Image</th>
                                             <th scope="col">Date of Availabilty</th>
                                             <th scope="col" colspan="2">Time of Availabilty</th>
                                             <th scope="col">Tags</th>
                                             <th scope="col">Max Guests/ Travelers</th>
-                                            <th scope="col">Service Offered As</th>
+                                            {{-- <th scope="col">Service Offered As</th> --}}
                                             <th scope="col">Upload Charter Agreement</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($charters as  $key=>$charter)
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Horse back ride</td>
-                                            <td>Misc.</td>
+                                            <th scope="row">{{ ++$key }}</th>
+                                            <td>{{ $charter->charter_name }}</td>
+                                            <td>{{ $charter->charter_type }}</td>
                                             <td>$50</td>
-                                            <td>$50</td>
-                                            <td>Hr.</td>
-                                            <td>Take a ride on a h....</td>
-                                            <td><label class="uploadFile-table border rounded">
-                                                    <i class="fa fa-cloud-upload upload-icon-account-1-table"
-                                                        aria-hidden="true"></i> </label>
+                                            <td>{{ $charter->rate }}</td>
+                                            {{-- <td>Hr.</td> --}}
+                                            <td>{{ $charter->description }}</td>
+                                            <td>
+                                                <img src="{{ uploaded_asset($charter->thumbnail_img)}}" alt="">
+                                                <label class="uploadFile-table border rounded">
+                                                    </label>
                                             </td>
-                                            <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                                            <td>AM</td>
-                                            <td>PM</td>
+                                            <td><i class="fa fa-calendar" aria-hidden="true">{{ $charter->date_of_avalability }} </i></td>
+                                            <td>{{ $charter->start_time }}</td>
+                                            <td>{{ $charter->end_time }}</td>
                                             <td>
                                                 <div class="table-tag">
                                                     <ul class="list-unstyled mb-0">
-                                                        <li>lorem<a href="" class="close-btn-tab"><i
-                                                                    class="fa fa-times" aria-hidden="true"></i> </a></li>
-                                                        <li>lorem<a href="" class="close-btn-tab"><i
-                                                                    class="fa fa-times" aria-hidden="true"></i></a></li>
-                                                        <li>lorem<a href="" class="close-btn-tab"><i
-                                                                    class="fa fa-times" aria-hidden="true"></i> </a></li>
+                                                        @foreach (explode(',',$charter->tags) as $item)
+                                                        <li>{{ $item }}<a href="" class="close-btn-tab"><i
+                                                            class="fa fa-times" aria-hidden="true"></i> </a></li>
+                                                        @endforeach
                                                     </ul>
                                                 </div>
                                             </td>
-                                            <td>1</td>
-                                            <td>Local</td>
+                                            <td>{{ $charter->max_guests }}</td>
+                                            {{-- <td>Local</td> --}}
                                             <td><label class="uploadFile border rounded">
                                                     <i class="fa fa-cloud-upload upload-icon-account-1"
-                                                        aria-hidden="true"></i>
+                                                        aria-hidden="true">
+                                                        {{ uploaded_asset($charter->charter_agreement)}}
+                                                    </i>
                                                     <span class="filename">Upload </span>
                                                     <input type="file" class="inputfile form-control" name="file">
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>4 Wheeler</td>
-                                            <td>Vehicle</td>
-                                            <td>$150</td>
-                                            <td>$150</td>
-                                            <td>Day</td>
-                                            <td>Ride off-road on a....</td>
-                                            <td><label class="uploadFile-table border rounded">
-                                                    <i class="fa fa-cloud-upload upload-icon-account-1-table"
-                                                        aria-hidden="true"></i> </label>
-                                            </td>
-                                            <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                                            <td>AM</td>
-                                            <td>PM</td>
-                                            <td>
-                                                <div class="table-tag">
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li>lorem<a href="" class="close-btn-tab"><i
-                                                                    class="fa fa-times" aria-hidden="true"></i> </a></li>
-                                                        <li>lorem<a href="" class="close-btn-tab"><i
-                                                                    class="fa fa-times" aria-hidden="true"></i></a></li>
-                                                        <li>lorem<a href="" class="close-btn-tab"><i
-                                                                    class="fa fa-times" aria-hidden="true"></i> </a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                            <td>2</td>
-                                            <td>Local</td>
-                                            <td><label class="uploadFile border rounded">
-                                                    <i class="fa fa-cloud-upload upload-icon-account-1"
-                                                        aria-hidden="true"></i>
-                                                    <span class="filename">Upload </span>
-                                                    <input type="file" class="inputfile form-control" name="file">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Small Moter Boat</td>
-                                            <td>Boat</td>
-                                            <td>$250</td>
-                                            <td>$250</td>
-                                            <td>Hr.</td>
-                                            <td>Go fishing or float....</td>
-                                            <td><label class="uploadFile-table border rounded">
-                                                    <i class="fa fa-cloud-upload upload-icon-account-1-table"
-                                                        aria-hidden="true"></i> </label>
-                                            </td>
-                                            <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                                            <td>AM</td>
-                                            <td>PM</td>
-                                            <td>
-                                                <div class="table-tag">
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li>lorem<a href="" class="close-btn-tab"><i
-                                                                    class="fa fa-times" aria-hidden="true"></i> </a></li>
-                                                        <li>lorem<a href="" class="close-btn-tab"><i
-                                                                    class="fa fa-times" aria-hidden="true"></i></a></li>
-                                                        <li>lorem<a href="" class="close-btn-tab"><i
-                                                                    class="fa fa-times" aria-hidden="true"></i> </a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                            <td>4</td>
-                                            <td>Local</td>
-                                            <td><label class="uploadFile border rounded">
-                                                    <i class="fa fa-cloud-upload upload-icon-account-1"
-                                                        aria-hidden="true"></i>
-                                                    <span class="filename">Upload </span>
-                                                    <input type="file" class="inputfile form-control" name="file">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><i class="fa fa-plus" aria-hidden="true"></i></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

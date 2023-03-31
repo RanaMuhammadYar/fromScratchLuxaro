@@ -288,7 +288,7 @@
                             <div class="merchant-banner-text">
                                 {{-- <h3>(Banner ad for Luxauro, Goledvine, or BMG; easily changeable by admin)</h3>
                                      --}}
-                                     <img src="{{ banner()->image }}" onerror="this.src='{{ asset('images/default.png') }}'" alt="" width="100%">
+                                     <img src="{{ banner()->image ?? '' }}" onerror="this.src='{{ asset('images/default.png') }}'" alt="" width="100%">
 
                             </div>
                         </div>
