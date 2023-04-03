@@ -40,6 +40,7 @@ Route::post('api/fetch-states', [UserController::class, 'fetchState']);
 Route::post('api/fetch-cities', [UserController::class, 'fetchCity']);
 
 Route::post('/search-product',[ProductController::class,'productsearch'])->name('productsearch');
+Route::get('/forums', [App\Http\Controllers\HomeController::class, 'forums'])->name('forums');
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/luxauro', 'index')->name('home');

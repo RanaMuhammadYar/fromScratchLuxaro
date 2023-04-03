@@ -315,7 +315,7 @@
                         @endif
                     @endif
                     <li><a href="{{ route('charters') }}">charters</a></li>
-                    <li><a href="javascript:void">forums</a></li>
+                    <li><a href="{{ route('forums') }}">forums</a></li>
                     <li><a href="javascript:void">Suits</a></li>
                 </ul>
 

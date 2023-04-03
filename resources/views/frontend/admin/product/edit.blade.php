@@ -53,6 +53,72 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Product SKU </label>
+                                    <input type="text" class="form-control @error('sku') is-invalid @enderror"
+                                        name="sku" value="{{ $product->sku }}" placeholder="Product Sku" title="Product Sku"
+                                        value="{{ old('sku') }}" />
+                                    @if ($errors->has('sku'))
+                                        <span class="text-danger">{{ $errors->first('sku') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">ProductId </label>
+                                    <input type="text"
+                                        class="form-control @error('productId') is-invalid @enderror" name="productId" value="{{ $product->productId }}"
+                                        placeholder="Product Id" title="Product Name" value="{{ old('productId') }}" />
+                                    @if ($errors->has('productId'))
+                                        <span class="text-danger mt-2">{{ $errors->first('productId') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Modal Number</label>
+                                    <input type="text" class="form-control @error('modal_number') is-invalid @enderror"
+                                    value="{{ $product->modal_number }}"  name="modal_number" placeholder="Modal Number" title="Modal Number"
+                                        value="{{ old('modal_number') }}" />
+                                    @if ($errors->has('modal_number'))
+                                        <span class="text-danger">{{ $errors->first('modal_number') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Serial Number</label>
+                                    <input type="text" class="form-control @error('serial_number') is-invalid @enderror"
+                                    value="{{ $product->serial_number }}"  name="serial_number" placeholder="Serial Number" title="Serial Number"
+                                        value="{{ old('serial_number') }}" />
+                                    @if ($errors->has('serial_number'))
+                                        <span class="text-danger">{{ $errors->first('serial_number') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Quantity</label>
+                                    <input type="text" class="form-control @error('quantity') is-invalid @enderror"
+                                    value="{{ $product->serial_number }}"   name="quantity" placeholder="Quantity" title="Quantity"
+                                        value="{{ old('quantity') }}" />
+                                    @if ($errors->has('quantity'))
+                                        <span class="text-danger">{{ $errors->first('quantity') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Product Price </label>
+                                    <input type="text" class="form-control @error('product_price') is-invalid @enderror"
+                                        name="product_price" placeholder="Product Price" title="Product Price"
+                                        value="{{ old('product_price') }}" />
+                                    @if ($errors->has('product_price'))
+                                        <span class="text-danger">{{ $errors->first('product_price') }}</span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Product Description</label>

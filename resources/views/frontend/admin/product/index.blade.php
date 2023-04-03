@@ -44,7 +44,11 @@
                                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
                                         <strong>{{ $product->product_name }}</strong>
                                     </td>
-                                    <td>{{ $product->category->title }}</td>
+                                    <td>
+                                        @foreach ($product->categories as $category)
+                                        {{ $product->name }}
+                                        @endforeach
+                                    </td>
                                     <td>{{ $product->product_price }}</td>
                                     <td>{{ $product->user->email }}</td>
                                     <td><img src="{{ $product->image }}" height="50" width="50"

@@ -38,7 +38,7 @@
                 </form>
                 <div class="Luxaurolicious-slider ">
                     <div class="row mb-3">
-                        @foreach ($products as $product)
+                        @foreach ($relatedProducts as $product)
                         <div class="col-md-2  col-12 my-2">
                             <div class="product-item">
                                 <a href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
@@ -65,7 +65,6 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <strong class="title">${{ $product->product_price }}</strong>
                                         <button class="btn bg-dark text-white py-1 px-2" onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i class="fa fa-shopping-basket"></i>
-
                                         </button>
                                         <input type="hidden" name="" value="1" class="addOrRemove">
                                     </div>
@@ -114,7 +113,7 @@
                             <h2 class="m-0">Related items</h2>
                             <div class="d-flex form-holder">
                                 <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
-                                <form class="page-form flex-fill" action="#">
+                                {{-- <form class="page-form flex-fill" action="#">
                                     <div class="page-form-holder d-flex">
                                         <label class="form-control rounded-0">Search Filter</label>
                                         <div class="form-field d-flex flex-fill">
@@ -125,7 +124,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </form>
+                                </form> --}}
                             </div>
                         </div>
                         <div class="slider Luxauro-fresh-slider product-detail-merchant">
@@ -133,15 +132,15 @@
                             @foreach ($relatedProducts as $relatedProduct)
                             <div>
                                 <div class="product-item">
-                                    <a href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
+                                    <a href="{{ route('productDetails', ['id' => $relatedProduct->id, 'slug' => Str::slug($relatedProduct->product_name)]) }}">
                                         <div class="img-holder">
-                                            <img src="{{ $relatedProduct->image }}" onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                                            <img src="{{ @$relatedProduct->image }}" onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
                                         </div>
                                     </a>
                                     <div class="txt-holder">
                                         <div class="d-flex justify-content-between mb-3">
                                             <div>
-                                                <a href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}" style="color:black;">
+                                                <a href="{{ route('productDetails', ['id' => $relatedProduct->id, 'slug' => Str::slug($relatedProduct->product_name)]) }}" style="color:black;">
                                                     <strong class="title">{{ $relatedProduct->product_name }}</strong>
                                                 </a>
                                                 <ul class="list-unstyled m-0 p-0 d-flex stars">
@@ -172,7 +171,7 @@
                             <h2 class="m-0">You may also like</h2>
                             <div class="d-flex form-holder">
                                 <!-- <a class="btn btn-view rounded-0" href="javascript:void">View All</a> -->
-                                <form class="page-form flex-fill" action="#">
+                                {{-- <form class="page-form flex-fill" action="#">
                                     <div class="page-form-holder d-flex">
                                         <label class="form-control rounded-0">Search Filter</label>
                                         <div class="form-field d-flex flex-fill">
@@ -183,7 +182,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </form>
+                                </form> --}}
                             </div>
                         </div>
                         <div class="slider Luxauro-fresh-slider product-detail-merchant">
