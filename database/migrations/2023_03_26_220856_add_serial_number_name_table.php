@@ -14,10 +14,10 @@ class AddSerialNumberNameTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('serial_number')->nullable();
-            $table->string('msrf');
-            $table->string('quantity');
-            $table->renameColumn('product_type_id', 'product_type');
+            // $table->string('serial_number')->nullable();
+            // $table->string('msrf');
+            // $table->string('quantity');
+            // $table->renameColumn('product_type_id', 'product_type');
         });
     }
 

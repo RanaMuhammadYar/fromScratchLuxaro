@@ -38,51 +38,107 @@
                   <div class="tab-content" id="pills-tabContent">
                   <div class="tab-pane fade " id="pills-home" role="tabpanel"
                       aria-labelledby="pills-home-tab">
-                      <form action="{{ route('productUpload') }}" enctype="multipart/form-data" method="post">
+                      <form action="{{ route('product.store') }}" enctype="multipart/form-data" method="post">
                         @csrf
                         <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
+                        <input type="hidden" value="vendorSide" name="vendorSide">
                         <div class="row gx-2">
                             <div class="col-12 col-md-6">
                                 <label for="exampleInputEmail1">Product Name</label>
-                                <input type="text" name="product_name" class="form-control mb-3 p-2" id="exampleInputEmail1"
+                                <input type="text" name="product_name"  class="form-control mb-3 p-2 @error('product_name') is-invalid @enderror" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
+                                    @error('product_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                             <div class="col-12 col-md-6">
                                 <label for="exampleInputPassword1">Product Price</label>
-                                <input type="price" name="product_price" class="form-control mb-3 p-2"
-                                    id="exampleInputPassword1">
+                                <input type="price" name="product_price"  class="form-control mb-3 p-2 @error('product_price') is-invalid @enderror"
+                                    id="exampleInputPassword1" >
+                                    @error('product_price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                             <div class="col-12 col-md-6">
                                 <label for="exampleInputPassword1">UPC</label>
-                                <input type="price" name="upc" class="form-control mb-3 p-2"
-                                    id="exampleInputPassword1">
+                                <input type="price" name="upc"  class="form-control mb-3 p-2 @error('price') is-invalid @enderror"
+                                    id="exampleInputPassword1" >
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                         </div>
                         <div class="row gx-2">
                             <div class="col-12 col-md-6">
                                 <label for="exampleInputEmail1">SKU</label>
-                                <input type="text" name="sku" class="form-control mb-3 p-2" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
+                                <input type="text" name="sku"  class="form-control mb-3 p-2 @error('sku') is-invalid @enderror" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" >
+                                    @error('sku')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                             <div class="col-12 col-md-6">
                                 <label for="exampleInputPassword1">Product ID</label>
-                                <input type="price" name="productId" class="form-control mb-3 p-2"
-                                    id="exampleInputPassword1">
+                                <input type="text" name="productId"  class="form-control mb-3 p-2 @error('productId') is-invalid @enderror"
+                                    id="exampleInputPassword1" >
+                                    @error('productId')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                             <div class="col-12 col-md-6">
                                 <label for="exampleInputPassword1">Modal Number</label>
-                                <input type="price" name="modal_number" class="form-control mb-3 p-2"
-                                    id="exampleInputPassword1">
+                                <input type="number" name="modal_number" class="form-control mb-3 p-2 @error('modal_number') is-invalid @enderror"
+                                    id="exampleInputPassword1" >
+                                    @error('modal_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="exampleInputPassword1">Quantity</label>
+                                <input type="number" name="quantity" class="form-control mb-3 p-2 @error('quantity') is-invalid @enderror"
+                                    id="exampleInputPassword1" >
+                                    @error('quantity')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="exampleInputPassword1">MSRF</label>
+                                <input type="number" name="msrf" class="form-control mb-3 p-2 @error('msrf') is-invalid @enderror"
+                                    id="exampleInputPassword1" >
+                                    @error('msrf')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                             <div class="col-12 col-md-6">
                                 <label for="exampleInputPassword1">Serial Number</label>
-                                <input type="price" name="serial_number" class="form-control mb-3 p-2"
-                                    id="exampleInputPassword1">
+                                <input type="number" name="serial_number" class="form-control mb-3 p-2 @error('serial_number') is-invalid @enderror"
+                                    id="exampleInputPassword1" >
+                                    @error('serial_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                         </div>
                          <label for="select-products">products Type</label>
                           <select class="form-select mb-3" aria-label="Default select example" name="product_type_id"
-                              id="select-products">
+                              id="select-products" >
                               <option selected></option>
                               @foreach ($product_types as  $product_type)
                               <option value="{{ $product_type->id }}">{{ $product_type->title }}</option>
@@ -90,31 +146,38 @@
                           </select>
                         <label for="select-products">In this is an Auction Product?</label>
                         <select class="form-select mb-3 w-25" aria-label="Default select example" name="is_auction"
-                            id="select-products">
+                            id="select-products" >
                             <option selected></option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                         </select>
                         <div class="text-area">
                             <label for="exampleInputPassword1">Product Description</label>
-                            <textarea class="form-control mb-4"  name="product_description"
-                                id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea class="form-control mb-4 @error('product_description') is-invalid @enderror"  name="product_description"
+                                id="exampleFormControlTextarea1" rows="3" ></textarea>
+                                @error('product_description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                         </div>
                         <div class="mb-3">
                             <label class="uploadFile border rounded">
                                 <i class="fa fa-cloud-upload upload-icon-account-1" aria-hidden="true"></i>
                                 <span class="filename">Upload product image</span>
-                                <input type="file" class="inputfile form-control" name="product_image">
+                                <input type="file" class="inputfile form-control @error('product_image') is-invalid @enderror" name="product_image">
+                                @error('product_image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </label>
                         </div>
                        
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Tags</label>
-                            <input class="form-control @error('tags') is-invalid @enderror" type="text"
+                            <input class="form-control" type="text"
                                 data-role="tagsinput" name="tags" value="{{ old('tags') }}" placeholder="Tags">
-                            @if ($errors->has('tags'))
-                                <span class="text-danger">{{ $errors->first('tags') }}</span>
-                            @endif
                         </div>
                          <div class="input-groups mb-3">
                             <label>Product Category</label>
@@ -173,9 +236,14 @@
                                 <label>Shipping Charge</label>
                                 <div class="input-group flex-nowrap w-50">
                                     <span class="input-group-text" id="addon-wrapping">$</span>
-                                    <input type="text" class="form-control custom-input"
+                                    <input type="number" class="form-control custom-input"
                                     name="shipping_charge" aria-label="Username"
                                     aria-describedby="addon-wrapping">
+                                    @error('shipping_charge')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -216,9 +284,9 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                   @foreach ($products as $product)
+                                   @foreach ($products as $key=>$product)
                                    <tr>
-                                            <th scope="row">1</th>
+                                            <th scope="row">{{ ++$key }}</th>
                                             <td>{{ $product->upc }}</td>
                                             <td>{{ $product->sku }}</td>
                                             <td>{{ $product->productId }}</td>

@@ -42,7 +42,12 @@
                                 <div class="row gx-2">
                                     <div class="col-12 col-md-6">
                                         <label for="exampleInputEmail1">Charter Name</label>
-                                        <input type="text" class="form-control mb-3 p-2" id="exampleInputEmail1" name="charter_name" aria-describedby="emailHelp">
+                                        <input type="text" class="form-control mb-3 p-2 @error('charter_name') is-invalid @enderror" id="exampleInputEmail1" name="charter_name" aria-describedby="emailHelp">
+                                        @error('charter_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row gx-2">
@@ -61,7 +66,12 @@
                                             <div class="col-12 col-md-6">
                                                 <div class="input-group flex-nowrap mb-3">
                                                     <span class="input-group-text" id="addon-wrapping">$</span>
-                                                    <input type="text" class="form-control custom-input py-2" name="rate" aria-label="Username" aria-describedby="addon-wrapping">
+                                                    <input type="text" class="form-control custom-input py-2 @error('rate') is-invalid @enderror" name="rate" aria-label="Username" aria-describedby="addon-wrapping">
+                                                    @error('rate')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
@@ -76,13 +86,23 @@
                                     </div>
                                     <div class="text-area mb-3">
                                         <label for="exampleInputPassword1">Charter Description</label>
-                                        <textarea class="form-control mb-4" name="description" placeholder="Message..." id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea class="form-control mb-4  @error('description') is-invalid @enderror" name="description" placeholder="Message..." id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        @error('description')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label class="uploadFile border rounded">
                                             <i class="fa fa-cloud-upload upload-icon-account-1" aria-hidden="true"></i>
                                             <span class="filename">Upload charter Image</span>
-                                            <input type="file" class="inputfile form-control" name="thumbnail_img">
+                                            <input type="file" class="inputfile form-control @error('thumbnail_img') is-invalid @enderror" name="thumbnail_img">
+                                            @error('thumbnail_img')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </label>
                                     </div>
                                
@@ -90,8 +110,13 @@
                                         <div class="col-12 col-lg-6">
                                             <label>Date Of Avaliabilty</label>
                                             <div class="input-group mb-3">
-                                                <input type="date" class="form-control" name="date_of_avalability" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                                <input type="date" class="form-control @error('date_of_avalability') is-invalid @enderror" name="date_of_avalability" aria-label="Recipient's username" aria-describedby="button-addon2">
                                                 <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                                @error('date_of_avalability')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-12 col-lg-6">
@@ -104,7 +129,12 @@
                                                             <li><a class="dropdown-item" href="#">AM</a></li>
                                                             <li><a class="dropdown-item" href="#">PM</a></li>
                                                         </ul>
-                                                        <input type="time" class="form-control" name="start_time" aria-label="Text input with dropdown button">
+                                                        <input type="time" class="form-control @error('start_time') is-invalid @enderror" name="start_time" aria-label="Text input with dropdown button">
+                                                        @error('start_time')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-6">
@@ -114,7 +144,12 @@
                                                             <li><a class="dropdown-item" href="#">AM</a></li>
                                                             <li><a class="dropdown-item" href="#">PM</a></li>
                                                         </ul>
-                                                        <input type="time" class="form-control" name="end_time" aria-label="Text input with dropdown button">
+                                                        <input type="time" class="form-control @error('end_time') is-invalid @enderror" name="end_time" aria-label="Text input with dropdown button">
+                                                        @error('end_time')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="d-grid d-md-flex justify-content-md-end mb-2">
