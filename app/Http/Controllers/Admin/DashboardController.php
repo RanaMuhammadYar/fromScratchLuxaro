@@ -22,7 +22,7 @@ class DashboardController extends Controller
 
     public function allVendor()
     {
-        $pendingVendors = User::with('vendor')->where('role', 'Vendor')->whereIn('status',['Pending','Active','Suspended'])->get();
+        $pendingVendors = User::with('vendor')->where('role','Merchant')->whereIn('status',['Pending','Active','Suspended'])->get();
         return view('frontend.admin.vendors.index' , compact('pendingVendors'));
     }
 

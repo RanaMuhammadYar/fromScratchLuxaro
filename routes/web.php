@@ -67,7 +67,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/aboutUs', 'aboutUs')->name('aboutUs');
     Route::get('/faqs', 'faqs')->name('faqs');
 });
-Route::get('luxauro/vendorRegister', [RegisterController::class, 'showRegistrationForm'])->name('vendorRegister');
+Route::get('luxauro/merchant-register', [RegisterController::class, 'showRegistrationForm'])->name('vendorRegister');
 Route::get('goldEvines/founderRegister', [RegisterController::class, 'showRegistrationForm'])->name('founderRegister');
 Route::get('goldMetal/professionalRegister', [RegisterController::class, 'showRegistrationForm'])->name('professionalRegister');
 
@@ -77,6 +77,7 @@ Route::controller(MerchantController::class)->group(function () {
     Route::post('/save_merchant_account', 'saveMerchantAccount')->name('save_merchant_account');
 });
 Route::controller(CharterManagementController::class)->group(function () {
+
     Route::post('/charter_manage', 'store')->name('charter_manage');
     Route::get('/all_charters', 'index')->name('charters');
     Route::get('/charter_detail', 'charter_detail')->name('charter_detail');

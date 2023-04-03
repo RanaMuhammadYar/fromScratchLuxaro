@@ -7,7 +7,7 @@ use App\Models\Admin\Product;
 use App\Models\Admin\Category;
 use App\Models\Admin\DeliveryOption as AdminDeliveryOption;
 use App\Models\Admin\ProductType;
-use App\Models\DeliveryOption;
+use App\Models\Admin\DeliveryOption;
 
 class ProductController extends Controller
 {

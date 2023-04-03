@@ -102,11 +102,11 @@
             </ul>
         </li>
         <!-- Cards -->
-        <li class="menu-item {{ Request::is('all-vendor') ? 'active' : '' }}">
+        <li class="menu-item {{ Request::is('all-merchant') ? 'active' : '' }}">
             <a href="{{ route('allVendor') }}" class="menu-link">
                 {{-- <i class=" bx bx-collection"></i> --}}
                 <i class=" menu-icon tf-icons bi bi-person-fill"></i>
-                <div data-i18n="Basic">Vendors</div>
+                <div data-i18n="Basic">Murchant</div>
             </a>
         </li>
 

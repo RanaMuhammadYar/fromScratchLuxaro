@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin\DeliveryOption;
-use App\Models\Charter;
-use App\Models\CharterBooking;
 use App\Models\Upload;
+use App\Models\Charter;
 use Illuminate\Http\Request;
+use App\Models\CharterBooking;
+use App\Models\Admin\DeliveryOption;
 use Illuminate\Support\Facades\Validator;
+
 class CharterManagementController extends Controller
 {
-        public function charters()
-        {
-            return view('frontend.charters');
-        }
-        /**
-         * Display a listing of the resource.
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function index(Request $request)
-        {
-            $search = $request->input('search');
+    public function charters()
+    {
+        return view('frontend.charters');
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
 
             $charters = Charter::query()
                 ->when($search, function ($query, $search) {
                     return $query->where('charter_name', 'like', '%' . $search . '%');
                 })
-                ->paginate(5);  
+                ->paginate(5);
             return view('frontend.charters.all',compact('charters'));
         }
         public function charter_detail(Request $request)
@@ -50,8 +51,8 @@ class CharterManagementController extends Controller
             $html = view('frontend.all-page.append_charters', ['charters' => $charters])->render();
             return $html;
         }
-    
-       
+
+
         public function charter_book(Request $request)
         {
            CharterBooking::create([
@@ -65,8 +66,8 @@ class CharterManagementController extends Controller
           ]);
           return back();
         }
-    
-    
+
+
         /**
          * Store a newly created resource in storage.
          *
@@ -86,8 +87,8 @@ class CharterManagementController extends Controller
             ]);
             if ($validate->fails()) {
                 return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Charter Added Failed');
-            } 
-            else 
+            }
+            else
             {
                 $charter                       = new Charter;
                 $charter->charter_name         = $request->charter_name;
@@ -136,11 +137,11 @@ class CharterManagementController extends Controller
                     "xls"=>"document",
                     "xlsx"=>"document"
                 );
-                
+
                 if($request->hasFile('charter_agreement')){
                     $upload = new Upload;
                     $extension = strtolower($request->file('charter_agreement')->getClientOriginalExtension());
-        
+
                     if(isset($type[$extension])){
                         $upload->file_original_name = null;
                         $arr = explode('.', $request->file('charter_agreement')->getClientOriginalName());
@@ -170,7 +171,7 @@ class CharterManagementController extends Controller
                 if($request->hasFile('thumbnail_img')){
                     $upload = new Upload;
                     $extension = strtolower($request->file('thumbnail_img')->getClientOriginalExtension());
-        
+
                     if(isset($type[$extension])){
                         $upload->file_original_name = null;
                         $arr = explode('.', $request->file('thumbnail_img')->getClientOriginalName());
@@ -201,5 +202,5 @@ class CharterManagementController extends Controller
             }
             return redirect()->route('charter_management');
         }
-    
+
 }

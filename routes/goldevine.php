@@ -2,6 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SuitsController;
 use App\Http\Controllers\Goldevine\GoldevineCategoryController;
 use App\Http\Controllers\Admin\Goldevine\ProjectManageController;
 
@@ -24,3 +25,8 @@ Route::post('create-project', [ProjectManageController::class, 'store'])->name('
 Route::get('all-project', [ProjectManageController::class, 'allProject'])->name('allprojects');
 Route::get('edit-project/{id}', [ProjectManageController::class, 'edit'])->name('editProject');
 Route::post('edit-project', [ProjectManageController::class, 'update'])->name('updateProject');
+
+
+
+// Suits Route
+Route::get('suits', [SuitsController::class, 'index'])->name('suits');

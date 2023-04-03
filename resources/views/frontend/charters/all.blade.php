@@ -1,4 +1,7 @@
 @extends('frontend.layouts.app')
+@section('title')
+<title>Charters</title>
+@endsection
 @section('content')
 <div class="inner-content">
     <div class="product-page-section">

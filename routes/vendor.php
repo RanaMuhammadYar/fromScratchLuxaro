@@ -8,9 +8,9 @@ use App\Http\Controllers\Vendor\VendorProductController;
 use App\Http\Controllers\Vendor\VendorDashboardController;
 
 
-Route::get('all-vendor', [DashboardController::class, 'allVendor'])->name('allVendor');
-Route::get('allvendor/{id}', [DashboardController::class, 'adminsuspendedVendor'])->name('admin.suspendedVendor');
-Route::get('allvendors/{id}', [DashboardController::class, 'adminactiveVendor'])->name('admin.adminactiveVendor');
+Route::get('all-merchant', [DashboardController::class, 'allVendor'])->name('allVendor');
+Route::get('all-merchant/{id}', [DashboardController::class, 'adminsuspendedVendor'])->name('admin.suspendedVendor');
+Route::get('all-merchants/{id}', [DashboardController::class, 'adminactiveVendor'])->name('admin.adminactiveVendor');
 Route::get('vendor-dashboard', [VendorDashboardController::class, 'vendorDashboard'])->name('vendorDashboard');
 Route::resource('vendor-product', VendorProductController::class);
 Route::get('account-request', [AccountController::class, 'accountRequest'])->name('accountRequest');

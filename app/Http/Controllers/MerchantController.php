@@ -19,17 +19,21 @@ class MerchantController extends Controller
 {
     public function merchantAccountFirstStep()
     {
-        $countries = Country::all();
-        $states = State::all();
-        $cities = City::all();
-        $merchant_detail = MerchantDetail::where('user_id', auth()->user()->id)->first();
-        $delivery_options = DeliveryOption::all();
-        // return $delivery_options;
-        return view('frontend.all-page.merchant_account', compact('merchant_detail', 'states', 'cities', 'countries', 'delivery_options'));
+
+        if (auth()->user()->role == 'Merchant' && auth()->user()->status == 'Active') {
+            $countries = Country::all();
+            $states = State::all();
+            $cities = City::all();
+            $merchant_detail = MerchantDetail::where('user_id', auth()->user()->id)->first();
+            $delivery_options = DeliveryOption::all();
+            // return $delivery_options;
+            return view('frontend.all-page.merchant_account', compact('merchant_detail', 'states', 'cities', 'countries', 'delivery_options'));
+        } else {
+            return redirect()->back()->with('error', 'Application is under review');
+        }
     }
     public function merchantAccountSecondStep(Request $request)
     {
-        // return $request->all();
 
         $validation = Validator::make($request->all(), [
             'business_name' => 'required',
@@ -57,59 +61,64 @@ class MerchantController extends Controller
             return redirect()->back()->withErrors($validation)->withInput()->with('error', 'Please fill up all the fields');
         } else {
 
-            $merchant = new MerchantApplication();
-            $merchant->business_name = $request->business_name;
-            $merchant->business_address = $request->business_address;
-            $merchant->country_id = $request->country_id;
-            $merchant->state_id = $request->state_id;
-            $merchant->city_id = $request->city_id;
-            $merchant->zip_code = $request->zip_code;
-            $merchant->business_email = $request->business_email;
-            $merchant->business_website = $request->business_website;
-            $merchant->phone_number = $request->phone_number;
-            $merchant->ein = $request->ein;
-            $merchant->bank_account_number = $request->bank_account_number;
-            $merchant->credit_card_number = $request->credit_card_number;
-            $merchant->description_about_us = $request->description_about_us;
-            $merchant->business_run = $request->business_run;
-            $merchant->delivery_id = $request->delivery_id;
-            $merchant->social_media_link = json_encode($request->social_media_link);
-            $merchant->owner_name = json_encode($request->owner_name);
-            $merchant->owner_introduce = $request->owner_introduce;
-            $merchant->team_memeber_name = json_encode($request->team_memeber_name);
-            $merchant->history = $request->history;
-            $merchant->ethic = $request->ethic;
-            $merchant->philosophy = $request->philosophy;
-            $merchant->status = 'Pending';
-            $merchant->user_id = auth()->user()->id;
+            $already_exist = MerchantApplication::where('user_id', auth()->user()->id)->count();
+            if ($already_exist > 0) {
+                return redirect()->back()->with('error', 'You have already applied for merchant account');
+            } else {
+                $merchant = new MerchantApplication();
+                $merchant->business_name = $request->business_name;
+                $merchant->business_address = $request->business_address;
+                $merchant->country_id = $request->country_id;
+                $merchant->state_id = $request->state_id;
+                $merchant->city_id = $request->city_id;
+                $merchant->zip_code = $request->zip_code;
+                $merchant->business_email = $request->business_email;
+                $merchant->business_website = $request->business_website;
+                $merchant->phone_number = $request->phone_number;
+                $merchant->ein = $request->ein;
+                $merchant->bank_account_number = $request->bank_account_number;
+                $merchant->credit_card_number = $request->credit_card_number;
+                $merchant->description_about_us = $request->description_about_us;
+                $merchant->business_run = $request->business_run;
+                $merchant->delivery_id = $request->delivery_id;
+                $merchant->social_media_link = json_encode($request->social_media_link);
+                $merchant->owner_name = json_encode($request->owner_name);
+                $merchant->owner_introduce = $request->owner_introduce;
+                $merchant->team_memeber_name = json_encode($request->team_memeber_name);
+                $merchant->history = $request->history;
+                $merchant->ethic = $request->ethic;
+                $merchant->philosophy = $request->philosophy;
+                $merchant->status = 'Pending';
+                $merchant->user_id = auth()->user()->id;
 
-            if ($request->hasFile('business_logo')) {
-                $path = asset('storage/' . $request->file('business_logo')->store('public/merchant_logo'));
-                $merchant->business_logo = $path;
-            }
-            if ($request->hasFile('store_header')) {
-                $path = asset('storage/' . $request->file('store_header')->store('public/merchant_header'));
-                $merchant->store_header = $path;
-            }
-            if ($request->hasFile('owner_image')) {
+                if ($request->hasFile('business_logo')) {
+                    $path = asset('storage/' . $request->file('business_logo')->store('public/merchant_logo'));
+                    $merchant->business_logo = $path;
+                }
+                if ($request->hasFile('store_header')) {
+                    $path = asset('storage/' . $request->file('store_header')->store('public/merchant_header'));
+                    $merchant->store_header = $path;
+                }
+                if ($request->hasFile('owner_image')) {
 
-                $owner_image = [];
-                foreach ($request->owner_image as $key => $value) {
-                    $path = asset('storage/' . $request->file('owner_image')[$key]->store('public/owner_image'));
-                    array_push($owner_image, $path);
+                    $owner_image = [];
+                    foreach ($request->owner_image as $key => $value) {
+                        $path = asset('storage/' . $request->file('owner_image')[$key]->store('public/owner_image'));
+                        array_push($owner_image, $path);
+                    }
+                    $merchant->owner_image = json_encode($owner_image);
                 }
-                $merchant->owner_image = json_encode($owner_image);
-            }
-            if ($request->hasFile('team_memeber_image')) {
-                $team_memeber_image = [];
-                foreach ($request->team_memeber_image as $key => $value) {
-                    $path = asset('storage/' . $request->file('team_memeber_image')[$key]->store('public/merchant_team_member'));
-                    array_push($team_memeber_image, $path);
+                if ($request->hasFile('team_memeber_image')) {
+                    $team_memeber_image = [];
+                    foreach ($request->team_memeber_image as $key => $value) {
+                        $path = asset('storage/' . $request->file('team_memeber_image')[$key]->store('public/merchant_team_member'));
+                        array_push($team_memeber_image, $path);
+                    }
+                    $merchant->team_memeber_image = json_encode($team_memeber_image);
                 }
-                $merchant->team_memeber_image = json_encode($team_memeber_image);
+                $merchant->save();
+                return redirect()->back()->with('success', 'Your application has been submitted successfully');
             }
-            $merchant->save();
-            return redirect()->back()->with('success', 'Your application has been submitted successfully');
         }
     }
     public function saveMerchantAccount(Request $request)
