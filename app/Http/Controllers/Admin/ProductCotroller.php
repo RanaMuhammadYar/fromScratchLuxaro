@@ -17,7 +17,7 @@ class ProductCotroller extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth','admin']);
+        $this->middleware(['auth']);
     }
 
     /**
@@ -27,7 +27,7 @@ class ProductCotroller extends Controller
      */
     public function index()
     {
-        $products = Product::with('categories', 'productType', 'deliveryOption', 'shippingType','user')->get();
+        $products = Product::with('categories', 'productType', 'deliveryOption', 'shippingType', 'user')->get();
         return view('frontend.admin.product.index', compact('products'));
     }
 
@@ -53,14 +53,23 @@ class ProductCotroller extends Controller
      */
     public function store(Request $request)
     {
+
         $validate = Validator::make($request->all(), [
             'product_name' => 'required',
             'product_description' => 'required',
-            'product_price' => 'required',
-            'product_description'=>'required',
-            'modal_number'=>'required',
-            'sku'=>'required',
-            'productId'=>'required',
+            'product_price' => 'required|numeric',
+            'modal_number' => 'required',
+            'sku' => 'required',
+            'productId' => 'required',
+            'multiple_image' => 'required',
+            'msrf' => 'required',
+            'quantity' => 'required',
+            'serial_number' => 'required',
+            'shipping_charge' => 'required|numeric',
+            'category_id' => 'required',
+            'delivery_option_id' => 'required',
+            'product_image' => 'required',
+
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Product Added Failed');
@@ -79,11 +88,21 @@ class ProductCotroller extends Controller
             $product->serial_number = $request->serial_number;
             $product->product_type = $request->product_type_id;
             $product->shipping_charge = $request->shipping_charge;
-            $product->status = "Active";
-            $product->user_id = $request->user_id;
+            $product->status = "Pending";
+            $product->user_id = auth()->user()->id;
             if ($request->hasFile('product_image')) {
-                $path = asset('storage/'.$request->product_image->store('product'));
+                $path = asset('storage/' . $request->product_image->store('product'));
                 $product->image = $path;
+            }
+
+            if($request->hasFile('multiple_image')){
+                $images = $request->file('multiple_image');
+                $imageArray = array();
+                foreach($images as $image){
+                    $path = asset('storage/' . $image->store('product'));
+                    $imageArray[] = $path;
+                }
+                $product->multiple_image = json_encode($imageArray);
             }
             $product->save();
             $tags = explode(",", $request->tags);
@@ -91,10 +110,10 @@ class ProductCotroller extends Controller
             $product->categories()->sync($request->category_id);
             $product->deliveryOption()->sync($request->delivery_option_id);
             $product->shippingType()->sync($request->shipping_type_id);
-            if(isset($request->vendorSide))
-            return redirect()->route('product_management')->with('success', 'Product Added Successfully');
+            if (isset($request->vendorSide))
+                return redirect()->route('product_management')->with('success', 'Product Added Successfully');
             else
-            return redirect()->route('product.index')->with('success', 'Product Added Successfully');
+                return redirect()->route('product.index')->with('success', 'Product Added Successfully');
         }
     }
 
@@ -117,7 +136,7 @@ class ProductCotroller extends Controller
      */
     public function edit($id)
     {
-        $product = Product::with('categories', 'productType', 'deliveryOption', 'shippingType','user')->find($id);
+        $product = Product::with('categories', 'productType', 'deliveryOption', 'shippingType', 'user')->find($id);
         $categories = Category::all();
         $productType = ProductType::all();
         $delivoryOption = AdminDeliveryOption::all();
@@ -140,52 +159,59 @@ class ProductCotroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $validate = Validator::make($request->all(), [
-        //     'product_name' => 'required',
-        //     'product_description' => 'required',
-        //     'product_price' => 'required',
-        //     'product_description'=>'required',
-        //     'tags'=>'required',
-        //     'product_type_id' => 'required',
-        //     'product_category_id' => 'required',
-        //     'delivory_option_id' => 'required',
-        //     'shipping_type_id' => 'required',
-        //     'shipping_charge' => 'required',
-        //     'status'=>'required',
-        //     'user_id'=>'required',
-        // ]);
-        // if ($validate->fails()) {
-        //     return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Product Added Failed');
-        // } else {
-            $product = Product::find($id);
-            $product->product_name = $request->product_name;
-            $product->product_description = $request->product_description;
-            $product->product_price = $request->product_price;
-            // $product->category_id = $request->product_category_id;
-            // $product->product_type_id = $request->product_type_id;
-            // $product->delivory_option_id = $request->delivory_option_id;
-            // $product->shipping_type_id = $request->shipping_type_id;
-            $product->shipping_charge = $request->shipping_charge;
-            $product->product_price = $request->product_price;
-            $product->msrf = $request->msrf;
-            $product->quantity = $request->quantity;
-            $product->serial_number = $request->serial_number;
-            $product->status = $request->status;
-            $product->user_id = $request->user_id;
-            if ($request->hasFile('product_image')) {
-                $path = asset('storage/'.$request->product_image->store('product'));
-                $product->image = $path;
+        // return $request->all();
+        $validate = Validator::make($request->all(), [
+            'product_name' => 'required',
+            'product_description' => 'required',
+            'product_price' => 'required|numeric',
+            'sku' => 'required',
+            'productId' => 'required',
+            'quantity' => 'required',
+            'serial_number' => 'required',
+            'shipping_charge' => 'required|numeric',
+            
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Product Added Failed');
+        } else {
+        $product = Product::find($id);
+        $product->product_name = $request->product_name;
+        $product->product_description = $request->product_description;
+        $product->product_price = $request->product_price;
+        // $product->category_id = $request->product_category_id;
+        // $product->product_type_id = $request->product_type_id;
+        // $product->delivory_option_id = $request->delivory_option_id;
+        // $product->shipping_type_id = $request->shipping_type_id;
+        $product->shipping_charge = $request->shipping_charge;
+        $product->product_price = $request->product_price;
+        $product->msrf = $request->msrf;
+        $product->quantity = $request->quantity;
+        $product->serial_number = $request->serial_number;
+        $product->status = $request->status;
+        $product->user_id = $request->user_id;
+        if ($request->hasFile('product_image')) {
+            $path = asset('storage/' . $request->product_image->store('product'));
+            $product->image = $path;
+        }
+        if($request->hasFile('multiple_image')){
+            $images = $request->file('multiple_image');
+            $imageArray = array();
+            foreach($images as $image){
+                $path = asset('storage/' . $image->store('product'));
+                $imageArray[] = $path;
             }
-            $product->save();
-            $tags = explode(",", $request->tags);
-            $product->retag($tags);
-            $tags = explode(",", $request->tags);
-            $product->categories()->sync($request->category_id);
-            $product->deliveryOption()->sync($request->delivery_option_id);
-            // $product->productType()->sync($request->product_type_id);
-            $product->shippingType()->sync($request->shipping_type_id);
-            return redirect()->route('product.index')->with('success', 'Product Added Successfully');
-        // }
+            $product->multiple_image = json_encode($imageArray);
+        }
+        $product->save();
+        $tags = explode(",", $request->tags);
+        $product->retag($tags);
+        $tags = explode(",", $request->tags);
+        $product->categories()->sync($request->category_id);
+        $product->deliveryOption()->sync($request->delivery_option_id);
+        // $product->productType()->sync($request->product_type_id);
+        $product->shippingType()->sync($request->shipping_type_id);
+        return redirect()->route('product.index')->with('success', 'Product Added Successfully');
+        }
     }
 
     /**

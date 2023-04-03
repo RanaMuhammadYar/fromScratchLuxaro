@@ -53,8 +53,14 @@
                                                         <li>
                                                             <div class="shopping-bag-pickup d-flex">
                                                                 <div class="shopping-bag-delivery me-3">
-                                                                    <strong
-                                                                        class="shopping-bag-title">{{ $allcartorder->product->delivoryOption->title }}</strong>
+                                                                    <strong class="shopping-bag-title">
+                                                                        @foreach ($allcartorder->product->deliveryOption as $deliveryOption)
+                                                                            {{ $deliveryOption->delivery_option }}
+                                                                            @if (!$loop->last)
+                                                                                ,
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </strong>
                                                                     <span class="estimated mb-2">Estimated Arrival:<span
                                                                             class="d-block"></span>Thurs, Feb 16</span>
                                                                     <p class="mb-0"><strong
@@ -73,7 +79,7 @@
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <hr>
+                                                            <hr class="my-2">
                                                         </li>
                                                         <li>
                                                             <div class="save-for-later d-flex" style="width: 100px;">

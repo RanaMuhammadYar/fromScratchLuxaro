@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @yield('title')
     @include('frontend.include.style')
-    @livewireStyles   
+    @livewireStyles
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
@@ -19,6 +19,7 @@
             @include('frontend.include.footer')
         </div>
         @include('frontend.include.script')
+        @yield('script')
     </div>
     @livewireScripts
 </body>

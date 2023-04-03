@@ -59,17 +59,19 @@
                             <div class="details-review d-flex align-items-center mb-1">
                                 <ul class="list-unstyled m-0 p-0 d-flex stars">
                                     @php
-                                       $size = (int)$product->ratings()->avg('rating');
-                                       $unstart = 5-$size;
+                                        $size = (int) $product->ratings()->avg('rating');
+                                        $unstart = 5 - $size;
                                     @endphp
-                                    @for ($i=0;$i<$size;$i++)
+                                    @for ($i = 0; $i < $size; $i++)
                                         <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
                                     @endfor
-                                    @for ($i=0;$i<$unstart;$i++)
-                                       <li class="me-1"><i class="fa fa-star"></i></li>
-                                     @endfor
+                                    @for ($i = 0; $i < $unstart; $i++)
+                                        <li class="me-1"><i class="fa fa-star"></i></li>
+                                    @endfor
                                 </ul>
-                                <span class="small">{{ round($product->ratings()->avg('rating'), 1).'(Based on '.$product->ratings()->count().'Reviews)' }} </span>
+                                <span
+                                    class="small">{{ round($product->ratings()->avg('rating'), 1) . '(Based on ' . $product->ratings()->count() . 'Reviews)' }}
+                                </span>
                             </div>
                             <p class="price my-2">${{ $product->product_price }}</p>
                             <div class="quantity-btn d-flex align-items-center mb-3">
@@ -87,7 +89,11 @@
                             </div>
                             <div class="luxauro-fresh d-flex align-items-center">
                                 <div class="luxauro-catogery me-5">
-                                    <p>Catogery: <strong>{{ $product->category->title }}</strong></p>
+                                    <p>Catogery:
+                                        @foreach ($product->categories as $category)
+                                            <strong>{{ $category->title . ',' }}</strong>
+                                        @endforeach
+                                    </p>
                                 </div>
                                 <div class="luxauro-catogery">
                                     <p>Tags: <strong>
@@ -98,7 +104,9 @@
                                 </div>
                             </div>
                             <div class="merchant-name">
-                                <p>Merchant: <u>{{ isset($product->user->userDetails->name) ? $product->user->userDetails->name  : '' }}</u></p>
+                                <p>Merchant:
+                                    <u>{{ isset($product->user->userDetails->name) ? $product->user->userDetails->name : '' }}</u>
+                                </p>
                             </div>
                             <div class="description-detail d-flex ">
                                 <div class="description-heading">
@@ -137,7 +145,8 @@
                     @foreach ($productsasc as $productasc)
                         <div>
                             <div class="product-item">
-                                <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}">
+                                <a
+                                    href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}">
                                     <div class="img-holder">
                                         <img src="{{ $productasc->image }}"
                                             onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
@@ -146,20 +155,21 @@
                                 <div class="txt-holder">
                                     <div class="d-flex justify-content-between mb-3">
                                         <div>
-                                            <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}" style="color: black">
+                                            <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}"
+                                                style="color: black">
                                                 <strong class="title">{{ $productasc->product_name }}</strong>
                                             </a>
                                             <ul class="list-unstyled m-0 p-0 d-flex stars">
                                                 @php
-                                                   $size = (int)$productasc->ratings()->avg('rating');
-                                                   $unstart = 5-$size;
+                                                    $size = (int) $productasc->ratings()->avg('rating');
+                                                    $unstart = 5 - $size;
                                                 @endphp
-                                                @for ($i=0;$i<$size;$i++)
+                                                @for ($i = 0; $i < $size; $i++)
                                                     <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
                                                 @endfor
-                                                @for ($i=0;$i<$unstart;$i++)
-                                                   <li class="me-1"><i class="fa fa-star"></i></li>
-                                                 @endfor
+                                                @for ($i = 0; $i < $unstart; $i++)
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                @endfor
                                             </ul>
                                         </div>
                                         <i class="fa fa-globe fa-1x mt-2"></i>
@@ -200,45 +210,47 @@
                 </div>
                 <div class="slider Charters-slider">
                     @foreach ($mayyoulike as $productasc)
-                    <div>
-                        <div class="product-item">
-                            <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}">
-                                <div class="img-holder">
-                                    <img src="{{ $productasc->image }}"
-                                        onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
-                                </div>
-                            </a>
-                            <div class="txt-holder">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <div>
-                                        <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}" style="color: black">
-                                            <strong class="title">{{ $productasc->product_name }}</strong>
-                                        </a>
-                                        <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            @php
-                                               $size = (int)$productasc->ratings()->avg('rating');
-                                               $unstart = 5-$size;
-                                            @endphp
-                                            @for ($i=0;$i<$size;$i++)
-                                                <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
-                                            @endfor
-                                            @for ($i=0;$i<$unstart;$i++)
-                                               <li class="me-1"><i class="fa fa-star"></i></li>
-                                             @endfor
-                                        </ul>
+                        <div>
+                            <div class="product-item">
+                                <a
+                                    href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}">
+                                    <div class="img-holder">
+                                        <img src="{{ $productasc->image }}"
+                                            onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
                                     </div>
-                                    <i class="fa fa-globe fa-1x mt-2"></i>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong class="title">${{ $productasc->product_price }}</strong>
-                                    <button class="btn bg-dark text-white py-1 px-2"
-                                        onclick="addToCart('{{ $productasc->id }}', '{{ $productasc->product_name }}', '{{ $productasc->product_price }}')"><i
-                                            class="fa fa-shopping-basket"></i>
-                                    </button>
+                                </a>
+                                <div class="txt-holder">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <div>
+                                            <a href="{{ route('productDetails', ['id' => $productasc->id, 'slug' => Str::slug($productasc->product_name)]) }}"
+                                                style="color: black">
+                                                <strong class="title">{{ $productasc->product_name }}</strong>
+                                            </a>
+                                            <ul class="list-unstyled m-0 p-0 d-flex stars">
+                                                @php
+                                                    $size = (int) $productasc->ratings()->avg('rating');
+                                                    $unstart = 5 - $size;
+                                                @endphp
+                                                @for ($i = 0; $i < $size; $i++)
+                                                    <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
+                                                @endfor
+                                                @for ($i = 0; $i < $unstart; $i++)
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                @endfor
+                                            </ul>
+                                        </div>
+                                        <i class="fa fa-globe fa-1x mt-2"></i>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <strong class="title">${{ $productasc->product_price }}</strong>
+                                        <button class="btn bg-dark text-white py-1 px-2"
+                                            onclick="addToCart('{{ $productasc->id }}', '{{ $productasc->product_name }}', '{{ $productasc->product_price }}')"><i
+                                                class="fa fa-shopping-basket"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
@@ -268,29 +280,32 @@
                     @foreach ($productsdesc as $productsdescs)
                         <div>
                             <div class="product-item">
-                                <a href="{{ route('productDetails', ['id' => $productsdescs->id, 'slug' => Str::slug($productsdescs->product_name)]) }}">
+                                <a
+                                    href="{{ route('productDetails', ['id' => $productsdescs->id, 'slug' => Str::slug($productsdescs->product_name)]) }}">
                                     <div class="img-holder">
                                         <img src="{{ $productsdescs->image }}"
-                                        onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                                            onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
                                     </div>
                                 </a>
                                 <div class="txt-holder">
                                     <div class="d-flex justify-content-between mb-3">
                                         <div>
-                                            <a href="{{ route('productDetails', ['id' => $productsdescs->id, 'slug' => Str::slug($productsdescs->product_name)]) }}" style="color: black">
+                                            <a href="{{ route('productDetails', ['id' => $productsdescs->id, 'slug' => Str::slug($productsdescs->product_name)]) }}"
+                                                style="color: black">
                                                 <strong class="title">{{ $productsdescs->product_name }}</strong>
                                             </a>
                                             <ul class="list-unstyled m-0 p-0 d-flex stars">
                                                 @php
-                                                   $size = (int)$productsdescs->ratings()->avg('rating');
-                                                   $unstart = 5-$size;
+                                                    $size = (int) $productsdescs->ratings()->avg('rating');
+                                                    $unstart = 5 - $size;
                                                 @endphp
-                                                @for ($i=0;$i<$size;$i++)
-                                                    <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
+                                                @for ($i = 0; $i < $size; $i++)
+                                                    <li class="me-1"><i class="fa fa-star" style="color: blue"></i>
+                                                    </li>
                                                 @endfor
-                                                @for ($i=0;$i<$unstart;$i++)
-                                                   <li class="me-1"><i class="fa fa-star"></i></li>
-                                                 @endfor
+                                                @for ($i = 0; $i < $unstart; $i++)
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                @endfor
                                             </ul>
                                         </div>
                                         <i class="fa fa-globe fa-1x mt-2"></i>
@@ -312,5 +327,5 @@
             </div>
 
         </div>
-          @livewire('product-ratings', ['product' => $product], key($product->id))
+        @livewire('product-ratings', ['product' => $product], key($product->id))
     @endsection

@@ -118,7 +118,7 @@
                                     @endif
                                 </div>
                             </div>
-                           
+
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Product Description</label>
@@ -174,17 +174,17 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Product Category </label>
-                                    <select class="form-control @error('product_category_id') is-invalid @enderror "
-                                        name="product_category_id">
+                                    <select class="form-control @error('category_id') is-invalid @enderror "
+                                        name="category_id">
                                         <option value="">Select Product Category</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
-                                                {{ $category->id == old('product_category_id') ? 'selected' : '' }}>
+                                                {{ $category->id == old('category_id') ? 'selected' : '' }}>
                                                 {{ $category->title }}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('product_category_id'))
-                                        <span class="text-danger">{{ $errors->first('product_category_id') }}</span>
+                                    @if ($errors->has('category_id'))
+                                        <span class="text-danger">{{ $errors->first('category_id') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -192,17 +192,17 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Delivory Option
                                     </label>
-                                    <select class="form-control @error('delivory_option_id') is-invalid  @enderror"
-                                        name="delivory_option_id">
+                                    <select class="form-control @error('delivery_option_id') is-invalid  @enderror"
+                                        name="delivery_option_id">
                                         <option value="">Select Delivory Option</option>
                                         @foreach ($delivoryOption as $delivoryOp)
                                             <option value="{{ $delivoryOp->id }}"
-                                                {{ $delivoryOp->id == old('delivory_option_id') ? 'selected' : '' }}>
+                                                {{ $delivoryOp->id == old('delivery_option_id') ? 'selected' : '' }}>
                                                 {{ $delivoryOp->name }}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('delivory_option_id'))
-                                        <span class="text-danger">{{ $errors->first('delivory_option_id') }}</span>
+                                    @if ($errors->has('delivery_option_id'))
+                                        <span class="text-danger">{{ $errors->first('delivry_option_id') }}</span>
                                     @endif
                                 </div>
                             </div>

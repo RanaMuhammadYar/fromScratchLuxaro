@@ -35,9 +35,9 @@ class Product extends Model
     ];
     public function categories()
     {
-        return $this->belongsToMany(Category::class,'category_products');
+        return $this->belongsToMany(Category::class, 'category_products');
     }
-    
+
     public function productType()
     {
         return $this->belongsTo(ProductType::class);
@@ -45,20 +45,19 @@ class Product extends Model
 
     public function deliveryOption()
     {
-        return $this->belongsToMany(DeliveryOption::class,'product_delivery_options');
+        return $this->belongsToMany(DeliveryOption::class, 'product_delivery_options');
     }
     public function shippingType()
     {
-        return $this->belongsToMany(ShippingType::class,'product_shippings');
+        return $this->belongsToMany(ShippingType::class, 'product_shippings');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function ratings(){
+    public function ratings()
+    {
         return $this->hasMany(Rating::class);
     }
-
-
 }

@@ -25,7 +25,7 @@
             <div class="card mb-4">
                 <h5 class="card-header">Edit Product</h5>
                 <div class="card-body">
-                    <form action="{{ route('product.update',$product->id) }}" enctype="multipart/form-data" method="post">
+                    <form action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data" method="post">
                         @csrf
                         @method('PUT')
                         <input type="hidden" value="Pending" name="status">
@@ -36,7 +36,8 @@
                                     <label for="exampleFormControlInput1" class="form-label">Product Name </label>
                                     <input type="text"
                                         class="form-control @error('product_name') is-invalid @enderror"name="product_name"
-                                        placeholder="Product Name" title="Product Name" value="{{ $product->product_name }}" />
+                                        placeholder="Product Name" title="Product Name"
+                                        value="{{ $product->product_name }}" />
                                     @if ($errors->has('product_name'))
                                         <span class="text-danger mt-2">{{ $errors->first('product_name') }}</span>
                                     @endif
@@ -57,8 +58,8 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Product SKU </label>
                                     <input type="text" class="form-control @error('sku') is-invalid @enderror"
-                                        name="sku" value="{{ $product->sku }}" placeholder="Product Sku" title="Product Sku"
-                                        value="{{ old('sku') }}" />
+                                        name="sku" value="{{ $product->sku }}" placeholder="Product Sku"
+                                        title="Product Sku" value="{{ old('sku') }}" />
                                     @if ($errors->has('sku'))
                                         <span class="text-danger">{{ $errors->first('sku') }}</span>
                                     @endif
@@ -67,9 +68,9 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">ProductId </label>
-                                    <input type="text"
-                                        class="form-control @error('productId') is-invalid @enderror" name="productId" value="{{ $product->productId }}"
-                                        placeholder="Product Id" title="Product Name" value="{{ old('productId') }}" />
+                                    <input type="text" class="form-control @error('productId') is-invalid @enderror"
+                                        name="productId" value="{{ $product->productId }}" placeholder="Product Id"
+                                        title="Product Name" value="{{ old('productId') }}" />
                                     @if ($errors->has('productId'))
                                         <span class="text-danger mt-2">{{ $errors->first('productId') }}</span>
                                     @endif
@@ -79,8 +80,8 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Modal Number</label>
                                     <input type="text" class="form-control @error('modal_number') is-invalid @enderror"
-                                    value="{{ $product->modal_number }}"  name="modal_number" placeholder="Modal Number" title="Modal Number"
-                                        value="{{ old('modal_number') }}" />
+                                        value="{{ $product->modal_number }}" name="modal_number" placeholder="Modal Number"
+                                        title="Modal Number" value="{{ old('modal_number') }}" />
                                     @if ($errors->has('modal_number'))
                                         <span class="text-danger">{{ $errors->first('modal_number') }}</span>
                                     @endif
@@ -90,7 +91,8 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Serial Number</label>
                                     <input type="text" class="form-control @error('serial_number') is-invalid @enderror"
-                                    value="{{ $product->serial_number }}"  name="serial_number" placeholder="Serial Number" title="Serial Number"
+                                        value="{{ $product->serial_number }}" name="serial_number"
+                                        placeholder="Serial Number" title="Serial Number"
                                         value="{{ old('serial_number') }}" />
                                     @if ($errors->has('serial_number'))
                                         <span class="text-danger">{{ $errors->first('serial_number') }}</span>
@@ -101,27 +103,17 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Quantity</label>
                                     <input type="text" class="form-control @error('quantity') is-invalid @enderror"
-                                    value="{{ $product->serial_number }}"   name="quantity" placeholder="Quantity" title="Quantity"
-                                        value="{{ old('quantity') }}" />
+                                        value="{{ $product->serial_number }}" name="quantity" placeholder="Quantity"
+                                        title="Quantity" value="{{ old('quantity') }}" />
                                     @if ($errors->has('quantity'))
                                         <span class="text-danger">{{ $errors->first('quantity') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Product Price </label>
-                                    <input type="text" class="form-control @error('product_price') is-invalid @enderror"
-                                        name="product_price" placeholder="Product Price" title="Product Price"
-                                        value="{{ old('product_price') }}" />
-                                    @if ($errors->has('product_price'))
-                                        <span class="text-danger">{{ $errors->first('product_price') }}</span>
-                                    @endif
-                                </div>
-                            </div>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Product Description</label>
+                                    <label for="exampleFormControlTextarea1" class="form-label">Product
+                                        Description</label>
                                     <textarea class="form-control @error('product_description') is-invalid @enderror" name="product_description"
                                         rows="3" placeholder="Product Description" title="Product Description">{{ $product->product_description }}</textarea>
                                     @if ($errors->has('product_description'))
@@ -133,7 +125,8 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Tags</label>
                                     <input class="form-control @error('tags') is-invalid @enderror" type="text"
-                                        data-role="tagsinput" name="tags" value="@foreach($product->tags as $tags){{$tags->name.','}}@endforeach">
+                                        data-role="tagsinput" name="tags"
+                                        value="@foreach ($product->tags as $tags){{ $tags->name . ',' }} @endforeach">
                                     @if ($errors->has('tags'))
                                         <span class="text-danger">{{ $errors->first('tags') }}</span>
                                     @endif
@@ -145,7 +138,8 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Product Image </label>
-                                    <input type="file" class="form-control @error('product_image') is-invalid @enderror"
+                                    <input type="file"
+                                        class="form-control @error('product_image') is-invalid @enderror"
                                         name="product_image" placeholder="Product Image" title="Product Image" />
                                     @if ($errors->has('product_image'))
                                         <span class="text-danger">{{ $errors->first('product_image') }}</span>
@@ -175,8 +169,8 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Product Category </label>
-                                    <select class="form-control @error('product_category_id') is-invalid @enderror "
-                                        name="product_category_id">
+                                    <select class="form-control @error('category_id') is-invalid @enderror "
+                                        name="category_id">
                                         <option value="">Select Product Category</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
@@ -184,8 +178,8 @@
                                                 {{ $category->title }}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('product_category_id'))
-                                        <span class="text-danger">{{ $errors->first('product_category_id') }}</span>
+                                    @if ($errors->has('category_id'))
+                                        <span class="text-danger">{{ $errors->first('category_id') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -199,7 +193,7 @@
                                         @foreach ($delivoryOption as $delivoryOp)
                                             <option value="{{ $delivoryOp->id }}"
                                                 {{ $delivoryOp->id == $product->delivory_option_id ? 'selected' : '' }}>
-                                                {{ $delivoryOp->title }}</option>
+                                                {{ $delivoryOp->name }}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('delivory_option_id'))
@@ -239,25 +233,24 @@
                                         <span class="text-danger">{{ $errors->first('shipping_charge') }}</span>
                                     @endif
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label">Product Multiple
-                                                images </label>
-                                            <input type="file" name="multiple_image[]" class="form-control" multiple>
-                                            @if ($errors->has('multiple_image'))
-                                                <span class="text-danger">{{ $errors->first('multiple_image') }}</span>
-                                            @endif
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Product Multiple
+                                            images </label>
+                                        <input type="file" name="multiple_image[]" class="form-control" multiple>
+                                        @if ($errors->has('multiple_image'))
+                                            <span class="text-danger">{{ $errors->first('multiple_image') }}</span>
+                                        @endif
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row py-3">
-                                    <div class="col-sm-12 text-end">
-                                        <a href="{{ route('product.index') }}"
-                                            class="btn btn-outline-danger mx-2">Closed</a>
-                                        <button class="btn btn-outline-primary" type="submit">Update</button>
-                                    </div>
+                            <div class="row py-3">
+                                <div class="col-sm-12 text-end">
+                                    <a href="{{ route('product.index') }}" class="btn btn-outline-danger mx-2">Closed</a>
+                                    <button class="btn btn-outline-primary" type="submit">Update</button>
                                 </div>
                             </div>
                         </div>
