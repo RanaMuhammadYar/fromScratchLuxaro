@@ -125,3 +125,5 @@ Route::group(['prefix' => 'website'], function () {
 
 Route::get('product-detail/{id}/{slug}', [ProductMangeCotroller::class, 'productDetails'])->name('productDetails');
 
+Route::get('merchant/my-order', [OrderController::class, 'merchantMyOrders'])->name('merchant.myOrders');
+Route::get('merchant/my-order-invoice/{id}', [OrderController::class, 'merchantMyOrderInvoice'])->name('merchant.myOrder.invoice');

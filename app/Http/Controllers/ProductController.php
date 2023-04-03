@@ -17,9 +17,7 @@ class ProductController extends Controller
          $categories = Category::all();
          $delivery_options = AdminDeliveryOption::all();
          $product_types = ProductType::all();
-         $products = Product::with('categories','deliveryOption','shippingType')->get();
-
-
+         $products = Product::with('categories','deliveryOption','shippingType')->where('user_id',auth()->user()->id)->get();
          return view('frontend.charters.product_management',compact('products','product_types','categories','delivery_options'));
     }
 

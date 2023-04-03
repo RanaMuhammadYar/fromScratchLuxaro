@@ -9,7 +9,9 @@
                 <div class="card-body">
                     <h2 class="font-weight-bold text-primary">INVOICE</h2>
                     <div>
-                        <h5 class="mb-1">Hi <strong> {{ isset($order->user->userDetails->name)? $order->user->userDetails->name:'' }} </strong></h5>
+                        <h5 class="mb-1">Hi <strong>
+                                {{ isset($order->user->userDetails->name) ? $order->user->userDetails->name : '' }} </strong>
+                        </h5>
                     </div>
                     <div class="card-body ps-0 pe-0">
                         <div class="row">
@@ -132,5 +134,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

@@ -29,9 +29,13 @@ use App\Http\Livewire\Product;
 // });
 
 
-
-
-
+Route::get('storage-link', function () {
+    Artisan::call('storage:link');
+    Artisan::call('config:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    return 'Storage link successfully created';
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/my-Profile', [App\Http\Controllers\HomeController::class, 'myProfile'])->name('my-profile');
@@ -103,13 +107,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/privacy-policy', 'privacypolicy')->name('privacypolicy');
 });
 
-Route::get('storage-link', function () {
-    Artisan::call('storage:link');
-    Artisan::call('config:cache');
-    Artisan::call('cache:clear');
-    Artisan::call('view:clear');
-    return 'Storage link successfully created';
-});
+
 Auth::routes(['verify' => true]);
 
 // Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');

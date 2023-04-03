@@ -333,19 +333,23 @@
                                                 <td>{{ $product->quantity }}</td>
                                                 <td>{{ $product->product_description }}</td>
                                                 <td>
-                                                    <label class="uploadFile-table border rounded">
+                                                    {{-- <label class="uploadFile-table border rounded">
                                                         <i class="fa fa-cloud-upload upload-icon-account-1-table"
                                                             aria-hidden="true"></i>
-                                                        <img src="{{ $product->image }}" alt="">
-                                                    </label>
+                                                        </label> --}}
+                                                    <img src="{{ $product->image }}"
+                                                        onerror="this.src='{{ asset('images/default.png') }}'"
+                                                        alt="">
                                                 </td>
                                                 <td>
                                                     <div class="table-tag">
                                                         <ul class="list-unstyled mb-0" style="display: flex">
                                                             @foreach ($product->tags as $item)
-                                                                <li>{{ $item->name }}<a href=""
-                                                                        class="close-btn-tab"><i class="fa fa-times"
-                                                                            aria-hidden="true"></i> </a></li>
+                                                                <li class="close-btn-tab">
+                                                                    {{ $item->name }}
+                                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                                </li>
+                                                                @break
                                                             @endforeach
                                                         </ul>
                                                     </div>

@@ -126,11 +126,11 @@
                                             <ul class="list-unstyled m-0 p-0">
                                                 <li>
                                                     <p class="mb-0">Solid by
-                                                        {{ $projectBenefit->project->user->userDetails->name }}</p>
+                                                        {{ isset($projectBenefit->project->user->userDetails->name)? $projectBenefit->project->user->userDetails->name: '' }}</p>
                                                 </li>
                                                 <li>
                                                     <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                                aria-hidden="true"></i></span>{{ $projectBenefit->project->user->userDetails->address }}
+                                                                aria-hidden="true"></i></span>{{ isset($projectBenefit->project->user->userDetails->address)?$projectBenefit->project->user->userDetails->address:'' }}
                                                     </p>
                                                 </li>
                                                 <li>

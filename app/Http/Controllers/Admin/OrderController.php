@@ -38,4 +38,16 @@ class OrderController extends Controller
         return view('frontend.admin.myorder.invoice', compact('order'));
     }
 
+    public function merchantMyOrders()
+    {
+        $orders = Order::with('cart', 'user')->get();
+        return view('frontend.merchant.order.index', compact('orders'));
+    }
+
+    public function merchantMyOrderInvoice($id)
+    {
+        $order = Order::with('cart', 'user')->where('id', $id)->first();
+        return view('frontend.merchant.order.invoice', compact('order'));
+    }
+
 }
