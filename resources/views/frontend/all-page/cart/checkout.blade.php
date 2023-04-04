@@ -126,11 +126,12 @@
                                             <ul class="list-unstyled m-0 p-0">
                                                 <li>
                                                     <p class="mb-0">Solid by
-                                                        {{ isset($projectBenefit->project->user->userDetails->name)? $projectBenefit->project->user->userDetails->name: '' }}</p>
+                                                        {{ isset($projectBenefit->project->user->userDetails->name) ? $projectBenefit->project->user->userDetails->name : '' }}
+                                                    </p>
                                                 </li>
                                                 <li>
                                                     <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                                aria-hidden="true"></i></span>{{ isset($projectBenefit->project->user->userDetails->address)?$projectBenefit->project->user->userDetails->address:'' }}
+                                                                aria-hidden="true"></i></span>{{ isset($projectBenefit->project->user->userDetails->address) ? $projectBenefit->project->user->userDetails->address : '' }}
                                                     </p>
                                                 </li>
                                                 <li>
@@ -163,13 +164,16 @@
                                                 </li>
                                                 <li>
                                                     <div class="save-for-later d-flex mt-1">
-                                                        <button type="button">
+                                                        <button type="button" style="text-decoration: none:boder:none;">
                                                             <p class="save-remove-later me-4 mb-0"
                                                                 onclick="addToFavirate({{ $projectBenefit->project->id }})">
                                                                 Save for later</p>
                                                         </button>
-                                                        <a class="mb-0" href="{{ route('home') }}"
-                                                            style="color: rgb(61, 60, 60)">Remove</a>
+
+                                                        <button type="button" class="mb-0" style="color: rgb(61, 60, 60)"
+                                                            onclick="removeFacirate({{ $projectBenefit->project->id }})">
+                                                            Remove
+                                                        </button>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -591,6 +595,26 @@
         function addToFavirate(id) {
             $.ajax({
                 url: "{{ route('addToFavirate') }}",
+                type: "GET",
+                data: {
+                    "project_id": id,
+                },
+                success: function(response) {
+                    if(response.success)
+                    {
+                        swal("Success", response.success, "success");
+
+                    }else{
+                        swal("Error", response.error, "error");
+                    }
+
+                }
+            });
+        }
+
+        function removeFacirate(id) {
+            $.ajax({
+                url: "{{ route('removeFacirates') }}",
                 type: "GET",
                 data: {
                     "project_id": id,

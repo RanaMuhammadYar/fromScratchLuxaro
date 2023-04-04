@@ -34,14 +34,9 @@ class ProjectManageController extends Controller
         $findinggoal = $Project->project_funding_goal;
         $total = totalamout($request->project_id);
         $newtotal = $total + $request->total;
-        echo $newtotal."newtotal"."<br>";
-        echo $findinggoal."findinggoal"."<br>";
-        // return "OK";
-
-        // $total = $request->total;
         if ($findinggoal < $newtotal) {
             return redirect()->back()->with('error', 'You can not order more than project funding goal');
-        }else{
+        } else {
             $goldevineorder = new GoldevineOrder();
             $goldevineorder->benefit_id = $request->benefit_id;
             $goldevineorder->user_id = $request->user_id;
@@ -358,8 +353,27 @@ class ProjectManageController extends Controller
     {
 
         $project = Project::find($request->project_id);
-        $project->add_to_favirate = auth()->user()->id;
-        $project->save();
-        return response()->json(['success' => 'Project Added To Favorite']);
+        if ($project->add_to_favirate == auth()->user()->id) {
+            return response()->json(['error' => 'Project Already Added To Favorite']);
+        } else {
+
+            $project->add_to_favirate = auth()->user()->id;
+            $project->save();
+            return response()->json(['success' => 'Project Added To Favorite']);
+        }
+    }
+
+    public function favirateRemove(Request $request)
+    {
+        $checkfavirate = Project::where('add_to_favirate', auth()->user()->id)->where('id', $request->project_id)->count();
+        if ($checkfavirate == 0) {
+            return response()->json(['error' => 'Project Not Found In Favorite']);
+        } else {
+
+            $project = Project::find($request->project_id);
+            $project->add_to_favirate = null;
+            $project->save();
+            return response()->json(['success' => 'Project Removed From Favorite']);
+        }
     }
 }

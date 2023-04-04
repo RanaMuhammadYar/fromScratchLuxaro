@@ -45,7 +45,7 @@
                 <li
                     class="menu-item {{ Request::is('delivory-option') || Request::is('delivory-option/create') || Request::is('delivory-option/*/edit') ? 'active' : '' }}">
                     <a href="{{ route('delivory-option.index') }}" class="menu-link">
-                        <div data-i18n="Without navbar">All Delivory Option</div>
+                        <div data-i18n="Without navbar">All Delivery Option</div>
                     </a>
                 </li>
                 <li

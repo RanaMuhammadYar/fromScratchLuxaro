@@ -18,6 +18,10 @@ Route::any('project-search', [ProjectManageController::class, 'projectsearch'])-
 
 Route::get('project-add-to-favirate', [ProjectManageController::class, 'addToFavirate'])->name('addToFavirate');
 
+Route::get('project-favirate', [ProjectManageController::class, 'favirate'])->name('favirate');
+
+Route::get('project-favirate-removes', [ProjectManageController::class, 'favirateRemove'])->name('removeFacirates');
+
 // Myprofile Admin pnal |Route:
 
 Route::get('create-project', [ProjectManageController::class, 'create'])->name('createProject');

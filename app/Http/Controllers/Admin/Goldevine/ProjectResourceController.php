@@ -10,6 +10,7 @@ use App\Models\Admin\Goldevine\Project;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Admin\Goldevine\ProjectBenefit;
 
+
 class ProjectResourceController extends Controller
 {
     /**
@@ -41,6 +42,7 @@ class ProjectResourceController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
 
         $validate = Validator::make($request->all(), [
             'title' => 'required',
@@ -51,15 +53,17 @@ class ProjectResourceController extends Controller
             'video_link' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'minimum_pledge_amount' => 'required',
-            'maximum_pledge_amount' => 'required',
+            'minimum_pledge_amount' => 'required|numeric',
+            'maximum_pledge_amount' => 'required|numeric',
             'project_funding_goal' => 'required',
-            'recommended_pledge_amount' => 'required',
+            'recommended_pledge_amount' => 'required|numeric',
             'location' => 'required',
             'description' => 'required',
             'benefit_name' => 'required',
-            'price' => 'required',
-            'benefit_msrp' => 'required',
+            'price.*' => 'required|array',
+            'price.*' => 'sometimes|required|numeric',
+            'benefit_msrp.*' => 'required|array',
+            'benefit_msrp.*' => 'required|numeric',
             'feature_image' => 'required',
             'estimated_delivery_date' => 'required',
             'quantity' => 'required',
@@ -197,7 +201,7 @@ class ProjectResourceController extends Controller
                 } else {
                     $benefit = ProjectBenefit::find($request->benefit_id[$key]);
                 }
-                if ($request->hasFile('feature_image'.$key)) {
+                if ($request->hasFile('feature_image' . $key)) {
                     $path = asset('storage/' . $request->feature_image[$key]->store('project'));
                     $benefit->feature_image = $path;
                 }

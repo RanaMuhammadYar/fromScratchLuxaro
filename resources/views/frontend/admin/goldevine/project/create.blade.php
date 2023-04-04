@@ -216,7 +216,7 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Price</label>
                                         <input type="number" class="form-control" name="price[]" placeholder="Price"
-                                            title="Price" value="" />
+                                            title="Price" />
                                     </div>
                                 </div>
 
@@ -285,7 +285,7 @@
                                 <div class="col-sm-12 text-end">
                                     <a href="{{ route('admin-goudevine-project.index') }}"
                                         class="btn btn-outline-danger mx-2">Closed</a>
-                                    <button class="btn btn-outline-primary" type="submit">Submit</button>
+                                    <button class="btn btn-outline-primary" type="submit" onclick="this.form.submit();this.disabled=true;" >Submit</button>
                                 </div>
                             </div>
                         </div>

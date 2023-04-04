@@ -1,6 +1,6 @@
 @extends('frontend.admin.layouts.app')
 @section('title')
-    <title>Delivory Option</title>
+    <title>Delivery Option</title>
 @endsection
 @section('content')
     <div class="row">
@@ -8,8 +8,8 @@
             <!-- Basic Bootstrap Table -->
             <div class="card">
                 <div class="card-header d-flux">
-                    <h5 class="d-inline">All Delivory Option</h5>
-                    <a href="{{ route('delivory-option.create') }}" class="btn btn-outline-primary float-end">Add Delivory
+                    <h5 class="d-inline">All Delivery Option</h5>
+                    <a href="{{ route('delivory-option.create') }}" class="btn btn-outline-primary float-end">Add Delivery
                         Options</a>
                 </div>
                 <div class="table text-nowrap">

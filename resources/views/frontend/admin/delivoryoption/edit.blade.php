@@ -1,13 +1,13 @@
 @extends('frontend.admin.layouts.app')
 @section('title')
-    <title>Edit Delivory Option</title>
+    <title>Edit Delivery Option</title>
 @endsection
 @section('content')
     <div class="row">
         <!-- Form controls -->
         <div class="col-md-12">
             <div class="card mb-4">
-                <h5 class="card-header">Edit Delivory Option</h5>
+                <h5 class="card-header">Edit Delivery Option</h5>
                 <div class="card-body">
                     <form action="{{ route('delivory-option.update', $delivoryOption->id) }}" enctype="multipart/form-data"
                         method="post">
@@ -25,7 +25,7 @@
                                 <div class="col-sm-12 text-end">
                                     <a href="{{ route('delivory-option.index') }}"
                                         class="btn btn-outline-danger mx-2">Closed</a>
-                                    <button class="btn btn-outline-primary" type="submit">Update</button>
+                                    <button class="btn btn-outline-primary" type="submit" onclick="this.form.submit(); this.disabled = true;">Update</button>
                                 </div>
                             </div>
                         </div>

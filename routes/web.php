@@ -47,7 +47,7 @@ Route::post('/search-product',[ProductController::class,'productsearch'])->name(
 Route::get('/forums', [App\Http\Controllers\HomeController::class, 'forums'])->name('forums');
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::get('/luxauro', 'index')->name('home');
+    // Route::get('/luxauro', 'index')->name('home');
     Route::get('/appendProducts', 'appendProducts')->name('appendProducts');
     Route::get('/appendLocalLuxauro', 'appendLocalLuxauro')->name('appendLocalLuxauro');
     Route::get('/appendCategories', 'appendCategories')->name('appendCategories');

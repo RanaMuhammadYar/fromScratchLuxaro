@@ -78,12 +78,18 @@
                                                 <div class="progres-circle d-flex justify-content-between">
                                                     <div class="bar">
                                                         <div class="row">
+                                                            <style>
+                                                                div[role="progressbar"]::before {
+                                                                    counter-reset: percentage var(--value);
+                                                                    content: '{{ persentage($project->id) }}%'!important;
+                                                                }
+                                                            </style>
                                                             <div class="col-md-3 col-sm-6">
-
                                                                 <div role="progressbar"
                                                                     aria-valuenow="{{ persentage($project->id) }}"
                                                                     aria-valuemin="0" aria-valuemax="100"
                                                                     style="--value:{{ persentage($project->id) }}">
+
                                                                 </div>
                                                             </div>
                                                         </div>
