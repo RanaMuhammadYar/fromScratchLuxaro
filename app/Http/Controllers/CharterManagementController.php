@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\CharterBooking;
 use App\Models\Admin\DeliveryOption;
 use Illuminate\Support\Facades\Validator;
+use App\Models\CharterAvaliabiltyDateAndTime;
 
 class CharterManagementController extends Controller
 {
@@ -39,7 +40,7 @@ class CharterManagementController extends Controller
     }
     public function charter_management(Request $request)
     {
-        $charters = Charter::all();
+        $charters = Charter::with('charterAvaliabiltyDateAndTimes')->get();
         $delivery_options = DeliveryOption::all();
         return view('frontend.charters.charter_management', compact('charters', 'delivery_options'));
     }
@@ -62,7 +63,7 @@ class CharterManagementController extends Controller
             "created_at" =>  \Carbon\Carbon::now()->timestamp,
             "created_at" =>  \Carbon\Carbon::now()->timestamp,
         ]);
-        return back();
+        return back()->with('success', 'Charter Booked Successfully');
     }
 
 
@@ -74,6 +75,7 @@ class CharterManagementController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         $validate = Validator::make($request->all(), [
             'charter_name' => 'required',
             'charter_type' => 'required',
@@ -99,22 +101,36 @@ class CharterManagementController extends Controller
             $charter->rate = $request->rate;
             $charter->hr_select = $request->hr_select;
             $charter->description = $request->description;
-            $charter->date_of_avalability = json_encode($request->date_of_avalability);
-            $charter->start_time = json_encode($request->start_time);
             $charter->max_guests = $request->max_guests;
-            $charter->delivery_id = $request->delivery_id;
             $charter->terms_condition = $request->terms_condition;
-
+            $charter->user_id = auth()->user()->id;
+            $charter->status = 'Active';
             if ($request->hasFile('thumbnail_img')) {
                 $path = asset('storage/' . $request->file('thumbnail_img')->store('public/charter'));
                 $charter->thumbnail_img = $path;
             }
+
             if ($request->hasFile('charter_agreement')) {
-                $path = asset('storage/' . $request->file('charter_agreement')->store('public/charter'));
-                $charter->charter_agreement = $path;
+                $images = $request->file('charter_agreement');
+                $imageArray = array();
+                foreach ($images as $image) {
+                    $path = asset('storage/' . $image->store('public/charter'));
+                    $imageArray[] = $path;
+                }
+                $charter->charter_agreement = json_encode($imageArray);
+
             }
             $charter->save();
-            $charter->tags()->attach($request->tags);
+            $tags = explode(",", $request->tags);
+            $charter->retag($tags);
+            $charter->charterDeliveryOptions()->sync($request->delivery_id);
+            foreach ($request->date_of_avalability as $key => $date) {
+                $availability = new CharterAvaliabiltyDateAndTime();
+                $availability->charter_id = $charter->id;
+                $availability->date_of_avalability = $date;
+                $availability->time_of_avalability = $request->start_time[$key];
+                $availability->save();
+            }
             return redirect()->back()->with('success', 'Charter Added Successfully');
         }
     }

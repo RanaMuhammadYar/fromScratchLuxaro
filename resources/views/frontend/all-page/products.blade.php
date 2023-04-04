@@ -23,24 +23,24 @@
         <div class="page-form-holder d-flex">
             <!-- <select class="form-control border-0 rounded-0 flex-fill"> -->
             <!-- <option>All</option>
-                                                        <option>All</option>
-                                                        <option>All</option> -->
+                                                                    <option>All</option>
+                                                                    <option>All</option> -->
             <!-- </select> -->
             <!-- <div class="form-field d-flex flex-fill">
-                                                        <input type="search" placeholder="Search..." class="border-0 bg-transparent flex-fill">
-                                                        <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
-                                                    </div> -->
+                                                                    <input type="search" placeholder="Search..." class="border-0 bg-transparent flex-fill">
+                                                                    <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
+                                                                </div> -->
 
             <!-- <div class="form-field d-flex flex-fill">
-                                                    <form action="{{ route('home') }}" method="GET">
-                                                        <div class="input-group">
-                                                            <input type="text" class="border-0 bg-transparent flex-fill" name="search" placeholder="Search products...">
-                                                            <span class="input-group-btn">
-                                                                <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
-                                                            </span>
-                                                        </div>
-                                                    </form>
-                                                </div> -->
+                                                                <form action="{{ route('home') }}" method="GET">
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="border-0 bg-transparent flex-fill" name="search" placeholder="Search products...">
+                                                                        <span class="input-group-btn">
+                                                                            <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                </form>
+                                                            </div> -->
         </div>
     </form>
     <div class="product-section mb-4">
@@ -194,10 +194,11 @@
             <div class="slider Charters-slider" id="charter-append">
                 @foreach ($luxauro_charters as $charter)
                     <div>
-                        <a href="{{ route('charter_detail', ['id' => $charter->id]) }}">
+                        <a href="{{ route('charter_detail', ['id' => $charter->id]) }}" class="text-dark">
                             <div class="product-item">
                                 <div class="img-holder">
-                                    <img src="{{ uploaded_asset($charter->thumbnail_img) }}" class="img-fluid">
+                                    <img src="{{ $charter->thumbnail_img }}"
+                                        onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
                                 </div>
                                 <div class="txt-holder">
                                     <div class="d-flex justify-content-between mb-3">
@@ -214,9 +215,11 @@
                                         <i class="fa fa-globe fa-1x mt-2"></i>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <strong class="title">{{ $charter->rate }}</strong>
-                                        <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
-                                                class="fa fa-shopping-basket"></i></a>
+                                        <strong class="title">${{ $charter->rate }}</strong>
+                                        <a class="btn bg-dark text-white py-1 px-2"
+                                            href="{{ route('charter_detail', ['id' => $charter->id]) }}"><i
+                                                class="fa fa-shopping-basket"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

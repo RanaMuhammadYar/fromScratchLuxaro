@@ -18,4 +18,9 @@ class DeliveryOption extends Model
     {
         return $this->belongsToMany(Product::class,'product_delivery_options');
     }
+
+    public function chaxrters()
+    {
+        return $this->belongsToMany(Charter::class,'charter_delivery_options');
+    }
 }

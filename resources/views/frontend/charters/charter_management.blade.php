@@ -62,7 +62,7 @@
                                         <label for="exampleInputEmail1">Charter Type</label>
                                         <select class="form-select mb-3 py-2" aria-label="Default select example"
                                             name="charter_type" id="select-products">
-                                            <option selected>-Select-</option>
+                                            <option value="" selected>-Select-</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
@@ -165,7 +165,7 @@
                                                 <label class="col-md-3 col-from-label">{{ translate('Tags') }}</label>
                                                 <div class="col-md-12">
                                                     <input type="text" class="inputfile form-control"
-                                                        data-role="tagsinput" name="tags[]"
+                                                        data-role="tagsinput" name="tags"
                                                         placeholder="{{ translate('Type and hit enter to add a tag') }}">
                                                 </div>
                                             </div>
@@ -176,7 +176,7 @@
                                                 <select class="form-select py-2 @error('max_guests') is-invalid @enderror"
                                                     name="max_guests" aria-label="Default select example"
                                                     id="select-products">
-                                                    <option selected>-Select-</option>
+                                                    <option value="">-Select-</option>
                                                     <option value="1">One</option>
                                                     <option value="2">Two</option>
                                                     <option value="3">Three</option>
@@ -231,7 +231,7 @@
                                                         aria-hidden="true"></i>
                                                     <span class="filename">Upload charter agreement</span>
                                                     <input type="file" class="inputfile form-control"
-                                                        name="charter_agreement">
+                                                        name="charter_agreement[]" multiple>
                                                     @error('charter_agreement')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -265,7 +265,7 @@
                                             <th scope="col">Description</th>
                                             <th scope="col">Image</th>
                                             <th scope="col">Date of Availabilty</th>
-                                            <th scope="col" colspan="2">Time of Availabilty</th>
+                                            <th scope="col">Time of Availabilty</th>
                                             <th scope="col">Tags</th>
                                             <th scope="col">Max Guests/ Travelers</th>
                                             {{-- <th scope="col">Service Offered As</th> --}}
@@ -279,66 +279,77 @@
                                                 <td>{{ $charter->charter_name }}</td>
                                                 <td>{{ $charter->charter_type }}</td>
                                                 <td>$50</td>
-                                                <td>{{ $charter->rate }}</td>
+                                                <td>${{ $charter->rate }}</td>
                                                 {{-- <td>Hr.</td> --}}
-                                                <td>{{ $charter->description }}</td>
+                                                <td>{!! Str::words($charter->description, 2, '...') !!}</td>
                                                 <td>
-                                                    <img src="{{ uploaded_asset($charter->thumbnail_img) }}"
-                                                        alt="">
-                                                    <label class="uploadFile-table border rounded">
-                                                    </label>
+                                                    <img src="{{ $charter->thumbnail_img }}" alt=""
+                                                        onerror="this.src='{{ asset('images/default.png') }}'"
+                                                        width="80px;" height="80px">
+
                                                 </td>
-                                                <td><i class="fa fa-calendar"
-                                                        aria-hidden="true">{{ $charter->date_of_avalability }} </i></td>
-                                                <td>{{ $charter->start_time }}</td>
-                                                <td>{{ $charter->end_time }}</td>
+                                                <td>
+                                                    @foreach ($charter->charterAvaliabiltyDateAndTimes as $item)
+                                                        <i class="fa fa-calendar" aria-hidden="true">
+                                                            {{ isset($item->date_of_avalability) ? $item->date_of_avalability->format('d-M-Y') : '' }}
+                                                        </i>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($charter->charterAvaliabiltyDateAndTimes as $item)
+                                                        <i class="fa fa-clock-o" aria-hidden="true">
+                                                            {{ isset($item->time_of_avalability) ? $item->time_of_avalability->format('h:m A') : '' }}
+                                                        </i>
+                                                    @endforeach
+
+                                                </td>
+
                                                 <td>
                                                     <div class="table-tag">
                                                         <ul class="list-unstyled mb-0">
-                                                            @foreach (explode(',', $charter->tags) as $item)
-                                                                <li>{{ $item }}<a href=""
-                                                                        class="close-btn-tab"><i class="fa fa-times"
-                                                                            aria-hidden="true"></i> </a></li>
+                                                            @foreach ($charter->tags as $item)
+                                                                <li class="close-btn-tab">
+                                                                    {{ $item->name }}
+                                                                </li>
                                                             @endforeach
                                                         </ul>
                                                     </div>
                                                 </td>
                                                 <td>{{ $charter->max_guests }}</td>
                                                 {{-- <td>Local</td> --}}
-                                                <td><label class="uploadFile border rounded">
-                                                        <i class="fa fa-cloud-upload upload-icon-account-1"
-                                                            aria-hidden="true">
-                                                            {{ uploaded_asset($charter->charter_agreement) }}
-                                                        </i>
-                                                        <span class="filename">Upload </span>
-                                                        <input type="file" class="inputfile form-control"
-                                                            name="file">
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                                <td>
+                                                    @foreach (json_decode($charter->charter_agreement) as $image)
+                                                        <img src="{{ $image }}"
+                                                            onerror="this.src='{{ asset('images/default.png') }}'"
+                                                            alt="" width="80px;">
+                                                    @break
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 
-        <script>
-            function addMoreAvalibilty() {
-                let temp_id = Math.floor(Math.random() * 1000000000);
-                let html = '<div class="removeAvaliblty' + temp_id +
-                    ' row"><div class="col-12 col-lg-6"><label>Date Of Avaliabilty</label><div class="input-group mb-3"><input type="date" class="form-control" name="date_of_avalability[]" aria-label="Recipient username" aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-calendar" aria-hidden="true"></i></button></div></div><div class="col-12 col-lg-6"><div class="row gx-2"><label>Time Of Avaliabilty</label><div class="col-12 col-md-12"><div class="input-group mb-3"><input type="time" class="form-control" name="start_time[]" aria-label="Text input with dropdown button"></div></div><div class="d-grid d-md-flex justify-content-md-end mb-2"><button class="btn btn-danger" type="button" onclick="removeMoreAvalibilty(' +
-                    temp_id +
-                    ')"><span><i class="fa fa-minus me-2" aria-hidden="true"></i></span> Remove </button></div></div></div></div>';
-                $('.addAvaliabilty').append(html);
-            }
+    <script>
+        function addMoreAvalibilty() {
+            let temp_id = Math.floor(Math.random() * 1000000000);
+            let html = '<div class="removeAvaliblty' + temp_id +
+                ' row"><div class="col-12 col-lg-6"><label>Date Of Avaliabilty</label><div class="input-group mb-3"><input type="date" class="form-control" name="date_of_avalability[]" aria-label="Recipient username" aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-calendar" aria-hidden="true"></i></button></div></div><div class="col-12 col-lg-6"><div class="row gx-2"><label>Time Of Avaliabilty</label><div class="col-12 col-md-12"><div class="input-group mb-3"><input type="time" class="form-control" name="start_time[]" aria-label="Text input with dropdown button"></div></div><div class="d-grid d-md-flex justify-content-md-end mb-2"><button class="btn btn-danger" type="button" onclick="removeMoreAvalibilty(' +
+                temp_id +
+                ')"><span><i class="fa fa-minus me-2" aria-hidden="true"></i></span> Remove </button></div></div></div></div>';
+            $('.addAvaliabilty').append(html);
+        }
 
-            function removeMoreAvalibilty(id) {
-                $('.removeAvaliblty' + id).remove();
-            }
-        </script>
-    @endsection
+        function removeMoreAvalibilty(id) {
+            $('.removeAvaliblty' + id).remove();
+        }
+    </script>
+@endsection

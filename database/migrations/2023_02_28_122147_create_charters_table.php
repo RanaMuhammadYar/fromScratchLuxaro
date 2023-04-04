@@ -15,19 +15,18 @@ class CreateChartersTable extends Migration
     {
         Schema::create('charters', function (Blueprint $table) {
             $table->id();
-            $table->string('charter_name')->nullable();
-            $table->string('charter_type')->nullable();
-            $table->string('rate')->nullable();
-            $table->string('description')->nullable();
-            $table->string('date_of_avalability')->nullable();
-            $table->string('start_time')->nullable();
-            $table->string('end_time')->nullable();
-            $table->string('tags')->nullable();
-            $table->string('max_guests')->nullable();
-            $table->string('delivery_id')->nullable();
-            $table->string('terms_condition')->nullable();
-            $table->string('thumbnail_img')->nullable();
-            $table->string('charter_agreement')->nullable();
+            $table->string('charter_name');
+            $table->string('charter_type');
+            $table->string('rate');
+            $table->string('hr_select')->nullable();
+            $table->string('description');
+            $table->string('max_guests');
+            $table->string('terms_condition');
+            $table->string('thumbnail_img');
+            $table->string('charter_agreement');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
