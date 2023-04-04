@@ -26,77 +26,60 @@
                                 aria-labelledby="pills-home-tab">
                                 <div class="section-business-information">
                                     <div class="business-name business-section mb-3">
-                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Business Name <div
-                                                class="pincel "></div>
-                                        </div>
-                                        <p class="ms-2">My New Business</p>
+                                        <div class="d-inline-block mb-2" style="color: #6a6969;">
+                                            Business Name
+                                        <div class="pincel in-edit" id="edit-button"></div></div>
+                                         <input class="border-0 text-edit bg-transparent d-block fw-bold" type="text" id="edit"  value="My New Business" disabled >
+
                                     </div>
                                     <div class="business-logo mb-3">
                                         <div class="d-block mb-3" style="color: #6a6969;">Business Logo </div>
-                                        <div class="my-business-logo-image ms-2">
-                                            <div class="business-logo-image">
-                                                <img src="images/about01.png" class="img-fluid w-100">
+                                            <div class="my-business-logo-image ms-2">
+                                                <div class="business-logo-image">
+                                                    <img src="{{ asset('images/default.png') }}" class="img-fluid" width="50px;">
+                                                </div>
+                                                <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
                                             </div>
-                                            <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="business-header mb-3">
                                         <div class="d-block mb-3" style="color: #6a6969;">Store Header </div>
                                         <div class="border d-inline-block rounded">
                                             <div class="my-business-banner d-flex p-1">
                                                 <div class="business-banner">
-                                                    <img src="images/banner.png" class="img-fluid w-100">
+                                                    <img src="images/banner.png" class="img-fluid " width="50px;">
                                                 </div>
-                                                <div class="upload-logos "><i class="fa fa-cloud-upload"
-                                                        aria-hidden="true"></i></div>
+                                                <div class="upload-logos "><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="business-address business-section mb-3">
-                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Business Address <div
-                                                class="pincel "></div>
-                                        </div>
-                                        <h5 class="ms-2">123 Business Avenue <br>
-                                            Fake Town, FT 99999 <br>
-                                            United State of America
-                                        </h5>
+                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Business Address <div class="pincel e-adress"></div></div>
+                                        <input type="text" class="w-100 ms-2 text-adress fw-bold d-block border-0" value="123 Business Avenue Fake Town, FT 99999 United State of America" disabled>
                                     </div>
                                     <div class="business-address business-section mb-3">
-                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Business Email <div
-                                                class="pincel "></div>
-                                        </div>
-                                        <h5 class="ms-2">info@mynewbusiness.com</h5>
+                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Business Email <div class="pincel b-email "></div></div>
+                                        <input type="text" class=" w-100 ms-2 text-email fw-bold d-block border-0"value="info@mynewbusiness.com" disabled>
                                     </div>
                                     <div class="business-address business-section mb-3">
-                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Business Website <div
-                                                class="pincel "></div>
-                                        </div>
-                                        <h5 class="ms-2">mynewbusiness.com</h5>
+                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Business Website <div class="pincel b-website"></div></div>
+                                        <input type="text" class="w-100 ms-2 text-website fw-bold d-block border-0"value="mynewbusiness.com" disabled>
+                                    </div>
+                                     <div class="business-address business-section mb-3">
+                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Business Phone <div class="pincel b-number"></div></div>
+                                         <input type="text" class="ms-2 text-number fw-bold d-block border-0"value="123-456-7890" disabled>
+
+                                    </div>
+                                     <div class="business-address business-section mb-3">
+                                        <div class="d-inline-block mb-2" style="color: #6a6969;">EIN / TIN<div class="pincel ein-tin"></div></div>
+                                        <input type="text" class="ms-2 text-ein fw-bold d-block border-0"value="12-3456789" disabled>
                                     </div>
                                     <div class="business-address business-section mb-3">
-                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Business Phone <div
-                                                class="pincel "></div>
-                                        </div>
-                                        <h5 class="ms-2">123-456-7890</h5>
+                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Deposit Bank Account <div class="pincel bank-account"></div></div>
+                                        <input type="text" class="ms-2 text-bank-account fw-bold d-block border-0"value="123456789" disabled>
                                     </div>
                                     <div class="business-address business-section mb-3">
-                                        <div class="d-inline-block mb-2" style="color: #6a6969;">EIN / TIN<div
-                                                class="pincel "></div>
-                                        </div>
-                                        <h5 class="ms-2">12-3456789</h5>
-                                    </div>
-                                    <div class="business-address business-section mb-3">
-                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Deposit Bank Account <div
-                                                class="pincel "></div>
-                                        </div>
-                                        <h5 class="ms-2">123456789</h5>
-                                    </div>
-                                    <div class="business-address business-section mb-3">
-                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Credit Card Number <div
-                                                class="pincel "></div>
-                                        </div>
-                                        <h5 class="ms-2">1234 5678 9876 5432</h5>
+                                        <div class="d-inline-block mb-2" style="color: #6a6969;">Credit Card Number <div class="pincel credit-account"></div></div>
+                                         <input type="text" class="ms-2 text-credit-account fw-bold d-block border-0"value="1234 5678 9876 5432" disabled>
                                     </div>
                                     <button class="btn btn-primary text-uppercase">Cancel</button>
                                     <button class="btn btn-primary text-uppercase">Save</button>
@@ -105,15 +88,9 @@
                             </div>
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                                 aria-labelledby="pills-profile-tab">
-                                <div class="business-address business-section mb-3">
-                                    <div class="d-inline-block mb-2" style="color: #6a6969;">Description / About Us<div
-                                            class="pincel "></div>
-                                    </div>
-                                    <h5 class="ms-2">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat.</h5>
+                                 <div class="business-address business-section mb-3">
+                                    <div class="d-inline-block mb-2" style="color: #6a6969;">Description / About Us<div class="pincel about-us"></div></div>
+                                     <input type="text" class="ms-2 text-about-us fw-bold d-block border-0 w-100"value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod." disabled>
                                 </div>
                                 <div class="mb-3">
                                     <label for="">What kind of business do you run?</label>
@@ -123,160 +100,120 @@
                                         <option>business 2</option>
                                     </select>
                                 </div>
-                                <div class="input-groups mb-3">
+                                 <div class="input-groups mb-3">
                                     <label>Where do you offer to deliver your product?</label>
-                                    <div class="input-type-check d-flex flex-wrap">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Global
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Limited International
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                National
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Limited Domestic
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Local Area
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                Pickup
-                                            </label>
-                                        </div>
-                                    </div>
+                                 <div class="input-type-check d-flex flex-wrap">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Global
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Limited International
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        National
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Limited Domestic
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Local Area
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Pickup
+                                    </label>
+                                  </div>
+                                </div>
                                 </div>
                                 <div class="business-address business-section mb-3">
-                                    <div class="d-inline-block mb-2" style="color: #6a6969;">Social Media Link <div
-                                            class="pincel "></div>
-                                    </div>
-                                    <h5 class="ms-2 mb-3">socialmedia.com/username123/profile</h5>
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary" type="button"><span><i class="fa fa-plus me-2"
-                                                    aria-hidden="true"></i></span>Add More</button>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <h3>Meet the team:</h3>
-                                </div>
-                                <div class="owner-flex d-flex">
-                                    <div class="owner-name">
-                                        <div class="my-account-image">
-                                            <div class="account-image">
-                                                <img src="images/user.png" class="img-fluid w-100">
-                                            </div>
-                                            <div class="upload-logo"><i class="fa fa-cloud-upload"
-                                                    aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="business-address business-section mb-3">
-                                            <div class="d-inline-block mb-0" style="color: #6a6969;">Owner Name-1 <div
-                                                    class="pincel "></div>
-                                            </div>
-                                            <h5 class="ms-2">John Smith</h5>
-                                        </div>
-                                    </div>
-                                    <div class="owner-name ms-md-5 ms-4">
-                                        <div class="my-account-image">
-                                            <div class="account-image">
-                                                <img src="images/user.png" class="img-fluid w-100">
-                                            </div>
-                                            <div class="upload-logo"><i class="fa fa-cloud-upload"
-                                                    aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="business-address business-section mb-3">
-                                            <div class="d-inline-block mb-0" style="color: #6a6969;">Owner Name-1 <div
-                                                    class="pincel "></div>
-                                            </div>
-                                            <h5 class="ms-2">John Q.Public</h5>
-                                        </div>
+                                    <div class="d-inline-block mb-2" style="color: #6a6969;">Social Media Link <div class="pincel social-media"></div></div>
+                                     <input type="text" class="ms-2 mb-2 text-social-media fw-bold d-block border-0 w-100"value="socialmedia.com/username123/profile" disabled>
+                                     <div class="mb-3">
+                                        <button class="btn btn-primary" type="button"><span><i
+                                        class="fa fa-plus me-2"
+                                        aria-hidden="true"></i></span>Add More</button>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <button class="btn btn-primary" type="button"><span><i class="fa fa-plus me-2"
-                                                aria-hidden="true"></i></span>Add More</button>
-                                </div>
-                                <div class="business-address business-section mb-3">
-                                    <div class="d-inline-block mb-2" style="color: #6a6969;">Introduce the Owner<div
-                                            class="pincel "></div>
+                                 <div class="mb-3"><h3>Meet the team:</h3></div>
+                                 <div class="owner-flex d-flex">
+                                 <div class="owner-name">
+                                 <div class="my-account-image">
+                                    <div class="account-image">
+                                        <img src="images/user.png" class="img-fluid w-100">
                                     </div>
-                                    <h5 class="ms-2">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat.</h5>
+                                    <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
+                                 </div>
+                                  <div class="business-address business-section mb-3">
+                                    <div class="d-inline-block mb-0" style="color: #6a6969;">Owner Name-1 <div class="pincel jhon-smith-2"></div></div>
+                                    <input type="text" class="ms-2 text-john-smith fw-bold d-block border-0 w-100"value="John Smith" disabled>
+                                 </div>
                                 </div>
-                                <div class="owner-name">
-                                    <div class="my-account-image">
-                                        <div class="account-image">
-                                            <img src="images/user.png" class="img-fluid w-100">
-                                        </div>
-                                        <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                                        </div>
+                                <div class="owner-name ms-md-5 ms-4">
+                                 <div class="my-account-image">
+                                    <div class="account-image">
+                                        <img src="images/user.png" class="img-fluid w-100">
                                     </div>
+                                    <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
+                                </div>
                                     <div class="business-address business-section mb-3">
-                                        <div class="d-inline-block mb-0" style="color: #6a6969;">Owner Name-1 <div
-                                                class="pincel "></div>
-                                        </div>
-                                        <h5 class="ms-2">John Smith</h5>
+                                        <div class="d-inline-block mb-0" style="color: #6a6969;">Owner Name-1 <div class="pincel john-public"></div></div>
+                                         <input type="text" class="ms-2 text-john-public fw-bold d-block border-0 w-100"value="John Q.Public" disabled>
                                     </div>
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary" type="button"><span><i class="fa fa-plus me-2"
-                                                    aria-hidden="true"></i></span>Add More</button>
+                                 </div>
+                             </div>
+                              <div class="mb-3">
+                                <button class="btn btn-primary" type="button"><span><i
+                                class="fa fa-plus me-2"
+                                aria-hidden="true"></i></span>Add More</button>
+                            </div>
+                            <div class="business-address business-section mb-3">
+                                <div class="d-inline-block mb-2" style="color: #6a6969;">Introduce the Owner<div class="pincel the-owner"></div></div>
+                                <input type="text" class="ms-2 text-the-owner fw-bold d-block border-0 w-100"value="Lorem ipsum dolor sit amet, consectetur adipisicing elit," disabled>
+                            </div>
+                             <div class="owner-name">
+                                 <div class="my-account-image">
+                                    <div class="account-image">
+                                        <img src="images/user.png" class="img-fluid w-100">
                                     </div>
+                                    <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
+                                 </div>
+                                  <div class="business-address business-section mb-3">
+                                    <div class="d-inline-block mb-0" style="color: #6a6969;">Owner Name-1 <div class="pincel john-smith-1"></div></div>
+                                     <input type="text" class="ms-2 text-john-smith-1 fw-bold d-block border-0 w-100"value="John Smith" disabled>
+                                 </div>
+                                 <div class="mb-3">
+                                <button class="btn btn-primary" type="button"><span><i
+                                class="fa fa-plus me-2"
+                                aria-hidden="true"></i></span>Add More</button>
+                                </div>
                                 </div>
                                 <div class="business-address business-section mb-3">
-                                    <div class="d-inline-block mb-2" style="color: #6a6969;">History <div
-                                            class="pincel "></div>
-                                    </div>
-                                    <h5 class="ms-2">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat.</h5>
+                                    <div class="d-inline-block mb-2" style="color: #6a6969;">History <div class="pincel history"></div></div>
+                                    <input type="text" class="ms-2 text-history fw-bold d-block border-0 w-100"value="Lorem ipsum dolor sit amet, consectetur adipisicing elit," disabled>
                                 </div>
                                 <div class="business-address business-section mb-3">
-                                    <div class="d-inline-block mb-2" style="color: #6a6969;">Ethics <div class="pincel ">
-                                        </div>
-                                    </div>
-                                    <h5 class="ms-2">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat.</h5>
+                                    <div class="d-inline-block mb-2" style="color: #6a6969;">Ethics <div class="pincel ethics-1"></div></div>
+                                    <input type="text" class="ms-2 text-ethics fw-bold d-block border-0 w-100"value="Lorem ipsum dolor sit amet, consectetur adipisicing elit," disabled>
                                 </div>
                                 <div class="business-address business-section mb-3">
-                                    <div class="d-inline-block mb-2" style="color: #6a6969;">Philosophy <div
-                                            class="pincel "></div>
-                                    </div>
-                                    <h5 class="ms-2">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat.</h5>
+                                    <div class="d-inline-block mb-2" style="color: #6a6969;">Philosophy <div class="pincel philosophy"></div></div>
+                                    <input type="text" class="ms-2 text-philosophy fw-bold d-block border-0 w-100"value="Lorem ipsum dolor sit amet, consectetur adipisicing elit," disabled>
                                 </div>
                                 <button class="btn btn-primary text-uppercase">Cancel</button>
                                 <button class="btn btn-primary text-uppercase">Save</button>
@@ -287,7 +224,203 @@
             </div>
         </div>
         <div class="street-img">
-            <img src="images/img1.png" class="img-fluid">
+            <img src="{{ asset('images/img1.png') }}" class="img-fluid">
         </div>
     </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+
+    $('.in-edit').on('click', function(){
+  var $textEdit = $('.text-edit');
+  if ($textEdit.prop('disabled')) {
+    $textEdit.prop('disabled', false).focus();
+    var val = $textEdit.val();
+    $textEdit.val('').val(val);
+  } else {
+    $textEdit.prop('disabled', true);
+  }
+});
+
+    $('.e-adress').on('click', function(){
+      var $textEdit = $('.text-adress');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+        $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+$('.b-email').on('click', function(){
+  var $textEdit = $('.text-email');
+  if ($textEdit.prop('disabled')) {
+    $textEdit.prop('disabled', false).focus();
+    var val = $textEdit.val();
+    $textEdit.val('').val(val);
+  } else {
+    $textEdit.prop('disabled', true);
+  }
+});
+
+    $('.b-website').on('click', function(){
+      var $textEdit = $('.text-website');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+    $('.b-number').on('click', function(){
+      var $textEdit = $('.text-number');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+    $('.ein-tin').on('click', function(){
+      var $textEdit = $('.text-ein');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+    $('.bank-account').on('click', function(){
+      var $textEdit = $('.text-bank-account');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+     $('.credit-account').on('click', function(){
+      var $textEdit = $('.text-credit-account');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+      $('.about-us').on('click', function(){
+      var $textEdit = $('.text-about-us');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+       $('.social-media').on('click', function(){
+      var $textEdit = $('.text-social-media');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+       $('.jhon-smith-2').on('click', function(){
+      var $textEdit = $('.text-john-smith');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+    $('.john-public').on('click', function(){
+      var $textEdit = $('.text-john-public');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+     $('.the-owner').on('click', function(){
+      var $textEdit = $('.text-the-owner');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+     $('.john-smith-1').on('click', function(){
+      var $textEdit = $('.text-john-smith-1');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+     $('.history').on('click', function(){
+      var $textEdit = $('.text-history');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+     $('.ethics-1').on('click', function(){
+      var $textEdit = $('.text-ethics');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+     $('.philosophy').on('click', function(){
+      var $textEdit = $('.text-philosophy');
+      if ($textEdit.prop('disabled')) {
+        $textEdit.prop('disabled', false).focus();
+        var val = $textEdit.val();
+    $textEdit.val('').val(val);
+      } else {
+        $textEdit.prop('disabled', true);
+      }
+    });
+
+  });
+
+    </script>
 @endsection

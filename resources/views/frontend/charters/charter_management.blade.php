@@ -1,4 +1,9 @@
 @extends('frontend.layouts.app')
+
+@section('title')
+    <title>Charter Managment</title>
+@endsection
+
 @section('content')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" />
 
@@ -37,24 +42,27 @@
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <form action="{{route('charter_manage')}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('charter_manage') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row gx-2">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-12">
                                         <label for="exampleInputEmail1">Charter Name</label>
-                                        <input type="text" class="form-control mb-3 p-2 @error('charter_name') is-invalid @enderror" id="exampleInputEmail1" name="charter_name" aria-describedby="emailHelp">
+                                        <input type="text"
+                                            class="form-control mb-3 p-2 @error('charter_name') is-invalid @enderror"
+                                            id="exampleInputEmail1" name="charter_name" aria-describedby="emailHelp">
                                         @error('charter_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="row gx-2">
                                     <div class="col-12 col-md-6">
                                         <label for="exampleInputEmail1">Charter Type</label>
-                                        <select class="form-select mb-3 py-2" aria-label="Default select example" name="charter_type" id="select-products">
-                                            <option selected></option>
+                                        <select class="form-select mb-3 py-2" aria-label="Default select example"
+                                            name="charter_type" id="select-products">
+                                            <option selected>-Select-</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
@@ -66,125 +74,133 @@
                                             <div class="col-12 col-md-6">
                                                 <div class="input-group flex-nowrap mb-3">
                                                     <span class="input-group-text" id="addon-wrapping">$</span>
-                                                    <input type="text" class="form-control custom-input py-2 @error('rate') is-invalid @enderror" name="rate" aria-label="Username" aria-describedby="addon-wrapping">
+                                                    <input type="number"
+                                                        class="form-control custom-input py-2 @error('rate') is-invalid @enderror"
+                                                        name="rate" aria-label="Username"
+                                                        aria-describedby="addon-wrapping">
                                                     @error('rate')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
-                                                <select class="form-select mb-3 py-2" aria-label="Default select example" id="select-products">
-                                                    <option selected>HR</option>
+                                                <select
+                                                    class="form-select mb-3 py-2 @error('hr_select') is-invalid @enderror"
+                                                    aria-label="Default select example" id="select-products"
+                                                    name="hr_select">
+                                                    <option value=""selected>-Select-</option>
+                                                    <option value="HR">HR</option>
                                                     <option value="1">One</option>
                                                     <option value="2">Two</option>
                                                     <option value="3">Three</option>
                                                 </select>
+                                                @error('hr_select')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-area mb-3">
                                         <label for="exampleInputPassword1">Charter Description</label>
-                                        <textarea class="form-control mb-4  @error('description') is-invalid @enderror" name="description" placeholder="Message..." id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea class="form-control mb-4  @error('description') is-invalid @enderror" name="description"
+                                            placeholder="Message..." id="exampleFormControlTextarea1" rows="3"></textarea>
                                         @error('description')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label class="uploadFile border rounded">
                                             <i class="fa fa-cloud-upload upload-icon-account-1" aria-hidden="true"></i>
                                             <span class="filename">Upload charter Image</span>
-                                            <input type="file" class="inputfile form-control @error('thumbnail_img') is-invalid @enderror" name="thumbnail_img">
+                                            <input type="file"
+                                                class="inputfile form-control @error('thumbnail_img') is-invalid @enderror"
+                                                name="thumbnail_img">
                                             @error('thumbnail_img')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </label>
                                     </div>
-                               
+
                                     <div class="row gx-2">
                                         <div class="col-12 col-lg-6">
                                             <label>Date Of Avaliabilty</label>
                                             <div class="input-group mb-3">
-                                                <input type="date" class="form-control @error('date_of_avalability') is-invalid @enderror" name="date_of_avalability" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-calendar" aria-hidden="true"></i></button>
-                                                @error('date_of_avalability')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                <input type="date" class="form-control" name="date_of_avalability[]"
+                                                    aria-label="Recipient username" aria-describedby="button-addon2">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                    id="button-addon2"><i class="fa fa-calendar"
+                                                        aria-hidden="true"></i></button>
                                             </div>
                                         </div>
                                         <div class="col-12 col-lg-6">
                                             <div class="row gx-2">
                                                 <label>Time Of Avaliabilty</label>
-                                                <div class="col-12 col-md-6">
+                                                <div class="col-12 col-md-12">
                                                     <div class="input-group mb-3">
-                                                        <button class="btn btn-outline-secondary dropdown-toggle btn-font" type="button" data-bs-toggle="dropdown" aria-expanded="false">AM</button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item" href="#">AM</a></li>
-                                                            <li><a class="dropdown-item" href="#">PM</a></li>
-                                                        </ul>
-                                                        <input type="time" class="form-control @error('start_time') is-invalid @enderror" name="start_time" aria-label="Text input with dropdown button">
-                                                        @error('start_time')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <div class="input-group mb-3">
-                                                        <button class="btn btn-outline-secondary dropdown-toggle btn-font" type="button" data-bs-toggle="dropdown" aria-expanded="false">PM</button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item" href="#">AM</a></li>
-                                                            <li><a class="dropdown-item" href="#">PM</a></li>
-                                                        </ul>
-                                                        <input type="time" class="form-control @error('end_time') is-invalid @enderror" name="end_time" aria-label="Text input with dropdown button">
-                                                        @error('end_time')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
+                                                        <input type="time" class="form-control" name="start_time[]"
+                                                            aria-label="Text input with dropdown button">
                                                     </div>
                                                 </div>
                                                 <div class="d-grid d-md-flex justify-content-md-end mb-2">
-                                                    <button class="btn btn-primary" type="button"><span><i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add More</button>
+                                                    <button class="btn btn-primary" type="button"
+                                                        onclick="addMoreAvalibilty()"><span><i class="fa fa-plus me-2"
+                                                                aria-hidden="true"></i></span>Add
+                                                        More</button>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="addAvaliabilty">
+
+                                        </div>
                                         <div class="form-group mb-3">
                                             <div class="form-group row">
-                                                <label class="col-md-3 col-from-label">{{translate('Tags')}}</label>
+                                                <label class="col-md-3 col-from-label">{{ translate('Tags') }}</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" class="inputfile form-control" data-role="tagsinput" name="tags[]" placeholder="{{ translate('Type and hit enter to add a tag') }}">
+                                                    <input type="text" class="inputfile form-control"
+                                                        data-role="tagsinput" name="tags[]"
+                                                        placeholder="{{ translate('Type and hit enter to add a tag') }}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row gx-3 mb-3">
                                             <div class="col-12 col-md-4">
                                                 <label for="exampleInputEmail1">Max Guests/Travels</label>
-                                                <select class="form-select py-2" name="max_guests" aria-label="Default select example" id="select-products">
-                                                    <option selected></option>
+                                                <select class="form-select py-2 @error('max_guests') is-invalid @enderror"
+                                                    name="max_guests" aria-label="Default select example"
+                                                    id="select-products">
+                                                    <option selected>-Select-</option>
                                                     <option value="1">One</option>
                                                     <option value="2">Two</option>
                                                     <option value="3">Three</option>
                                                 </select>
+
+                                                @error('max_guests')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                             <div class="col-12 col-md-8 align-self-end">
                                                 <label>Delivory Option</label>
                                                 <div class="input-type-check d-flex flex-wrap">
-                                                    @foreach ($delivery_options as $delivery_option )
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="delivery_id[]" value="{{ $delivery_option->id }}" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            {{ $delivery_option->name }}
-                                                        </label>
-                                                    </div>
+                                                    @foreach ($delivery_options as $delivery_option)
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                name="delivery_id[]" value="{{ $delivery_option->id }}"
+                                                                id="flexCheckDefault{{ $delivery_option->id }}">
+                                                            <label class="form-check-label"
+                                                                for="flexCheckDefault{{ $delivery_option->id }}">
+                                                                {{ $delivery_option->name }}
+                                                            </label>
+                                                        </div>
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -193,31 +209,45 @@
                                             <div class="col-12 col-md-4">
                                                 <div class="input-type-check d-flex flex-wrap">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="terms_condition"  id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                        <input
+                                                            class="form-check-input @error('terms_condition') is-invalid @enderror"
+                                                            type="checkbox" name="terms_condition" value="1"
+                                                            id="Term&Condition">
+                                                        <label class="form-check-label" for="Term&Condition">
                                                             Term & Condition
                                                         </label>
+                                                        @error('terms_condition')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-8 mb-3">
-                                                <label class="uploadFile border rounded">
-                                                    <i class="fa fa-cloud-upload upload-icon-account-1" aria-hidden="true"></i>
+                                                <label
+                                                    class="uploadFile border rounded @error('charter_agreement') is-invalid @enderror">
+                                                    <i class="fa fa-cloud-upload upload-icon-account-1"
+                                                        aria-hidden="true"></i>
                                                     <span class="filename">Upload charter agreement</span>
-                                                    <input type="file" class="inputfile form-control" name="charter_agreement">
+                                                    <input type="file" class="inputfile form-control"
+                                                        name="charter_agreement">
+                                                    @error('charter_agreement')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </label>
                                             </div>
-    
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-grid d-lg-block">
-                                    <button class="btn btn-primary my-2" type="button"><span><i class="fa fa-plus me-2" aria-hidden="true"></i></span>Add
-                                        More</button>
                                     <button class="btn btn-primary mx-1 my-2" type="submit">Submit
                                         Product</button>
                                 </div>
-    
+
                             </form>
                         </div>
                         <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
@@ -243,44 +273,48 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($charters as  $key=>$charter)
-                                        <tr>
-                                            <th scope="row">{{ ++$key }}</th>
-                                            <td>{{ $charter->charter_name }}</td>
-                                            <td>{{ $charter->charter_type }}</td>
-                                            <td>$50</td>
-                                            <td>{{ $charter->rate }}</td>
-                                            {{-- <td>Hr.</td> --}}
-                                            <td>{{ $charter->description }}</td>
-                                            <td>
-                                                <img src="{{ uploaded_asset($charter->thumbnail_img)}}" alt="">
-                                                <label class="uploadFile-table border rounded">
+                                        @foreach ($charters as $key => $charter)
+                                            <tr>
+                                                <th scope="row">{{ ++$key }}</th>
+                                                <td>{{ $charter->charter_name }}</td>
+                                                <td>{{ $charter->charter_type }}</td>
+                                                <td>$50</td>
+                                                <td>{{ $charter->rate }}</td>
+                                                {{-- <td>Hr.</td> --}}
+                                                <td>{{ $charter->description }}</td>
+                                                <td>
+                                                    <img src="{{ uploaded_asset($charter->thumbnail_img) }}"
+                                                        alt="">
+                                                    <label class="uploadFile-table border rounded">
                                                     </label>
-                                            </td>
-                                            <td><i class="fa fa-calendar" aria-hidden="true">{{ $charter->date_of_avalability }} </i></td>
-                                            <td>{{ $charter->start_time }}</td>
-                                            <td>{{ $charter->end_time }}</td>
-                                            <td>
-                                                <div class="table-tag">
-                                                    <ul class="list-unstyled mb-0">
-                                                        @foreach (explode(',',$charter->tags) as $item)
-                                                        <li>{{ $item }}<a href="" class="close-btn-tab"><i
-                                                            class="fa fa-times" aria-hidden="true"></i> </a></li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                            <td>{{ $charter->max_guests }}</td>
-                                            {{-- <td>Local</td> --}}
-                                            <td><label class="uploadFile border rounded">
-                                                    <i class="fa fa-cloud-upload upload-icon-account-1"
-                                                        aria-hidden="true">
-                                                        {{ uploaded_asset($charter->charter_agreement)}}
-                                                    </i>
-                                                    <span class="filename">Upload </span>
-                                                    <input type="file" class="inputfile form-control" name="file">
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td><i class="fa fa-calendar"
+                                                        aria-hidden="true">{{ $charter->date_of_avalability }} </i></td>
+                                                <td>{{ $charter->start_time }}</td>
+                                                <td>{{ $charter->end_time }}</td>
+                                                <td>
+                                                    <div class="table-tag">
+                                                        <ul class="list-unstyled mb-0">
+                                                            @foreach (explode(',', $charter->tags) as $item)
+                                                                <li>{{ $item }}<a href=""
+                                                                        class="close-btn-tab"><i class="fa fa-times"
+                                                                            aria-hidden="true"></i> </a></li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $charter->max_guests }}</td>
+                                                {{-- <td>Local</td> --}}
+                                                <td><label class="uploadFile border rounded">
+                                                        <i class="fa fa-cloud-upload upload-icon-account-1"
+                                                            aria-hidden="true">
+                                                            {{ uploaded_asset($charter->charter_agreement) }}
+                                                        </i>
+                                                        <span class="filename">Upload </span>
+                                                        <input type="file" class="inputfile form-control"
+                                                            name="file">
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -292,4 +326,19 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+
+        <script>
+            function addMoreAvalibilty() {
+                let temp_id = Math.floor(Math.random() * 1000000000);
+                let html = '<div class="removeAvaliblty' + temp_id +
+                    ' row"><div class="col-12 col-lg-6"><label>Date Of Avaliabilty</label><div class="input-group mb-3"><input type="date" class="form-control" name="date_of_avalability[]" aria-label="Recipient username" aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-calendar" aria-hidden="true"></i></button></div></div><div class="col-12 col-lg-6"><div class="row gx-2"><label>Time Of Avaliabilty</label><div class="col-12 col-md-12"><div class="input-group mb-3"><input type="time" class="form-control" name="start_time[]" aria-label="Text input with dropdown button"></div></div><div class="d-grid d-md-flex justify-content-md-end mb-2"><button class="btn btn-danger" type="button" onclick="removeMoreAvalibilty(' +
+                    temp_id +
+                    ')"><span><i class="fa fa-minus me-2" aria-hidden="true"></i></span> Remove </button></div></div></div></div>';
+                $('.addAvaliabilty').append(html);
+            }
+
+            function removeMoreAvalibilty(id) {
+                $('.removeAvaliblty' + id).remove();
+            }
+        </script>
     @endsection
