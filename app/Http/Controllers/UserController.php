@@ -49,7 +49,7 @@ class UserController extends Controller
         //                           ->limit(6)
         //                           ->get();
         $cat = Category::where('id',$cat_id)->first();
-        $products = $cat->products()->orderBy('product_price',$orderby)->get();
+        $products = $cat->products()->where('status','Active')->orderBy('product_price',$orderby)->get();
         // dd($products->get());
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;

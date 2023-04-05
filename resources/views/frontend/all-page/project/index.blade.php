@@ -5,6 +5,13 @@
 @section('content')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" />
     <div class="inner-content">
+        <style>
+            div[role="progressbar"]::before {
+                display: none !important;
+                counter-reset: percentage var(--value);
+                content: "0%";
+            }
+        </style>
         <div class="section-product-charter">
             <div class="container">
                 <div class="row col-lg-9 mx-auto gx-5">
@@ -42,6 +49,10 @@
                                                     <div role="progressbar" aria-valuenow="{{ persentage($project->id) }}"
                                                         aria-valuemin="0" aria-valuemax="100"
                                                         style="--value:{{ persentage($project->id) }}">
+                                                        <p>
+                                                            <span>{{ persentage($project->id) }}</span>
+                                                            <span>%</span>
+                                                        </p>
                                                     </div>
 
 

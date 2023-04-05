@@ -107,9 +107,9 @@ class ProjectManageController extends Controller
             'short_description' => 'required',
             'delivery_date' => 'required',
             'quantity' => 'required',
-
             'business_address' => 'required',
             'city' => 'required',
+
             'business_category' => 'required',
             'zip_code' => 'required',
             'email' => 'required|email',
@@ -186,18 +186,16 @@ class ProjectManageController extends Controller
                 $projectbusiness->ein = $request->ein;
                 $projectbusiness->bank_account = $request->bank_account;
                 $projectbusiness->cart_number = $request->cart_number;
-                $projectbusiness->term_conditions = $request->term_conditions;
                 $projectbusiness->user_id = auth()->user()->id;
                 $projectbusiness->save();
             }
-
             return redirect()->back()->with('success', 'Project Created Successfully');
         }
     }
 
     public function allProject()
     {
-        $projects = Project::with('user')->get();
+        $projects = Project::with('user')->where('user_id',auth()->user()->id)->get();
         return view('frontend.all-page.project.index', compact('projects'));
     }
 
@@ -340,7 +338,6 @@ class ProjectManageController extends Controller
                     $projectbusiness->ein = $request->ein;
                     $projectbusiness->bank_account = $request->bank_account;
                     $projectbusiness->cart_number = $request->cart_number;
-                    $projectbusiness->term_conditions = $request->term_conditions;
                     $projectbusiness->user_id = auth()->user()->id;
                     $projectbusiness->save();
                 }

@@ -463,6 +463,152 @@
                             <div class="addnewbenefit">
 
                             </div>
+
+
+                            <label for="" class="form-lable py-2"> <strong> Fouder Details</strong></label>
+                                 <input type="hidden" name="founder_id" value="{{ $project->FounderDetail->id }}">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Business Address
+                                    </label>
+                                    <input type="text"
+                                        class="form-control @error('business_address') is-invalid @enderror"
+                                        name="business_address" placeholder="Business Address" title="Business Address"
+                                        value="{{ $project->FounderDetail->business_address }}" />
+                                    @error('business_address')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1"
+                                        class="form-label">City
+                                    </label>
+                                    <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" placeholder="City"
+                                        title="City" value="{{ $project->FounderDetail->city }}" />
+                                    @error('city')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Project Category
+
+                                    </label>
+                                    <select name="business_category" id=""
+                                        class="form-control @error('business_category') is-invalid @enderror">
+                                        <option value="">-Select-</option>
+                                        <option value="One" {{ $project->FounderDetail->business_category == 'One' ? 'selected' : '' }}>
+                                            One
+                                        </option>
+                                        <option value="Two" {{ $project->FounderDetail->business_category == 'Two' ? 'selected' : '' }}>
+                                            Two
+                                        </option>
+                                        <option value="Three"{{ $project->FounderDetail->business_category == 'Three' ? 'selected' : '' }}>
+                                            Three</option>
+                                    </select>
+                                    @error('business_category')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Zip Code
+                                    </label>
+                                    <input type="number" class="form-control @error('zip_code') is-invalid @enderror"
+                                        name="zip_code" placeholder="Zip Code" title="Zip Code"
+                                        value="{{ $project->FounderDetail->zip_code }}" />
+                                    @error('zip_code')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Email
+                                    </label>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                        name="email" placeholder="Email" title="Email"
+                                        value="{{ $project->FounderDetail->email }}" />
+                                    @error('email')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Website
+                                    </label>
+                                    <input type="text" class="form-control @error('website') is-invalid @enderror"
+                                        name="website" placeholder="Website" title="Website"
+                                        value="{{ $project->FounderDetail->website }}" />
+                                    @error('website')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Phone
+                                    </label>
+                                    <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                                        name="phone" placeholder="Phone" title="Phone"
+                                        value="{{ $project->FounderDetail->phone }}" />
+                                    @error('phone')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">EIN / TIN
+                                    </label>
+                                    <input type="number" class="form-control @error('ein') is-invalid @enderror"
+                                        name="ein" placeholder="EIN / TIN" title="EIN / TIN"
+                                        value="{{ $project->FounderDetail->ein }}" />
+                                    @error('ein')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Deposit Bank Account
+                                    </label>
+                                    <input type="number"
+                                        class="form-control @error('deposit_bank_account') is-invalid @enderror"
+                                        name="deposit_bank_account" placeholder="Deposit Bank Account"
+                                        title="Deposit Bank Account" value="{{ $project->FounderDetail->bank_account }}" />
+                                    @error('deposit_bank_account')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Credit Cart Number
+                                    </label>
+                                    <input type="number"
+                                        class="form-control @error('credit_cart_number') is-invalid @enderror"
+                                        name="credit_cart_number" placeholder="Credit Cart Number Account"
+                                        title="Credit Cart Number" value="{{ $project->FounderDetail->cart_number }}" />
+                                    @error('credit_cart_number')
+                                        <span class="text-danger mt-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
                             <div class="row py-3">
                                 <div class="col-sm-12 text-end">
                                     <a href="{{ route('admin-goudevine-project.index') }}"

@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-12 col-md-7 gx-0 gx-md-1 gx-lg-5 px-lg-5">
                         <div class="my-account-section">
-                            <h2 class="mb-2 setup-merchant-heading d-block">Create New Goldevine Project <span
+                            <h2 class="mb-2 setup-merchant-heading d-block">Edit New Goldevine Project <span
                                     class="appendata">(1/2)</span></h2>
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -30,7 +30,7 @@
                                 </li>
                             </ul>
                             <form action="{{ route('updateProject') }}" enctype="multipart/form-data"
-                                method="post">
+                                method="post" id="formSubmit">
                                 @csrf
                                 <input type="hidden" name="project_id" value="{{ $project->id }}">
                                 <div class="tab-content" id="pills-tabContent">
@@ -72,16 +72,6 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            {{-- <div class="mb-3">
-                                                <label for="select-products">Project Category</label>
-                                                <select class="form-select mb-3" aria-label="Default select example"
-                                                    id="select-products">
-                                                    <option selected></option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div> --}}
                                             <div class="form-group mb-3">
                                                 <label for="city_tag">Tags</label>
                                                 <input type="text"
@@ -440,7 +430,7 @@
                                                         <div class="row">
                                                             <div class="col-8"></div>
                                                             <div class="col-4">
-                                                                <button class="btn btn-danger"
+                                                                <button type="button" class="btn btn-danger"
                                                                     onclick="removerow({{ $key }})"> -
                                                                     Remove a Benefit</button>
                                                             </div>
@@ -617,7 +607,7 @@
                                         </div>
                                         <div class="form-check mb-4">
                                             <input
-                                                class="form-check-input  @error('term_conditions') is-invalid @enderror "
+                                                class="form-check-input @error('term_conditions') is-invalid @enderror "
                                                 type="checkbox" id="defaultCheck1" name="term_conditions"
                                                 value="1">
                                             <label class="form-check-label pb-0" for="defaultCheck1">
@@ -631,7 +621,7 @@
                                             @enderror
                                         </div>
                                         <button class="btn btn-primary text-uppercase">Back</button>
-                                        <button class="btn btn-primary text-uppercase">submit </button>
+                                        <button type="submit" onclick="submitform()"  class="btn btn-primary text-uppercase">submit </button>
                                     </div>
                                 </div>
                             </form>
@@ -652,6 +642,9 @@
 
 
     <script>
+        function submitform() {
+            document.getElementById("formSubmit").submit();
+        }
         function addNewBenefit() {
             var tempid = Math.floor(Math.random() * 100000);
             var html = '<div class="benefit' + tempid +

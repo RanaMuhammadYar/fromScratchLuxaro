@@ -19,31 +19,7 @@
             </div>
         </div>
     @endif
-    <form class="page-form mx-auto mb-5 mt-5 pt-5" action="#">
-        <div class="page-form-holder d-flex">
-            <!-- <select class="form-control border-0 rounded-0 flex-fill"> -->
-            <!-- <option>All</option>
-                                                                    <option>All</option>
-                                                                    <option>All</option> -->
-            <!-- </select> -->
-            <!-- <div class="form-field d-flex flex-fill">
-                                                                    <input type="search" placeholder="Search..." class="border-0 bg-transparent flex-fill">
-                                                                    <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
-                                                                </div> -->
-
-            <!-- <div class="form-field d-flex flex-fill">
-                                                                <form action="{{ route('home') }}" method="GET">
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="border-0 bg-transparent flex-fill" name="search" placeholder="Search products...">
-                                                                        <span class="input-group-btn">
-                                                                            <button type="submit" class="bg-transparent border-0 flex-fill"><i class="fa fa-search"></i></button>
-                                                                        </span>
-                                                                    </div>
-                                                                </form>
-                                                            </div> -->
-        </div>
-    </form>
-    <div class="product-section mb-4">
+    <div class="product-section mb-4 mt-5 pt-2">
         <div class="container">
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                 <h2 class="m-0">Luxauro Global + National</h2>
@@ -176,15 +152,15 @@
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                 <h2 class="m-0">Luxauro Charters</h2>
                 <div class="d-flex form-holder">
-                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                    <a class="btn btn-view rounded-0" href="{{ route('charters') }}">View All</a>
                     <form class="page-form flex-fill" action="#">
                         <div class="page-form-holder d-flex">
                             <label class="form-control rounded-0">Search Filter</label>
                             <div class="form-field d-flex flex-fill">
                                 <select class="flex-fill border-0 bg-transparent" onchange="appendCharters(this)">
                                     <option>OrderBy</option>
-                                    <option value="desc">price(max)</option>
-                                    <option value="asc">price(min)</option>
+                                    <option value="asc">price(max)</option>
+                                    <option value="desc">price(min)</option>
                                 </select>
                             </div>
                         </div>
@@ -313,7 +289,10 @@
                 </div>
             </div>
             <div class="slider Luxauro-library-slider" id="product-append{{ $category->id }}">
-                @foreach ($category->products as $product)
+                @php
+                    $categores = $category->products->where('status', 'Active');
+                @endphp
+                @foreach ($categores as $product)
                     <div>
                         <div class="product-item" style="margin: 0 12px;">
                             <a
@@ -355,3 +334,5 @@
             </div>
         @endforeach
     @endsection
+
+

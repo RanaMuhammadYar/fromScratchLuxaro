@@ -33,6 +33,7 @@ class Project extends Model
         'user_id',
         'tags',
         'add_to_favirate',
+        'country'
     ];
 
 

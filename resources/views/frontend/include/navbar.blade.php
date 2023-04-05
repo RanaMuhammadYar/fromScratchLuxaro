@@ -302,12 +302,12 @@
                         class="fa fa-times text-white"></i></button>
                 <ul class="list-unstyled m-0 p-0 d-md-flex">
                     <li><a href="{{ route('home') }}">products</a></li>
-                    <li><a href="javascript:void">projects</a></li>
+                    <li><a href="{{ route('goldEvine') }}">projects</a></li>
                     <li><a href="javascript:void">professionals</a></li>
                 </ul>
                 <ul class="list-unstyled m-0 p-0 d-md-flex justify-content-end">
                     @if (Auth::check())
-                        @if (Auth::user()->role == 'Vendor')
+                        @if (Auth::user()->role == 'Merchant')
                             <li><a href="{{ route('vendorDashboard') }}">Vendor Dashboard</a></li>
                         @elseif (Auth::user()->role == 'Admin')
                             <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>

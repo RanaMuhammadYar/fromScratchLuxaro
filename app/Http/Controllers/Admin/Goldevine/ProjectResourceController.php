@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\Goldevine\Project;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Admin\Goldevine\FounderDetail;
 use App\Models\Admin\Goldevine\ProjectBenefit;
 
 
@@ -69,6 +70,16 @@ class ProjectResourceController extends Controller
             'quantity' => 'required',
             'short_description' => 'required',
             'tags' => 'required',
+            'business_address' => 'required',
+            'city' => 'required',
+            'zip_code' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'ein' => 'required',
+            'deposit_bank_account' => 'required',
+            'credit_cart_number' => 'required',
+            'business_category' => 'required',
+
         ]);
 
         if ($validate->fails()) {
@@ -120,7 +131,23 @@ class ProjectResourceController extends Controller
                     $benefit->user_id = auth()->user()->id;
                     $benefit->save();
                 }
-                if ($benefit->save()) {
+                if ($project->save()) {
+                    $projectbusiness = new FounderDetail();
+                    $projectbusiness->project_id = $project->id;
+                    $projectbusiness->business_address = $request->business_address;
+                    $projectbusiness->city = $request->city;
+                    $projectbusiness->business_category = $request->business_category;
+                    $projectbusiness->zip_code = $request->zip_code;
+                    $projectbusiness->email = $request->email;
+                    $projectbusiness->website = $request->website;
+                    $projectbusiness->phone = $request->phone;
+                    $projectbusiness->ein = $request->ein;
+                    $projectbusiness->bank_account = $request->deposit_bank_account;
+                    $projectbusiness->cart_number = $request->credit_cart_number;
+                    $projectbusiness->user_id = auth()->user()->id;
+                    $projectbusiness->save();
+                }
+                if ($projectbusiness->save()) {
                     return redirect()->route('admin-goudevine-project.index')->with('success', 'Project created successfully');
                 } else {
                     return redirect()->back()->with('error', 'Something went wrong');
@@ -194,7 +221,6 @@ class ProjectResourceController extends Controller
         $tags = explode(",", $request->tags);
         $project->retag($tags);
         if ($project->save()) {
-            // dd($request->all());
             foreach ($request->benefit_name as $key => $value) {
                 if ($request->benefit_id[$key] == null || $request->benefit_id[$key] == 0 || $request->benefit_id[$key] == '') {
                     $benefit = new ProjectBenefit();
@@ -215,23 +241,22 @@ class ProjectResourceController extends Controller
                 $benefit->user_id = auth()->user()->id;
                 $benefit->save();
             }
-            // foreach ($request->benefit_name as $key => $value) {
-            //     $benefit = new ProjectBenefit();
-            //     if ($request->hasFile('feature_image')) {
-            //         $path = asset('storage/' . $request->feature_image[$key]->store('project'));
-            //         $benefit->feature_image = $path;
-            //     }
-            //     $benefit->benefit_name = $request->benefit_name[$key];
-            //     $benefit->price = $request->price[$key];
-            //     $benefit->benefit_msrp = $request->benefit_msrp[$key];
-            //     $benefit->estimated_delivery_date = $request->estimated_delivery_date[$key];
-            //     $benefit->quantity = $request->quantity[$key];
-            //     $benefit->short_description = $request->short_description[$key];
-            //     $benefit->project_id = $project->id;
-            //     $benefit->user_id = auth()->user()->id;
-            //     $benefit->save();
-            // }
-            if ($benefit->save()) {
+            $projectbusiness = FounderDetail::find($request->founder_id);
+            $projectbusiness->project_id = $project->id;
+            $projectbusiness->business_address = $request->business_address;
+            $projectbusiness->city = $request->city;
+            $projectbusiness->business_category = $request->business_category;
+            $projectbusiness->zip_code = $request->zip_code;
+            $projectbusiness->email = $request->email;
+            $projectbusiness->website = $request->website;
+            $projectbusiness->phone = $request->phone;
+            $projectbusiness->ein = $request->ein;
+            $projectbusiness->bank_account = $request->deposit_bank_account;
+            $projectbusiness->cart_number = $request->credit_cart_number;
+            $projectbusiness->user_id = auth()->user()->id;
+            $projectbusiness->save();
+
+            if ($projectbusiness->save()) {
                 return redirect()->route('admin-goudevine-project.index')->with('success', 'Project created successfully');
             } else {
                 return redirect()->back()->with('error', 'Something went wrong');

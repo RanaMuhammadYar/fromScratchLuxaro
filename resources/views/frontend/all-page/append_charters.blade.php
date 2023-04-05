@@ -3,7 +3,7 @@
     <a href="{{route('charter_detail',['id'=>$charter->id])}}">
         <div class="product-item">
             <div class="img-holder">
-                <img src="{{ uploaded_asset($charter->thumbnail_img)}}" class="img-fluid">
+                <img src="{{ $charter->thumbnail_img }}" onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
             </div>
             <div class="txt-holder">
                 <div class="d-flex justify-content-between mb-3">

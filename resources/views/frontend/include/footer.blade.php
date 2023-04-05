@@ -1,3 +1,7 @@
+
+<div class="street-img">
+    <img src="{{ asset('images/img1.png') }}" class="img-fluid">
+</div>
 <footer id="footer">
     <div class="container">
         <div class="footer-holder py-5">
