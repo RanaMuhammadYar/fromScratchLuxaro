@@ -115,6 +115,11 @@ Auth::routes(['verify' => true]);
 Route::match(['get','post'],'/search-product', [ProductController::class, 'productsearch'])->name('productsearch');
 // Route::get('/search-product', [ProductController::class, 'productsearch'])->name('productsearch');
 
+
+
+Route::get('/all-products', [ProductController::class, 'allProducts'])->name('allProducts');
+
+
 Route::controller(MessagesController::class)->group(function () {
     Route::get('/chatify', 'index')->middleware(['auth'])->name(config('chatify.routes.prefix'));
 

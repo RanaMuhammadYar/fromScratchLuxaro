@@ -225,4 +225,6 @@ class UserController extends Controller
     {
         return view('frontend.login');
     }
+
+   
 }

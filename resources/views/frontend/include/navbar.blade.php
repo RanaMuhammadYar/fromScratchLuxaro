@@ -301,7 +301,7 @@
                 <button class="menu-btn d-md-none background-none border-0 bg-transparent"><i
                         class="fa fa-times text-white"></i></button>
                 <ul class="list-unstyled m-0 p-0 d-md-flex">
-                    <li><a href="{{ route('home') }}">products</a></li>
+                    <li><a href="{{ route('allProducts') }}">products</a></li>
                     <li><a href="{{ route('goldEvine') }}">projects</a></li>
                     <li><a href="javascript:void">professionals</a></li>
                 </ul>

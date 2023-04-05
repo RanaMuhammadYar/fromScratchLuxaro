@@ -321,7 +321,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <strong class="title">${{ $product->product_price }}</strong>
-                                    <button class="btn bg-dark text-white py-1 px-2" href=""
+                                    <button class="btn bg-dark text-white py-1 px-2"
                                         onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
                                             class="fa fa-shopping-basket"></i>
                                     </button>
