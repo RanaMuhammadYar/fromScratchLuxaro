@@ -20,7 +20,7 @@ class MerchantController extends Controller
     public function merchantAccountFirstStep()
     {
 
-        if (auth()->user()->role == 'Merchant' && auth()->user()->status == 'Active') {
+        // if (auth()->user()->role == 'Merchant' && auth()->user()->status == 'Active') {
             $countries = Country::all();
             $states = State::all();
             $cities = City::all();
@@ -28,13 +28,13 @@ class MerchantController extends Controller
             $delivery_options = DeliveryOption::all();
             // return $delivery_options;
             return view('frontend.all-page.merchant_account', compact('merchant_detail', 'states', 'cities', 'countries', 'delivery_options'));
-        } else {
-            return redirect()->back()->with('error', 'Application is under review');
-        }
+        // } else {
+        //     return redirect()->back()->with('error', 'Application is under review');
+        // }
     }
     public function merchantAccountSecondStep(Request $request)
     {
-
+       
         $validation = Validator::make($request->all(), [
             'business_name' => 'required',
             'business_address' => 'required',
@@ -82,9 +82,9 @@ class MerchantController extends Controller
                 $merchant->business_run = $request->business_run;
                 $merchant->delivery_id = $request->delivery_id;
                 $merchant->social_media_link = json_encode($request->social_media_link);
-                $merchant->owner_name = json_encode($request->owner_name);
+                $merchant->owner_name = $request->owner_name;
                 $merchant->owner_introduce = $request->owner_introduce;
-                $merchant->team_memeber_name = json_encode($request->team_memeber_name);
+                $merchant->team_memeber_name = $request->team_memeber_name;
                 $merchant->history = $request->history;
                 $merchant->ethic = $request->ethic;
                 $merchant->philosophy = $request->philosophy;
@@ -99,28 +99,42 @@ class MerchantController extends Controller
                     $path = asset('storage/' . $request->file('store_header')->store('public/merchant_header'));
                     $merchant->store_header = $path;
                 }
-                if ($request->hasFile('owner_image')) {
-
-                    $owner_image = [];
-                    foreach ($request->owner_image as $key => $value) {
-                        $path = asset('storage/' . $request->file('owner_image')[$key]->store('public/owner_image'));
-                        array_push($owner_image, $path);
-                    }
-                    $merchant->owner_image = json_encode($owner_image);
-                }
                 if ($request->hasFile('team_memeber_image')) {
-                    $team_memeber_image = [];
-                    foreach ($request->team_memeber_image as $key => $value) {
-                        $path = asset('storage/' . $request->file('team_memeber_image')[$key]->store('public/merchant_team_member'));
-                        array_push($team_memeber_image, $path);
-                    }
-                    $merchant->team_memeber_image = json_encode($team_memeber_image);
+                    $path = asset('storage/' . $request->file('team_memeber_image')->store('public/merchant_header'));
+                    $merchant->team_memeber_image = $path;
                 }
+
+                if ($request->hasFile('owner_image')) {
+                    $path = asset('storage/' . $request->file('owner_image')->store('public/merchant_header'));
+                    $merchant->owner_image = $path;
+                }
+                // if ($request->hasFile('owner_image')) {
+                //     foreach ($request->owner_image as $file) {
+                //         if ($file) {
+                //             $path = asset('storage/' . $file->store('public/merchant_owner'));
+                //             $owner_images[] = $path;
+                //         }
+                //     }
+                //     $merchant->owner_image = json_encode($owner_images);
+                // }
+                // if ($request->hasFile('team_memeber_image')) {
+                //     $team_memeber_image = [];
+                //     foreach ($request->team_memeber_image as $key => $value) {
+                //         $path = asset('storage/' . $request->file('team_memeber_image')[$key]->store('public/merchant_team_member'));
+                //         array_push($team_memeber_image, $path);
+                //     }
+                //     $merchant->team_memeber_image = json_encode($team_memeber_image);
+                // }
                 $merchant->save();
                 return redirect()->back()->with('success', 'Your application has been submitted successfully');
             }
         }
     }
+
+
+
+
+
     public function saveMerchantAccount(Request $request)
     {
         $merchant = $request->session()->get('merchant');

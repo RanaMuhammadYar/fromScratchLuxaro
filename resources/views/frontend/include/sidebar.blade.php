@@ -11,7 +11,7 @@
             <div class="accordion-body px-md-3">
                 <ul class="mangement profile p-0 list-unstyled">
                     @auth
-                        <li class="pb-1"><a href="{{ route('my-profile') }}">My Profile</a></li>
+                        <li class="pb-1"><a href="{{ route('myaccount') }}">My Profile</a></li>
                         <li class="pb-1"><a href="{{ route('chatify') }}">Messages</a></li>
                     @endauth
                     <!-- <li class="pb-1"><a href="">My Favorite Products</a></li>
@@ -39,7 +39,7 @@
             data-bs-parent="#accordionExample">
             <div class="accordion-body px-4">
                 <ul class="mangement profile p-0 list-unstyled">
-                    <li class="pb-1"><a href="{{ route('my-profile') }}">My Profile</a></li>
+                    <li class="pb-1"><a href="{{ route('myaccount') }}">My Profile</a></li>
                     <li class="pb-1"><a href="">my saved addresse</a></li>
                     <li class="pb-1"><a href="">my saved payment methods</a></li>
                     <li class="pb-1"><a href="">preference</a></li>

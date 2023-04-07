@@ -34,3 +34,4 @@ Route::post('edit-project', [ProjectManageController::class, 'update'])->name('u
 
 // Suits Route
 Route::get('suits', [SuitsController::class, 'index'])->name('suits');
+Route::post('suits/store', [SuitsController::class, 'store'])->name('suits.store');

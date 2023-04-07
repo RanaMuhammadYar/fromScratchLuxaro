@@ -287,24 +287,24 @@
                                         <div class="row gx-4 mb-0 mb-md-3 align-items-end">
                                             <div class="col-12 col-md-8 mb-3 mb-md-0">
                                                 <label for="" class="form-label mb-0">Owner Name-1</label>
-                                                <input type="text" class="form-control" name="owner_name[]">
+                                                <input type="text" class="form-control" name="owner_name">
                                             </div>
                                             <div class="col-12 col-md-4 mb-3 mb-md-0">
                                                 <label class="uploadFile">
                                                     <i class="fa fa-cloud-upload upload-icon" aria-hidden="true"></i>
                                                     <span class="filename">Upload Image</span>
                                                     <input type="file" class="inputfile form-control"
-                                                        name="owner_image[]">
+                                                        name="owner_image">
                                                 </label>
                                             </div>
                                         </div>
 
-                                        <div class="mb-3">
+                                        {{-- <div class="mb-3">
                                             <button class="btn btn-primary" type="button"
                                                 onclick="addownername()"><span><i class="fa fa-plus me-2"
                                                         aria-hidden="true"></i></span>Add
                                                 More</button>
-                                        </div>
+                                        </div> --}}
                                         <div class="addToOwnerName">
 
                                         </div>
@@ -325,24 +325,24 @@
                                             <div class="col-12 col-md-8 mb-3 mb-md-0">
                                                 <label for="" class="form-label mb-0">Team Memeber
                                                     Name-1</label>
-                                                <input type="text" class="form-control" name="team_memeber_name[]">
+                                                <input type="text" class="form-control" name="team_memeber_name">
                                             </div>
                                             <div class="col-12 col-md-4 mb-3 mb-md-0">
                                                 <label class="uploadFile">
                                                     <i class="fa fa-cloud-upload upload-icon" aria-hidden="true"></i>
                                                     <span class="filename">Upload Image</span>
                                                     <input type="file" class="inputfile form-control"
-                                                        name="team_memeber_image[]">
+                                                        name="team_memeber_image">
                                                 </label>
                                             </div>
                                         </div>
 
-                                        <div class="mb-3">
+                                        {{-- <div class="mb-3">
                                             <button class="btn btn-primary" type="button"
                                                 onclick="addTeamMemeber()"><span><i class="fa fa-plus me-2"
                                                         aria-hidden="true"></i></span>Add
                                                 More</button>
-                                        </div>
+                                        </div> --}}
                                         <div class="addToTeamMemebers">
 
                                         </div>

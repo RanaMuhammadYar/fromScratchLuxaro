@@ -19,7 +19,7 @@
                                 <div class="col-12 col-md-5 col-lg-4">
                                     <div class="my-account-image">
                                         <div class="account-image">
-                                            <img id="preview-image-before-upload" src="{{@$userDetail->user_profile_image}}" alt="preview image" style="max-height: 250px;">
+                                            <img id="preview-image-before-upload" src="{{@$userDetail->user_profile_image}}" alt="preview image" style="max-height: 250px;" onerror="this.src='{{ asset('images/users.jfif') }}'">
                                         </div>
                                         <input type="file" class="inputfile form-control" name="user_profile_image" id="user_profile_image">
                                         <div class="upload-logo"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>

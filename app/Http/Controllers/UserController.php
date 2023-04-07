@@ -9,6 +9,7 @@ use App\Models\Vendor\City;
 use App\Models\Vendor\State;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
+use App\Models\Admin\DeliveryOption;
 use App\Models\Vendor\Country;
 use App\Models\MerchantApplication;
 use App\Models\Admin\Goldevine\Project;
@@ -20,36 +21,34 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $categories = Category::where('title', 'LIKE', '%'.$search.'%')->get();
-        if(count($categories) <= 0)
-        {
-            $categories = Category::
-            when($search, function ($query, $search) {
-              $query->whereHas('relatedProducts',function ($query) use ($search){
-                  $query->where('product_name', 'LIKE', '%'.$search.'%');
-              });
-          })
-          ->with(['relatedProducts' => function($query) use ($search){
-              $query->where('product_name', 'like', '%'.$search.'%');
-          }])
-          ->get();
+        $categories = Category::where('title', 'LIKE', '%' . $search . '%')->get();
+        if (count($categories) <= 0) {
+            $categories = Category::when($search, function ($query, $search) {
+                    $query->whereHas('relatedProducts', function ($query) use ($search) {
+                        $query->where('product_name', 'LIKE', '%' . $search . '%');
+                    });
+                })
+                ->with(['relatedProducts' => function ($query) use ($search) {
+                    $query->where('product_name', 'like', '%' . $search . '%');
+                }])
+                ->get();
         }
-        $locallaxaro = AdminProduct::with('categories', 'productType', 'deliveryOption', 'user')->where('status','Active')->orderby('id','desc')->limit(15)->get();
-        $goldevines = Project::with('projectBenefits')->where('status','Active')->orderBy('id','desc')->limit(15)->get();
-        $luxauro_charters = Charter::orderBy('id','desc')->limit(15)->get();
-        return view('frontend.all-page.products', compact('categories','goldevines','locallaxaro','luxauro_charters'));
+        $locallaxaro = AdminProduct::with('categories', 'productType', 'deliveryOption', 'user')->where('status', 'Active')->orderby('id', 'desc')->limit(15)->get();
+        $goldevines = Project::with('projectBenefits')->where('status', 'Active')->orderBy('id', 'desc')->limit(15)->get();
+        $luxauro_charters = Charter::orderBy('id', 'desc')->limit(15)->get();
+        return view('frontend.all-page.products', compact('categories', 'goldevines', 'locallaxaro', 'luxauro_charters'));
     }
     public function appendProducts(Request $request)
     {
         $cat_id = substr($request->price_filter, -1);
         $orderby = substr($request->price_filter, 0, -1);
-        $categories = Category::where('id',$cat_id)->first();
+        $categories = Category::where('id', $cat_id)->first();
         // $products = AdminProduct::where('category_id',$cat_id)
         //                           ->orderBy('product_price',$orderby)
         //                           ->limit(6)
         //                           ->get();
-        $cat = Category::where('id',$cat_id)->first();
-        $products = $cat->products()->where('status','Active')->orderBy('product_price',$orderby)->get();
+        $cat = Category::where('id', $cat_id)->first();
+        $products = $cat->products()->where('status', 'Active')->orderBy('product_price', $orderby)->get();
         // dd($products->get());
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;
@@ -57,15 +56,15 @@ class UserController extends Controller
     public function appendLocalLuxauro(Request $request)
     {
         $orderby = substr($request->products, 0, -1);
-        $products = AdminProduct::orderBy('product_price',$orderby)->limit(6)->get();
+        $products = AdminProduct::orderBy('product_price', $orderby)->limit(6)->get();
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;
     }
     public function appendCategories(Request $request)
     {
-            $categories = Category::orderBy('title',$request->category_filter)->get();
-            $html = view('frontend.all-page.append_category', ['categories' => $categories])->render();
-            return $html;
+        $categories = Category::orderBy('title', $request->category_filter)->get();
+        $html = view('frontend.all-page.append_category', ['categories' => $categories])->render();
+        return $html;
     }
     public function productDetail(Request $request)
     {
@@ -76,24 +75,18 @@ class UserController extends Controller
     {
         $userId = isset($request->user_id) ? $request->user_id : auth()->user()->id;
         $user = User::where('id', auth()->user()->id)->first();
-         User::where('id',$userId)->update([
+        User::where('id', $userId)->update([
             "email" => $request->email,
             "zip_code" => $request->zip_code,
-          ]);
-        if(isset($request->user_profile_image))
-        {
-           $user_profile_image =  asset('storage/'.$request->user_profile_image->store('public/user_profile_image'));
-        }
-        else
-        {
+        ]);
+        if (isset($request->user_profile_image)) {
+            $user_profile_image =  asset('storage/' . $request->user_profile_image->store('public/user_profile_image'));
+        } else {
             $user_profile_image =  $user->userDetails()->first()->user_profile_image;
         }
-        if(isset($request->course_certification_document))
-        {
-           $course_certification_document =  asset('storage/'.$request->course_certification_document->store('public/course_certification_document'));
-        }
-        else
-        {
+        if (isset($request->course_certification_document)) {
+            $course_certification_document =  asset('storage/' . $request->course_certification_document->store('public/course_certification_document'));
+        } else {
             $course_certification_document =  $user->userDetails()->first()->course_certification_document;
         }
         $user->userDetails()->updateOrCreate([
@@ -126,8 +119,8 @@ class UserController extends Controller
             "course_certification_document" => $course_certification_document,
         ]);
 
-        $user =   User::with(['userDetails' => function($query){
-                 return  $query->first();
+        $user =   User::with(['userDetails' => function ($query) {
+            return  $query->first();
         }, 'userEducations', 'userCertificates', 'userProfessions'])
             ->where('id', $userId)->first();
         Session::flash('message', 'Profile  Updated Successfully!');
@@ -140,7 +133,12 @@ class UserController extends Controller
     public function merchantSuitManagement()
     {
         $suite = MerchantApplication::where('user_id', auth()->user()->id)->first();
-        return view('frontend.suite_management', compact('suite'));
+        $delivory_options = DeliveryOption::all();
+        if ($suite == null) {
+            return redirect()->back()->with('error', 'Please fill the Merchant application form first');
+        } else {
+            return view('frontend.suite_management', compact('suite', 'delivory_options'));
+        }
     }
 
     public function merchantPaymentManagement()
@@ -170,22 +168,20 @@ class UserController extends Controller
         $newprojects = Project::where('status', 'Active')->orderBy('id', 'desc')->limit(15)->get();
         $trandingProjects = Project::where('status', 'Active')->orderBy('id', 'asc')->get();
         $nearlythereProjects = Project::where('status', 'Active')->inRandomOrder()->limit(15)->get();
-        $featuredProjects = Project::where('status', 'Active')->where('project_category','Featured')->limit(15)->get();
+        $featuredProjects = Project::where('status', 'Active')->where('project_category', 'Featured')->limit(15)->get();
         // return dd($trandingProjects);
-        return view('frontend.goldevine.index',compact('allprojects','newprojects','trandingProjects','nearlythereProjects','featuredProjects'));
+        return view('frontend.goldevine.index', compact('allprojects', 'newprojects', 'trandingProjects', 'nearlythereProjects', 'featuredProjects'));
     }
     public function myProfile()
     {
-        $projects = Project::with('user')->where('user_id',auth()->user()->id)->get();
-        return view('frontend.all-page.goldevineprofile',compact('projects'));
-
-
+        $projects = Project::with('user')->where('user_id', auth()->user()->id)->get();
+        return view('frontend.all-page.goldevineprofile', compact('projects'));
     }
 
     public function myaccount()
     {
-        $user =   User::with('userDetails','userEducations', 'userCertificates', 'userProfessions')
-       ->where('id', auth()->user()->id)->first();
+        $user =   User::with('userDetails', 'userEducations', 'userCertificates', 'userProfessions')
+            ->where('id', auth()->user()->id)->first();
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();
@@ -193,8 +189,16 @@ class UserController extends Controller
         $userEducations = $user->userEducations()->latest()->first();
         $userCertificates = $user->userCertificates()->latest()->first();
         $userProfessions = $user->userProfessions()->latest()->first();
-        return view('frontend.all-page.my_profile',compact('user','states','cities','countries',
-         'userDetail','userEducations','userCertificates','userProfessions'));
+        return view('frontend.all-page.my_profile', compact(
+            'user',
+            'states',
+            'cities',
+            'countries',
+            'userDetail',
+            'userEducations',
+            'userCertificates',
+            'userProfessions'
+        ));
     }
 
 
@@ -225,6 +229,4 @@ class UserController extends Controller
     {
         return view('frontend.login');
     }
-
-   
 }
