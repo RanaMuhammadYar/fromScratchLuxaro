@@ -5,6 +5,11 @@
     </title>
 @endsection
 @section('content')
+    <style>
+        .progress-bar {
+            background: #5ce78c !important;
+        }
+    </style>
     <div class="inner-content mt-5 pt-3">
         <div class="product-page-section">
             <div class="col-12 col-md-10 mx-auto">
@@ -76,8 +81,8 @@
                                 <div class="row">
                                     @foreach ($projectsearches as $projectsearch)
                                         <div class="col-3 mb-4">
-                                            <a
-                                                href="{{ route('projectDetail', ['id' => $projectsearch->id, 'slug' => $projectsearch->slug]) }}" style="text-decoration: none;color:rgb(92, 91, 91)">
+                                            <a href="{{ route('projectDetail', ['id' => $projectsearch->id, 'slug' => $projectsearch->slug]) }}"
+                                                style="text-decoration: none;color:rgb(92, 91, 91)">
 
                                                 <div class="product-item">
                                                     <div class="img-holder">
@@ -217,9 +222,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="street-img">
-            <img src="{{ asset('images/img1.png') }}" class="img-fluid">
         </div>
     </div>
 @endsection

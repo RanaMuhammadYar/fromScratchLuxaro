@@ -30,6 +30,10 @@
             user-select: none;
             width: 41px
         }
+
+        .text-#133033 {
+            color: #133033;
+        }
     </style>
     <div class="inner-content">
         <div class="charter-detail-page mt-4 pt-md-5 mt-md-5 mb-3 mb-md-5">
@@ -63,10 +67,10 @@
                                         $unstart = 5 - $size;
                                     @endphp
                                     @for ($i = 0; $i < $size; $i++)
-                                        <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
+                                        <li class="me-1"><i class="fa fa-star" style="color:#133033"></i></li>
                                     @endfor
                                     @for ($i = 0; $i < $unstart; $i++)
-                                        <li class="me-1"><i class="fa fa-star"></i></li>
+                                        <li class="me-1"><i class="bi bi-star"></i></li>
                                     @endfor
                                 </ul>
                                 <span
@@ -165,10 +169,11 @@
                                                     $unstart = 5 - $size;
                                                 @endphp
                                                 @for ($i = 0; $i < $size; $i++)
-                                                    <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star" style="color: #133033"></i>
+                                                    </li>
                                                 @endfor
                                                 @for ($i = 0; $i < $unstart; $i++)
-                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="bi bi-star"></i></li>
                                                 @endfor
                                             </ul>
                                         </div>
@@ -232,10 +237,11 @@
                                                     $unstart = 5 - $size;
                                                 @endphp
                                                 @for ($i = 0; $i < $size; $i++)
-                                                    <li class="me-1"><i class="fa fa-star" style="color: blue"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star" style="color: #133033"></i>
+                                                    </li>
                                                 @endfor
                                                 @for ($i = 0; $i < $unstart; $i++)
-                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="bi bi-star"></i></li>
                                                 @endfor
                                             </ul>
                                         </div>
@@ -300,11 +306,12 @@
                                                     $unstart = 5 - $size;
                                                 @endphp
                                                 @for ($i = 0; $i < $size; $i++)
-                                                    <li class="me-1"><i class="fa fa-star" style="color: blue"></i>
+                                                    <li class="me-1"><i class="fa fa-star"
+                                                            style="color:#133033 !importent"></i>
                                                     </li>
                                                 @endfor
                                                 @for ($i = 0; $i < $unstart; $i++)
-                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="bi bi-star"></i></li>
                                                 @endfor
                                             </ul>
                                         </div>

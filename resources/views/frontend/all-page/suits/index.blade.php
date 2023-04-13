@@ -25,15 +25,19 @@
                                     <div class="col-md-3  col-12 my-2">
                                         <div class="product-item">
                                             <a href="#" style="color: rgb(75, 75, 75)">
-                                                <div class="img-holder">
-                                                    <img src="{{ $suit->business_logo }}"
-                                                        onerror="this.src='{{ asset('images/default.png') }}'"
-                                                        class="img-fluid">
-                                                </div>
+                                                <a href="{{ route('suitsProducts',$suit->user_id) }}">
+                                                    <div class="img-holder">
+                                                        <img src="{{ $suit->business_logo }}"
+                                                            onerror="this.src='{{ asset('images/default.png') }}'"
+                                                            class="img-fluid">
+                                                    </div>
+                                                </a>
                                                 <div class="txt-holder">
                                                     <div class="d-flex justify-content-between mb-3">
                                                         <div>
-                                                            <strong class="title">{{ $suit->business_name }}</strong>
+                                                            <a href="{{ route('suitsProducts',$suit->user_id) }}" style="text-decoration: none;color:rgb(42, 40, 40)">
+                                                                <strong class="title">{{ $suit->business_name }}</strong>
+                                                            </a>
                                                             <ul class="list-unstyled m-0 p-0 d-flex stars">
                                                                 <li class="me-1"><i class="fa fa-star"></i></li>
                                                                 <li class="me-1"><i class="fa fa-star"></i></li>

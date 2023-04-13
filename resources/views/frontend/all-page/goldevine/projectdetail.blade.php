@@ -12,6 +12,10 @@
             padding: 0.45rem 1.2rem;
         }
 
+        .progress-bar {
+            background: #5ce78c !important;
+        }
+
         .nav-pills .nav-link {
             background: 0 0;
             font-size: 14px;
@@ -273,12 +277,16 @@
                                 <div class="tab-pane fade" id="pills-updates" role="tabpanel"
                                     aria-labelledby="pills-contact-tab">
                                     <h2>This is Update </h2>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus corrupti quaerat repellat earum ex, minima nemo perferendis id nobis, sit et praesentium voluptate aut, asperiores ullam dolores a. Cum.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus corrupti
+                                    quaerat repellat earum ex, minima nemo perferendis id nobis, sit et praesentium
+                                    voluptate aut, asperiores ullam dolores a. Cum.
                                 </div>
                                 <div class="tab-pane fade" id="pills-comments" role="tabpanel"
                                     aria-labelledby="pills-contact-tab">
                                     <h2>This is Comments </h2>
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio, numquam error debitis atque ducimus cumque tenetur quisquam minus, culpa magnam et? Eaque at nam mollitia illo corrupti placeat. Quasi, quis!
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio, numquam error debitis
+                                    atque ducimus cumque tenetur quisquam minus, culpa magnam et? Eaque at nam mollitia illo
+                                    corrupti placeat. Quasi, quis!
                                 </div>
                             </div>
                         </div>
@@ -327,8 +335,6 @@
 
                 </div>
             </div>
-            <div class="street-img">
-                <img src="{{ asset('images/img1.png') }}" class="img-fluid">
-            </div>
         </div>
-    @endsection
+    </div>
+@endsection

@@ -14,7 +14,7 @@
                             <div class="mb-3 mb-md-0">
                                 <ol class="breadcrumb mb-1">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home </a></li>
-                                        / Search results - ( {{ $products->count() }} )
+                                    / Search results - ( {{ $products->count() }} )
                                     <li class="breadcrumb-item active" aria-current="page">
 
                                 </ol>
@@ -39,12 +39,12 @@
                     {{-- <form class="page-form mx-auto mb-5" action="{{ route('productsearch') }}" method="post">
                         @csrf
                         <div class="page-form-holder d-flex"> --}}
-                            {{-- <select class="form-control select-control border-0 rounded-0 flex-fill">
+                    {{-- <select class="form-control select-control border-0 rounded-0 flex-fill">
                                 <option>All</option>
                                 <option>All</option>
                                 <option>All</option>
                             </select> --}}
-                            {{-- <div class="form-field d-flex flex-fill">
+                    {{-- <div class="form-field d-flex flex-fill">
                                 <input type="search" placeholder="Search..." name="search" class="border-0 bg-transparent flex-fill">
                                 <button type="submit" class="bg-transparent border-0 flex-fill"><i
                                         class="fa fa-search"></i></button>
@@ -72,11 +72,18 @@
                                                         <strong class="title">{{ $product->product_name }}</strong>
                                                     </a>
                                                     <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
-                                                        <li class="me-1"><i class="fa fa-star"></i></li>
+                                                        @php
+                                                            $size = (int) $product->ratings()->avg('rating');
+                                                            $unstart = 5 - $size;
+                                                        @endphp
+                                                        @for ($i = 0; $i < $size; $i++)
+                                                            <li class="me-1"><i class="fa fa-star"
+                                                                    style="color: #133033"></i>
+                                                            </li>
+                                                        @endfor
+                                                        @for ($i = 0; $i < $unstart; $i++)
+                                                            <li class="me-1"><i class="bi bi-star"></i></li>
+                                                        @endfor
                                                     </ul>
                                                 </div>
                                                 <i class="fa fa-globe fa-1x mt-2"></i>
@@ -270,11 +277,8 @@
                         </div>
                     </div>
                 </div> --}}
+                </div>
             </div>
         </div>
-    </div>
-    <div class="street-img">
-        <img src="{{ asset('images/img1.png') }}" class="img-fluid">
-    </div>
     </div>
 @endsection

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\City;
-use App\Models\State;
-use App\Models\Country;
+
+use App\Models\Vendor\City;
+use App\Models\Vendor\State;
+use App\Models\Vendor\Country;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

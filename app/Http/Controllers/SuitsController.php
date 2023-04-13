@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Admin\Product;
 use App\Models\MerchantApplication;
 use Illuminate\Support\Facades\Validator;
 
@@ -81,5 +82,13 @@ class SuitsController extends Controller
         //     $merchant->team_memeber_image = json_encode($team_memeber_image);
         // }
 
+    }
+
+    public function suitsProducts($id)
+    {
+        $products = Product::where('user_id', $id)->where('status','Active')->paginate(12);
+        $productsassending = Product::where('user_id', $id)->where('status','Active')->orderBy('id', 'asc')->get();
+        $productsdesending = Product::where('user_id', $id)->where('status','Active')->orderBy('id', 'desc')->get();
+        return view('frontend.all-page.suits.suitsproducts', compact('products','productsassending','productsdesending'));
     }
 }

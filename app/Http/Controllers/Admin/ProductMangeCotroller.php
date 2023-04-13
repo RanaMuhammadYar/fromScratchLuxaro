@@ -38,16 +38,16 @@ class ProductMangeCotroller extends Controller
     public function productcategory(Request $request, $id, $slug)
     {
         $products = Product::with('categories', 'productType', 'delivoryOption', 'shippingType', 'user')
-                             ->where('status', 'Active')
-                             ->where('category_id', $id)
-                             ->paginate(15);
+            ->where('status', 'Active')
+            ->where('category_id', $id)
+            ->paginate(15);
 
         if (Cache::has('related_products_' . $id)) {
             // $relatedProducts = Cache::get('related_products_' . $id);
-            $product = Category::with('products')->where('id',$id)->first();
+            $product = Category::with('products')->where('id', $id)->first();
             $relatedProducts = $product->products()->get();
         } else {
-            $product = Category::with('products')->where('id',$id)->first();
+            $product = Category::with('products')->where('id', $id)->first();
             $relatedProducts = $product->products()->get();
             Cache::put('related_products_' . $id, $relatedProducts, 1440);
         }
@@ -57,10 +57,10 @@ class ProductMangeCotroller extends Controller
 
     public function productDetails(Request $request, $id, $slug)
     {
-        $product = Product::with('ratings','categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('id', $id)->first();
-        $productsdesc = Product::with('ratings','categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'desc')->paginate(15);
-        $productsasc = Product::with('ratings','categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'asc')->paginate(15);
-        $mayyoulike = Product::with('ratings','categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->paginate(15);
+        $product = Product::with('ratings', 'categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('id', $id)->first();
+        $productsdesc = Product::with('ratings', 'categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'desc')->paginate(15);
+        $productsasc = Product::with('ratings', 'categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'asc')->paginate(15);
+        $mayyoulike = Product::with('ratings', 'categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->paginate(15);
         return view('frontend.all-page.product_detail', compact('product', 'id', 'slug', 'productsdesc', 'productsasc', 'mayyoulike'));
     }
 
@@ -229,17 +229,17 @@ class ProductMangeCotroller extends Controller
                 })
                 ->sum('total_price');
 
-                $count = \App\Models\Admin\Cart::with('product')
+            $count = \App\Models\Admin\Cart::with('product')
                 ->where(function ($query) {
                     $query
-                    ->where('status', 'pending')
-                    ->where('user_id', Auth::id())
-                    ->orWhere(function ($query) {
-                        $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
-                    });
+                        ->where('status', 'pending')
+                        ->where('user_id', Auth::id())
+                        ->orWhere(function ($query) {
+                            $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                        });
                 })
                 ->count();
-                // $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+            // $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
             // $count = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
             return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total, 'count' => $count]);
         } else {
@@ -254,14 +254,14 @@ class ProductMangeCotroller extends Controller
                 })
                 ->sum('total_price');
 
-                $count = \App\Models\Admin\Cart::with('product')
+            $count = \App\Models\Admin\Cart::with('product')
                 ->where(function ($query) {
                     $query
-                    ->where('status', 'pending')
-                    ->where('user_id', Auth::id())
-                    ->orWhere(function ($query) {
-                        $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
-                    });
+                        ->where('status', 'pending')
+                        ->where('user_id', Auth::id())
+                        ->orWhere(function ($query) {
+                            $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                        });
                 })
                 ->count();
 
@@ -286,5 +286,4 @@ class ProductMangeCotroller extends Controller
         // dd($categories);
         return view('frontend.all-page.category.index', compact('categories'));
     }
-
 }

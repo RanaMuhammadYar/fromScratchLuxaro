@@ -50,6 +50,7 @@ class UserController extends Controller
         $cat = Category::where('id', $cat_id)->first();
         $products = $cat->products()->where('status', 'Active')->orderBy('product_price', $orderby)->get();
         // dd($products->get());
+        
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;
     }
@@ -169,7 +170,6 @@ class UserController extends Controller
         $trandingProjects = Project::where('status', 'Active')->orderBy('id', 'asc')->get();
         $nearlythereProjects = Project::where('status', 'Active')->inRandomOrder()->limit(15)->get();
         $featuredProjects = Project::where('status', 'Active')->where('project_category', 'Featured')->limit(15)->get();
-        // return dd($trandingProjects);
         return view('frontend.goldevine.index', compact('allprojects', 'newprojects', 'trandingProjects', 'nearlythereProjects', 'featuredProjects'));
     }
     public function myProfile()

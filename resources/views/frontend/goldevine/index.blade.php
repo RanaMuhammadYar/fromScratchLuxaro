@@ -46,17 +46,18 @@
                             <div class="page-form-holder d-flex">
                                 <label class="form-control rounded-0">Search Filter</label>
                                 <div class="form-field d-flex flex-fill">
-                                    <select class="flex-fill border-0 bg-transparent">
-                                        <option></option>
-                                        <option>All</option>
-                                        <option>All</option>
+                                    <select class="flex-fill border-0 bg-transparent goldeinefiltera"
+                                        onchange="goldeinefilteras()">
+                                        <option>OrderBy</option>
+                                        <option value="Raised(max)">Funding Goal(max)</option>
+                                        <option value="Raised(min)">Funding Goal(min)</option>
                                     </select>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="slider gold-evine-slider">
+                <div class="slider gold-evine-slider appendFilterData">
                     @foreach ($newprojects as $newproject)
                         <div>
                             <a href="{{ route('projectDetail', ['id' => $newproject->id, 'slug' => $newproject->slug]) }}">
@@ -85,8 +86,15 @@
 
                         </div>
                     @endforeach
-
                 </div>
+
+                <div class="slider123 gold-evine-slider classAppendgoldevine">
+                    <div class="filterGoldevines">
+
+                    </div>
+                </div>
+
+
             </div>
         </div>
         <div class="product-section project-page-mockup mb-4 pb-lg-3">
@@ -99,20 +107,22 @@
                             <div class="page-form-holder d-flex">
                                 <label class="form-control rounded-0">Search Filter</label>
                                 <div class="form-field d-flex flex-fill">
-                                    <select class="flex-fill border-0 bg-transparent">
-                                        <option></option>
-                                        <option>All</option>
-                                        <option>All</option>
+                                    <select class="flex-fill border-0 bg-transparent goldeinetrending"
+                                        onchange="goldeinetrending()">
+                                        <option>OrderBy</option>
+                                        <option value="Raised(max)">Funding Goal(max)</option>
+                                        <option value="Raised(min)">Funding Goal(min)</option>
                                     </select>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="slider gold-evine-slider">
+                <div class="slider gold-evine-slider appendtrending">
                     @foreach ($trandingProjects as $trendingproject)
                         <div>
-                            <a href="{{ route('projectDetail', ['id' => $trendingproject->id, 'slug' => $trendingproject->slug]) }}">
+                            <a
+                                href="{{ route('projectDetail', ['id' => $trendingproject->id, 'slug' => $trendingproject->slug]) }}">
 
                                 <div class="product-item">
                                     <div class="img-holder">
@@ -139,6 +149,16 @@
                         </div>
                     @endforeach
                 </div>
+
+                <div class="slider123 gold-evine-slider goldevinetrending">
+                    <div class="Goldevinestrending">
+                        <div class="lodars text-center py-5 my-5" style="display:none;">
+                            <div class="spinner-border" role="status" style="color:#133033 !importent">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="product-section gv-featured-projects project-page-mockup mb-5 pb-lg-2">
                 <div class="container">
@@ -148,7 +168,8 @@
                     <div class="gv-featured-project-slider ">
                         @foreach ($featuredProjects as $featuredProject)
                             <div>
-                                <a href="{{ route('projectDetail', ['id' => $featuredProject->id, 'slug' => $featuredProject->slug]) }}">
+                                <a
+                                    href="{{ route('projectDetail', ['id' => $featuredProject->id, 'slug' => $featuredProject->slug]) }}">
 
                                     <div class="product-item">
                                         <div class="img-holder">
@@ -181,20 +202,22 @@
                                 <div class="page-form-holder d-flex">
                                     <label class="form-control rounded-0">Search Filter</label>
                                     <div class="form-field d-flex flex-fill">
-                                        <select class="flex-fill border-0 bg-transparent">
-                                            <option></option>
-                                            <option>All</option>
-                                            <option>All</option>
+                                        <select class="flex-fill border-0 bg-transparent goldeinebackend"
+                                            onchange="goldeinebackend()">
+                                            <option>OrderBy</option>
+                                            <option value="Raised(max)">Funding Goal(max)</option>
+                                            <option value="Raised(min)">Funding Goal(min)</option>
                                         </select>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div class="slider gold-evine-slider">
+                    <div class="slider gold-evine-slider appendbackend">
                         @foreach ($trandingProjects as $trendingproject)
                             <div>
-                                <a href="{{ route('projectDetail', ['id' => $trendingproject->id, 'slug' => $trendingproject->slug]) }}">
+                                <a
+                                    href="{{ route('projectDetail', ['id' => $trendingproject->id, 'slug' => $trendingproject->slug]) }}">
 
                                     <div class="product-item">
                                         <div class="img-holder">
@@ -222,7 +245,11 @@
 
                             </div>
                         @endforeach
+                    </div>
+                    <div class="slider123 gold-evine-slider goldevinebackend">
+                        <div class="Goldevinesbackend">
 
+                        </div>
                     </div>
                 </div>
                 <div class="product-section project-page-mockup mb-4 pb-lg-3">
@@ -235,20 +262,22 @@
                                     <div class="page-form-holder d-flex">
                                         <label class="form-control rounded-0">Search Filter</label>
                                         <div class="form-field d-flex flex-fill">
-                                            <select class="flex-fill border-0 bg-transparent">
-                                                <option></option>
-                                                <option>All</option>
-                                                <option>All</option>
+                                            <select class="flex-fill border-0 bg-transparent goldeinenearly"
+                                                onchange="goldeinenearly()">
+                                                <option>OrderBy</option>
+                                                <option value="Raised(max)">Funding Goal(max)</option>
+                                                <option value="Raised(min)">Funding Goal(min)</option>
                                             </select>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div class="slider gold-evine-slider">
+                        <div class="slider gold-evine-slider appendnearly">
                             @foreach ($nearlythereProjects as $nearlythereproject)
                                 <div>
-                                    <a href="{{ route('projectDetail', ['id' => $nearlythereproject->id, 'slug' => $nearlythereproject->slug]) }}">
+                                    <a
+                                        href="{{ route('projectDetail', ['id' => $nearlythereproject->id, 'slug' => $nearlythereproject->slug]) }}">
 
                                         <div class="product-item">
                                             <div class="img-holder">
@@ -280,6 +309,11 @@
                                 </div>
                             @endforeach
                         </div>
+                        <div class="slider123 gold-evine-slider goldevinenearly">
+                            <div class="Goldevinesnearly">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class=" mb-5">
@@ -288,14 +322,179 @@
                             <div class="merchant-banner-text">
                                 {{-- <h3>(Banner ad for Luxauro, Goledvine, or BMG; easily changeable by admin)</h3>
                                      --}}
-                                     <img src="{{ banner()->image ?? '' }}" onerror="this.src='{{ asset('images/default.png') }}'" alt="" width="100%">
+                                <img src="{{ banner()->image ?? '' }}"
+                                    onerror="this.src='{{ asset('images/default.png') }}'" alt=""
+                                    width="100%">
 
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="street-img">
-                    <img src="{{ asset('images/img1.png') }}" class="img-fluid">
-                </div>
             </div>
+
+
+            <script>
+                function goldeinetrending() {
+                    $('.Goldevinestrending').html('');
+                    let filter = $('.goldeinetrending').val();
+                    $.ajax({
+                        url: "{{ route('Goldevinetrending') }}",
+                        type: "GET",
+                        beforeSend: function() {
+                            $('.appendtrending').html('');
+                            if($('.appendtrending').hasClass('slick-initialized')){
+                                $('.appendtrending').show();
+                            }else{
+                                $('.appendtrending').show();
+                            }
+                            $('.appendtrending').html('<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>');
+                        },
+                        data: {
+                            filter: filter
+                        },
+                        success: function(data) {
+                            
+                            // $('.lodars').removeClass('d-none');
+                            // return false;
+                            $('.Goldevinestrending').html('');
+                            data.forEach(element => {
+                                $('.Goldevinestrending').append(element);
+                            });
+                            // check if the element has a Slick slider initialized
+                            if ($('.Goldevinestrending').hasClass('slick-initialized')) {
+                                $('.Goldevinestrending').slick('unslick');
+                            }
+                            $('.Goldevinestrending').slick({
+                                slidesToShow: 2,
+                                slidesToScroll: 1,
+                                infinite: true,
+                                dots: false,
+                                arrows: true,
+                                focusOnSelect: true,
+                                autoplay: false,
+                                mobileFirst: true,
+                                prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+                                nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+                                responsive: [{
+                                    breakpoint: 768,
+                                    settings: {
+                                        slidesToShow: 4,
+                                        slidesToScroll: 1,
+                                    }
+                                }, {
+                                    breakpoint: 992,
+                                    settings: {
+                                        slidesToShow: 6,
+                                        slidesToScroll: 1,
+                                    }
+                                }]
+                            });
+                        },
+                        complete: function() {
+                            $('.appendtrending').hide();
+                        }
+                    });
+                }
+
+                function goldeinebackend() {
+                    let filter = $('.goldeinebackend').val();
+                    // alert(filter);
+                    // return false;
+                    $.ajax({
+                        url: "{{ route('goldevinebackeds') }}",
+                        type: "GET",
+                        data: {
+                            filter: filter
+                        },
+                        success: function(data) {
+                            $('.appendbackend').html('');
+                            $('.Goldevinesbackend').html('');
+                            data.forEach(element => {
+                                $('.Goldevinesbackend').append(element);
+                            });
+                            // check if the element has a Slick slider initialized
+                            if ($('.Goldevinesbackend').hasClass('slick-initialized')) {
+                                $('.Goldevinesbackend').slick('unslick');
+                            }
+                            $('.Goldevinesbackend').slick({
+                                slidesToShow: 2,
+                                slidesToScroll: 1,
+                                infinite: true,
+                                dots: false,
+                                arrows: true,
+                                focusOnSelect: true,
+                                autoplay: false,
+                                mobileFirst: true,
+                                prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+                                nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+                                responsive: [{
+                                    breakpoint: 768,
+                                    settings: {
+                                        slidesToShow: 4,
+                                        slidesToScroll: 1,
+                                    }
+                                }, {
+                                    breakpoint: 992,
+                                    settings: {
+                                        slidesToShow: 6,
+                                        slidesToScroll: 1,
+                                    }
+                                }]
+                            });
+                        }
+                    });
+
+                }
+
+                function goldeinenearly() {
+                    let filter = $('.goldeinenearly').val();
+                    // alert(filter);
+                    // return false;
+                    $.ajax({
+                        url: "{{ route('goldevinenearly') }}",
+                        type: "GET",
+                        data: {
+                            filter: filter
+                        },
+                        success: function(data) {
+                            $('.appendnearly').html('');
+                            $('.Goldevinesnearly').html('');
+                            data.forEach(element => {
+                                $('.Goldevinesnearly').append(element);
+                            });
+                            // check if the element has a Slick slider initialized
+                            if ($('.Goldevinesnearly').hasClass('slick-initialized')) {
+                                $('.Goldevinesnearly').slick('unslick');
+                            }
+                            $('.Goldevinesnearly').slick({
+                                slidesToShow: 2,
+                                slidesToScroll: 1,
+                                infinite: true,
+                                dots: false,
+                                arrows: true,
+                                focusOnSelect: true,
+                                autoplay: false,
+                                mobileFirst: true,
+                                prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+                                nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+                                responsive: [{
+                                    breakpoint: 768,
+                                    settings: {
+                                        slidesToShow: 4,
+                                        slidesToScroll: 1,
+                                    }
+                                }, {
+                                    breakpoint: 992,
+                                    settings: {
+                                        slidesToShow: 6,
+                                        slidesToScroll: 1,
+                                    }
+                                }]
+                            });
+                        }
+                    });
+
+                }
+            </script>
+            @include('frontend.include.script')
         @endsection

@@ -3,6 +3,11 @@
     <title>Home</title>
 @endsection
 @section('content')
+    <style>
+        .progress-bar {
+            background: #5ce78c !important;
+        }
+    </style>
     @if (get_setting('home_banner1_images') != null)
         <div class="banner mb-4">
             <div class="banner-slider">
@@ -88,7 +93,7 @@
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                 <h2 class="m-0">My Local Luxauro</h2>
                 <div class="d-flex form-holder">
-                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                    <a class="btn btn-view rounded-0" href="{{ route('allProducts') }}">View All</a>
                     <form class="page-form flex-fill" action="#">
                         <div class="page-form-holder d-flex">
                             <label class="form-control rounded-0">Search Filter</label>
@@ -122,11 +127,17 @@
                                             <strong class="title">{{ $locallaxar->product_name }}</strong>
                                         </a>
                                         <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
+                                            @php
+                                                $size = (int) $locallaxar->ratings()->avg('rating');
+                                                $unstart = 5 - $size;
+                                            @endphp
+                                            @for ($i = 0; $i < $size; $i++)
+                                                <li class="me-1"><i class="fa fa-star" style="color: #133033"></i>
+                                                </li>
+                                            @endfor
+                                            @for ($i = 0; $i < $unstart; $i++)
+                                                <li class="me-1"><i class="bi bi-star"></i></li>
+                                            @endfor
                                         </ul>
                                     </div>
                                     {{-- <i class="fa fa-globe fa-1x mt-2"></i> --}}
@@ -181,11 +192,11 @@
                                         <div>
                                             <strong class="title">{{ $charter->name }}</strong>
                                             <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                <li class="me-1"><i class="fa fa-star"></i></li>
+                                                <li class="me-1"><i class="bi bi-star"></i></li>
+                                                <li class="me-1"><i class="bi bi-star"></i></li>
+                                                <li class="me-1"><i class="bi bi-star"></i></li>
+                                                <li class="me-1"><i class="bi bi-star"></i></li>
+                                                <li class="me-1"><i class="bi bi-star"></i></li>
                                             </ul>
                                         </div>
                                         <i class="fa fa-globe fa-1x mt-2"></i>
@@ -210,30 +221,30 @@
         <div class="container">
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                 <h2 class="m-0">Gold Evine</h2>
-                {{-- <div class="d-flex form-holder">
-                    <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                <div class="d-flex form-holder">
+                    <a class="btn btn-view rounded-0" href="{{ route('goldEvine') }}">View All</a>
                     <form class="page-form flex-fill" action="#">
                         <div class="page-form-holder d-flex">
                             <label class="form-control rounded-0">Search Filter</label>
                             <div class="form-field d-flex flex-fill">
-                                <select class="flex-fill border-0 bg-transparent">
-                                    <option>All</option>
-                                    <option>All</option>
-                                    <option>All</option>
+                                <select class="flex-fill border-0 bg-transparent goldeinefiltera" onchange="goldeinefilteras()" id="goldeinefilter">
+                                    <option>OrderBy</option>
+                                    <option value="Raised(max)">Funding Goal(max)</option>
+                                    <option value="Raised(min)">Funding Goal(min)</option>
                                 </select>
                             </div>
                         </div>
                     </form>
-                </div> --}}
+                </div>
             </div>
-            <div class="slider gold-evine-slider">
+            <div class="slider gold-evine-slider appendFilterData">
                 @forelse ($goldevines as $goldevine)
                     @php
                         $total_amount = App\Models\Admin\Goldevine\GoldevineOrder::where('project_id', $goldevine->id)->sum('total_price');
                         $donations = App\Models\Admin\Goldevine\GoldevineOrder::where('project_id', $goldevine->id)->count();
-
+                        
                     @endphp
-                    <div>
+                    <div class="goldevineFilterAppend">
                         <a href="{{ route('projectDetail', ['id' => $goldevine->id, 'slug' => $goldevine->slug]) }}">
                             <div class="product-item">
                                 <div class="img-holder">
@@ -266,6 +277,12 @@
                     </div>
                 @endforelse
             </div>
+            <div class="slider123 gold-evine-slider classAppendgoldevine">
+                <div class="filterGoldevines">
+
+                </div>
+            </div>
+
         </div>
         @foreach ($categories as $category)
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
@@ -311,11 +328,17 @@
                                                 style="color:black">{{ $product->product_name }}</strong>
                                         </a>
                                         <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
-                                            <li class="me-1"><i class="fa fa-star"></i></li>
+                                            @php
+                                                $size = (int) $product->ratings()->avg('rating');
+                                                $unstart = 5 - $size;
+                                            @endphp
+                                            @for ($i = 0; $i < $size; $i++)
+                                                <li class="me-1"><i class="fa fa-star" style="color: #133033"></i>
+                                                </li>
+                                            @endfor
+                                            @for ($i = 0; $i < $unstart; $i++)
+                                                <li class="me-1"><i class="bi bi-star"></i></li>
+                                            @endfor
                                         </ul>
                                     </div>
                                 </div>
@@ -334,5 +357,3 @@
             </div>
         @endforeach
     @endsection
-
-

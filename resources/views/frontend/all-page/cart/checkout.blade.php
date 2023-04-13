@@ -9,8 +9,8 @@
                 <form action="{{ route('projectcheckoutstore') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-12 col-md-8">
-                            <h2>My Shopping Bag</h2>
+                        <div class="col-12 col-md-8 py-2">
+                            <h2 class="py-3">My Shopping Bag</h2>
                             {{-- <div class="shopping-bag-component luxauro-subscription-currents mb-3">
                                 <h3 class="mb-4">Luxauro</h3>
                                 @php
@@ -150,17 +150,17 @@
                                                                     class="shopping-bag-title">${{ number_format($projectBenefit->price) }}</strong>
                                                             </p>
                                                         </div>
-                                                        <div class="shopping-bag-delivery ">
+                                                        {{-- <div class="shopping-bag-delivery "> --}}
                                                             {{-- <p class="mb-0"><strong
                                                                     class="shopping-bag-title">Pickup</strong></p>
                                                             <p class="mb-0"><strong
                                                                     class="shopping-bag-title">Free</strong>
                                                             </p> --}}
-                                                        </div>
+                                                        {{-- </div> --}}
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <hr>
+                                                    <hr class="mt-2">
                                                 </li>
                                                 <li>
                                                     <div class="save-for-later d-flex mt-1">
@@ -500,8 +500,8 @@
                                 </ul>
                             </div> --}}
                         </div>
-                        <div class="col-12 col-md-4">
-                            <h2>My Shopping Bag</h2>
+                        <div class="col-12 col-md-4 py-2">
+                            <h2 class="py-3">My Shopping Bag</h2>
                             <div class="shipping-my-order">
                                 {{-- <div class="shopping-bag-my-order mb-5">
                                     <div class="d-flex align-items-center justify-content-between mb-2">
@@ -542,7 +542,7 @@
                                     {{-- <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="mb-0">Estimated Shipping</p>
                                     <p class="mb-0">$40.00</p>
-                                </div> --}}
+                                        </div> --}}
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <p class="mb-0">Sales Tax</p>
                                         <p class="mb-0">Calculated at Checkout</p>
@@ -581,7 +581,7 @@
                                     <span class="payment-titles">$214.43</span>
                                 </div>
                                 <button class="btn btn-primary d-block w-100">GOLD METAL GUILD CHECKOUT</button>
-                            </div> --}}
+                                        </div> --}}
 
                                 {{-- <button class="btn btn-primary d-block w-100 mb-3">TRIBIRD CHECKOUT</button> --}}
                             </div>
@@ -600,11 +600,10 @@
                     "project_id": id,
                 },
                 success: function(response) {
-                    if(response.success)
-                    {
+                    if (response.success) {
                         swal("Success", response.success, "success");
 
-                    }else{
+                    } else {
                         swal("Error", response.error, "error");
                     }
 
@@ -620,7 +619,12 @@
                     "project_id": id,
                 },
                 success: function(response) {
-                    swal("Success", response.success, "success");
+                    if(response.success == null )
+                    {
+                        swal("Error", "This Project Not Add to Favorite", "error");
+                    }else{
+                        swal("Success", response.success, "success");
+                    }
 
                 }
             });

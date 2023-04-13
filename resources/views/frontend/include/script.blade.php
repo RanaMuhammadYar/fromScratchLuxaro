@@ -104,7 +104,6 @@
 </script>
 
 <script>
-    $('.alert').alert()
     $('.openLuxaroSidebar').click(function() {
         $('.common').addClass('close');
         $('.common').removeClass('show');
@@ -281,10 +280,194 @@
         });
 
     }
+    // $(document).on('change', '.goldeinefilteras', function() {
+
+    // Code to execute when the input value changes
+    // });
+
+
+
+    // $(document).ready(function() {
+    //     $('.goldeinefilteras').change(function(e) {
+    //         e.preventDefault();
+    //         alert('hello');
+    //         $.ajax({
+    //             url: "{{ route('filterGoldevine') }}",
+    //             type: "GET",
+    //             data: {
+    //                 filter: filter
+    //             },
+    //             success: function(data) {
+    //                 $('.appendFilterData').html('');
+    //                 $('.classAppendgoldevine').slider('destroy');
+    //                 $('.classAppendgoldevine').slider();
+    //                 data.forEach(element => {
+    //                     $('.filterGoldevines').append(element);
+    //                     console.log(element);
+    //                 });
+    //             }
+    //         });
+
+    //     });
+    //     // $j("#classAppendgoldevine").slider();
+    // });
+
+    // function filterGoldevine() {
+    //     var filter = $('#goldeinefilter').val();
+
+    // }
 </script>
 
 <script>
-    $(document).ready(function() {
+    $(window).on('load', function() {
+        // $( '#ckeditor-textarea' ).ckeditor();
         CKEDITOR.replace('description');
     });
+
+    $(document).ready(function() {});
+</script>
+
+<script>
+
+    function goldeinefilteras()
+    {
+        let filter = $('.goldeinefiltera').val();
+        $.ajax({
+            url: "{{ route('filterGoldevine') }}",
+            type: "GET",
+            data: {
+                filter: filter
+            },
+            success: function(data) {
+                $('.appendFilterData').html('');
+                $('.filterGoldevines').html('');
+                data.forEach(element => {
+                    $('.filterGoldevines').append(element);
+                });
+
+                // check if the element has a Slick slider initialized
+                if ($('.filterGoldevines').hasClass('slick-initialized')) {
+                    $('.filterGoldevines').slick('unslick');
+                }
+
+                $('.filterGoldevines').slick({
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false,
+                    arrows: true,
+                    focusOnSelect: true,
+                    autoplay: false,
+                    mobileFirst: true,
+                    prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+                    nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+                    responsive: [{
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                        }
+                    }, {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 6,
+                            slidesToScroll: 1,
+                        }
+                    }]
+                });
+            }
+        });
+
+    }
+    // $('.goldeinefilteras').change(function(e) {
+    //     e.preventDefault();
+    //     alert('hello');
+        
+    // });
+
+
+
+    // $('.goldeinefilteras').change(function(e) {
+    //     e.preventDefault();
+    //     let filter = $(this).val();
+    //     $.ajax({
+    //         url: "{{ route('filterGoldevine') }}",
+    //         type: "GET",
+    //         data: {
+    //             filter: filter
+    //         },
+    //         success: function(data) {
+    //             console.log(data);
+    //             $('.appendFilterData').html('');
+    //             $('.filterGoldevines').html('');
+    //             data.forEach(element => {
+    //                 $('.filterGoldevines').append(element);
+    //             });
+    //             $('.filterGoldevines').slick({
+    //                 slidesToShow: 2,
+    //                 slidesToScroll: 1,
+    //                 infinite: true,
+    //                 dots: false,
+    //                 arrows: true,
+    //                 focusOnSelect: true,
+    //                 autoplay: false,
+    //                 mobileFirst: true,
+    //                 prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+    //                 nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+    //                 responsive: [{
+    //                     breakpoint: 768,
+    //                     settings: {
+    //                         slidesToShow: 4,
+    //                         slidesToScroll: 1,
+    //                     }
+    //                 }, {
+    //                     breakpoint: 992,
+    //                     settings: {
+    //                         slidesToShow: 6,
+    //                         slidesToScroll: 1,
+    //                     }
+    //                 }]
+    //             });
+    //         }
+    //     });
+    // });
+
+    // function testslider() {
+    //     $('.slider').slick({
+    //         slidesToShow: 2,
+    //         slidesToScroll: 1,
+    //         infinite: true,
+    //         dots: false,
+    //         arrows: true,
+    //         focusOnSelect: true,
+    //         autoplay: false,
+    //         mobileFirst: true,
+    //         prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+    //         nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+    //         responsive: [{
+    //             breakpoint: 768,
+    //             settings: {
+    //                 slidesToShow: 4,
+    //                 slidesToScroll: 1,
+    //             }
+    //         }, {
+    //             breakpoint: 992,
+    //             settings: {
+    //                 slidesToShow: 6,
+    //                 slidesToScroll: 1,
+    //             }
+    //         }]
+    //     });
+
+    // }
+
+    // $(document).ready(function() {
+    //     $('.filterGoldevines').on('load', function() {
+    //         alert();
+    //     });
+    // });
+
+    // window.onload = function() {
+    //     $('.filterGoldevines').addClass('slick-initialized slick-slider');
+    // };
 </script>

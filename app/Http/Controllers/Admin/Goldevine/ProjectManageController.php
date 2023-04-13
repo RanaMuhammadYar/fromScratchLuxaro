@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Goldevine;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Vendor\Country;
 use App\Http\Controllers\Controller;
@@ -195,7 +196,7 @@ class ProjectManageController extends Controller
 
     public function allProject()
     {
-        $projects = Project::with('user')->where('user_id',auth()->user()->id)->get();
+        $projects = Project::with('user')->where('user_id', auth()->user()->id)->get();
         return view('frontend.all-page.project.index', compact('projects'));
     }
 
@@ -371,6 +372,165 @@ class ProjectManageController extends Controller
             $project->add_to_favirate = null;
             $project->save();
             return response()->json(['success' => 'Project Removed From Favorite']);
+        }
+    }
+
+
+    public function filterGoldevine(Request $request)
+    {
+        if ($request->filter == "Raised(max)") {
+
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'DESC')->get();
+            $data = [];
+            foreach ($projects as $project) {
+                $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
+                $asset = asset('images/default.png');
+                $title = Str::words($project->title, 2, '...');
+                $total_amount = GoldevineOrder::where('project_id', $project->id)->sum('total_price');
+                $donations = GoldevineOrder::where('project_id', $project->id)->count();
+                $totalAmount = number_format($total_amount);
+                $persentage = persentage($project->id);
+                $donation = donation($project->id);
+                $short_description = Str::words($project->short_description, 10, '...');
+                $html = '<div> <a href="' . $url . '"> <div class=product-item> <div class=img-holder> <img src="' . $project->feature_image . '" onerror="this.src=' . $asset . '" class=img-fluid> </div> <div class=txt-holder> <strong class="title text-center d-block mb-2">' . $title . '</strong> <div class="progress rounded-0 mb-1"> <div class="progress-bar rounded-0" role=progressbar style=width:' . $persentage . '; aria-valuenow=75 aria-valuemin=0 aria-valuemax=100></div></div><div class="d-flex justify-content-between"> <span>$' . $totalAmount . ' Raised</span> <span>' . $persentage . '%</span> </div> <p class=mb-2>' . $donation . ' Donations</p> <p class=m-0>' . $short_description . '</p></div> </div></a></div>';
+                array_push($data, $html);
+            }
+            return $data;
+        } else {
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'ASC')->get();
+            $data = [];
+            foreach ($projects as $project) {
+                $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
+                $asset = asset('images/default.png');
+                $title = Str::words($project->title, 2, '...');
+                $total_amount = GoldevineOrder::where('project_id', $project->id)->sum('total_price');
+                $donations = GoldevineOrder::where('project_id', $project->id)->count();
+                $totalAmount = number_format($total_amount);
+                $persentage = persentage($project->id);
+                $donation = donation($project->id);
+                $short_description = Str::words($project->short_description, 10, '...');
+                $html = '<div> <a href="' . $url . '"> <div class=product-item> <div class=img-holder> <img src="' . $project->feature_image . '" onerror="this.src=' . $asset . '" class=img-fluid> </div> <div class=txt-holder> <strong class="title text-center d-block mb-2">' . $title . '</strong> <div class="progress rounded-0 mb-1"> <div class="progress-bar rounded-0" role=progressbar style=width:' . $persentage . '; aria-valuenow=75 aria-valuemin=0 aria-valuemax=100></div></div><div class="d-flex justify-content-between"> <span>$' . $totalAmount . ' Raised</span> <span>' . $persentage . '%</span> </div> <p class=mb-2>' . $donation . ' Donations</p> <p class=m-0>' . $short_description . '</p></div> </div></a></div>';
+                array_push($data, $html);
+            }
+            return $data;
+        }
+    }
+
+    public function Goldevinetrending(Request $request)
+    {
+        if ($request->filter == "Raised(max)") {
+            $projects = Project::where('status', 'Active')->orderBy('id', 'DESC')->orderBy('project_funding_goal', 'DESC')->get();
+            $data = [];
+            foreach ($projects as $project) {
+                $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
+                $asset = asset('images/default.png');
+                $title = Str::words($project->title, 2, '...');
+                $total_amount = GoldevineOrder::where('project_id', $project->id)->sum('total_price');
+                $donations = GoldevineOrder::where('project_id', $project->id)->count();
+                $totalAmount = number_format($total_amount);
+                $persentage = persentage($project->id);
+                $donation = donation($project->id);
+                $short_description = Str::words($project->short_description, 10, '...');
+                $html = '<div> <a href="' . $url . '"> <div class=product-item> <div class=img-holder> <img src="' . $project->feature_image . '" onerror="this.src=' . $asset . '" class=img-fluid> </div> <div class=txt-holder> <strong class="title text-center d-block mb-2">' . $title . '</strong> <div class="progress rounded-0 mb-1"> <div class="progress-bar rounded-0" role=progressbar style=width:' . $persentage . '; aria-valuenow=75 aria-valuemin=0 aria-valuemax=100></div></div><div class="d-flex justify-content-between"> <span>$' . $totalAmount . ' Raised</span> <span>' . $persentage . '%</span> </div> <p class=mb-2>' . $donation . ' Donations</p> <p class=m-0>' . $short_description . '</p></div> </div></a></div>';
+                array_push($data, $html);
+            }
+            return $data;
+        } else {
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'asc')->orderBy('id', 'desc')->get();
+            $data = [];
+            foreach ($projects as $project) {
+                $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
+                $asset = asset('images/default.png');
+                $title = Str::words($project->title, 2, '...');
+                $total_amount = GoldevineOrder::where('project_id', $project->id)->sum('total_price');
+                $donations = GoldevineOrder::where('project_id', $project->id)->count();
+                $totalAmount = number_format($total_amount);
+                $persentage = persentage($project->id);
+                $donation = donation($project->id);
+                $short_description = Str::words($project->short_description, 10, '...');
+                $html = '<div> <a href="' . $url . '"> <div class=product-item> <div class=img-holder> <img src="' . $project->feature_image . '" onerror="this.src=' . $asset . '" class=img-fluid> </div> <div class=txt-holder> <strong class="title text-center d-block mb-2">' . $title . '</strong> <div class="progress rounded-0 mb-1"> <div class="progress-bar rounded-0" role=progressbar style=width:' . $persentage . '; aria-valuenow=75 aria-valuemin=0 aria-valuemax=100></div></div><div class="d-flex justify-content-between"> <span>$' . $totalAmount . ' Raised</span> <span>' . $persentage . '%</span> </div> <p class=mb-2>' . $donation . ' Donations</p> <p class=m-0>' . $short_description . '</p></div> </div></a></div>';
+                array_push($data, $html);
+            }
+            return $data;
+        }
+    }
+
+    public function goldevinebackeds(Request $request)
+    {
+
+        if ($request->filter == "Raised(max)") {
+            $projects = Project::where('status', 'Active')->orderBy('id', 'DESC')->orderBy('project_funding_goal', 'DESC')->get();
+            $data = [];
+            foreach ($projects as $project) {
+                $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
+                $asset = asset('images/default.png');
+                $title = Str::words($project->title, 2, '...');
+                $total_amount = GoldevineOrder::where('project_id', $project->id)->sum('total_price');
+                $donations = GoldevineOrder::where('project_id', $project->id)->count();
+                $totalAmount = number_format($total_amount);
+                $persentage = persentage($project->id);
+                $donation = donation($project->id);
+                $short_description = Str::words($project->short_description, 10, '...');
+                $html = '<div> <a href="' . $url . '"> <div class=product-item> <div class=img-holder> <img src="' . $project->feature_image . '" onerror="this.src=' . $asset . '" class=img-fluid> </div> <div class=txt-holder> <strong class="title text-center d-block mb-2">' . $title . '</strong> <div class="progress rounded-0 mb-1"> <div class="progress-bar rounded-0" role=progressbar style=width:' . $persentage . '; aria-valuenow=75 aria-valuemin=0 aria-valuemax=100></div></div><div class="d-flex justify-content-between"> <span>$' . $totalAmount . ' Raised</span> <span>' . $persentage . '%</span> </div> <p class=mb-2>' . $donation . ' Donations</p> <p class=m-0>' . $short_description . '</p></div> </div></a></div>';
+                array_push($data, $html);
+            }
+            return $data;
+        } else {
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'asc')->orderBy('id', 'desc')->get();
+            $data = [];
+            foreach ($projects as $project) {
+                $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
+                $asset = asset('images/default.png');
+                $title = Str::words($project->title, 2, '...');
+                $total_amount = GoldevineOrder::where('project_id', $project->id)->sum('total_price');
+                $donations = GoldevineOrder::where('project_id', $project->id)->count();
+                $totalAmount = number_format($total_amount);
+                $persentage = persentage($project->id);
+                $donation = donation($project->id);
+                $short_description = Str::words($project->short_description, 10, '...');
+                $html = '<div> <a href="' . $url . '"> <div class=product-item> <div class=img-holder> <img src="' . $project->feature_image . '" onerror="this.src=' . $asset . '" class=img-fluid> </div> <div class=txt-holder> <strong class="title text-center d-block mb-2">' . $title . '</strong> <div class="progress rounded-0 mb-1"> <div class="progress-bar rounded-0" role=progressbar style=width:' . $persentage . '; aria-valuenow=75 aria-valuemin=0 aria-valuemax=100></div></div><div class="d-flex justify-content-between"> <span>$' . $totalAmount . ' Raised</span> <span>' . $persentage . '%</span> </div> <p class=mb-2>' . $donation . ' Donations</p> <p class=m-0>' . $short_description . '</p></div> </div></a></div>';
+                array_push($data, $html);
+            }
+            return $data;
+        }
+    }
+
+    public function goldevinenearly(Request $request)
+    {
+        if ($request->filter == "Raised(max)") {
+            $projects = Project::where('status', 'Active')->orderBy('id', 'DESC')->orderBy('project_funding_goal', 'DESC')->get();
+            $data = [];
+            foreach ($projects as $project) {
+                $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
+                $asset = asset('images/default.png');
+                $title = Str::words($project->title, 2, '...');
+                $total_amount = GoldevineOrder::where('project_id', $project->id)->sum('total_price');
+                $donations = GoldevineOrder::where('project_id', $project->id)->count();
+                $totalAmount = number_format($total_amount);
+                $persentage = persentage($project->id);
+                $donation = donation($project->id);
+                $short_description = Str::words($project->short_description, 10, '...');
+                $html = '<div> <a href="' . $url . '"> <div class=product-item> <div class=img-holder> <img src="' . $project->feature_image . '" onerror="this.src=' . $asset . '" class=img-fluid> </div> <div class=txt-holder> <strong class="title text-center d-block mb-2">' . $title . '</strong> <div class="progress rounded-0 mb-1"> <div class="progress-bar rounded-0" role=progressbar style=width:' . $persentage . '; aria-valuenow=75 aria-valuemin=0 aria-valuemax=100></div></div><div class="d-flex justify-content-between"> <span>$' . $totalAmount . ' Raised</span> <span>' . $persentage . '%</span> </div> <p class=mb-2>' . $donation . ' Donations</p> <p class=m-0>' . $short_description . '</p></div> </div></a></div>';
+                array_push($data, $html);
+            }
+            return $data;
+        } else {
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'asc')->orderBy('id', 'desc')->get();
+            $data = [];
+            foreach ($projects as $project) {
+                $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
+                $asset = asset('images/default.png');
+                $title = Str::words($project->title, 2, '...');
+                $total_amount = GoldevineOrder::where('project_id', $project->id)->sum('total_price');
+                $donations = GoldevineOrder::where('project_id', $project->id)->count();
+                $totalAmount = number_format($total_amount);
+                $persentage = persentage($project->id);
+                $donation = donation($project->id);
+                $short_description = Str::words($project->short_description, 10, '...');
+                $html = '<div> <a href="' . $url . '"> <div class=product-item> <div class=img-holder> <img src="' . $project->feature_image . '" onerror="this.src=' . $asset . '" class=img-fluid> </div> <div class=txt-holder> <strong class="title text-center d-block mb-2">' . $title . '</strong> <div class="progress rounded-0 mb-1"> <div class="progress-bar rounded-0" role=progressbar style=width:' . $persentage . '; aria-valuenow=75 aria-valuemin=0 aria-valuemax=100></div></div><div class="d-flex justify-content-between"> <span>$' . $totalAmount . ' Raised</span> <span>' . $persentage . '%</span> </div> <p class=mb-2>' . $donation . ' Donations</p> <p class=m-0>' . $short_description . '</p></div> </div></a></div>';
+                array_push($data, $html);
+            }
+            return $data;
         }
     }
 }

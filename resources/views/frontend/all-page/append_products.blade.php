@@ -13,12 +13,18 @@
                                <strong class="title" style="color:black">{{ $product->product_name }}</strong>
                            </a>
                            <ul class="list-unstyled m-0 p-0 d-flex stars">
-                               <li class="me-1"><i class="fa fa-star"></i></li>
-                               <li class="me-1"><i class="fa fa-star"></i></li>
-                               <li class="me-1"><i class="fa fa-star"></i></li>
-                               <li class="me-1"><i class="fa fa-star"></i></li>
-                               <li class="me-1"><i class="fa fa-star"></i></li>
-                           </ul>
+                            @php
+                                $size = (int) $product->ratings()->avg('rating');
+                                $unstart = 5 - $size;
+                            @endphp
+                            @for ($i = 0; $i < $size; $i++)
+                                <li class="me-1"><i class="fa fa-star" style="color: #133033"></i>
+                                </li>
+                            @endfor
+                            @for ($i = 0; $i < $unstart; $i++)
+                                <li class="me-1"><i class="bi bi-star"></i></li>
+                            @endfor
+                        </ul>
                        </div>
                        <i class="fa fa-globe fa-1x mt-2"></i>
                    </div>

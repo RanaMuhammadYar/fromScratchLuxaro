@@ -30,8 +30,15 @@ Route::get('all-project', [ProjectManageController::class, 'allProject'])->name(
 Route::get('edit-project/{id}', [ProjectManageController::class, 'edit'])->name('editProject');
 Route::post('edit-project', [ProjectManageController::class, 'update'])->name('updateProject');
 
+Route::get('filter-Goldevine', [ProjectManageController::class, 'filterGoldevine'])->name('filterGoldevine');
+Route::get('filter-trending', [ProjectManageController::class, 'Goldevinetrending'])->name('Goldevinetrending');
+Route::get('filter-backend', [ProjectManageController::class, 'goldevinebackeds'])->name('goldevinebackeds');
+Route::get('filter-nearly', [ProjectManageController::class, 'goldevinenearly'])->name('goldevinenearly');
 
 
 // Suits Route
 Route::get('suits', [SuitsController::class, 'index'])->name('suits');
 Route::post('suits/store', [SuitsController::class, 'store'])->name('suits.store');
+Route::get('suits/product/{id}', [SuitsController::class, 'suitsProducts'])->name('suitsProducts');
+
+// Suits Route

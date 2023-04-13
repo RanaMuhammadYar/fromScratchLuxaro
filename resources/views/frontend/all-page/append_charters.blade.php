@@ -20,7 +20,7 @@
                     <i class="fa fa-globe fa-1x mt-2"></i>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <strong class="title">{{ $charter->rate }}</strong>
+                    <strong class="title">${{ $charter->rate }}</strong>
                     <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i class="fa fa-shopping-basket"></i></a>
                 </div>
             </div>
