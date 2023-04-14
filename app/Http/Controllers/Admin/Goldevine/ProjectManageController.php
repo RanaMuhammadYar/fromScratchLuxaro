@@ -379,8 +379,8 @@ class ProjectManageController extends Controller
     public function filterGoldevine(Request $request)
     {
         if ($request->filter == "Raised(max)") {
-
-            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'DESC')->get();
+            $data = '';
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'DESC')->limit(8)->get();
             $data = [];
             foreach ($projects as $project) {
                 $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
@@ -397,7 +397,7 @@ class ProjectManageController extends Controller
             }
             return $data;
         } else {
-            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'ASC')->get();
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'ASC')->limit(8)->get();
             $data = [];
             foreach ($projects as $project) {
                 $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
@@ -419,7 +419,7 @@ class ProjectManageController extends Controller
     public function Goldevinetrending(Request $request)
     {
         if ($request->filter == "Raised(max)") {
-            $projects = Project::where('status', 'Active')->orderBy('id', 'DESC')->orderBy('project_funding_goal', 'DESC')->get();
+            $projects = Project::where('status', 'Active')->orderBy('id', 'DESC')->orderBy('project_funding_goal', 'DESC')->limit(8)->get();
             $data = [];
             foreach ($projects as $project) {
                 $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
@@ -436,7 +436,7 @@ class ProjectManageController extends Controller
             }
             return $data;
         } else {
-            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'asc')->orderBy('id', 'desc')->get();
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'asc')->orderBy('id', 'desc')->limit(8)->get();
             $data = [];
             foreach ($projects as $project) {
                 $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
@@ -459,7 +459,7 @@ class ProjectManageController extends Controller
     {
 
         if ($request->filter == "Raised(max)") {
-            $projects = Project::where('status', 'Active')->orderBy('id', 'DESC')->orderBy('project_funding_goal', 'DESC')->get();
+            $projects = Project::where('status', 'Active')->orderBy('id', 'DESC')->orderBy('project_funding_goal', 'DESC')->limit(8)->get();
             $data = [];
             foreach ($projects as $project) {
                 $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
@@ -476,7 +476,7 @@ class ProjectManageController extends Controller
             }
             return $data;
         } else {
-            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'asc')->orderBy('id', 'desc')->get();
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'asc')->orderBy('id', 'desc')->limit(8)->get();
             $data = [];
             foreach ($projects as $project) {
                 $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
@@ -498,7 +498,7 @@ class ProjectManageController extends Controller
     public function goldevinenearly(Request $request)
     {
         if ($request->filter == "Raised(max)") {
-            $projects = Project::where('status', 'Active')->orderBy('id', 'DESC')->orderBy('project_funding_goal', 'DESC')->get();
+            $projects = Project::where('status', 'Active')->orderBy('id', 'DESC')->orderBy('project_funding_goal', 'DESC')->limit(8)->get();
             $data = [];
             foreach ($projects as $project) {
                 $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
@@ -515,7 +515,7 @@ class ProjectManageController extends Controller
             }
             return $data;
         } else {
-            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'asc')->orderBy('id', 'desc')->get();
+            $projects = Project::where('status', 'Active')->orderBy('project_funding_goal', 'asc')->orderBy('id', 'desc')->limit(8)->get();
             $data = [];
             foreach ($projects as $project) {
                 $url = route('projectDetail', ['id' => $project->id, 'slug' => $project->slug]);
@@ -532,5 +532,30 @@ class ProjectManageController extends Controller
             }
             return $data;
         }
+    }
+
+    public function goldevineNewest()
+    {
+        $newestprojects = Project::where('status', 'Active')->orderBy('id', 'DESC')->paginate(20);
+        // return dd($newestprojects);
+        return view('frontend.goldevine.project.category.newest', compact('newestprojects'));
+    }
+
+    public function goldevineTrendings()
+    {
+        $trendingprojects = Project::where('status', 'Active')->orderBy('id', 'DESC')->paginate(20);
+        return view('frontend.goldevine.project.category.trending', compact('trendingprojects'));
+    }
+
+    public function goldevinemostbacked()
+    {
+        $goldevinemostbacked = Project::where('status', 'Active')->orderBy('id', 'DESC')->paginate(20);
+        return view('frontend.goldevine.project.category.mostbacked', compact('goldevinemostbacked'));
+    }
+
+    public function goldevinenearlys()
+    {
+        $goldevinenearly = Project::where('status', 'Active')->orderBy('id', 'DESC')->paginate(20);
+        return view('frontend.goldevine.project.category.nearly', compact('goldevinenearly'));
     }
 }

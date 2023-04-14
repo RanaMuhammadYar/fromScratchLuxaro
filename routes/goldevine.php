@@ -35,6 +35,11 @@ Route::get('filter-trending', [ProjectManageController::class, 'Goldevinetrendin
 Route::get('filter-backend', [ProjectManageController::class, 'goldevinebackeds'])->name('goldevinebackeds');
 Route::get('filter-nearly', [ProjectManageController::class, 'goldevinenearly'])->name('goldevinenearly');
 
+Route::any('goldevine-newest',[ProjectManageController::class,'goldevineNewest'])->name('goldevineNewest');
+Route::any('goldevine-trending',[ProjectManageController::class,'goldevineTrendings'])->name('goldevineTrendings');
+Route::any('goldevine-most-backed',[ProjectManageController::class,'goldevinemostbacked'])->name('goldevinemostbacked');
+Route::any('goldevine-nearly',[ProjectManageController::class,'goldevinenearlys'])->name('goldevinenearlys');
+
 
 // Suits Route
 Route::get('suits', [SuitsController::class, 'index'])->name('suits');

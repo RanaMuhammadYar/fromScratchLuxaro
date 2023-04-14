@@ -41,7 +41,7 @@
                 <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                     <h2 class="m-0">Newest [Catogery] Projects</h2>
                     <div class="d-flex form-holder">
-                        <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                        <a class="btn btn-view rounded-0" href="{{ route('goldevineNewest') }}">View All</a>
                         <form class="page-form flex-fill" action="#">
                             <div class="page-form-holder d-flex">
                                 <label class="form-control rounded-0">Search Filter</label>
@@ -102,7 +102,7 @@
                 <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                     <h2 class="m-0">Trending [Catogery] Projects</h2>
                     <div class="d-flex form-holder">
-                        <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                        <a class="btn btn-view rounded-0" href="{{ route('goldevineTrendings') }}">View All</a>
                         <form class="page-form flex-fill" action="#">
                             <div class="page-form-holder d-flex">
                                 <label class="form-control rounded-0">Search Filter</label>
@@ -152,11 +152,7 @@
 
                 <div class="slider123 gold-evine-slider goldevinetrending">
                     <div class="Goldevinestrending">
-                        <div class="lodars text-center py-5 my-5" style="display:none;">
-                            <div class="spinner-border" role="status" style="color:#133033 !importent">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -197,7 +193,7 @@
                     <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                         <h2 class="m-0">Most Backed [Catogery] Projects</h2>
                         <div class="d-flex form-holder">
-                            <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                            <a class="btn btn-view rounded-0" href="{{ route('goldevinemostbacked') }}">View All</a>
                             <form class="page-form flex-fill" action="#">
                                 <div class="page-form-holder d-flex">
                                     <label class="form-control rounded-0">Search Filter</label>
@@ -257,7 +253,7 @@
                         <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                             <h2 class="m-0">Nearly There Projects</h2>
                             <div class="d-flex form-holder">
-                                <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
+                                <a class="btn btn-view rounded-0" href="{{ route('goldevinenearlys') }}">View All</a>
                                 <form class="page-form flex-fill" action="#">
                                     <div class="page-form-holder d-flex">
                                         <label class="form-control rounded-0">Search Filter</label>
@@ -342,21 +338,27 @@
                         type: "GET",
                         beforeSend: function() {
                             $('.appendtrending').html('');
-                            if($('.appendtrending').hasClass('slick-initialized')){
+                            if ($('.appendtrending').hasClass('slick-initialized')) {
                                 $('.appendtrending').show();
-                            }else{
+                            } else {
                                 $('.appendtrending').show();
                             }
-                            $('.appendtrending').html('<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>');
+                            $('.appendtrending').html(
+                                '<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>'
+                                );
                         },
                         data: {
                             filter: filter
                         },
                         success: function(data) {
-                            
-                            // $('.lodars').removeClass('d-none');
-                            // return false;
-                            $('.Goldevinestrending').html('');
+                            if ($('.Goldevinestrending').hasClass('slick-initialized')) {
+                                $('.Goldevinestrending').slick('unslick');
+                                $('.Goldevinestrending').html('');
+                                $('.appendtrending').html('');
+                            } else {
+                                $('.Goldevinestrending').html('');
+                                $('.appendtrending').html('');
+                            }
                             data.forEach(element => {
                                 $('.Goldevinestrending').append(element);
                             });
@@ -406,9 +408,26 @@
                         data: {
                             filter: filter
                         },
-                        success: function(data) {
-                            $('.appendbackend').html('');
+                        beforeSend: function() {
                             $('.Goldevinesbackend').html('');
+                            if ($('.appendbackend').hasClass('slick-initialized')) {
+                                $('.appendbackend').show();
+                            } else {
+                                $('.appendbackend').show();
+                            }
+                            $('.appendbackend').html(
+                                '<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>'
+                                );
+                        },
+                        success: function(data) {
+                            if ($('.Goldevinesbackend').hasClass('slick-initialized')) {
+                                $('.Goldevinesbackend').slick('unslick');
+                                $('.Goldevinesbackend').html('');
+                                $('.appendbackend').html('');
+                            } else {
+                                $('.Goldevinesbackend').html('');
+                                $('.appendbackend').html('');
+                            }
                             data.forEach(element => {
                                 $('.Goldevinesbackend').append(element);
                             });
@@ -441,6 +460,9 @@
                                     }
                                 }]
                             });
+                        },
+                        complete: function() {
+                            $('.appendbackend').hide();
                         }
                     });
 
@@ -456,8 +478,26 @@
                         data: {
                             filter: filter
                         },
-                        success: function(data) {
+                        beforeSend: function() {
                             $('.appendnearly').html('');
+                            if ($('.appendnearly').hasClass('slick-initialized')) {
+                                $('.appendnearly').show();
+                            } else {
+                                $('.appendnearly').show();
+                            }
+                            $('.appendnearly').html(
+                                '<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>'
+                                );
+                        },
+                        success: function(data) {
+                            if ($('.Goldevinesnearly').hasClass('slick-initialized')) {
+                                $('.Goldevinesnearly').slick('unslick');
+                                $('.Goldevinesnearly').html('');
+                                $('.appendnearly').html('');
+                            } else {
+                                $('.Goldevinesnearly').html('');
+                                $('.appendnearly').html('');
+                            }
                             $('.Goldevinesnearly').html('');
                             data.forEach(element => {
                                 $('.Goldevinesnearly').append(element);
@@ -491,6 +531,9 @@
                                     }
                                 }]
                             });
+                        },
+                        complete: function() {
+                            $('.appendnearly').hide();
                         }
                     });
 

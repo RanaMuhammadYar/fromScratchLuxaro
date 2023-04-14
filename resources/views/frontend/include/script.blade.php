@@ -328,9 +328,9 @@
 </script>
 
 <script>
-
-    function goldeinefilteras()
-    {
+    function goldeinefilteras() {
+        $('.appendFilterData').html('');
+        $('.filterGoldevines').html('');
         let filter = $('.goldeinefiltera').val();
         $.ajax({
             url: "{{ route('filterGoldevine') }}",
@@ -338,9 +338,29 @@
             data: {
                 filter: filter
             },
-            success: function(data) {
+            beforeSend: function() {
                 $('.appendFilterData').html('');
-                $('.filterGoldevines').html('');
+                if ($('.appendFilterData').hasClass('slick-initialized')) {
+                    $('.appendFilterData').html('');
+                    $('.filterGoldevines').html('');
+                    $('.appendFilterData').show();
+                } else {
+                    $('.appendFilterData').show();
+                }
+                $('.appendFilterData').html(
+                    '<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>'
+                );
+            },
+            success: function(data) {
+                if( $('.filterGoldevines').hasClass('slick-initialized')) {
+                    $('.filterGoldevines').slick('unslick');
+                    $('.appendFilterData').html('');
+                    $('.filterGoldevines').html('');
+
+                }else{
+                    $('.appendFilterData').html('');
+                    $('.filterGoldevines').html('');
+                }
                 data.forEach(element => {
                     $('.filterGoldevines').append(element);
                 });
@@ -375,6 +395,9 @@
                         }
                     }]
                 });
+            },
+            complete: function() {
+                $('.appendFilterData').hide();
             }
         });
 
@@ -382,7 +405,7 @@
     // $('.goldeinefilteras').change(function(e) {
     //     e.preventDefault();
     //     alert('hello');
-        
+
     // });
 
 
