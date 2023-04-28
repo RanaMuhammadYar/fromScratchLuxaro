@@ -107,6 +107,7 @@ class ProductMangeCotroller extends Controller
                 $cart->status = 'Pending';
                 $cart->save();
                 // $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
+                $product = Product::where('id', $request->product_id)->first();
                 $total = \App\Models\Admin\Cart::with('product')
                     ->where(function ($query) {
                         $query
@@ -129,7 +130,7 @@ class ProductMangeCotroller extends Controller
                     })
                     ->count();
 
-                return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => Auth::user()->id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id]);
+                return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => Auth::user()->id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id,'product'=>$product]);
             } else {
                 if (session()->has('temp_id')) {
                     $temp_id = session()->get('temp_id');

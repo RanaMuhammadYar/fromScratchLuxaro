@@ -34,19 +34,11 @@
                                                 </a>
                                                 <div class="txt-holder">
                                                     <div class="d-flex justify-content-between mb-3">
-                                                        <div>
+                                                        <div class="txt-holder">
                                                             <a href="{{ route('suitsProducts',$suit->user_id) }}" style="text-decoration: none;color:rgb(42, 40, 40)">
                                                                 <strong class="title">{{ $suit->business_name }}</strong>
                                                             </a>
-                                                            <ul class="list-unstyled m-0 p-0 d-flex stars">
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                                <li class="me-1"><i class="fa fa-star"></i></li>
-                                                            </ul>
                                                         </div>
-                                                        <i class="fa fa-globe fa-1x mt-2"></i>
                                                     </div>
                                                 </div>
                                             </a>
@@ -58,9 +50,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="street-img">
-            <img src="{{ asset('images/img1.png') }}" class="img-fluid">
         </div>
     </div>
 @endsection

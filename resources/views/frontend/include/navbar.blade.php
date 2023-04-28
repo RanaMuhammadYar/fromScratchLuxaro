@@ -1,4 +1,10 @@
+<style>
+    #header {
+        padding-bottom: 70px;
+    }
+</style>
 <header id="header">
+<div class="fixed-top">
     <div class="logos-header py-2">
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center">
@@ -164,7 +170,7 @@
                                 style="color: rgb(213, 207, 207)">
                                 <div class="luxauro-cart mb-2">
                                     <h3 class="border-bottom d-inline-block mb-1">Luxauro</h3>
-                                    <div class="catdata">
+                                    <div class="catdata py-2">
                                         @php
                                             if (Auth::check()) {
                                                 $cartorders = \App\Models\Admin\Cart::with('product')
@@ -194,26 +200,40 @@
                                             $total = 0;
                                         @endphp
                                         @foreach ($cartorders as $cartorder)
-                                            <div class="row destroy{{ $cartorder->id }}">
-                                                <div class="col-5 px-1">
-                                                    <span class="mx-2"><i
-                                                            class="fa fa-shopping-cart"aria-hidden="true"></i></span><span>
-
-                                                        {{ $cartorder->product->product_name }}
-
+                                            <div class="row destroy{{ $cartorder->id }} py-1">
+                                                <div class="col-1 px-1">
+                                                    <span class="">
+                                                        <img src="{{ $cartorder->product->image }}" height="50px"
+                                                            width="50px"
+                                                            onerror="this.src='{{ asset('images/default.png') }}'"
+                                                            alt="">
                                                     </span>
+                                                </div>
+                                                <div class="col-4 px-1">
+
+                                                    <span>{{ $cartorder->product->product_name }} </span>
+                                                </div>
+                                                <div class="col-1">
+
+                                                </div>
+                                                <div class="col-2 px-1">
+
+                                                    <span>${{ $cartorder->product->product_price }} </span>
                                                 </div>
                                                 <div class="col-1 px-1">
                                                     <span> <i class="fa fa-times"aria-hidden="true"
                                                             onclick="orderdestroy({{ $cartorder->id }})"
                                                             style="cursor: pointer;"></i></span>
                                                 </div>
-                                                <div class="col-3 px-1">
+                                                <div class="col-1 px-1">
                                                     <span>{{ $cartorder->quantity }}</span>
                                                 </div>
-                                                <div class="col-3 px-1 ">
+                                                <div class="col-1 px-1">
+                                                    <span> = </span>
+                                                </div>
+                                                <div class="col-1 px-1">
                                                     <span
-                                                        class="d-block">=${{ $cartorder->quantity * $cartorder->product->product_price }}
+                                                        class="">${{ $cartorder->quantity * $cartorder->product->product_price }}
                                                     </span>
                                                 </div>
                                             </div>
@@ -228,16 +248,32 @@
                                     </div>
                                     <div class="totalprice">
                                         <div class="row px-1">
-                                            <div class="col-8"></div>
-                                            <div class="col-3">
-                                                <span class="mx-1">
-                                                    @if ($total == !null)
-                                                        Total=${{ $total }}
-                                                    @else
+                                            <div class="col-9"></div>
+                                            <div class="col-1">
+                                                <span>
+                                                    @if($total == !null)
+                                                    Total
+                                                    @else   
+                                                    @endif 
+                                                </span>
+                                            </div>
+                                            <div class="col-1">
+                                                <span>
+                                                    @if($total == !null)
+                                                    =
+                                                    @else   
                                                     @endif
                                                 </span>
                                             </div>
-                                            <div class="col-1"></div>
+                                            <div class="col-1">
+                                                <span class="mx-1">
+                                                    @if ($total == !null)
+                                                        ${{ $total }}
+                                                    @else
+                                                    @endif
+                                                </span>
+                                                
+                                            </div>
                                         </div>
                                     </div>
 
@@ -309,7 +345,7 @@
                     @if (Auth::check())
                         @if (Auth::user()->role == 'Admin')
                             <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
-                        @e lse
+                            @e lse
                         @endif
                     @endif
                     <li><a href="{{ route('charters') }}">charters</a></li>
@@ -320,4 +356,5 @@
             </nav>
         </div>
 
-</header>
+    </div>
+    </header>

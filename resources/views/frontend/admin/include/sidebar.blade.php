@@ -131,6 +131,12 @@
                 <div data-i18n="Basic">Banners</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::is('home-slider') || Request::is('home-slider/create')  ? 'active' : '' }}">
+            <a href="{{ route('home-slider.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bi bi-boxes"></i>
+                <div data-i18n="Basic">Home Slider</div>
+            </a>
+        </li>
 
         <li class="menu-item menu-link mt-3">
             <div data-i18n="Basic" style="font-size: 12px;">Goldevine Setup</div>

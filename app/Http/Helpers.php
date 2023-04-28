@@ -24,6 +24,7 @@ use App\Models\SellerPackage;
 use App\Models\BusinessSetting;
 use App\Models\CustomerPackage;
 use App\Utility\SendSMSUtility;
+use App\Models\Admin\HomeSlider;
 use App\Utility\CategoryUtility;
 use App\Models\SellerPackagePayment;
 use App\Utility\NotificationUtility;
@@ -1344,4 +1345,10 @@ function favoriteProject()
     $user = Auth::user();
     $favorite = Project::where('add_to_favirate', $user->id)->where('status', 'Active')->count();
     return $favorite;
+}
+
+function homeSlider()
+{
+    $slider = HomeSlider::where('status', 'Active')->get();
+    return $slider;
 }

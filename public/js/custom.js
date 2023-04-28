@@ -9,7 +9,7 @@ $('.banner-slider').slick({
   dots: false,
   arrows: true,
   focusOnSelect: true,
-  autoplay: false,
+  autoplay: true,
   mobileFirst: true,
   prevArrow:"<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
   nextArrow:"<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>"

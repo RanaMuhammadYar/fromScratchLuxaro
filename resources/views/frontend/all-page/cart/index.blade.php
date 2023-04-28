@@ -10,7 +10,7 @@
                     @csrf
                     <div class="row">
                         <div class="col-12 col-md-8">
-                            <h2>My Shopping Bag</h2>
+                            <h2 class="py-3">My Shopping Bag</h2>
                             <div class="shopping-bag-component luxauro-subscription-currents mb-3">
                                 <h3 class="mb-4">Luxauro</h3>
                                 @php
@@ -97,10 +97,24 @@
                                                     <span
                                                         class="payment-titles">${{ $allcartorder->product->product_price }}</span>
                                                     <span class="px-1"> x </span>
-                                                    <span class="border rounded px-1">{{ $allcartorder->quantity }}</span>
+                                                    <div
+                                                        class="product-details-quantity border rounded d-inline-block me-3">
+                                                        <span class="input-number-decrement{{ $allcartorder->id }}"
+                                                            onclick="decrements({{ $allcartorder->id }} , {{ $allcartorder->product->product_price }})"
+                                                            style="cursor: pointer;
+                                                            ">–</span><input
+                                                            class="input-number addOrRemoves{{ $allcartorder->id }}"
+                                                            type="text" value="{{ $allcartorder->quantity }}"
+                                                            min="1" max="10" id="" readonly><span
+                                                            class="input-number-increment"
+                                                            onclick="increments({{ $allcartorder->id }} , {{ $allcartorder->product->product_price }})">+</span>
+                                                    </div>
+                                                    {{-- <span class="border rounded px-1">{{ $allcartorder->quantity }}</span> --}}
                                                     <span>=</span>
+                                                    <input type="hidden" class="price{{ $allcartorder->id }}"
+                                                        value="{{ $allcartorder->product->product_price * $allcartorder->quantity }}">
                                                     <span
-                                                        class="payment-titles">${{ $allcartorder->product->product_price * $allcartorder->quantity }}</span>
+                                                        class="payment-titles appendprice{{ $allcartorder->id }} ">${{ $allcartorder->product->product_price * $allcartorder->quantity }}</span>
                                                 </div>
                                             </li>
                                         </ul>
@@ -488,15 +502,17 @@
                             </div> --}}
                         </div>
                         <div class="col-12 col-md-4">
-                            <h2>My Shopping Bag</h2>
+                            <h2 class="py-3">My Shopping Bag</h2>
                             <div class="shipping-my-order">
                                 <div class="shopping-bag-my-order mb-5">
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <strong>Luxauro Subtotal</strong>
-                                        <strong class="luxaurosubtotal"
-                                            data-subtotal="{{ $subtotal }}">${{ $subtotal }}</strong>
-                                        <input type="hidden"name="luxaurosubtotal"class="luxaurosubtotal"
-                                            data-subtotal="{{ $subtotal }}" value="{{ $subtotal }} ">
+                                        <strong class="luxaurosubtotal" data-subtotal="{{ $subtotal }}"
+                                            id="luxarosubtotalsappend">${{ $subtotal }}</strong>
+                                        <input
+                                            type="hidden"name="luxaurosubtotal"class="luxaurosubtotal luxaurosubtotalappen"
+                                            data-subtotal="{{ $subtotal }}" value="{{ $subtotal }} "
+                                            id="luxarosubtotals">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <p class="mb-0">Estimated Shipping</p>
@@ -515,7 +531,7 @@
                                         <span class="payment-titles">Total</span>
                                         <span class="payment-titles overalltotal"
                                             data-total="{{ $total }}">${{ $total }}</span>
-                                        <input type="hidden" name="overalltotal" class="overalltotal"
+                                        <input type="hidden" name="overalltotal" class="overalltotals"
                                             data-total="{{ $total }}" value="{{ $total }}">
                                     </div>
                                     <button type="submit" class="btn btn-primary d-block w-100">LUXAURO CHECKOUT</button>
@@ -569,4 +585,53 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function increments(id, price) {
+            let qty = $('.addOrRemoves' + id).val();
+            $('.addOrRemoves' + id).val(++qty);
+            $('.price' + id).val(qty * price);
+            $('.appendprice' + id).html('$' + qty * price);
+            let luxarosubtotals1 = $('#luxarosubtotals').val();
+            console.log(luxarosubtotals1);
+            let luxaurosubtotal = parseFloat(luxarosubtotals1) + parseFloat(price);
+            console.log(luxaurosubtotal);
+            $('#luxarosubtotalsappend').html('$' + luxaurosubtotal.toFixed(2));
+            $('.luxaurosubtotalappen').val(luxaurosubtotal.toFixed(2));
+            let shipingcharge = $('.shipingcharge').val();
+            let overalltotal = parseFloat(luxaurosubtotal) + parseFloat(shipingcharge);
+            $('.overalltotal').html('$' + overalltotal.toFixed(2));
+        }
+
+        function decrements(id, price) {
+            let qty = $('.addOrRemoves' + id).val();
+            if (qty > 1) {
+                $('.addOrRemoves' + id).val(--qty);
+                $('.price' + id).val(qty * price);
+                $('.appendprice' + id).html('$' + qty * price);
+                let luxarosubtotals1 = $('#luxarosubtotals').val();
+                console.log(luxarosubtotals1);
+                let luxaurosubtotal = parseFloat(luxarosubtotals1) - parseFloat(price);
+                console.log(luxaurosubtotal);
+                $('#luxarosubtotalsappend').html('$' + luxaurosubtotal.toFixed(2));
+                $('.luxaurosubtotalappen').val(luxaurosubtotal.toFixed(2));
+                let shipingcharge = $('.shipingcharge').val();
+                let overalltotal = parseFloat(luxaurosubtotal) + parseFloat(shipingcharge);
+                $('.overalltotal').html('$' + overalltotal.toFixed(2));
+            } else {
+                $('.addOrRemoves' + id).val(1);
+                $('.price' + id).val(price);
+                $('.appendprice' + id).html('$' + price);
+                let luxarosubtotals1 = $('#luxarosubtotals').val();
+                console.log(luxarosubtotals1);
+                let luxaurosubtotal = parseFloat(luxarosubtotals1) - parseFloat(price);
+                console.log(luxaurosubtotal);
+                $('#luxarosubtotalsappend').html('$' + luxaurosubtotal.toFixed(2));
+                $('.luxaurosubtotalappen').val(luxaurosubtotal.toFixed(2));
+                let shipingcharge = $('.shipingcharge').val();
+                let overalltotal = parseFloat(luxaurosubtotal) + parseFloat(shipingcharge);
+                $('.overalltotal').html('$' + overalltotal.toFixed(2));
+            }
+        }
+    </script>
 @endsection

@@ -8,10 +8,11 @@ use App\Models\Charter;
 use App\Models\Vendor\City;
 use App\Models\Vendor\State;
 use Illuminate\Http\Request;
+use App\Models\Admin\Product;
 use App\Models\Admin\Category;
-use App\Models\Admin\DeliveryOption;
 use App\Models\Vendor\Country;
 use App\Models\MerchantApplication;
+use App\Models\Admin\DeliveryOption;
 use App\Models\Admin\Goldevine\Project;
 use Illuminate\Support\Facades\Session;
 use App\Models\Admin\Product as AdminProduct;
@@ -20,14 +21,17 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->limit(15)->get();
+        $ownluxauros = Product::with('user')->where('status', 'Active')->limit(15)->get();
+        $nationalshops = MerchantApplication::where('status', 'Active')->limit(15)->get();
         $search = $request->input('search');
         $categories = Category::where('title', 'LIKE', '%' . $search . '%')->get();
         if (count($categories) <= 0) {
             $categories = Category::when($search, function ($query, $search) {
-                    $query->whereHas('relatedProducts', function ($query) use ($search) {
-                        $query->where('product_name', 'LIKE', '%' . $search . '%');
-                    });
-                })
+                $query->whereHas('relatedProducts', function ($query) use ($search) {
+                    $query->where('product_name', 'LIKE', '%' . $search . '%');
+                });
+            })
                 ->with(['relatedProducts' => function ($query) use ($search) {
                     $query->where('product_name', 'like', '%' . $search . '%');
                 }])
@@ -36,7 +40,7 @@ class UserController extends Controller
         $locallaxaro = AdminProduct::with('categories', 'productType', 'deliveryOption', 'user')->where('status', 'Active')->orderby('id', 'desc')->limit(15)->get();
         $goldevines = Project::with('projectBenefits')->where('status', 'Active')->orderBy('id', 'desc')->limit(15)->get();
         $luxauro_charters = Charter::orderBy('id', 'desc')->limit(15)->get();
-        return view('frontend.all-page.products', compact('categories', 'goldevines', 'locallaxaro', 'luxauro_charters'));
+        return view('frontend.all-page.products', compact('categories', 'goldevines', 'locallaxaro', 'luxauro_charters', 'ownluxauros', 'nationalshops', 'luxauroLibrarys'));
     }
     public function appendProducts(Request $request)
     {
@@ -50,7 +54,7 @@ class UserController extends Controller
         $cat = Category::where('id', $cat_id)->first();
         $products = $cat->products()->where('status', 'Active')->orderBy('product_price', $orderby)->get();
         // dd($products->get());
-        
+
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;
     }
@@ -228,5 +232,81 @@ class UserController extends Controller
     public function login()
     {
         return view('frontend.login');
+    }
+
+    public function searchFilter(Request $request)
+    {
+        $search = $request->search;
+        if ($request->searchFilter == null) {
+            $products = Product::where('product_name', 'like', '%' . $search . '%')->paginate(10);
+            return view('frontend.all-page.search.index', compact('products'));
+        } elseif ($request->searchFilter == 'max') {
+            $products = Product::where('product_price', 'desc')->where('product_name', 'like', '%' . $search . '%')->paginate(10);
+            return view('frontend.all-page.search.index', compact('products'));
+        } else {
+            $products = Product::where('product_price', 'asc')->where('product_name', 'like', '%' . $search . '%')->paginate(10);
+            return view('frontend.all-page.search.index', compact('products'));
+        }
+    }
+
+    public function allOwner(request $request)
+    {
+
+        $products = Product::where('status', 'Active')->paginate(20);
+        $productsassending = Product::where('status', 'Active')->orderBy('id', 'asc')->paginate(20);
+        $productsdesending = Product::where('status', 'Active')->orderBy('id', 'desc')->paginate(20);
+        return view('frontend.all-page.product.ownproduct', compact('products', 'productsassending', 'productsdesending'));
+    }
+
+    public function forumPublishing(Request $request)
+    {
+        $products = AdminProduct::with('user', 'categories')->where('status', 'Active')->paginate(20);
+        $productsassending = Product::where('status', 'Active')->orderBy('id', 'asc')->paginate(20);
+        $productsdesending = Product::where('status', 'Active')->orderBy('id', 'desc')->paginate(20);
+        return view('frontend.all-page.product.luxaurolibrary', compact('products', 'productsassending', 'productsdesending'));
+    }
+
+    public function luxaurostreet(Request $request)
+    {
+        $products = Product::where('status', 'Active')->paginate(20);
+        $productsassending = Product::where('status', 'Active')->orderBy('id', 'asc')->paginate(20);
+        $productsdesending = Product::where('status', 'Active')->orderBy('id', 'desc')->paginate(20);
+        return view('frontend.all-page.product.luxaurostreet', compact('products', 'productsassending', 'productsdesending'));
+    }
+
+    public function forumFilter(Request $request)
+    {
+        
+        if ($request->searchFilter == null) {
+            $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->paginate(20);
+            $html = view('frontend.all-page.search.luxaurolibraryfilter', compact('luxauroLibrarys'))->render();
+            return $html;
+        } elseif ($request->searchFilter == 'min') {
+            $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->orderBy('product_price', 'desc')->paginate(20);
+            $html = view('frontend.all-page.search.luxaurolibraryfilter',compact('luxauroLibrarys'))->render();
+            return $html;
+        } else {
+            $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->orderBy('product_price', 'asc')->paginate(20);
+            $html = view('frontend.all-page.search.luxaurolibraryfilter', compact('luxauroLibrarys'))->render();
+            return $html;
+        }
+    }
+
+    public function streetFilter(Request $request)
+    {
+        if ($request->searchFilter == null) {
+            $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->paginate(20);
+            $html = view('frontend.all-page.search.luxaurostreetfilter', compact('luxauroLibrarys'))->render();
+            return $html;
+        } elseif ($request->searchFilter == 'min') {
+            $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->orderBy('product_price', 'desc')->paginate(20);
+            $html = view('frontend.all-page.search.luxaurostreetfilter',compact('luxauroLibrarys'))->render();
+            return $html;
+        } else {
+            $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->orderBy('product_price', 'asc')->paginate(20);
+            $html = view('frontend.all-page.search.luxaurostreetfilter', compact('luxauroLibrarys'))->render();
+            return $html;
+        }
+
     }
 }

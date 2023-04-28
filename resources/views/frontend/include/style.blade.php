@@ -96,4 +96,9 @@
     .element {
         --pgPercentage: 50;
     }
+
+    h2.m-0 {
+        font-size: 24px;
+        font-weight: 500;
+    }
 </style>

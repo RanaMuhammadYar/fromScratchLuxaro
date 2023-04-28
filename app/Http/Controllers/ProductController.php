@@ -36,4 +36,16 @@ class ProductController extends Controller
         $productsdesending = Product::where('status', 'Active')->orderBy('id', 'desc')->paginate(20);
         return view('frontend.all-page.product.allProduct', compact('products','productsassending', 'productsdesending'));
     }
+    public function ownLuxaurofilter(Request $request)
+    {
+        if($request->ownluxauro == 'min'){
+            $products = Product::where('status', 'Active')->orderBy('product_price', 'asc')->paginate(10);
+        }elseif($request->ownluxauro == 'max'){
+            $products = Product::where('status', 'Active')->orderBy('product_price', 'desc')->paginate(10);
+        }else{
+            $products = Product::where('status', 'Active')->paginate(10);
+        }
+        $html = view('frontend.all-page.product.productFilter', compact('products'))->render();
+        return $html;
+    }
 }

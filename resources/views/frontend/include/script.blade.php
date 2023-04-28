@@ -38,12 +38,38 @@
                 price_filter: filterValue
             },
             success: function(data) {
+                if ($('#product-append' + id).hasClass('slick-initialized')) {
+                    $('#product-append' + id).slick('unslick');
+                    $('#product-append' + id).html('');
+                }
                 $('#product-append' + id).html(null);
-                $('#product-append' + id).html(data);
-                $('#product-append' + id).css({
-                    "display": "flex"
+                $('#product-append' + id).append(data);
+                $('#product-append' + id).slick({
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false,
+                    arrows: true,
+                    focusOnSelect: true,
+                    autoplay: false,
+                    mobileFirst: true,
+                    prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+                    nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+                    responsive: [{
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                        }
+                    }, {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 6,
+                            slidesToScroll: 1,
+                        }
+                    }]
                 });
-            }
+            },
         });
     }
 
@@ -71,15 +97,57 @@
         $.ajax({
             type: 'GET',
             url: "{{ route('appendCharters') }}",
+            beforeSend: function() {
+                $('#charter-append').html('');
+                if ($('#charter-append').hasClass('slick-initialized')) {
+                    $('#charter-append').html('');
+                    $('.filterGoldevines').html('');
+                    $('#charter-append').show();
+                } else {
+                    $('#charter-append').show();
+                }
+                $('#charter-append').html(
+                    '<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>'
+                );
+            },
             data: {
                 charter: filterValue
             },
             success: function(data) {
-                $('#charter-append').html(null);
-                $('#charter-append').html(data);
-                $('#charter-append').css({
-                    "display": "flex"
+                if ($('.appendCharter').hasClass('slick-initialized')) {
+                    $('.appendCharter').slick('unslick');
+                    $('.appendCharter').html('');
+                }
+                $('.appendCharter').append(data);
+                $('.appendCharter').slick({
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false,
+                    arrows: true,
+                    focusOnSelect: true,
+                    autoplay: false,
+                    mobileFirst: true,
+                    prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+                    nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+                    responsive: [{
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                        }
+                    }, {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 6,
+                            slidesToScroll: 1,
+                        }
+                    }]
                 });
+
+            },
+            complete: function() {
+                $('#charter-append').hide();
             }
         });
     }
@@ -174,20 +242,25 @@
                         icon: "success",
                         button: "Ok",
                     });
-                    $('.catdata').append(
-                        '<div class="row destroy' + response.id +
-                        '"><div class="col-5 px-1"><span class="mx-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span><span>' +
-                        response.cart.name +
-                        '</span></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true" onclick="orderdestroy(' +
-                        response.id +
-                        ')"style="cursor: pointer;"></i></span></div><div class="col-3 px-1"><span>' +
-                        response.cart.quantity +
-                        '</span></div><div class="col-3 px-1"><span class="d-block">=$' + response.cart
-                        .price * response.cart.quantity + '</span></div></div>');
+                    console.log(response);
+                    $('.catdata').append('<div class="row destroy'+response.id+' py-1"> <div class="col-1 px-1"> <span class=""> <img src="'+response.product.image+'" height="50px" width="50px" alt=""> </span> </div><div class="col-4 px-1"> <span>'+response.cart.name+'</span> </div><div class="col-1"> </div><div class="col-2 px-1"> <span>$'+response.product.product_price+'</span> </div><div class="col-1 px-1"> <span> <i class="fa fa-times"aria-hidden="true" onclick="orderdestroy('+response.id+')" style="cursor: pointer;"></i></span> </div><div class="col-1 px-1"> <span>'+response.cart.quantity+'</span> </div><div class="col-1 px-1"> <span>=</span> </div><div class="col-1 px-1"> <span class="">$'+response.cart.price * response.cart.quantity+'</span> </div></div>');
+                    // $('.catdata').append(
+                    //     '<div class="row destroy' + response.id +
+                    //     '"><div class="col-1 px-1"><span class="mx-2"><img src="' +
+                    //     response.product.image+
+                    //     '" height="50px"width="50px" alt=""></span><div class="col-2 px-1">  <span>' +
+                    //     response.cart.name +
+                    //     '</span></div></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true" onclick="orderdestroy(' +
+                    //     response.id +
+                    //     ')"style="cursor: pointer;"></i></span></div><div class="col-3 px-1"><span>' +
+                    //     response.cart.quantity +
+                    //     '</span></div><div class="col-3 px-1"><span class="d-block">=$' + response.cart
+                    //     .price * response.cart.quantity + '</span></div></div>');
                     $('.totalprice').html('');
-                    $('.totalprice').append(
-                        '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
-                        response.total + '</span></div><div class="col-1"></div></div>');
+                    $('.totalprice').append('<div class="row px-1"> <div class="col-9"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $'+response.total+'</span> </div></div>');
+                    // $('.totalprice').append(
+                    //     '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
+                    //     response.total + '</span></div><div class="col-1"></div></div>');
                     $('.CartCount').html('');
                     $('.CartCount').append(response.count);
                 }
@@ -217,9 +290,10 @@
                 $('.CartCount').append(response.count);
                 $('.totalprice').html('');
                 if (response.total == 0) {} else {
-                    $('.totalprice').append(
-                        '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
-                        response.total + '</span></div><div class="col-1"></div></div>');
+                    // $('.totalprice').append(
+                    //     '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
+                    //     response.total + '</span></div><div class="col-1"></div></div>');
+                    $('.totalprice').append('<div class="row px-1"> <div class="col-9"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $'+response.total+'</span> </div></div>');
                 };
                 swal({
                     title: "Success!",
@@ -352,12 +426,12 @@
                 );
             },
             success: function(data) {
-                if( $('.filterGoldevines').hasClass('slick-initialized')) {
+                if ($('.filterGoldevines').hasClass('slick-initialized')) {
                     $('.filterGoldevines').slick('unslick');
                     $('.appendFilterData').html('');
                     $('.filterGoldevines').html('');
 
-                }else{
+                } else {
                     $('.appendFilterData').html('');
                     $('.filterGoldevines').html('');
                 }

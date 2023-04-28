@@ -71,6 +71,13 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/aboutUs', 'aboutUs')->name('aboutUs');
     Route::get('/faqs', 'faqs')->name('faqs');
 });
+Route::any('luxauro-library-forum-publishing',[UserController::class,'forumPublishing'])->name('forumPublishing');
+Route::get('luxauro-library-forum-filter',[UserController::class,'forumFilter'])->name('forumFilter');
+Route::get('luxauro-library-street-filter',[UserController::class,'streetFilter'])->name('streetFilter');
+Route::any('luxauro-street-vintage-antique-market',[UserController::class,'luxaurostreet'])->name('luxaurostreet');
+Route::any('all-owner-luxauro', [UserController::class, 'allOwner'])->name('allOwner');
+Route::any('search',[UserController::class,'searchFilter'])->name('searchFilters');
+
 Route::get('luxauro/merchant-register', [RegisterController::class, 'showRegistrationForm'])->name('vendorRegister');
 Route::get('goldEvines/founderRegister', [RegisterController::class, 'showRegistrationForm'])->name('founderRegister');
 Route::get('goldMetal/professionalRegister', [RegisterController::class, 'showRegistrationForm'])->name('professionalRegister');
@@ -114,6 +121,8 @@ Auth::routes(['verify' => true]);
 
 Route::match(['get','post'],'/search-product', [ProductController::class, 'productsearch'])->name('productsearch');
 // Route::get('/search-product', [ProductController::class, 'productsearch'])->name('productsearch');
+
+Route::get('own-luxauro-filter',[ProductController::class,'ownLuxaurofilter'])->name('ownLuxaurofilter');
 
 
 

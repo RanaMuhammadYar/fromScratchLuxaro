@@ -52,7 +52,7 @@
                                     <td>{{ $product->product_price }}</td>
                                     <td>{{ $product->user->email }}</td>
                                     <td><img src="{{ $product->image }}" height="50" width="50"
-                                            onerror="this.src'{{ asset('images/default.png') }}'" alt=""></td>
+                                            onerror="this.src='{{ asset('images/default.png') }}'" alt=""></td>
                                     <td>
                                         @if ($product->status == 'Active')
                                             <span class="badge rounded-pill bg-success">{{ $product->status }}</span><br>

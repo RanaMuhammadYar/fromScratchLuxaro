@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\DelivoryOptionCotroller;
 use App\Http\Controllers\Admin\BusinessSettingsController;
 use App\Http\Controllers\Admin\Goldevine\GoldevineMageController;
 use App\Http\Controllers\Admin\Goldevine\ProjectResourceController;
+use App\Http\Controllers\HomeSliderController;
 
 Route::get('admin-dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -27,6 +28,7 @@ Route::resource('product-type', ProductTypeCotroller::class);
 Route::resource('product', ProductCotroller::class);
 Route::resource('admin-goudevine-project', ProjectResourceController::class);
 Route::resource('banner', BannerController::class);
+Route::resource('home-slider', HomeSliderController::class);
 
 
 Route::get('product-active', [ProductMangeCotroller::class, 'suspended'])->name('product.suspended');

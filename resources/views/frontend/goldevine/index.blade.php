@@ -321,7 +321,6 @@
                                 <img src="{{ banner()->image ?? '' }}"
                                     onerror="this.src='{{ asset('images/default.png') }}'" alt=""
                                     width="100%">
-
                             </div>
                         </div>
                     </div>
@@ -345,7 +344,7 @@
                             }
                             $('.appendtrending').html(
                                 '<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>'
-                                );
+                            );
                         },
                         data: {
                             filter: filter
@@ -417,7 +416,7 @@
                             }
                             $('.appendbackend').html(
                                 '<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>'
-                                );
+                            );
                         },
                         success: function(data) {
                             if ($('.Goldevinesbackend').hasClass('slick-initialized')) {
@@ -487,7 +486,7 @@
                             }
                             $('.appendnearly').html(
                                 '<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>'
-                                );
+                            );
                         },
                         success: function(data) {
                             if ($('.Goldevinesnearly').hasClass('slick-initialized')) {
