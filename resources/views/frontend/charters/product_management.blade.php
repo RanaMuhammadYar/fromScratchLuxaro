@@ -331,7 +331,7 @@
                                                 <td>{{ $product->is_auction }}</td>
                                                 <td>{{ $product->product_price }}</td>
                                                 <td>{{ $product->quantity }}</td>
-                                                <td>{{ $product->product_description }}</td>
+                                                <td>{{ Str::words($product->product_description, 5, '...') }}</td>
                                                 <td>
                                                     {{-- <label class="uploadFile-table border rounded">
                                                         <i class="fa fa-cloud-upload upload-icon-account-1-table"

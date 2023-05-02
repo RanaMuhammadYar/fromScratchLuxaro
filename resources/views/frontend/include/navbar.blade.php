@@ -286,13 +286,11 @@
                                                 aria-hidden="true"></i></span><span>Save for later</span>
                                     </div> --}}
 
-                                    <div class="row">
-                                        <a href="{{ route('checkout') }}" class="btn btn-primary">Checkout</a>
-                                    </div>
                                 </div>
-                                {{-- <div class="luxauro-cart mb-2">
+                               
+                                <div class="luxauro-cart mb-2">
                                     <h3 class="border-bottom d-inline-block mb-1">GoldEvine</h3>
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-5 px-1">
                                             <span class="mx-2"><i
                                                     class="fa fa-shopping-cart"aria-hidden="true"></i></span><span>(items
@@ -307,17 +305,92 @@
                                         <div class="col-3 px-1 ">
                                             <span class="d-block">= $</span><span>= $ Total</span>
                                         </div>
+                                    </div> --}}
+                                    @php
+                                        $totalprojectprice = 0;
+                                    @endphp
+
+                                    @foreach (projectaddTocart() as $cartorders) 
+                                    <div class="row destroy{{ $cartorders->id }} py-1">
+                                        <div class="col-1 px-1">
+                                            <span class="">
+                                                <img src="{{ $cartorders->project_benefit->feature_image }}" height="50px"
+                                                    width="50px"
+                                                    onerror="this.src='{{ asset('images/default.png') }}'"
+                                                    alt="">
+                                            </span>
+                                        </div>
+                                        <div class="col-4 px-1">
+
+                                            <span>{{ $cartorders->project_benefit->benefit_name }} </span>
+                                        </div>
+                                        <div class="col-1">
+
+                                        </div>
+                                        <div class="col-2 px-1">
+
+                                            <span>${{ $cartorders->project_benefit->price }} </span>
+                                        </div>
+                                        <div class="col-1 px-1">
+                                            <span> <i class="fa fa-times"aria-hidden="true"></i></span>
+                                        </div>
+                                        <div class="col-1 px-1">
+                                            <span>{{ $cartorders->project_benefit->quantity }}</span>
+                                        </div>
+                                        <div class="col-1 px-1">
+                                            <span> = </span>
+                                        </div>
+                                        <div class="col-1 px-1">
+                                            <span
+                                                class="">${{ $cartorders->project_benefit->price *  $cartorders->project_benefit->quantity }}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="cart-fav mb-0">
-                                        <span class="me-2"><i class="fa fa-heart"
-                                                aria-hidden="true"></i></span><span>Favorites </span>
+
+                                    @if ($cartorders->project_benefit->price *  $cartorders->project_benefit->quantity == !null)
+                                        @php
+
+                                            
+                                            
+                                            $totalprojectprice = $totalprojectprice + $cartorders->project_benefit->price *  $cartorders->project_benefit->quantity;
+                                        @endphp
+
+                                    @else
+                                    @endif
+                                    @endforeach
+                                    <div class="goldevinecatdata">
+
                                     </div>
-                                    <div class="cart-fav">
-                                        <span class="me-2"><i class="fa fa-bookmark"
-                                                aria-hidden="true"></i></span><span>Save for later</span>
+                                    <div class="row px-1 goldevinecatdata1total">
+                                        <div class="col-8"></div>
+                                        <div class="col-1">
+                                            <span>
+                                                @if($totalprojectprice == !null)
+                                                Total
+                                                @else   
+                                                @endif 
+                                            </span>
+                                        </div>
+                                        <div class="col-1">
+                                            <span>
+                                                @if($totalprojectprice == !null)
+                                                =
+                                                @else   
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="col-2">
+                                            <span class="mx-1">
+                                                @if ($totalprojectprice == !null)
+                                                    ${{ $totalprojectprice }}
+                                                @else
+                                                @endif
+                                            </span>
+                                            
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="luxauro-cart mb-2">
+                                {{-- <div class="luxauro-cart mb-2">
                                     <h3 class="border-bottom d-inline-block mb-1">gold metal guild</h3>
                                     <div class="cart-fav mb-0">
                                         <span class="me-2"><i class="fa fa-plus"
@@ -328,6 +401,9 @@
                                                 aria-hidden="true"></i></span><span>Scheduler</span>
                                     </div>
                                 </div> --}}
+                                <div class="row">
+                                    <a href="{{ route('checkout') }}" class="btn btn-primary">Checkout</a>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -345,7 +421,6 @@
                     @if (Auth::check())
                         @if (Auth::user()->role == 'Admin')
                             <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
-                            @e lse
                         @endif
                     @endif
                     <li><a href="{{ route('charters') }}">charters</a></li>

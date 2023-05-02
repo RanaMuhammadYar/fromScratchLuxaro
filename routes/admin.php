@@ -35,6 +35,9 @@ Route::get('product-active', [ProductMangeCotroller::class, 'suspended'])->name(
 Route::get('product-suspended', [ProductMangeCotroller::class, 'active'])->name('product.active');
 Route::get('product/{id}/{slug}', [ProductMangeCotroller::class, 'productcategory'])->name('productcategory');
 
+Route::get('product/type-Feature/{id}/{slug}', [ProductMangeCotroller::class, 'productType'])->name('productType');
+Route::get('product/type-normal/{id}/{slug}', [ProductMangeCotroller::class, 'productTypenormal'])->name('productTypenormal');
+
 Route::get('all-category', [ProductMangeCotroller::class, 'allcategory'])->name('allcategory');
 Route::get('productsabc/{id}', [ProductMangeCotroller::class, 'getRelatedProducts']);
 Route::get('productsabc/{slug}', [ProductMangeCotroller::class, 'product']);

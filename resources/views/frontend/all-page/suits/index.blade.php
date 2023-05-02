@@ -25,7 +25,7 @@
                                     <div class="col-md-3  col-12 my-2">
                                         <div class="product-item">
                                             <a href="#" style="color: rgb(75, 75, 75)">
-                                                <a href="{{ route('suitsProducts',$suit->user_id) }}">
+                                                <a href="{{ route('suitsSuitsDetail',['id' => $suit->id ,'slug' => Str::slug($suit->business_name) ]) }}">
                                                     <div class="img-holder">
                                                         <img src="{{ $suit->business_logo }}"
                                                             onerror="this.src='{{ asset('images/default.png') }}'"
@@ -35,7 +35,7 @@
                                                 <div class="txt-holder">
                                                     <div class="d-flex justify-content-between mb-3">
                                                         <div class="txt-holder">
-                                                            <a href="{{ route('suitsProducts',$suit->user_id) }}" style="text-decoration: none;color:rgb(42, 40, 40)">
+                                                            <a href="{{ route('suitsSuitsDetail',['id' => $suit->id ,'slug' => Str::slug($suit->business_name) ]) }}" style="text-decoration: none;color:rgb(42, 40, 40)">
                                                                 <strong class="title">{{ $suit->business_name }}</strong>
                                                             </a>
                                                         </div>

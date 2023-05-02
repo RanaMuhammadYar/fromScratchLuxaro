@@ -1,6 +1,6 @@
 @extends('frontend.admin.layouts.app')
 @section('title')
-    <title>All Vendors</title>
+    <title>All Merchant</title>
 @endsection
 @section('content')
     <style>
@@ -21,7 +21,7 @@
             <!-- Basic Bootstrap Table -->
             <div class="card">
                 <div class="card-header d-flux">
-                    <h5 class="d-inline">All Vendors</h5>
+                    <h5 class="d-inline">All Merchant</h5>
                 </div>
                 <div class="table text-nowrap">
                     <table class="table">
@@ -40,7 +40,7 @@
                                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
                                         <strong> {{ $pendingVendor->email }}</strong>
                                     </td>
-                                    <td>{{ $pendingVendor->shop_name }}</td>
+                                    <td>{{ isset($pendingVendor->merchant->business_name) ? $pendingVendor->merchant->business_name : '' }}</td>
                                     <td>
                                         @isset($pendingVendor->vendor)
                                             <i class="bi bi-eye display-5" onclick="showdata({{ $pendingVendor->vendor->id  }})" style="cursor: pointer"></i>

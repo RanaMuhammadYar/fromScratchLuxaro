@@ -29,6 +29,7 @@ use App\Utility\CategoryUtility;
 use App\Models\SellerPackagePayment;
 use App\Utility\NotificationUtility;
 use Illuminate\Support\Facades\Auth;
+use App\Models\SelectProjectBenefits;
 use App\Models\Admin\Goldevine\Project;
 use App\Http\Resources\V2\CarrierCollection;
 use App\Http\Controllers\AffiliateController;
@@ -1351,4 +1352,13 @@ function homeSlider()
 {
     $slider = HomeSlider::where('status', 'Active')->get();
     return $slider;
+}
+
+
+function projectaddTocart()
+{
+    if(Auth::check()){
+        $selectBenefit = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::user()->id)->where('status','pending')->get();
+        return $selectBenefit;
+    }
 }

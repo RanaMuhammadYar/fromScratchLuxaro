@@ -309,4 +309,36 @@ class UserController extends Controller
         }
 
     }
+
+    function nationalShop(Request $request)
+    {
+        // return $request->nationalShop;
+        if($request->nationalShop == 'AZ')
+        {
+            $nationalshops = MerchantApplication::orderBy('business_name','asc')->where('status', 'Active')->paginate(20);
+        }else{
+            $nationalshops = MerchantApplication::orderBy('business_name','desc')->where('status', 'Active')->paginate(20);
+        }
+        $html = view('frontend.all-page.search.nationalshopfilter', compact('nationalshops'))->render();
+        return $html;
+        // $applications = MerchantApplication::where('status', 'Active')->paginate(20);
+        // return view('frontend.all-page.product.nationalshop', compact('products', 'productsassending', 'productsdesending'));
+    }
+
+    public function recommendedFilter(Request $request)
+    {
+        if ($request->filter == null) {
+            $productsassending = Product::where('status', 'Active')->paginate(10);
+            $html = view('frontend.all-page.search.recommendedfilter', compact('productsassending'))->render();
+            return $html;
+        } elseif ($request->filter == 'max') {
+            $productsassending = Product::where('status', 'Active')->orderBy('product_price', 'desc')->paginate(10);
+            $html = view('frontend.all-page.search.recommendedfilter',compact('productsassending'))->render();
+            return $html;
+        } else {
+            $productsassending = Product::where('status', 'Active')->orderBy('product_price', 'asc')->paginate(10);
+            $html = view('frontend.all-page.search.recommendedfilter', compact('productsassending'))->render();
+            return $html;
+        }
+    }
 }

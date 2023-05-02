@@ -34,6 +34,7 @@
                                 <th>Vendor</th>
                                 <th>image</th>
                                 <th>status</th>
+                                <th>Product Type </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -46,7 +47,7 @@
                                     </td>
                                     <td>
                                         @foreach ($product->categories as $category)
-                                        {{ $product->name }}
+                                            {{ $product->name }}
                                         @endforeach
                                     </td>
                                     <td>{{ $product->product_price }}</td>
@@ -71,21 +72,34 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @if ($product->product_status_type == 'Featured')
+                                            <span
+                                                class="badge rounded-pill bg-success">{{ $product->product_status_type }}</span><br>
+                                        @else
+                                            <span
+                                                class="badge rounded-pill bg-danger">{{ $product->product_status_type }}</span><br>
+                                        @endif
+                                    </td>
+                                    <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                                 data-bs-toggle="dropdown">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('product.edit',$product->id) }}"><i
+                                                <a class="dropdown-item" href="{{ route('product.edit', $product->id) }}"><i
                                                         class="bx bx-edit-alt me-1 text-success"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{ route('product.destroy',$product->id) }}"  onclick="event.preventDefault();
-                                                document.getElementById('logout-form{{ $product->id}}').submit();"><i
+                                                <a class="dropdown-item" href="{{ $product->product_status_type == 'Normal' ? route('productType' ,['id' => $product->id , 'slug' => Str::slug($product->product_name )  ] ) : route('productTypenormal' ,['id' => $product->id , 'slug' => Str::slug($product->product_name )  ] ) }}"><i
+                                                        class="bi bi-stars me-1 text-success"></i> Change Product Type</a>
+                                                <a class="dropdown-item" href="{{ route('product.destroy', $product->id) }}"
+                                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form{{ $product->id }}').submit();"><i
                                                         class="bx bx-trash me-1 text-danger"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>
-                                    <form id="logout-form{{ $product->id}}" action="{{ route('product.destroy',$product->id) }}" method="POST" class="d-none">
+                                    <form id="logout-form{{ $product->id }}"
+                                        action="{{ route('product.destroy', $product->id) }}" method="POST" class="d-none">
                                         @csrf
                                         @method('DELETE')
                                     </form>
@@ -149,6 +163,5 @@
                 }
             });
         }
-
     </script>
 @endsection

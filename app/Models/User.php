@@ -60,8 +60,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(UserCertificate::class);
     }
 
-    public function vendor()
+    public function merchant()
     {
-        return $this->hasOne(VendorAccount::class);
+        return $this->hasOne(MerchantApplication::class,'user_id','id');
     }
 }

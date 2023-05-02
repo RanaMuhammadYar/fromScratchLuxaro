@@ -31,6 +31,7 @@ class Product extends Model
         'tags',
         'status',
         'multiple_image',
+        'product_status_type'
 
     ];
 

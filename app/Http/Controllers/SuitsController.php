@@ -86,9 +86,23 @@ class SuitsController extends Controller
 
     public function suitsProducts($id)
     {
-        $products = Product::where('user_id', $id)->where('status','Active')->paginate(12);
-        $productsassending = Product::where('user_id', $id)->where('status','Active')->orderBy('id', 'asc')->get();
-        $productsdesending = Product::where('user_id', $id)->where('status','Active')->orderBy('id', 'desc')->get();
-        return view('frontend.all-page.suits.suitsproducts', compact('products','productsassending','productsdesending'));
+        
+        $suits = MerchantApplication::find($id);
+        $featured = Product::where('user_id', $suits->user_id)->where('status','Active')->where('product_status_type','Featured')->paginate(12);
+        $productsassending = Product::where('user_id', $suits->user_id)->where('status','Active')->orderBy('id', 'asc')->paginate(10);
+        $productsdesending = Product::where('user_id', $suits->user_id)->where('status','Active')->orderBy('id', 'desc')->paginate(10);
+        $allSuits = MerchantApplication::where('status','Active')->paginate(12);
+        return view('frontend.all-page.suits.suits_detail', compact('suits','featured','productsassending','productsdesending','allSuits'));
+    }
+
+    public function suitsSuitsDetail($id)
+    {   
+        $suits = MerchantApplication::find($id);
+        $featured = Product::where('user_id', $suits->user_id)->where('status','Active')->where('product_status_type','Featured')->paginate(12);
+        $productsassending = Product::where('user_id', $suits->user_id)->where('status','Active')->orderBy('id', 'asc')->paginate(10);
+        $productsdesending = Product::where('user_id', $suits->user_id)->where('status','Active')->orderBy('id', 'desc')->paginate(10);
+        $allSuits = MerchantApplication::where('status','Active')->paginate(12);
+        return view('frontend.all-page.suits.suits_detail', compact('suits','featured','productsassending','productsdesending','allSuits'));
+
     }
 }

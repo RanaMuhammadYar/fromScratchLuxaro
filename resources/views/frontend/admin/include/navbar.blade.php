@@ -32,7 +32,7 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ isset(auth()->user()->userDetails->user_profile_image) ? auth()->user()->userDetails->user_profile_image : '' }}"
+                        <img src="{{ isset(auth()->user()->userDetails->user_profile_image) ? auth()->user()->userDetails->user_profile_image :  asset('images/avatar.png')  }}"
                             onerror="this.scr='{{ asset('images/avatar.png') }}'" alt
                             class="w-px-40 h-auto rounded-circle" />
                     </div>

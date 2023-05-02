@@ -85,29 +85,28 @@
                         <div class="page-form-holder d-flex">
                             <label class="form-control rounded-0">Search Filter</label>
                             <div class="form-field d-flex flex-fill">
-                                <select class="flex-fill border-0 bg-transparent">
-                                    <option>All</option>
-                                    <option>All</option>
-                                    <option>All</option>
+                                <select class="flex-fill border-0 bg-transparent nationalShop" name="shopfilter">
+                                    <option value="">Order By</option>
+                                    <option value="AZ">(A-Z)</option>
+                                    <option value="ZA">(Z-A)</option>
                                 </select>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="slider national-shop-slider text-center">
+            <div class="slider national-shop-slider text-center nationshopdiv">
                 @forelse ($nationalshops as $nationalshop)
                     <div>
                         <div class="product-item">
-                            <a href="{{ route('suitsProducts', $nationalshop->user_id) }}">
+                            <a href="{{ route('suitsProducts', $nationalshop->id) }}">
                                 <div class="img-holder">
                                     <img src="{{ $nationalshop->business_logo }}"
                                         onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
                                 </div>
                             </a>
                             <div class="txt-holder">
-                                {{-- <strong class="title">{{ $nationalshop->business_name }}</strong> --}}
-                                <a href="{{ route('suitsProducts', $nationalshop->user_id) }}"
+                                <a href="{{ route('suitsProducts', $nationalshop->id) }}"
                                     style="text-decoration: none;color:rgb(42, 40, 40)">
                                     <strong class="title">{{ $nationalshop->business_name }}</strong>
                                 </a>
@@ -122,6 +121,9 @@
                         </h2>
                     </div>
                 @endforelse
+            </div>
+            <div class="nationalShopFilter">
+
             </div>
         </div>
     </div>
@@ -326,7 +328,7 @@
                                 <a
                                     href="{{ route('productDetails', ['id' => $ownluxauro->id, 'slug' => Str::slug($ownluxauro->product_name)]) }}">
                                     <div class="img-holder">
-                                        <img src="{{ $ownluxauro->image }}" oner class="img-fluid">
+                                        <img src="{{ $ownluxauro->image }}" onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
                                     </div>
                                 </a>
                                 <div class="txt-holder">
@@ -919,5 +921,7 @@
                 });
 
             }
+
+            
         </script>
     @endsection

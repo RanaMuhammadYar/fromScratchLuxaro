@@ -22,6 +22,7 @@ Route::get('project-favirate', [ProjectManageController::class, 'favirate'])->na
 
 Route::get('project-favirate-removes', [ProjectManageController::class, 'favirateRemove'])->name('removeFacirates');
 
+Route::post('project-add-to-cart', [ProjectManageController::class, 'projectAddToCart'])->name('projectAddToCart');
 // Myprofile Admin pnal |Route:
 
 Route::get('create-project', [ProjectManageController::class, 'create'])->name('createProject');
@@ -46,4 +47,8 @@ Route::get('suits', [SuitsController::class, 'index'])->name('suits');
 Route::post('suits/store', [SuitsController::class, 'store'])->name('suits.store');
 Route::get('suits/product/{id}', [SuitsController::class, 'suitsProducts'])->name('suitsProducts');
 
+Route::get('suits/suits_detail/{id}/{slug}', [SuitsController::class, 'suitsSuitsDetail'])->name('suitsSuitsDetail');
+
+
+Route::get('remove-project/', [ProjectManageController::class, 'removeGoldevineproject'])->name('removeGoldevineproject');
 // Suits Route

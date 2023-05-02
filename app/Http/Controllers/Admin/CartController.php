@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Models\Admin\CartOrder;
 use App\Http\Controllers\Controller;
+use App\Models\SelectProjectBenefits;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\Console\RetryCommand;
 
@@ -33,7 +34,9 @@ class CartController extends Controller
                     });
             })
             ->get();
-        return view('frontend.all-page.cart.index', compact('allcartorders'));
+
+            $goldenevines = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::id())->where('status', 'pending')->get();
+        return view('frontend.all-page.cart.index', compact('allcartorders' , 'goldenevines'));
     }
     public function destroycheckout(Request $request)
     {

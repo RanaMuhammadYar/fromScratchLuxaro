@@ -13,21 +13,24 @@
                                 <img src="{{ $allproject->feature_image }}"
                                     onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid" alt="">
                                 <div class="card-item-text">
-                                    <div class="txt-holder">
-                                        <strong
-                                            class="title text-center d-block mb-2">{{ Str::words($allproject->title, 7, '...') }}</strong>
-                                        <div class="progress rounded-0 mb-1">
-                                            <div class="progress-bar rounded-0" role="progressbar"
-                                                style="width: {{ persentage($allproject->id) }}%" aria-valuenow="75"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                    <a href="{{ route('project.detail', ['id' => $allproject->id, 'slug' => Str::slug($allproject->title)]) }}"
+                                        style="color: white">
+                                        <div class="txt-holder">
+                                            <strong
+                                                class="title text-center d-block mb-2">{{ Str::words($allproject->title, 7, '...') }}</strong>
+                                            <div class="progress rounded-0 mb-1">
+                                                <div class="progress-bar rounded-0" role="progressbar"
+                                                    style="width: {{ persentage($allproject->id) }}%" aria-valuenow="75"
+                                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span>$ {{ number_format(totalamout($allproject->id)) }} raised</span>
+                                                <span>{{ persentage($allproject->id) }}%</span>
+                                            </div>
+                                            <p class="mb-2">{{ number_format(donation($allproject->id)) }} donations</p>
+                                            <p class="m-0">{!! Str::limit($allproject->short_description, 70, ' ...') !!}</p>
                                         </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>$ {{ number_format(totalamout($allproject->id)) }} raised</span>
-                                            <span>{{ persentage($allproject->id) }}%</span>
-                                        </div>
-                                        <p class="mb-2">{{ number_format(donation($allproject->id)) }} donations</p>
-                                        <p class="m-0">{!! Str::limit($allproject->short_description, 70, ' ...') !!}</p>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         @endforeach

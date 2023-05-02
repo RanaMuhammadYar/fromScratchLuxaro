@@ -242,8 +242,19 @@
                         icon: "success",
                         button: "Ok",
                     });
-                    console.log(response);
-                    $('.catdata').append('<div class="row destroy'+response.id+' py-1"> <div class="col-1 px-1"> <span class=""> <img src="'+response.product.image+'" height="50px" width="50px" alt=""> </span> </div><div class="col-4 px-1"> <span>'+response.cart.name+'</span> </div><div class="col-1"> </div><div class="col-2 px-1"> <span>$'+response.product.product_price+'</span> </div><div class="col-1 px-1"> <span> <i class="fa fa-times"aria-hidden="true" onclick="orderdestroy('+response.id+')" style="cursor: pointer;"></i></span> </div><div class="col-1 px-1"> <span>'+response.cart.quantity+'</span> </div><div class="col-1 px-1"> <span>=</span> </div><div class="col-1 px-1"> <span class="">$'+response.cart.price * response.cart.quantity+'</span> </div></div>');
+                    $('.catdata').append('<div class="row destroy' + response.id +
+                        ' py-1"> <div class="col-1 px-1"> <span class=""> <img src="' + response.product
+                        .image +
+                        '" height="50px" width="50px" alt=""> </span> </div><div class="col-4 px-1"> <span>' +
+                        response.cart.name +
+                        '</span> </div><div class="col-1"> </div><div class="col-2 px-1"> <span>$' +
+                        response.product.product_price +
+                        '</span> </div><div class="col-1 px-1"> <span> <i class="fa fa-times"aria-hidden="true" onclick="orderdestroy(' +
+                        response.id +
+                        ')" style="cursor: pointer;"></i></span> </div><div class="col-1 px-1"> <span>' +
+                        response.cart.quantity +
+                        '</span> </div><div class="col-1 px-1"> <span>=</span> </div><div class="col-1 px-1"> <span class="">$' +
+                        response.cart.price * response.cart.quantity + '</span> </div></div>');
                     // $('.catdata').append(
                     //     '<div class="row destroy' + response.id +
                     //     '"><div class="col-1 px-1"><span class="mx-2"><img src="' +
@@ -257,7 +268,9 @@
                     //     '</span></div><div class="col-3 px-1"><span class="d-block">=$' + response.cart
                     //     .price * response.cart.quantity + '</span></div></div>');
                     $('.totalprice').html('');
-                    $('.totalprice').append('<div class="row px-1"> <div class="col-9"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $'+response.total+'</span> </div></div>');
+                    $('.totalprice').append(
+                        '<div class="row px-1"> <div class="col-9"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $' +
+                        response.total + '</span> </div></div>');
                     // $('.totalprice').append(
                     //     '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
                     //     response.total + '</span></div><div class="col-1"></div></div>');
@@ -293,7 +306,9 @@
                     // $('.totalprice').append(
                     //     '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
                     //     response.total + '</span></div><div class="col-1"></div></div>');
-                    $('.totalprice').append('<div class="row px-1"> <div class="col-9"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $'+response.total+'</span> </div></div>');
+                    $('.totalprice').append(
+                        '<div class="row px-1"> <div class="col-9"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $' +
+                        response.total + '</span> </div></div>');
                 };
                 swal({
                     title: "Success!",
@@ -567,4 +582,60 @@
     // window.onload = function() {
     //     $('.filterGoldevines').addClass('slick-initialized slick-slider');
     // };
+</script>
+<script>
+    $(document).ready(function() {
+        $('.nationalShop').change(function(e) {
+            e.preventDefault();
+            let nationalShop = $('.nationalShop').val();
+            $.ajax({
+                type: "GET",
+                url: "{{ route('nationalShop') }}",
+                data: {
+                    nationalShop: nationalShop
+                },
+                success: function(data) {
+                    console.log(data);
+
+                    if ($('.nationshopdiv').hasClass('slick-initialized')) {
+                        $('.nationshopdiv').slick('unslick');
+                        $('.nationshopdiv').html('');
+                    }
+                    if ($('.nationalShopFilter').hasClass('slick-initialized')) {
+                        $('.nationalShopFilter').slick('unslick');
+                        $('.nationalShopFilter').html('');
+                    }
+                    $('.nationalShopFilter').html('');
+                    $('.nationshopdiv').html('');
+                    $('.nationalShopFilter').html(data);
+                    $('.nationalShopFilter').slick({
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false,
+                        arrows: true,
+                        focusOnSelect: true,
+                        autoplay: false,
+                        mobileFirst: true,
+                        prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+                        nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+                        responsive: [{
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 4,
+                                slidesToScroll: 1,
+                            }
+                        }, {
+                            breakpoint: 992,
+                            settings: {
+                                slidesToShow: 6,
+                                slidesToScroll: 1,
+                            }
+                        }]
+                    });
+                }
+            });
+
+        });
+    });
 </script>

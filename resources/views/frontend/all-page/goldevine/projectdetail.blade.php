@@ -3,6 +3,8 @@
     <title>{{ $project->title }} </title>
 @endsection
 @section('content')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     <style>
         .nav-pills .nav-link.active,
         .nav-pills .show>.nav-link {
@@ -164,8 +166,8 @@
                                     <p class="m-0 color-saceem"><Span class=""><i class="fa fa-shield me-2"
                                                 aria-hidden="true"></i></Span>10, 000 benefits left</p>
                                 </div>
-                                <a href="{{ route('projectcheckout', $benefit->id) }}"
-                                    class="btn btn-primary text-uppercase select-benefits">Select Benefit</a>
+                                <a href="javascript:void(0)" class="btn btn-primary text-uppercase select-benefits"
+                                    onclick="selectBenefit({{ $benefit->id }})">Select Benefit</a>
                             </div>
                         </div>
                     @endforeach
@@ -295,46 +297,94 @@
                     <div class="project-page-slider mb-5 pb-lg-3">
                         @foreach ($randdomprojects as $randdomproject)
                             <div>
-                                <div class="product-item border rounded">
-                                    <div class="img-holder mb-3">
-                                        <img src="{{ $randdomproject->feature_image }}"
-                                            onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
+                                <a
+                                    href="{{ route('projectDetail', ['id' => $randdomproject->id, 'slug' => $randdomproject->slug]) }}">
+                                    <div class="product-item border rounded">
+                                        <div class="img-holder mb-3">
+                                            <img src="{{ $randdomproject->feature_image }}"
+                                                onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
+                                        </div>
+                                        <div class="txt-holder p-3">
+                                            <div class="d-flex flex-wrap align-items-center mb-3">
+                                                <span class="me-2"><a class="btn btn-primary btn-sm rounded-0 py-1 px-2"
+                                                        href="{{ route('projectDetail', ['id' => $randdomproject->id, 'slug' => $randdomproject->slug]) }}">HOSPITALITY</a></span>
+                                                <span class="me-2"><i class="fa fa-clock-o"
+                                                        aria-hidden="true"></i></span>
+                                                <span>{{ leftdays($randdomproject->id) }} Days Left</span>
+                                            </div>
+                                            <div class="d-flex flex-column mb-4">
+                                                <span><strong>Cheap Test Project
+                                                        {{ totalproject($randdomproject->user_id) }}</strong></span>
+                                            </div>
+                                            <p class="present-project mb-2">Present Project:
+                                                {{ isset($randdomproject->user->userDetails->name) ? $randdomproject->user->userDetails->name : '' }}
+                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <span>Raised:${{ number_format(totalamout($randdomproject->id)) }}</span>
+                                                <span>{{ persentage($randdomproject->id) }}%</span>
+                                            </div>
+                                            <div class="progress rounded-0 mb-2">
+                                                <div class="progress-bar rounded-0" role="progressbar"
+                                                    style="width: {{ persentage($randdomproject->id) }}%"
+                                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="d-flex flex-column mb-2">
+                                                <span><strong>Goal:
+                                                        ${{ $randdomproject->project_funding_goal }}</strong></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="txt-holder p-3">
-                                        <div class="d-flex flex-wrap align-items-center mb-3">
-                                            <span class="me-2"><a class="btn btn-primary btn-sm rounded-0 py-1 px-2"
-                                                    href="{{ route('projectDetail', ['id' => $randdomproject->id, 'slug' => $randdomproject->slug]) }}">HOSPITALITY</a></span>
-                                            <span class="me-2"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                            <span>{{ leftdays($randdomproject->id) }} Days Left</span>
-                                        </div>
-                                        <div class="d-flex flex-column mb-4">
-                                            <span><strong>Cheap Test Project
-                                                    {{ totalproject($randdomproject->user_id) }}</strong></span>
-                                        </div>
-                                        <p class="present-project mb-2">Present Project:
-                                            {{ isset($randdomproject->user->userDetails->name) ? $randdomproject->user->userDetails->name : '' }}
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Raised:${{ number_format(totalamout($randdomproject->id)) }}</span>
-                                            <span>{{ persentage($randdomproject->id) }}%</span>
-                                        </div>
-                                        <div class="progress rounded-0 mb-2">
-                                            <div class="progress-bar rounded-0" role="progressbar"
-                                                style="width: {{ persentage($randdomproject->id) }}%" aria-valuenow="100"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <div class="d-flex flex-column mb-2">
-                                            <span><strong>Goal:
-                                                    ${{ $randdomproject->project_funding_goal }}</strong></span>
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function selectBenefit(id) {
+            // Get Ajax
+
+            $.ajax({
+                url: "{{ route('projectAddToCart') }}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id": id
+                },
+                success: function(response) {
+
+                    console.log(response);
+                    swal({
+                        title: "Success!",
+                        text: response.success,
+                        icon: "success",
+                        button: "Ok",
+                    });
+
+                    $('.goldevinecatdata').append('<div class="row destroy' + response.benefit.id +
+                        ' py-1"> <div class="col-1 px-1"> <span class=""> <img src="' + response.benefit
+                        .feature_image +
+                        '" height="50px" width="50px" alt=""> </span> </div><div class="col-4 px-1"> <span>' +
+                        response.benefit.benefit_name +
+                        '</span> </div><div class="col-1"> </div><div class="col-2 px-1"> <span>$' +
+                        response.benefit.price +
+                        '</span> </div><div class="col-1 px-1"> <span> <i class="fa fa-times"aria-hidden="true" onclick="orderdestroy(' +
+                        response.benefit.id +
+                        ')" style="cursor: pointer;"></i></span> </div><div class="col-1 px-1"> <span>' +
+                        response.benefit.quantity +
+                        '</span> </div><div class="col-1 px-1"> <span>=</span> </div><div class="col-1 px-1"> <span class="">$' +
+                        response.benefit.price * response.benefit.quantity + '</span> </div></div>');
+
+                        $('.goldevinecatdata1total').html('');
+                    $('.goldevinecatdata1total').append(
+                        '<div class="row px-1"> <div class="col-8"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $' +
+                        response.totalgoldenvine + '</span> </div></div>');
+
+                },
+            });
+        }
+    </script>
 @endsection

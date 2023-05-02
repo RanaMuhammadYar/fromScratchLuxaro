@@ -114,7 +114,9 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/privacy-policy', 'privacypolicy')->name('privacypolicy');
 });
 
+Route::get('national-shop',[UserController::class,'nationalShop'])->name('nationalShop');
 
+Route::get('recommended-filter',[UserController::class,'recommendedFilter'])->name('recommendedFilters');
 Auth::routes(['verify' => true]);
 
 // Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');

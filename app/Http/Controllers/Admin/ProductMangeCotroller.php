@@ -287,4 +287,21 @@ class ProductMangeCotroller extends Controller
         // dd($categories);
         return view('frontend.all-page.category.index', compact('categories'));
     }
+
+    public function productType($id)
+    {
+        $productType = Product::find($id);
+        $productType->product_status_type = "Featured";
+        $productType->save();
+        return redirect()->back()->with('status', 'Product Type Added Successfully.');
+
+    }
+
+    public function productTypenormal($id)
+    {
+        $productType = Product::find($id);
+        $productType->product_status_type = "Normal";
+        $productType->save();
+        return redirect()->back()->with('status', 'Product Type Added Successfully.');
+    }
 }

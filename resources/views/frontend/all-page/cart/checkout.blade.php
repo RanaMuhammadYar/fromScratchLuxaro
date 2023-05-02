@@ -151,7 +151,7 @@
                                                             </p>
                                                         </div>
                                                         {{-- <div class="shopping-bag-delivery "> --}}
-                                                            {{-- <p class="mb-0"><strong
+                                                        {{-- <p class="mb-0"><strong
                                                                     class="shopping-bag-title">Pickup</strong></p>
                                                             <p class="mb-0"><strong
                                                                     class="shopping-bag-title">Free</strong>
@@ -170,10 +170,14 @@
                                                                 Save for later</p>
                                                         </button>
 
-                                                        <button type="button" class="mb-0" style="color: rgb(61, 60, 60)"
+                                                        <a type="button" href="{{ route('goldEvine') }}" class="mb-0" style="color: rgb(61, 60, 60)">
+                                                            Remove
+                                                        </a>
+
+                                                        {{-- <button type="button" class="mb-0" style="color: rgb(61, 60, 60)"
                                                             onclick="removeFacirate({{ $projectBenefit->project->id }})">
                                                             Remove
-                                                        </button>
+                                                        </button> --}}
                                                     </div>
                                                 </li>
                                             </ul>
@@ -181,324 +185,28 @@
                                     </li>
                                     <li>
                                         <div class="shopping-bag-payment">
-                                            <span class="payment-titles">${{ number_format($projectBenefit->price) }}</span>
+                                            <span class="payment-titles ">${{ number_format($projectBenefit->price) }}</span>
                                             <span class="px-1"> x </span>
+
+                                            <div class="product-details-quantity border rounded d-inline-block me-3">
+                                                <span class="input-number-decrement" onclick="decrementstsgoldevine({{ $projectBenefit->id  }} , {{ $projectBenefit->price }})"
+                                                    style="cursor: pointer;
+                                                            ">–</span><input
+                                                    class="input-number addOrRemovesGoldeive" type="text" value="{{ $projectBenefit->quantity }}"
+                                                    min="1" max="10" id="" readonly><span
+                                                    class="input-number-increment" onclick="incrementsgoldevine({{ $projectBenefit->id  }} , {{ $projectBenefit->price }})">+</span>
+                                            </div>
+
                                             <span class="border rounded px-1">{{ $projectBenefit->quantity }} </span>
+
                                             <span>=</span>
-                                            <span
-                                                class="payment-titles">${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
+                                            <span class="payment-titles totalPricebag">${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
+                                            <div class="appenddatagoldeive">
+                                            </div>
                                         </div>
                                     </li>
                                 </ul>
-                                {{-- <ul
-                                    class="subscriptions-produccts mb-md-4 p-0 list-unstyled d-flex align-items-self-start flex-wrap justify-content-between">
-                                    <li>
-                                        <div class="sub-product-image mb-3 mb-md-4">
-                                            <img src="images/about01.png" class="img-fluid" alt="product-img">
-                                        </div>
-                                    </li>
-                                    <li class="mx-2 mb-2"><strong>Goldevine project Benefit Title</strong>
-                                        <div>
-                                            <ul class="list-unstyled m-0 p-0">
-                                                <li>
-                                                    <p class="mb-0">Solid by merchant_username02</p>
-                                                </li>
-                                                <li>
-                                                    <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                                aria-hidden="true"></i></span>[Merchant Location]</p>
-                                                </li>
-                                                <li>
-                                                    <p>[Product short description] Lorem ipsum is simply elit.</p>
-                                                </li>
-                                                <li>
-                                                    <div class="shopping-bag-pickup d-flex">
-                                                        <div class="shopping-bag-delivery me-3">
-                                                            <strong class="shopping-bag-title">Delivery</strong>
-                                                            <span class="estimated mb-2">Estimated Arrival:<span
-                                                                    class="d-block"></span> Thurs, Feb 16</span>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">$20</strong>
-                                                            </p>
-                                                        </div>
-                                                        <div class="shopping-bag-delivery ">
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Pickup</strong></p>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Free</strong>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <hr>
-                                                </li>
-                                                <li>
-                                                    <div class="save-for-later d-flex">
-                                                        <p class="save-remove-later me-4 mb-0">Save for later</p>
-                                                        <p class="mb-0">Remove</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="shopping-bag-payment">
-                                            <span class="payment-titles">$24.43</span>
-                                            <span class="px-1"> x </span>
-                                            <span class="border rounded px-1">3</span>
-                                            <span>=</span>
-                                            <span class="payment-titles">$73.97</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul
-                                    class="subscriptions-produccts mb-0 p-0 list-unstyled d-flex align-items-self-start justify-content-between flex-wrap">
-                                    <li>
-                                        <div class="sub-product-image mb-3 mb-md-4">
-                                            <img src="images/about01.png" class="img-fluid" alt="product-img">
-                                        </div>
-                                    </li>
-                                    <li class="mx-2 mb-2"><strong>Goldevine project Benefit Title</strong>
-                                        <div>
-                                            <ul class="list-unstyled m-0 p-0">
-                                                <li>
-                                                    <p class="mb-0">Solid by merchant_username03</p>
-                                                </li>
-                                                <li>
-                                                    <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                                aria-hidden="true"></i></span>[Merchant Location]</p>
-                                                </li>
-                                                <li>
-                                                    <p>[Product short description] Lorem ipsum is simply elit.</p>
-                                                </li>
-                                                <li>
-                                                    <div class="shopping-bag-pickup d-flex">
-                                                        <div class="shopping-bag-delivery me-3">
-                                                            <strong class="shopping-bag-title">Delivery</strong>
-                                                            <span class="estimated mb-2">Estimated Arrival:<span
-                                                                    class="d-block"></span> Thurs, Feb 16</span>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">$20</strong>
-                                                            </p>
-                                                        </div>
-                                                        <div class="shopping-bag-delivery ">
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Pickup</strong></p>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Free</strong>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <hr>
-                                                </li>
-                                                <li>
-                                                    <div class="save-for-later d-flex">
-                                                        <p class="save-remove-later me-4 mb-0">Save for later</p>
-                                                        <p class="mb-0">Remove</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="shopping-bag-payment">
-                                            <span class="payment-titles">$24.43</span>
-                                            <span class="px-1"> x </span>
-                                            <span class="border rounded px-1">3</span>
-                                            <span>=</span>
-                                            <span class="payment-titles">$73.97</span>
-                                        </div>
-                                    </li>
-                                </ul> --}}
                             </div>
-                            {{-- <div class="shopping-bag-component luxauro-subscription-currents mb-3">
-                                <h3 class="mb-4">Gold Metal Guild</h3>
-                                <ul
-                                    class="subscriptions-produccts mb-4 p-0 list-unstyled d-flex align-items-self-start justify-content-between flex-wrap">
-                                    <li>
-                                        <div class="sub-product-image mb-3 mb-md-4">
-                                            <img src="images/about01.png" class="img-fluid" alt="product-img">
-                                        </div>
-                                    </li>
-                                    <li class="mx-2 mb-2"><strong>GMG Professional Gold Seal Special Title</strong>
-                                        <div>
-                                            <ul class="list-unstyled m-0 p-0">
-                                                <li>
-                                                    <p class="mb-0">Solid by merchant_username01</p>
-                                                </li>
-                                                <li>
-                                                    <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                                aria-hidden="true"></i></span>[Merchant Location]</p>
-                                                </li>
-                                                <li>
-                                                    <p>[Product short description] Lorem ipsum is simply elit.</p>
-                                                </li>
-                                                <li>
-                                                    <div class="shopping-bag-pickup d-flex">
-                                                        <div class="shopping-bag-delivery me-3">
-                                                            <strong class="shopping-bag-title">Delivery</strong>
-                                                            <span class="estimated mb-2">Estimated Arrival:<span
-                                                                    class="d-block"></span> Thurs, Feb 16</span>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">$20</strong>
-                                                            </p>
-                                                        </div>
-                                                        <div class="shopping-bag-delivery ">
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Pickup</strong></p>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Free</strong>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <hr>
-                                                </li>
-                                                <li>
-                                                    <div class="save-for-later d-flex">
-                                                        <p class="save-remove-later me-4 mb-0">Save for later</p>
-                                                        <p class="mb-0">Remove</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="shopping-bag-payment">
-                                            <span class="payment-titles">$24.43</span>
-                                            <span class="px-1"> x </span>
-                                            <span class="border rounded px-1">3</span>
-                                            <span>=</span>
-                                            <span class="payment-titles">$73.97</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul
-                                    class="subscriptions-produccts mb-md-4 p-0 list-unstyled d-flex align-items-self-start flex-wrap justify-content-between">
-                                    <li>
-                                        <div class="sub-product-image mb-3 mb-md-4">
-                                            <img src="images/about01.png" class="img-fluid" alt="product-img">
-                                        </div>
-                                    </li>
-                                    <li class="mx-2 mb-2"><strong>GMG Professional Gold Seal Special Title</strong>
-                                        <div>
-                                            <ul class="list-unstyled m-0 p-0">
-                                                <li>
-                                                    <p class="mb-0">Solid by merchant_username02</p>
-                                                </li>
-                                                <li>
-                                                    <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                                aria-hidden="true"></i></span>[Merchant Location]</p>
-                                                </li>
-                                                <li>
-                                                    <p>[Product short description] Lorem ipsum is simply elit.</p>
-                                                </li>
-                                                <li>
-                                                    <div class="shopping-bag-pickup d-flex">
-                                                        <div class="shopping-bag-delivery me-3">
-                                                            <strong class="shopping-bag-title">Delivery</strong>
-                                                            <span class="estimated mb-2">Estimated Arrival:<span
-                                                                    class="d-block"></span> Thurs, Feb 16</span>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">$20</strong>
-                                                            </p>
-                                                        </div>
-                                                        <div class="shopping-bag-delivery ">
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Pickup</strong></p>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Free</strong>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <hr>
-                                                </li>
-                                                <li>
-                                                    <div class="save-for-later d-flex">
-                                                        <p class="save-remove-later me-4 mb-0">Save for later</p>
-                                                        <p class="mb-0">Remove</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="shopping-bag-payment">
-                                            <span class="payment-titles">$24.43</span>
-                                            <span class="px-1"> x </span>
-                                            <span class="border rounded px-1">3</span>
-                                            <span>=</span>
-                                            <span class="payment-titles">$73.97</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul
-                                    class="subscriptions-produccts mb-0 p-0 list-unstyled d-flex align-items-self-start justify-content-between flex-wrap">
-                                    <li>
-                                        <div class="sub-product-image mb-3 mb-md-4">
-                                            <img src="images/about01.png" class="img-fluid" alt="product-img">
-                                        </div>
-                                    </li>
-                                    <li class="mx-2 mb-2"><strong>GMG Professional Gold Seal Special Title</strong>
-                                        <div>
-                                            <ul class="list-unstyled m-0 p-0">
-                                                <li>
-                                                    <p class="mb-0">Solid by merchant_username03</p>
-                                                </li>
-                                                <li>
-                                                    <p class="mb-2"><span><i class="fa fa-map-marker me-2"
-                                                                aria-hidden="true"></i></span>[Merchant Location]</p>
-                                                </li>
-                                                <li>
-                                                    <p>[Product short description] Lorem ipsum is simply elit.</p>
-                                                </li>
-                                                <li>
-                                                    <div class="shopping-bag-pickup d-flex">
-                                                        <div class="shopping-bag-delivery me-3">
-                                                            <strong class="shopping-bag-title">Delivery</strong>
-                                                            <span class="estimated mb-2">Estimated Arrival:<span
-                                                                    class="d-block"></span> Thurs, Feb 16</span>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">$20</strong>
-                                                            </p>
-                                                        </div>
-                                                        <div class="shopping-bag-delivery ">
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Pickup</strong></p>
-                                                            <p class="mb-0"><strong
-                                                                    class="shopping-bag-title">Free</strong>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <hr>
-                                                </li>
-                                                <li>
-                                                    <div class="save-for-later d-flex">
-                                                        <p class="save-remove-later me-4 mb-0">Save for later</p>
-                                                        <p class="mb-0">Remove</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="shopping-bag-payment">
-                                            <span class="payment-titles">$24.43</span>
-                                            <span class="px-1"> x </span>
-                                            <span class="border rounded px-1">3</span>
-                                            <span>=</span>
-                                            <span class="payment-titles">$73.97</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div> --}}
                         </div>
                         <div class="col-12 col-md-4 py-2">
                             <h2 class="py-3">My Shopping Bag</h2>
@@ -537,7 +245,7 @@
                                 <div class="shopping-bag-my-order mb-5">
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <strong>Goldevine Subtotal</strong>
-                                        <strong>${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</strong>
+                                        <strong class="goldevineSubtotal" >${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</strong>
                                     </div>
                                     {{-- <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="mb-0">Estimated Shipping</p>
@@ -551,13 +259,13 @@
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <span class="payment-titles">Total</span>
                                         <span
-                                            class="payment-titles">${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
+                                            class="payment-titles " id="total">${{ number_format($projectBenefit->price * $projectBenefit->quantity) }}</span>
                                     </div>
 
-                                    <input type="hidden" name="total"
+                                    <input type="hidden" name="total" class="totalPrice"
                                         value="{{ $projectBenefit->price * $projectBenefit->quantity }}">
                                     <input type="hidden" name="benefit_id" value="{{ $projectBenefit->id }}">
-                                    <input type="hidden" name="quantity" value="{{ $projectBenefit->quantity }}">
+                                    <input type="hidden" name="quantity" class="quantitygoldevine" value="{{ $projectBenefit->quantity }}">
                                     <input type="hidden" name="project_id" value="{{ $projectBenefit->project_id }}">
 
                                     <button class="btn btn-primary d-block w-100" type="submit">GOLDEVINE CHECKOUT</button>
@@ -619,15 +327,50 @@
                     "project_id": id,
                 },
                 success: function(response) {
-                    if(response.success == null )
-                    {
+                    if (response.success == null) {
                         swal("Error", "This Project Not Add to Favorite", "error");
-                    }else{
+                    } else {
                         swal("Success", response.success, "success");
                     }
 
                 }
             });
+        }
+
+
+        function decrementstsgoldevine(id , price)
+        {
+            var quantity = $('.quantitygoldevine').val();
+            var totalPrice = $('.totalPrice').val();
+
+            if(quantity > 1)
+            {
+                quantity--;
+                $('.addOrRemovesGoldeive').val(quantity);
+                $('.quantitygoldevine').val(quantity);
+                $('.totalPrice').val(totalPrice - price);
+                let subtotal = totalPrice - price;
+                $('.totalPricebag').text('$'+subtotal);
+                $('.goldevineSubtotal').text('$'+subtotal);
+                $('#total').text('$'+subtotal);
+                
+            }
+
+        }
+
+        function incrementsgoldevine(id , price)
+        {
+            var quantity = $('.quantitygoldevine').val();
+            var totalPrice = $('.totalPrice').val();
+            quantity++;
+            $('.addOrRemovesGoldeive').val(quantity);
+            $('.quantitygoldevine').val(quantity);
+            $('.totalPrice').val(parseInt(totalPrice) + parseInt(price));
+            let subtotal = parseInt(totalPrice) + parseInt(price);
+            $('.totalPricebag').text('$'+subtotal);
+            $('.goldevineSubtotal').text('$'+subtotal);
+            $('#total').text('$'+subtotal);
+
         }
     </script>
 @endsection

@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Vendor\Country;
 use App\Http\Controllers\Controller;
+use App\Models\SelectProjectBenefits;
 use App\Models\Admin\Goldevine\Project;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Admin\Goldevine\FounderDetail;
@@ -25,7 +26,6 @@ class ProjectManageController extends Controller
     public function projectcheckout($id)
     {
         $projectBenefit = ProjectBenefit::with('project', 'user')->find($id);
-        // dd($projectBenefit);
         return view('frontend.all-page.cart.checkout', compact('projectBenefit'));
     }
 
@@ -558,4 +558,36 @@ class ProjectManageController extends Controller
         $goldevinenearly = Project::where('status', 'Active')->orderBy('id', 'DESC')->paginate(20);
         return view('frontend.goldevine.project.category.nearly', compact('goldevinenearly'));
     }
+
+    public function projectAddToCart(Request $request)
+    {
+        $selectBenefits = new SelectProjectBenefits();
+        $selectBenefits->benefit_id = $request->id;
+        $selectBenefits->user_id = auth()->user()->id;
+        $selectBenefits->save();
+        $goldenvine = SelectProjectBenefits::with('project_benefit')->where('user_id', auth()->user()->id)->where('status', 'pending')->get();
+        $totalgoldenvine = 0;
+        if ($selectBenefits->save()) {
+            $benefit = ProjectBenefit::with('project')->where('id', $request->id)->first();
+            foreach ($goldenvine as $totalgoldenvines) {
+                $totalgoldenvine = $totalgoldenvine + $totalgoldenvines->project_benefit->price * $totalgoldenvines->project_benefit->quantity;
+            }
+        }
+        return response()->json(['success' => 'Added to cart successfully!', 'benefit' => $benefit, 'totalgoldenvine' => $totalgoldenvine , 'goldenvine' => $goldenvine]);
+    }
+
+    public function removeGoldevineproject(Request $request)
+    {
+        $benefit = SelectProjectBenefits::find($request->id)->delete();
+        $goldenvine = SelectProjectBenefits::with('project_benefit')->where('user_id', auth()->user()->id)->where('status', 'pending')->get();
+        $totalgoldenvine = 0;
+        if ($benefit) {
+            foreach ($goldenvine as $totalgoldenvines) {
+                $totalgoldenvine = $totalgoldenvine + $totalgoldenvines->project_benefit->price * $totalgoldenvines->project_benefit->quantity;
+            }
+        }
+        return response()->json(['success' => 'Removed successfully!' , 'totalgoldenvine' => $totalgoldenvine , 'goldenvine' => $goldenvine]);
+        
+        
+    } 
 }
