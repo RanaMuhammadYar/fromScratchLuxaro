@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin\Goldevine;
 
 use Carbon\Carbon;
+use App\Models\Admin\Cart;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Vendor\Country;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\SelectProjectBenefits;
 use App\Models\Admin\Goldevine\Project;
 use Illuminate\Support\Facades\Validator;
@@ -51,19 +53,6 @@ class ProjectManageController extends Controller
             $goldevineorder->save();
             return redirect()->route('home')->with('success', 'Order Placed Successfully');
         }
-
-        // $goldevineorder = new GoldevineOrder();
-        // $goldevineorder->benefit_id = $request->benefit_id;
-        // $goldevineorder->user_id = $request->user_id;
-        // $goldevineorder->total_price = $request->total;
-        // $goldevineorder->quantity = $request->quantity;
-        // $goldevineorder->project_id = $request->project_id;
-        // $goldevineorder->order_status = 'Pending';
-        // $goldevineorder->payment_status = 'Pending';
-        // $goldevineorder->payment_method = 'Cash On Delivery';
-        // $goldevineorder->user_id = auth()->user()->id;
-        // $goldevineorder->save();
-        return redirect()->route('home')->with('success', 'Order Placed Successfully');
     }
 
     public function projectsearch(Request $request)
@@ -561,6 +550,10 @@ class ProjectManageController extends Controller
 
     public function projectAddToCart(Request $request)
     {
+        $checkalrady = SelectProjectBenefits::where('benefit_id', $request->id)->where('user_id', auth()->user()->id)->where('status', 'pending')->first();
+        if ($checkalrady) {
+            return response()->json(['error' => 'Already added to cart!']);
+        }
         $selectBenefits = new SelectProjectBenefits();
         $selectBenefits->benefit_id = $request->id;
         $selectBenefits->user_id = auth()->user()->id;
@@ -573,7 +566,21 @@ class ProjectManageController extends Controller
                 $totalgoldenvine = $totalgoldenvine + $totalgoldenvines->project_benefit->price * $totalgoldenvines->project_benefit->quantity;
             }
         }
-        return response()->json(['success' => 'Added to cart successfully!', 'benefit' => $benefit, 'totalgoldenvine' => $totalgoldenvine , 'goldenvine' => $goldenvine]);
+        $cartorders = 0;
+        $cartorders = Cart::with('product')
+            ->where(function ($query) {
+                $query
+                    ->where('status', 'pending')
+                    ->where('user_id', Auth::id())
+                    ->where('temp_id', '!=', null)
+                    ->orWhere(function ($query) {
+                        $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
+                    });
+            })
+            ->count();
+            $cartorders = $cartorders + projectaddTocartCount();
+
+        return response()->json(['success' => 'Added to cart successfully!', 'benefit' => $benefit, 'totalgoldenvine' => $totalgoldenvine, 'goldenvine' => $goldenvine , 'cartorders' => $cartorders]);
     }
 
     public function removeGoldevineproject(Request $request)
@@ -586,8 +593,6 @@ class ProjectManageController extends Controller
                 $totalgoldenvine = $totalgoldenvine + $totalgoldenvines->project_benefit->price * $totalgoldenvines->project_benefit->quantity;
             }
         }
-        return response()->json(['success' => 'Removed successfully!' , 'totalgoldenvine' => $totalgoldenvine , 'goldenvine' => $goldenvine]);
-        
-        
-    } 
+        return response()->json(['success' => 'Removed successfully!', 'totalgoldenvine' => $totalgoldenvine, 'goldenvine' => $goldenvine]);
+    }
 }

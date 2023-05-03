@@ -357,13 +357,23 @@
                 success: function(response) {
 
                     console.log(response);
-                    swal({
-                        title: "Success!",
-                        text: response.success,
-                        icon: "success",
-                        button: "Ok",
-                    });
 
+                    if (response.success == 'Added to cart successfully!') {
+                        swal({
+                            title: "Success!",
+                            text: response.success,
+                            icon: "success",
+                            button: "Ok",
+                        });
+                    } else {
+                        swal({
+                            title: "Error!",
+                            text: response.error,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
                     $('.goldevinecatdata').append('<div class="row destroy' + response.benefit.id +
                         ' py-1"> <div class="col-1 px-1"> <span class=""> <img src="' + response.benefit
                         .feature_image +
@@ -378,10 +388,12 @@
                         '</span> </div><div class="col-1 px-1"> <span>=</span> </div><div class="col-1 px-1"> <span class="">$' +
                         response.benefit.price * response.benefit.quantity + '</span> </div></div>');
 
-                        $('.goldevinecatdata1total').html('');
+                    $('.goldevinecatdata1total').html('');
                     $('.goldevinecatdata1total').append(
                         '<div class="row px-1"> <div class="col-8"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $' +
                         response.totalgoldenvine + '</span> </div></div>');
+                    $('.CartCount').html('');
+                    $('.CartCount').append(response.cartorders);
 
                 },
             });

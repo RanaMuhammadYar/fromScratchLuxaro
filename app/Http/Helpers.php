@@ -29,6 +29,7 @@ use App\Utility\CategoryUtility;
 use App\Models\SellerPackagePayment;
 use App\Utility\NotificationUtility;
 use Illuminate\Support\Facades\Auth;
+use App\Models\GoldevineOrderDenefit;
 use App\Models\SelectProjectBenefits;
 use App\Models\Admin\Goldevine\Project;
 use App\Http\Resources\V2\CarrierCollection;
@@ -1290,9 +1291,9 @@ if (!function_exists('get_url_params')) {
 function totalamout($id)
 {
     $total = 0;
-    $order = GoldevineOrder::where('project_id', $id)->get();
+    $order = GoldevineOrderDenefit::with('goldevine_order')->where('project_id', $id)->get();
     foreach ($order as $key => $orderDetail) {
-        $total += $orderDetail->total_price;
+        $total += $orderDetail->goldevine_order->total_price;
     }
     return $total;
 }
@@ -1300,21 +1301,23 @@ function totalamout($id)
 function persentage($id)
 {
     $total = 0;
-    $order = GoldevineOrder::with('project')->where('project_id', $id)->get();
+    $current = 0;
+    $order = GoldevineOrderDenefit::with('project','goldevine_order')->where('project_id', $id)->get();
     foreach ($order as $key => $orderDetail) {
-        $total += $orderDetail->total_price;
+        $total += $orderDetail->goldevine_order->total_price;
         $current = $orderDetail->project->project_funding_goal;
     }
     $percentage = 0;
     if ($total > 0 && $current > 0) {
         $percentage = $total / $current * 100;
     }
+    
     return $percentage;
 }
 
 function donation($id)
 {
-    return GoldevineOrder::where('project_id', $id)->count();
+    return GoldevineOrderDenefit::where('project_id', $id)->count();
 }
 
 function totalproject($id)
@@ -1333,7 +1336,7 @@ function leftdays($id)
 
 function backer($id)
 {
-    return GoldevineOrder::where('benefit_id', $id)->count();
+    return GoldevineOrderDenefit::where('benefit_id', $id)->count();
 }
 
 function banner()
@@ -1359,6 +1362,14 @@ function projectaddTocart()
 {
     if(Auth::check()){
         $selectBenefit = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::user()->id)->where('status','pending')->get();
+        return $selectBenefit;
+    }
+}
+
+function projectaddTocartCount()
+{
+    if(Auth::check()){
+        $selectBenefit = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::user()->id)->where('status','pending')->count();
         return $selectBenefit;
     }
 }

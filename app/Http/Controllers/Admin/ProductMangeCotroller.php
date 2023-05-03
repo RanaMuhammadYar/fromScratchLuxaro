@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\Cart;
+use App\Models\Admin\Banner;
 use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Models\Admin\Category;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Banner;
 use Illuminate\Support\Facades\Auth;
+use App\Models\SelectProjectBenefits;
 use Illuminate\Support\Facades\Cache;
 
 
@@ -129,8 +130,9 @@ class ProductMangeCotroller extends Controller
                             });
                     })
                     ->count();
+                    $selectBenefit = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::user()->id)->where('status','pending')->count();
 
-                return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => Auth::user()->id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id,'product'=>$product]);
+                return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => Auth::user()->id, 'total' => $total, 'count' => $count + $selectBenefit, 'id' =>  $cart->id,'product'=>$product]);
             } else {
                 if (session()->has('temp_id')) {
                     $temp_id = session()->get('temp_id');
@@ -240,9 +242,10 @@ class ProductMangeCotroller extends Controller
                         });
                 })
                 ->count();
+                $selectBenefit = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::user()->id)->where('status','pending')->count();
             // $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
             // $count = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
-            return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total, 'count' => $count]);
+            return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total, 'count' => $count +  $selectBenefit]);
         } else {
             $total = \App\Models\Admin\Cart::with('product')
                 ->where(function ($query) {

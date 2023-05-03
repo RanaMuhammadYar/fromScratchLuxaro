@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Models\Admin\CartOrder;
 use App\Http\Controllers\Controller;
-use App\Models\SelectProjectBenefits;
 use Illuminate\Support\Facades\Auth;
+use App\Models\GoldevineOrderDenefit;
+use App\Models\SelectProjectBenefits;
+use App\Models\Admin\Goldevine\Project;
 use Illuminate\Queue\Console\RetryCommand;
+use App\Models\Admin\Goldevine\GoldevineOrder;
 
 class CartController extends Controller
 {
@@ -58,6 +61,8 @@ class CartController extends Controller
     public function paymenttype(Request $request)
     {
 
+        // return $request->all();
+
         // foreach ($request->cart_id as $cart_id){
         //     $carts = Cart::find($cart_id);
         //     session()->put('vendor_id', $carts->product->user_id);
@@ -81,7 +86,11 @@ class CartController extends Controller
         // }
         // {{ dd(session()->forget('vendor_id')); }}
 
-        $order = new Order();
+
+        if($request->luxaurosubtotal == 0){
+            // return redirect()->back()->with('error', 'Please Select Product First');
+        }else{
+            $order = new Order();
         $order->payment_type = 'Cash On delivory';
         $order->payment_status = 'Pending';
         $order->status = 'Pending';
@@ -110,6 +119,33 @@ class CartController extends Controller
             }
             session()->forget('temp_id');
         }
+        }
+        $goldevineorder = new GoldevineOrder();
+        $goldevineorder->user_id = Auth::user()->id;
+        $goldevineorder->total_price = $request->goldevinetotals;
+        $goldevineorder->order_status = 'Pending';
+        $goldevineorder->payment_status = 'Pending';
+        $goldevineorder->payment_method = 'Cash On Delivery';
+        $goldevineorder->save();
+        foreach ($request->benefit_id as $key => $cart_id) {
+            $goldevineOrderDenefit = new GoldevineOrderDenefit();
+            $goldevineOrderDenefit->goldevine_order_id = $goldevineorder->id;
+            $goldevineOrderDenefit->select_project_benefits_id = $request->select_project_benefits_id[$key];
+            $goldevineOrderDenefit->project_id = $request->project_id[$key];
+            $goldevineOrderDenefit->benefit_id = $request->benefit_id[$key];
+            $goldevineOrderDenefit->project_user_id = $request->project_user_id[$key];
+            $goldevineOrderDenefit->quantity = $request->quantity[$key];
+            $goldevineOrderDenefit->price = $request->quantity[$key] * $request->price[$key];
+            $goldevineOrderDenefit->save();
+        }
+
+        foreach ($request->select_project_benefits_id as $cart_id) {
+            $cart = SelectProjectBenefits::find($cart_id);
+            $cart->status = 'Order Placed';
+            $cart->save();
+        }
+
+        
 
         return redirect()->route('home')->with(['success' => 'Order Placed Successfully.']);
     }
