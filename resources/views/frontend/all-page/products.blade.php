@@ -148,6 +148,7 @@
                     </form>
                 </div>
             </div>
+
             <div class="slider gold-evine-slider appendFilterData">
                 @forelse ($goldevines as $goldevine)
                     @php
@@ -173,7 +174,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <span>${{ number_format($total_amount) }} Raised</span>
+                                        <span>${{ number_format(totalamout($goldevine->id)) }} Raised</span>
                                         <span>{{ persentage($goldevine->id) }}%</span>
                                     </div>
                                     <p class="mb-2">{{ donation($goldevine->id) }} Donations</p>
