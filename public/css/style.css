@@ -137,10 +137,6 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 	height: 50px;
 }
 
-.user-info a {
-	color: #cfcfcf;
-	font-size: 12px;
-}
 
 .user-info ul li {
 	font-size: 12px;
@@ -838,7 +834,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 .merchant-banner-text h3 {
   font-size: 60px;
-  text-align: center; 
+  text-align: center;
   color: #fff;
 }
 
@@ -893,7 +889,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 .profile-section .profile > li {
   text-transform: uppercase;
-} 
+}
 
 .profile-section .profile > li a {
   font-size: 12px;
@@ -911,7 +907,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 .profile-tags .close-btn-pt {
   position: relative;
-  
+
 }
 
 .profile-tags .close-btn-pt i {
@@ -1051,9 +1047,9 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 .chat-box {
   background-color: #F1F2F4;
   padding: 5px 5px;
-  
+
   border-radius: 5px;
-  
+
 }
 
 .user-heading {
@@ -1085,7 +1081,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   display: flex;
   flex-direction: column;
   margin-left: auto;
-  padding: 4px 10px 10px; 
+  padding: 4px 10px 10px;
   width: 50%;
 
 }
@@ -1144,7 +1140,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   font-size: 17px;
 }
 
-  
+
 	.nav-section {
 		position: relative;
 	}
@@ -1207,7 +1203,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 	.about-banner {
 	  margin: 70px 0px 40px;	}
 
-	.about-img-holder img { 
+	.about-img-holder img {
     height: 400px;
     object-fit: contain;
 	}
@@ -1359,11 +1355,11 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 .panel-container {
-         
+
      overflow: hidden;
-          
+
           /* avoid browser level touch actions */
-          
+
         }
 
         .panel-left {
@@ -1378,10 +1374,10 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
         .splitter {
           flex: 0 0 auto;
-          width: 3px;  
+          width: 3px;
           background: silver;
           min-height: 200px;
-          cursor: col-resize;  
+          cursor: col-resize;
           margin: 0px 35px 0px 25px;
           display: none;
         }
@@ -1469,3 +1465,20 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     font-size: 14px;
 }
 
+    
+/* updating */
+
+.user-info img{
+    display: inline;
+    margin: 0px !important;
+}
+.user-info a{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 10px;
+    color: #cfcfcf;
+	font-size: 12px;
+}

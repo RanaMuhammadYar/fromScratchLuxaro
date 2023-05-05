@@ -5,5 +5,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="{{ asset('goldevine/css/style.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('goldevine/css/ar-style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('goldevine/css/ar-style.css') }}"/>
 <script type="text/javascript" src="{{ asset('goldevine/js/jquery-3.6.0.min.js') }}"></script>
+{{-- <link rel="stylesheet" href="{{ asset('css/ar-style.css') }}"> --}}
+{{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}

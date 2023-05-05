@@ -636,3 +636,18 @@ ul.subscriptions-producct:before {
 }
 
 
+
+/* updating  */
+
+.user-info img{
+    display: inline;
+    margin: 0px !important;
+}
+.user-info a{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 10px;
+}

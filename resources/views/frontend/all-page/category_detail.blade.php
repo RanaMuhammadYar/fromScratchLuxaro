@@ -47,7 +47,7 @@
                                     href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
                                     <div class="img-holder">
                                         <img src="{{ $product->image }}"
-                                            onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                                            onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
                                     </div>
                                 </a>
                                 <div class="txt-holder">
@@ -152,7 +152,7 @@
                                         href="{{ route('productDetails', ['id' => $relatedProduct->id, 'slug' => Str::slug($relatedProduct->product_name)]) }}">
                                         <div class="img-holder">
                                             <img src="{{ @$relatedProduct->image }}"
-                                                onerror="this.src'{{ asset('images/default.png') }}'"
+                                                onerror="this.src='{{ asset('images/default.png') }}'"
                                                 class="img-fluid">
                                         </div>
                                     </a>
@@ -222,9 +222,9 @@
                                         href="{{ route('productDetails', ['id' => $relatedProduct->id, 'slug' => Str::slug($relatedProduct->product_name)]) }}">
                                         <div class="img-holder">
                                             <img src="{{ $relatedProduct->image }}"
-                                                onerror="this.src'{{ asset('images/default.png') }}'"
+                                                onerror="this.src='{{ asset('images/default.png') }}'"
                                                 class="img-fluid">
-                                        </div>
+                                         </div>
                                     </a>
                                     <div class="txt-holder">
                                         <div class="d-flex justify-content-between mb-3">

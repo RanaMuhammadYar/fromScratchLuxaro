@@ -29,11 +29,20 @@ use App\Http\Livewire\Product;
 // });
 
 
+// app()->bind('test', function () {
+//     return "";
+// });
+
+
+// Route::get('/provide', function () {
+//     dd(app());
+// });
+
 Route::get('storage-link', function () {
-    Artisan::call('storage:link');
     Artisan::call('config:cache');
     Artisan::call('cache:clear');
     Artisan::call('view:clear');
+    Artisan::call('storage:link');
     return 'Storage link successfully created';
 });
 

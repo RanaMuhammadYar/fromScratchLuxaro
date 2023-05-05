@@ -60,9 +60,8 @@
                             <a href="{{ route('productcategory', ['id' => $category->id, 'slug' => Str::slug($category->title)]) }}"
                                 style="color: #2e2c2c; text-decoration: none;">
                                 <div class="img-holder">
-                                    <img src="{{ isset($category->image) ? $category->image : asset('images/product-img.png') }}"
-                                        onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid"
-                                        alt="">
+                                    <img src="{{ isset($category->image) ? $category->image : asset('images/product-img.png') }}" class="img-fluid"
+                                        alt="" onerror="this.src='{{ asset('images/default.png')  }}'">
                                 </div>
                                 <div class="txt-holder">
                                     <strong class="title">{{ $category->title }}</strong>
@@ -154,7 +153,7 @@
                     @php
                         $total_amount = App\Models\Admin\Goldevine\GoldevineOrder::where('project_id', $goldevine->id)->sum('total_price');
                         $donations = App\Models\Admin\Goldevine\GoldevineOrder::where('project_id', $goldevine->id)->count();
-                        
+
                     @endphp
                     <div class="goldevineFilterAppend">
                         <a href="{{ route('projectDetail', ['id' => $goldevine->id, 'slug' => $goldevine->slug]) }}">
@@ -922,6 +921,6 @@
 
             }
 
-            
+
         </script>
     @endsection

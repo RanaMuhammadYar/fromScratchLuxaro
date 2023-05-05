@@ -134,6 +134,7 @@ class ProductMangeCotroller extends Controller
 
                 return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => Auth::user()->id, 'total' => $total, 'count' => $count + $selectBenefit, 'id' =>  $cart->id,'product'=>$product]);
             } else {
+                $product = Product::where('id', $request->product_id)->first();
                 if (session()->has('temp_id')) {
                     $temp_id = session()->get('temp_id');
                     $cart = new Cart();
@@ -170,7 +171,7 @@ class ProductMangeCotroller extends Controller
                                 });
                         })
                         ->count();
-                    return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id]);
+                    return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id ,'product'=>$product]);
                 } else {
                     $temp_id = random_int(1000, 9999);
                     $cart = new Cart();

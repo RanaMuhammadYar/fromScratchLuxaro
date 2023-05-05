@@ -2,6 +2,10 @@
     #header {
         padding-bottom: 70px;
     }
+
+
+
+
 </style>
 <header id="header">
     <div class="fixed-top">
@@ -61,7 +65,7 @@
                                     <i
                                         class="fa fa-chevron-down me-2"></i>{{ isset(auth()->user()->userDetails) ? auth()->user()->userDetails->name : '' }}
                                     <img src="{{ isset(auth()->user()->userDetails->user_profile_image) ? auth()->user()->userDetails->user_profile_image : '' }}"
-                                        onerror="this.src='{{ asset('images/avatar.png') }}'" class="mt-2" alt=""
+                                        onerror="this.src='{{ asset('images/avatar.png') }}'"  alt=""
                                         style="border-radius: 50%" width="25px:">
                                     {{-- <i class="fa fa-user-circle ms-1"
                                     aria-hidden="true"></i> --}}
@@ -241,7 +245,7 @@
                                                 </div>
                                                 @if ($cartorder->quantity * $cartorder->product->product_price == !null)
                                                     @php
-                                                        
+
                                                         $total = $total + $cartorder->quantity * $cartorder->product->product_price;
                                                     @endphp
                                                 @else
@@ -351,7 +355,7 @@
                                                 </div>
                                                 @if ($cartorders->project_benefit->price * $cartorders->project_benefit->quantity == !null)
                                                     @php
-                                                        
+
                                                         $totalprojectprice = $totalprojectprice + $cartorders->project_benefit->price * $cartorders->project_benefit->quantity;
                                                     @endphp
                                                 @else

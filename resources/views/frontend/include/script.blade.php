@@ -227,6 +227,7 @@
             },
             dataType: "json",
             success: function(response) {
+                console.log(response);
                 if (response.success == 'Product Already Added To Cart.') {
                     swal({
                         title: "Error!",
