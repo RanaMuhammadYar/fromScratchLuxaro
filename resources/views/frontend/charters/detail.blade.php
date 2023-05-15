@@ -92,28 +92,29 @@
                 <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
                     <h2 class="m-0">Other charters in the area</h2>
                     <div class="d-flex form-holder">
-                        <a class="btn btn-view rounded-0" href="javascript:void">View All</a>
-                        <!-- <form class="page-form flex-fill" action="#"> -->
-                        <div class="page-form-holder d-flex">
-                            <label class="form-control rounded-0">Search Filter</label>
-                            <div class="form-field d-flex flex-fill">
-                                <select class="flex-fill border-0 bg-transparent">
-                                    <option>All</option>
-                                    <option>All</option>
-                                    <option>All</option>
-                                </select>
+                        <a class="btn btn-view rounded-0" href="{{ route('charters') }}">View All</a>
+                        <form class="page-form flex-fill" action="#">
+                            <div class="page-form-holder d-flex">
+                                <label class="form-control rounded-0">Search Filter</label>
+                                <div class="form-field d-flex flex-fill">
+                                    <select class="flex-fill border-0 bg-transparent" onchange="charterAreaAppend(this)">
+                                        <option>OrderBy</option>
+                                        <option value="asc">price(min)</option>
+                                        <option value="desc">price(max)</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <!-- </form> -->
+                        </form>
                     </div>
                 </div>
-                <div class="slider Charters-slider">
+                <div class="slider Charters-slider" id="charter-appendarea">
                     @foreach ($charters as $charter)
                         <div>
                             <a href="{{ route('charter_detail', ['id' => $charter->id]) }}" class="text-dark">
                                 <div class="product-item">
                                     <div class="img-holder">
-                                        <img src="{{ $charter->thumbnail_img }}" class="img-fluid">
+                                        <img src="{{ $charter->thumbnail_img }}" class="img-fluid"
+                                            onerror="this.src='{{ asset('images/default.png') }}'">
                                     </div>
                                     <div class="txt-holder">
                                         <div class="d-flex justify-content-between mb-3">
@@ -140,99 +141,195 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="appendCharterarea">
+
+                </div>
             </div>
         </div>
-        <!-- <div class="charter-specs-section mb-3 mb-md-5">
-                        <div class="container">
-                            <div class="col-md-10 mx-auto">
-                                <div class="row gx-5">
-                                    <div class="col-md-7">
-                                        <div class="row">
-                                            <div class="col-md-7 mb-3 mb-md-4">
-                                                <img src="{{ static_asset('frontend/images/charter-img.png') }}" class="img-fluid w-100">
-                                            </div>
-                                            <div class="col-md-5 mb-3 mb-md-4">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged</p>
-                                            </div>
-                                            <div class="col-md-5 mb-3 mb-md-4">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged</p>
-                                            </div>
-                                            <div class="col-md-7 mb-3 mb-md-4">
-                                                <img src="{{ static_asset('frontend/images/charter-img.png') }}" class="img-fluid w-100">
-                                            </div>
-                                            <div class="col-md-7 mb-3 mb-md-4">
-                                                <img src="{{ static_asset('frontend/images/charter-img.png') }}" class="img-fluid w-100">
-                                            </div>
-                                            <div class="col-md-5 mb-3 mb-md-4">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <h3 class="mb-4">Specifications</h3>
-                                        <h4 class="mb-3">General</h4>
-                                        <table class="w-100 mb-5">
-                                            <tr>
-                                                <td>Model Series Name</td>
-                                                <td>My Buddy D</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Model Number</td>
-                                                <td>POR 1376</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Primary Meterial</td>
-                                                <td>Wood</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Primary Meterial SubType</td>
-                                                <td>Partical Board</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Delivery Condition</td>
-                                                <td>DIY(Do-it-Yourself)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Suitable For</td>
-                                                <td>Study & Home Office</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Compatible Laptop Size</td>
-                                                <td>17 cm</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Foldable</td>
-                                                <td>Yes</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Adjustable Height</td>
-                                                <td>Yes</td>
-                                            </tr>
-                                        </table>
-                                        <h4 class="mb-3">Demensions</h4>
-                                        <table class="w-100">
-                                            <tr>
-                                                <td>Width</td>
-                                                <td>60 cm</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Height</td>
-                                                <td>80 cm</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Depth</td>
-                                                <td>40 cm</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Weight</td>
-                                                <td>4.98 kg</td>
-                                            </tr>
-                                        </table>
-                                    </div>
+
+        <div class="charter-specs-section mb-3 mb-md-5">
+            <div class="container">
+                <div class="col-md-10 mx-auto">
+                    <div class="row gx-5">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-7 mb-3 mb-md-4">
+                                    <img src="{{ isset($charter->charterSpecificationGeneral->first_image) ? $charter->charterSpecificationGeneral->first_image : '' }}"
+                                        class="img-fluid w-100" onerror="this.src='{{ asset('images/default.png') }}'">
+                                </div>
+                                <div class="col-md-5 mb-3 mb-md-4">
+                                    <p>
+                                        {!! isset($charter->charterSpecificationGeneral->first_description)
+                                            ? $charter->charterSpecificationGeneral->first_description
+                                            : '' !!}
+
+                                    </p>
+                                </div>
+                                <div class="col-md-5 mb-3 mb-md-4">
+                                    <p>
+                                        {!! isset($charter->charterSpecificationGeneral->second_description)
+                                            ? $charter->charterSpecificationGeneral->second_description
+                                            : '' !!}
+
+                                    </p>
+                                </div>
+                                <div class="col-md-7 mb-3 mb-md-4">
+                                    <img src="{{ isset($charter->charterSpecificationGeneral->second_image) ? $charter->charterSpecificationGeneral->second_image : '' }}"
+                                        class="img-fluid w-100" onerror="this.src='{{ asset('images/default.png') }}'">
+                                </div>
+                                <div class="col-md-7 mb-3 mb-md-4">
+                                    <img src="{{ isset($charter->charterSpecificationGeneral->third_image) ? $charter->charterSpecificationGeneral->third_image : '' }}"
+                                        class="img-fluid w-100" onerror="this.src='{{ asset('images/default.png') }}'">
+                                </div>
+                                <div class="col-md-5 mb-3 mb-md-4">
+                                    <p>
+                                        {!! isset($charter->charterSpecificationGeneral->third_description)
+                                            ? $charter->charterSpecificationGeneral->third_description
+                                            : '' !!}
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                        <div class="col-md-5">
+                            <h3 class="mb-4"><strong>Specifications</strong> </h3>
+                            <h4 class="mb-3"><strong>General</strong></h4>
+                            <table class="w-100 mb-5">
+                                <tr>
+                                    <td>Model Series Name</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->model_series_name) ? $charter->charterSpecificationGeneral->model_series_name : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Model Number</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->model_number) ? $charter->charterSpecificationGeneral->model_number : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Primary Meterial</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->primary_meterial) ? $charter->charterSpecificationGeneral->primary_meterial : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Primary Meterial SubType</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->primary_meterial_subType) ? $charter->charterSpecificationGeneral->primary_meterial_subType : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Delivery Condition</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->delivery_condition) ? $charter->charterSpecificationGeneral->delivery_condition : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Suitable For</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->suitable_for) ? $charter->charterSpecificationGeneral->suitable_for : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Compatible Laptop Size</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->compatible_laptop_size) ? $charter->charterSpecificationGeneral->compatible_laptop_size : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Foldable</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->foldable) ? $charter->charterSpecificationGeneral->foldable : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Adjustable Height</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->adjustable_height) ? $charter->charterSpecificationGeneral->adjustable_height : '' }}
+                                    </td>
+                                </tr>
+                            </table>
+                            <h4 class="mb-3"><strong>Demensions</strong></h4>
+                            <table class="w-100">
+                                <tr>
+                                    <td>Width</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->width) ? $charter->charterSpecificationGeneral->width : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Height</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->height) ? $charter->charterSpecificationGeneral->height : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Depth</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->depth) ? $charter->charterSpecificationGeneral->depth : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Weight</td>
+                                    <td>{{ isset($charter->charterSpecificationGeneral->weight) ? $charter->charterSpecificationGeneral->weight : '' }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="product-section mb-5 pb-lg-3">
+            <div class="container">
+                <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
+                    <h2 class="m-0">You may also like</h2>
+                    <div class="d-flex form-holder">
+                        <a class="btn btn-view rounded-0" href="{{ route('charters') }}">View All</a>
+                        <form class="page-form flex-fill" action="#">
+                            <div class="page-form-holder d-flex">
+                                <label class="form-control rounded-0">Search Filter</label>
+                                <div class="form-field d-flex flex-fill">
+                                    <select class="flex-fill border-0 bg-transparent" onchange="appendCharters(this)">
+                                        <option>OrderBy</option>
+                                        <option value="asc">price(min)</option>
+                                        <option value="desc">price(max)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="slider Charters-slider" id="charter-append">
+                    @foreach ($charters as $charter)
+                        <div>
+                            <a href="{{ route('charter_detail', ['id' => $charter->id]) }}" class="text-dark">
+                                <div class="product-item">
+                                    <div class="img-holder">
+                                        <img src="{{ $charter->thumbnail_img }}" class="img-fluid"
+                                            onerror="this.src='{{ asset('images/default.png') }}'">
+                                    </div>
+                                    <div class="txt-holder">
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <div>
+                                                <strong class="title">{{ $charter->name }}</strong>
+                                                <ul class="list-unstyled m-0 p-0 d-flex stars">
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                    <li class="me-1"><i class="fa fa-star"></i></li>
+                                                </ul>
+                                            </div>
+                                            <i class="fa fa-globe fa-1x mt-2"></i>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <strong class="title">${{ $charter->rate }}</strong>
+                                            <a class="btn bg-dark text-white py-1 px-2" href="javascript:void"><i
+                                                    class="fa fa-shopping-basket"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="appendCharter">
+
+                </div>
+            </div>
+        </div>
+
 
         <div class="reviews-ratings mb-3 mb-md-5">
             <div class="container">
@@ -240,9 +337,71 @@
                 <img src="{{ asset('images/review-img.png') }}" class="img-fluid">
             </div>
         </div>
-        <div class="street-img">
-            <img src="{{ asset('images/img1.png') }}" class="img-fluid">
-        </div>
 
     </div>
+
+
+    <script>
+        function charterAreaAppend(selectObject) {
+            var filterValue = selectObject.value;
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('appendarea') }}",
+            beforeSend: function() {
+                $('#charter-appendarea').html('');
+                if ($('#charter-appendarea').hasClass('slick-initialized')) {
+                    $('#charter-appendarea').html('');
+                    $('.filterGoldevinesarea').html('');
+                    $('#charter-appendarea').show();
+                } else {
+                    $('#charter-appendarea').show();
+                }
+                $('#charter-appendarea').html(
+                    '<div class="text-center " style="height:299px;"><div class="spinner-border" role="status" style="color:#133033 !importent ; width: 5rem; height: 5rem;"> <span class="visually-hidden">Loading...</span> </div></div>'
+                );
+            },
+            data: {
+                charter: filterValue
+            },
+            success: function(data) {
+                if ($('.appendCharterarea').hasClass('slick-initialized')) {
+                    $('.appendCharterarea').slick('unslick');
+                    $('.appendCharterarea').html('');
+                }
+                $('.appendCharterarea').append(data);
+                $('.appendCharterarea').slick({
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false,
+                    arrows: true,
+                    focusOnSelect: true,
+                    autoplay: false,
+                    mobileFirst: true,
+                    prevArrow: "<button type='button' class='slick-prev'><img src='images/arrow-left.png'></button>",
+                    nextArrow: "<button type='button' class='slick-next'><img src='images/arrow-next.png'></button>",
+                    responsive: [{
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                        }
+                    }, {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 6,
+                            slidesToScroll: 1,
+                        }
+                    }]
+                });
+
+            },
+            complete: function() {
+                $('#charter-appendarea').hide();
+            }
+        });
+
+
+        }
+    </script>
 @endsection

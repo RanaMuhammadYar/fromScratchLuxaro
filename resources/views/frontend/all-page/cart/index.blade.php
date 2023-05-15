@@ -142,7 +142,7 @@
                                 <input type="hidden" name="select_project_benefits_id[]" value="{{ $projectBenefit->id }}">
                                 <input type="hidden" name="project_user_id[]" value="{{ $projectBenefit->project_benefit->project->user_id }}">
                                 <input type="hidden" name="price[]" value="{{ $projectBenefit->project_benefit->price }}">
-                                
+
 
                                     <div class="removebenefit{{ $projectBenefit->id }}">
                                         <ul
@@ -550,6 +550,7 @@
         function decrements(id, price) {
             let qty = $('.addOrRemoves' + id).val();
             if (qty > 1) {
+
                 $('.addOrRemoves' + id).val(--qty);
                 $('.price' + id).val(qty * price);
                 $('.appendprice' + id).html('$' + qty * price);
@@ -563,18 +564,18 @@
                 let overalltotal = parseFloat(luxaurosubtotal) + parseFloat(shipingcharge);
                 $('.overalltotal').html('$' + overalltotal.toFixed(2));
             } else {
-                $('.addOrRemoves' + id).val(1);
-                $('.price' + id).val(price);
-                $('.appendprice' + id).html('$' + price);
-                let luxarosubtotals1 = $('#luxarosubtotals').val();
-                console.log(luxarosubtotals1);
-                let luxaurosubtotal = parseFloat(luxarosubtotals1) - parseFloat(price);
-                console.log(luxaurosubtotal);
-                $('#luxarosubtotalsappend').html('$' + luxaurosubtotal.toFixed(2));
-                $('.luxaurosubtotalappen').val(luxaurosubtotal.toFixed(2));
-                let shipingcharge = $('.shipingcharge').val();
-                let overalltotal = parseFloat(luxaurosubtotal) + parseFloat(shipingcharge);
-                $('.overalltotal').html('$' + overalltotal.toFixed(2));
+                // $('.addOrRemoves' + id).val(1);
+                // $('.price' + id).val(price);
+                // $('.appendprice' + id).html('$' + price);
+                // let luxarosubtotals1 = $('#luxarosubtotals').val();
+                // console.log(luxarosubtotals1);
+                // let luxaurosubtotal = parseFloat(luxarosubtotals1) - parseFloat(price);
+                // console.log(luxaurosubtotal);
+                // $('#luxarosubtotalsappend').html('$' + luxaurosubtotal.toFixed(2));
+                // $('.luxaurosubtotalappen').val(luxaurosubtotal.toFixed(2));
+                // let shipingcharge = $('.shipingcharge').val();
+                // let overalltotal = parseFloat(luxaurosubtotal) + parseFloat(shipingcharge);
+                // $('.overalltotal').html('$' + overalltotal.toFixed(2));
             }
         }
     </script>

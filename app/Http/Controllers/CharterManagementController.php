@@ -9,6 +9,7 @@ use App\Models\CharterBooking;
 use App\Models\Admin\DeliveryOption;
 use Illuminate\Support\Facades\Validator;
 use App\Models\CharterAvaliabiltyDateAndTime;
+use App\Models\Admin\CharterSpecificationGeneral;
 
 class CharterManagementController extends Controller
 {
@@ -34,7 +35,7 @@ class CharterManagementController extends Controller
     }
     public function charter_detail(Request $request)
     {
-        $charter_detail = Charter::where('id', $request->id)->first();
+        $charter_detail = Charter::with('charterSpecificationGeneral')->where('id', $request->id)->first();
         $charters = Charter::where('id', '!=', $request->id)->get();
         return view('frontend.charters.detail', compact('charter_detail', 'charters'));
     }
@@ -118,7 +119,6 @@ class CharterManagementController extends Controller
                     $imageArray[] = $path;
                 }
                 $charter->charter_agreement = json_encode($imageArray);
-
             }
             $charter->save();
             $tags = explode(",", $request->tags);
@@ -131,7 +131,46 @@ class CharterManagementController extends Controller
                 $availability->time_of_avalability = $request->start_time[$key];
                 $availability->save();
             }
+            $spacification =  new CharterSpecificationGeneral();
+            $spacification->charter_id = $charter->id;
+            $spacification->model_series_name = $request->model_series_name;
+            $spacification->model_number = $request->model_number;
+            $spacification->primary_meterial = $request->primary_meterial;
+            $spacification->primary_meterial_subType = $request->primary_meterial_subType;
+            $spacification->delivery_condition = $request->delivery_condition;
+            $spacification->suitable_for = $request->suitable_for;
+            $spacification->compatible_laptop_size = $request->compatible_laptop_size;
+            $spacification->foldable = $request->foldable;
+            $spacification->adjustable_height = $request->adjustable_height;
+            $spacification->width = $request->width;
+            $spacification->height = $request->height;
+            $spacification->depth = $request->depth;
+            $spacification->weight = $request->weight;
+            if ($request->hasFile('first_image')) {
+                $path = asset('storage/' . $request->first_image->store('product'));
+                $spacification->first_image = $path;
+            }
+            if ($request->hasFile('second_image')) {
+                $path = asset('storage/' . $request->second_image->store('product'));
+                $spacification->second_image = $path;
+            }
+            if ($request->hasFile('third_image')) {
+                $path = asset('storage/' . $request->third_image->store('product'));
+                $spacification->third_image = $path;
+            }
+            $spacification->first_description = $request->first_description;
+            $spacification->second_description = $request->second_description;
+            $spacification->third_description = $request->third_description;
+            $spacification->save();
             return redirect()->back()->with('success', 'Charter Added Successfully');
         }
+    }
+
+
+    public function appendarea(Request $request)
+    {
+        $charters = Charter::where('id', '!=', $request->id)->orderBy('rate', $request->charter)->get();
+        $html = view('frontend.all-page.append_charters', ['charters' => $charters])->render();
+        return $html;
     }
 }

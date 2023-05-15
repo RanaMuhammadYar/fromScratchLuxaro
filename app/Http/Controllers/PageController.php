@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\AboutUs;
 use Illuminate\Http\Request;
+use App\Models\LearnAboutGoldevine;
 
 class PageController extends Controller
 {
@@ -35,5 +37,36 @@ class PageController extends Controller
     {
         $page =  Page::where('type', 'privacy_policy_page')->first();
         return view("frontend.all-page.policies.privacy", compact('page'));
+    }
+
+    public function luxaurocontactUs()
+    {
+        return view("frontend.contactUs.luxauroContactUs");
+    }
+
+    public function goldevineAboutUs()
+    {
+        $about =  AboutUs::where('about_us_type', 'Goldevine')->first();
+        return view("frontend.goldevineaboutus",compact('about'));
+    }
+
+    public function tribridContactUs()
+    {
+        $ribrid = LearnAboutGoldevine::where('type', 'Tribrid')->first();
+        return view("frontend.goldevine.learnabout.aboutgold",compact('ribrid'));
+    }
+
+    public function learnaboutgoldevine()
+    {
+        $about =  AboutUs::where('about_us_type', 'Tribrid')->first();
+        return view("frontend.goldevine.learnabout.index",compact('about'));
+
+    }
+
+    public function goldevineRule()
+    {
+        $ribrid = LearnAboutGoldevine::where('type', 'Rule')->first();
+        return view("frontend.goldevine.learnabout.aboutgold",compact('ribrid'));
+
     }
 }

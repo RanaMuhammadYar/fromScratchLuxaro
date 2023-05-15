@@ -39,24 +39,39 @@
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Project Category</label>
-                                    <select name="project_category" id=""
-                                        class="form-control @error('project_category') is-invalid @enderror">
+                                    <label for="select-products">Project Category</label>
+                                    <select
+                                        class="form-select  @error('project_category')
+                                    is-invalid @enderror"
+                                        aria-label="Default select example" id="select-products" name="project_category">
+                                        <option selected value="">-Select-</option>
+                                        <option value="1" {{ $project->project_category == '1' ? 'selected' : '' }} >One</option>
+                                        <option value="2" {{ $project->project_category == '2' ? 'selected' : '' }} >Two</option>
+                                        <option value="3" {{ $project->project_category == '3' ? 'selected' : '' }} >Three</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Project End Method</label>
+                                    <select name="project_end_method" id=""
+                                        class="form-control @error('project_end_method') is-invalid @enderror">
                                         <option value="">-Select-</option>
                                         <option
-                                            value="Target Goal"{{ $project->project_category == 'Target Goal' ? 'selected' : '' }}>
+                                            value="Target Goal"{{ $project->project_end_method == 'Target Goal' ? 'selected' : '' }}>
                                             Target Goal</option>
                                         <option value="Target Date"
-                                            {{ $project->project_category == 'Target Date' ? 'selected' : '' }}>Target Date
+                                            {{ $project->project_end_method == 'Target Date' ? 'selected' : '' }}>Target Date
                                         </option>
                                         <option value="Target Goal & Date"
-                                            {{ $project->project_category == 'Target Goal & Date' ? 'selected' : '' }}>
+                                            {{ $project->project_end_method == 'Target Goal & Date' ? 'selected' : '' }}>
                                             Target
                                             Goal & Date</option>
                                         <option value="Campaign Never Ends"
-                                            {{ $project->project_category == 'Campaign Never Ends' ? 'selected' : '' }}>
+                                            {{ $project->project_end_method == 'Campaign Never Ends' ? 'selected' : '' }}>
                                             Campaign Never Ends</option>
-                                            <option value="Featured" {{ $project->project_category == 'Featured' ? 'selected' : '' }}>Featured</option>
+                                            <option value="Featured" {{ $project->project_end_method == 'Featured' ? 'selected' : '' }}>Featured</option>
                                     </select>
                                     @error('project_category')
                                         <span class="text-danger mt-2">{{ $message }}</span>
@@ -64,7 +79,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-sm-12">
+                            <div class="col-md-8 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Tags</label>
                                     <input class="form-control  @error('tags') is-invalid @enderror" type="text"
@@ -292,8 +307,8 @@
                                         </div>
                                         <div class="col-md-2 col-sm-12">
                                             <div class="mb-3 mt-4 pt-2">
-                                                <button class="btn btn-outline-primary addbenefit" type="button"> + Add a
-                                                    Benefit
+                                                <button class="btn btn-outline-primary addbenefit" type="button"> + Add
+                                                Benefit
                                                 </button>
                                             </div>
                                         </div>
@@ -496,22 +511,10 @@
 
                             <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Project Category
-
+                                    <label for="exampleFormControlInput1" class="form-label">State
                                     </label>
-                                    <select name="business_category" id=""
-                                        class="form-control @error('business_category') is-invalid @enderror">
-                                        <option value="">-Select-</option>
-                                        <option value="One" {{ $project->FounderDetail->business_category == 'One' ? 'selected' : '' }}>
-                                            One
-                                        </option>
-                                        <option value="Two" {{ $project->FounderDetail->business_category == 'Two' ? 'selected' : '' }}>
-                                            Two
-                                        </option>
-                                        <option value="Three"{{ $project->FounderDetail->business_category == 'Three' ? 'selected' : '' }}>
-                                            Three</option>
-                                    </select>
-                                    @error('business_category')
+                                    <input type="text" class="form-control @error('founder_state') is-invalid @enderror" name="founder_state" value="{{ $project->FounderDetail->founder_state }}">
+                                    @error('founder_state')
                                         <span class="text-danger mt-2">{{ $message }}</span>
                                     @enderror
                                 </div>

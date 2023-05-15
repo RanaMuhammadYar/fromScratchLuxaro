@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Livewire\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CharterManagementController;
 use App\Http\Controllers\MerchantController;
-use App\Http\Controllers\vendor\Chatify\MessagesController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CharterManagementController;
 use App\Http\Controllers\Vendor\VendorControlController;
-use App\Http\Livewire\Product;
+use App\Http\Controllers\vendor\Chatify\MessagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +23,9 @@ use App\Http\Livewire\Product;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -62,7 +65,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/appendCategories', 'appendCategories')->name('appendCategories');
     Route::get('/product-detail/{id}', 'productDetail')->name('product-detail');
     Route::get('/goldEvines', 'goldEvine')->name('goldEvine');
-    Route::get('/goldMetal', 'goldEvine')->name('goldMetal');
+    Route::get('/goldMetal', 'goldMetal')->name('goldMetal');
     Route::get('/chats', 'chats')->name('chats');
     Route::post('/product_upload', 'productUpload')->name('product_upload');
     Route::get('/merchant-suits', 'merchantSuits')->name('merchant-suits');
@@ -76,10 +79,13 @@ Route::controller(UserController::class)->group(function () {
 
     Route::get('/charter-detail', 'charterDetail')->name('charter-detail');
     // Route::get('/register', 'register')->name('register');
-    Route::get('/contactUs', 'contactUs')->name('contactUs');
-    Route::get('/aboutUs', 'aboutUs')->name('aboutUs');
+    Route::get('/contact-us', 'contactUs')->name('contactUs');
+    Route::post('/contact-us', 'contactUsStore')->name('contactUsStore');
+    Route::get('/about-us', 'aboutUs')->name('aboutUs');
     Route::get('/faqs', 'faqs')->name('faqs');
 });
+
+Route::get('luxauro/contact-us', [PageController::class, 'luxaurocontactUs'])->name('luxaurocontactUs');
 Route::any('luxauro-library-forum-publishing',[UserController::class,'forumPublishing'])->name('forumPublishing');
 Route::get('luxauro-library-forum-filter',[UserController::class,'forumFilter'])->name('forumFilter');
 Route::get('luxauro-library-street-filter',[UserController::class,'streetFilter'])->name('streetFilter');
@@ -104,6 +110,7 @@ Route::controller(CharterManagementController::class)->group(function () {
     Route::get('/appendCharters', 'appendCharters')->name('appendCharters');
     Route::post('/charter_book', 'charter_book')->name('charter_book');
     Route::get('/charter_management', 'charter_management')->name('charter_management');
+    Route::get('/append-charters-area', 'appendarea')->name('appendarea');
 });
 Route::controller(ProductController::class)->group(function () {
     Route::post('/productUpload', 'productUpload')->name('productUpload');
@@ -123,9 +130,17 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/privacy-policy', 'privacypolicy')->name('privacypolicy');
 });
 
-Route::get('national-shop',[UserController::class,'nationalShop'])->name('nationalShop');
+Route::get('goldevine/about-us',[PageController::class,'goldevineAboutUs'])->name('goldevineAboutUs');
 
+Route::get('goldevine/learn-about-goldevine',[PageController::class,'learnaboutgoldevine'])->name('learnaboutgoldevine');
+
+Route::get('goldevine-rule',[PageController::class,'goldevineRule'])->name('goldevineRule');    
+
+Route::get('goldevine/learn-about-the-tribrid',[PageController::class,'tribridContactUs'])->name('goldevineContactUs');
+Route::get('national-shop',[UserController::class,'nationalShop'])->name('nationalShop');
 Route::get('recommended-filter',[UserController::class,'recommendedFilter'])->name('recommendedFilters');
+
+
 Auth::routes(['verify' => true]);
 
 // Route::get('vendor-register', [VendorControlController::class, 'register'])->name('vendorRegister');
@@ -135,7 +150,7 @@ Route::match(['get','post'],'/search-product', [ProductController::class, 'produ
 
 Route::get('own-luxauro-filter',[ProductController::class,'ownLuxaurofilter'])->name('ownLuxaurofilter');
 
-
+// Route::get('contact-us',[UserController::class,'contactUs'])->name('contactUs');
 
 Route::get('/all-products', [ProductController::class, 'allProducts'])->name('allProducts');
 

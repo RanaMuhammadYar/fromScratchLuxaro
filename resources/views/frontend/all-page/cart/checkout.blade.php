@@ -353,7 +353,7 @@
                 $('.totalPricebag').text('$'+subtotal);
                 $('.goldevineSubtotal').text('$'+subtotal);
                 $('#total').text('$'+subtotal);
-                
+
             }
 
         }

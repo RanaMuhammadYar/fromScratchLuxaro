@@ -12,7 +12,7 @@ class FounderDetail extends Model
     protected $fillable = [
         'business_address',
         'city',
-        'business_category',
+        'founder_state',
         'zip_code',
         'email',
         'website',

@@ -68,7 +68,7 @@
                     <li class="pb-1"><a href="">my saved payment methods</a></li>
                     <li class="pb-1"><a href="">preference</a></li>
                     <li class="pb-1"><a href="">setting</a></li>
-                    <li class="pb-1 active"><a href="{{ route('createProject') }}">Project Create</a></li>
+                    <li class="pb-1 active"><a href="{{ route('createProject') }}"><strong> Create New Goldevine Project</strong></a></li>
                     <li class="pb-1 active"><a href="{{ route('allprojects') }}">My Project</a></li>
                 </ul>
             </div>

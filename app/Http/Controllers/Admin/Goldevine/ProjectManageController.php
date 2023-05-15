@@ -89,7 +89,7 @@ class ProjectManageController extends Controller
             'recommended_amount' => 'required',
             'country' => 'required',
             'location' => 'required',
-
+            'project_end_method' => 'required',
             'benefit_title' => 'required',
             'benefit_price' => 'required',
             'benefit_msrp' => 'required',
@@ -100,7 +100,7 @@ class ProjectManageController extends Controller
             'business_address' => 'required',
             'city' => 'required',
 
-            'business_category' => 'required',
+            'founder_state' => 'required',
             'zip_code' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
@@ -140,6 +140,7 @@ class ProjectManageController extends Controller
             $project->recommended_pledge_amount = $request->recommended_amount;
             $project->country = $request->country;
             $project->location = $request->location;
+            $project->project_end_method = $request->project_end_method;
             $project->status = 'Pending';
             $project->user_id = auth()->user()->id;
             $project->save();
@@ -168,7 +169,7 @@ class ProjectManageController extends Controller
                 $projectbusiness->project_id = $project->id;
                 $projectbusiness->business_address = $request->business_address;
                 $projectbusiness->city = $request->city;
-                $projectbusiness->business_category = $request->business_category;
+                $projectbusiness->founder_state = $request->founder_state;
                 $projectbusiness->zip_code = $request->zip_code;
                 $projectbusiness->email = $request->email;
                 $projectbusiness->website = $request->website;
@@ -214,6 +215,7 @@ class ProjectManageController extends Controller
             'recommended_amount' => 'required',
             'country' => 'required',
             'location' => 'required',
+            'project_end_method' => 'required',
 
             'benefit_title' => 'required',
             'benefit_price' => 'required',
@@ -225,7 +227,7 @@ class ProjectManageController extends Controller
 
             'business_address' => 'required',
             'city' => 'required',
-            'business_category' => 'required',
+            'founder_state' => 'required',
             'zip_code' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
@@ -281,6 +283,7 @@ class ProjectManageController extends Controller
             $project->recommended_pledge_amount = $request->recommended_amount;
             $project->country = $request->country;
             $project->location = $request->location;
+            $project->project_end_method = $request->project_end_method;
             $project->status = 'Pending';
             $project->user_id = auth()->user()->id;
             $project->save();
@@ -320,7 +323,7 @@ class ProjectManageController extends Controller
                     $projectbusiness->project_id = $project->id;
                     $projectbusiness->business_address = $request->business_address;
                     $projectbusiness->city = $request->city;
-                    $projectbusiness->business_category = $request->business_category;
+                    $projectbusiness->founder_state = $request->founder_state;
                     $projectbusiness->zip_code = $request->zip_code;
                     $projectbusiness->email = $request->email;
                     $projectbusiness->website = $request->website;

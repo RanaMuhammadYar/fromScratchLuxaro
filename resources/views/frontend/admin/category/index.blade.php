@@ -28,9 +28,7 @@
                                         <strong>{{ $category->title }}</strong>
                                     </td>
                                     <td>
-                                        <img src="{{ $category->image }}"
-                                            onerror="this.src='{{ asset('images/product-img.png') }}'" height="50px"
-                                            width="50px" alt="">
+                                        <img src="{{ $category->image }}" height="50px" width="50px" alt="" onerror="this.src='{{ asset('images/default.png') }}'">
 
                                     </td>
                                     <td>

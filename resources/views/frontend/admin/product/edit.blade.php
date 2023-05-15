@@ -225,7 +225,7 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Shipping Charge
                                     </label>
-                                    <input type="text"
+                                    <input type="number"
                                         class="form-control @error('shipping_charge') is-invalid @enderror"
                                         name="shipping_charge" placeholder="Shipping Charge" title="Shipping Charge"
                                         value="{{ $product->shipping_charge }}" />
@@ -246,6 +246,193 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <h5 class="mt-4">Specifications  General</h5>
+
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Model Series Name </label>
+                                        <input type="text" name="model_series_name" class="form-control" value="{{ $product->spacificationgeneral->model_series_name }}" >
+                                        @if ($errors->has('model_series_name'))
+                                            <span class="text-danger">{{ $errors->first('model_series_name') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Model Number </label>
+                                        <input type="text" name="model_number" class="form-control" value="{{ $product->spacificationgeneral->model_number }}" >
+                                        @if ($errors->has('model_number'))
+                                            <span class="text-danger">{{ $errors->first('model_number') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Primary Meterial</label>
+                                        <input type="text" name="primary_meterial" class="form-control" value="{{ $product->spacificationgeneral->primary_meterial }}" >
+                                        @if ($errors->has('primary_meterial'))
+                                            <span class="text-danger">{{ $errors->first('primary_meterial') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Primary Meterial SubType</label>
+                                        <input type="text" name="primary_meterial_subType" class="form-control" value="{{ $product->spacificationgeneral->primary_meterial_subType }}" >
+                                        @if ($errors->has('primary_meterial_subType'))
+                                            <span class="text-danger">{{ $errors->first('primary_meterial_subType') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Delivery Condition </label>
+                                        <input type="text" name="delivery_condition" class="form-control" value="{{ $product->spacificationgeneral->delivery_condition }}" >
+                                        @if ($errors->has('delivery_condition'))
+                                            <span class="text-danger">{{ $errors->first('delivery_condition') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Suitable For</label>
+                                        <input type="text" name="suitable_for" class="form-control" value="{{ $product->spacificationgeneral->suitable_for }}" >
+                                        @if ($errors->has('suitable_for'))
+                                            <span class="text-danger">{{ $errors->first('suitable_for') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Compatible Laptop Size</label>
+                                        <input type="text" name="compatible_laptop_size" class="form-control" value="{{ $product->spacificationgeneral->compatible_laptop_size }}" >
+                                        @if ($errors->has('compatible_laptop_size'))
+                                            <span class="text-danger">{{ $errors->first('compatible_laptop_size') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Foldable</label>
+                                        <input type="text" name="foldable" class="form-control"  value="{{ $product->spacificationgeneral->foldable }}" >
+                                        @if ($errors->has('foldable'))
+                                            <span class="text-danger">{{ $errors->first('foldable') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Adjustable Height</label>
+                                        <input type="text" name="adjustable_height" class="form-control" value="{{ $product->spacificationgeneral->adjustable_height }}">
+                                        @if ($errors->has('adjustable_height'))
+                                            <span class="text-danger">{{ $errors->first('adjustable_height') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5 class="mt-5">Demensions</h5>
+
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Width</label>
+                                        <input type="text" name="width" class="form-control" value="{{ $product->spacificationgeneral->width }}" >
+                                        @if ($errors->has('width'))
+                                            <span class="text-danger">{{ $errors->first('width') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Height</label>
+                                        <input type="text" name="height" class="form-control" value="{{ $product->spacificationgeneral->height }}">
+                                        @if ($errors->has('height'))
+                                            <span class="text-danger">{{ $errors->first('height') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Depth</label>
+                                        <input type="text" name="depth" class="form-control" value="{{ $product->spacificationgeneral->depth }}">
+                                        @if ($errors->has('depth'))
+                                            <span class="text-danger">{{ $errors->first('depth') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Weight</label>
+                                        <input type="text" name="weight" class="form-control" value="{{ $product->spacificationgeneral->weight }}" >
+                                        @if ($errors->has('weight'))
+                                            <span class="text-danger">{{ $errors->first('weight') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">First Image </label>
+                                        <input type="file" name="first_image" class="form-control">
+                                        @if ($errors->has('first_image'))
+                                            <span class="text-danger">{{ $errors->first('first_image') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">first Description</label>
+                                        <input type="text" name="first_description" class="form-control" value="{{ $product->spacificationgeneral->first_description }}">
+                                        @if ($errors->has('first_description'))
+                                            <span class="text-danger">{{ $errors->first('first_description') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Second Image </label>
+                                        <input type="file" name="second_image" class="form-control" multiple>
+                                        @if ($errors->has('second_image'))
+                                            <span class="text-danger">{{ $errors->first('second_image') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Second Description</label>
+                                        <input type="text" name="second_description" class="form-control" value="{{ $product->spacificationgeneral->second_description }}">
+                                        @if ($errors->has('second_description'))
+                                            <span class="text-danger">{{ $errors->first('second_description') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Third image </label>
+                                        <input type="file" name="third_image" class="form-control" >
+                                        @if ($errors->has('third_image'))
+                                            <span class="text-danger">{{ $errors->first('third_image') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-12">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Third description</label>
+                                        <input type="text" name="third_description" class="form-control" value="{{ $product->spacificationgeneral->third_description }}">
+                                        @if ($errors->has('third_description'))
+                                            <span class="text-danger">{{ $errors->first('third_description') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="row py-3">
                                 <div class="col-sm-12 text-end">

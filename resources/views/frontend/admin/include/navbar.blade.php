@@ -44,7 +44,7 @@
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
                                         <img src="{{ isset(auth()->user()->userDetails->user_profile_image) ? auth()->user()->userDetails->user_profile_image : '' }}"
-                                            onerror="this.scr='{{ asset('images/avatar.png') }}'" alt
+                                            onerror="this.scr='{{ asset('images/default.png') }}'" alt
                                             class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </div>

@@ -78,6 +78,7 @@
                                                         onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
                                                             class="fa fa-shopping-basket"></i></button>
                                                 </div>
+                                                <input type="hidden" name="" value="1" class="addOrRemove{{ $product->id  }}">
                                             </div>
                                         </div>
                                     </div>
@@ -162,6 +163,7 @@
                                                             onclick="addToCart('{{ $productassending->id }}', '{{ $productassending->product_name }}', '{{ $productassending->product_price }}')"><i
                                                                 class="fa fa-shopping-basket"></i></button>
                                                     </div>
+                                                    <input type="hidden" name="" value="1" class="addOrRemove{{ $productassending->id  }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -232,8 +234,7 @@
                                                         <button class="btn bg-dark text-white py-1 px-2"
                                                             onclick="addToCart('{{ $productdesending->id }}', '{{ $productdesending->product_name }}', '{{ $productdesending->product_price }}')"><i
                                                                 class="fa fa-shopping-basket"></i></button>
-                                                        <input type="hidden" name="" value="1"
-                                                            class="addOrRemove">
+                                                                <input type="hidden" name="" value="1" class="addOrRemove{{ $productdesending->id  }}">
                                                     </div>
                                                 </div>
                                             </div>

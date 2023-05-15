@@ -7,6 +7,7 @@ use App\Models\Admin\DeliveryOption;
 use App\Models\CharterDeliveryOption;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\CharterAvaliabiltyDateAndTime;
+use App\Models\Admin\CharterSpecificationGeneral;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Charter extends Model
@@ -46,6 +47,11 @@ class Charter extends Model
     public function tags()
     {
         return $this->morphToMany('App\Models\Tag', 'taggable');
+    }
+
+    public function charterSpecificationGeneral()
+    {
+        return $this->hasOne(CharterSpecificationGeneral::class);
     }
 
 

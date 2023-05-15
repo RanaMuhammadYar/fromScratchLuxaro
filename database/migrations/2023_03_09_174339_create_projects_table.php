@@ -33,6 +33,7 @@ class CreateProjectsTable extends Migration
             $table->string('slug');
             $table->unsignedBigInteger('user_id');
             $table->string('add_to_favirate')->nullable();
+            $table->string('project_end_method');
             // $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
             $table->timestamps();
         });

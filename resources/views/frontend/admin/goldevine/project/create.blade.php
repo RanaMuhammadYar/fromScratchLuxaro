@@ -35,11 +35,29 @@
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Project Category</label>
-                                    <select name="project_category" id=""
-                                        class="form-control @error('project_category') is-invalid @enderror">
+                                    <label for="select-products">Project Category</label>
+                                    <select
+                                        class="form-select  @error('project_category')
+                                    is-invalid @enderror"
+                                        aria-label="Default select example" id="select-products" name="project_category">
+                                        <option selected value="">-Select-</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Project End Method</label>
+                                    <select name="project_end_method" id=""
+                                        class="form-control @error('project_end_method') is-invalid @enderror">
                                         <option value="">-Select-</option>
                                         <option value="Target Goal">Target Goal</option>
                                         <option value="Target Date">Target Date</option>
@@ -47,13 +65,13 @@
                                         <option value="Campaign Never Ends">Campaign Never Ends</option>
                                         <option value="Featured">Featured</option>
                                     </select>
-                                    @error('project_category')
+                                    @error('project_end_method')
                                         <span class="text-danger mt-2">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-sm-12">
+                            <div class="col-md-8 col-sm-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Tags</label>
                                     <input class="form-control  @error('tags') is-invalid @enderror" type="text"
@@ -269,7 +287,7 @@
                                 </div>
                                 <div class="col-md-2 col-sm-12">
                                     <div class="mb-3 mt-4 pt-2">
-                                        <button class="btn btn-outline-primary addbenefit" type="button"> + Add a
+                                        <button class="btn btn-outline-primary addbenefit" type="button"> + Add
                                             Benefit
                                         </button>
                                     </div>
@@ -300,11 +318,10 @@
 
                             <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1"
-                                        class="form-label">City
+                                    <label for="exampleFormControlInput1" class="form-label">City
                                     </label>
-                                    <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" placeholder="City"
-                                        title="City" value="{{ old('city') }}" />
+                                    <input type="text" class="form-control @error('city') is-invalid @enderror"
+                                        name="city" placeholder="City" title="City" value="{{ old('city') }}" />
                                     @error('city')
                                         <span class="text-danger mt-2">{{ $message }}</span>
                                     @enderror
@@ -313,22 +330,11 @@
 
                             <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Project Category
+                                    <label for="exampleFormControlInput1" class="form-label">State
 
                                     </label>
-                                    <select name="business_category" id=""
-                                        class="form-control @error('business_category') is-invalid @enderror">
-                                        <option value="">-Select-</option>
-                                        <option value="One" {{ old('business_category') == 'One' ? 'selected' : '' }}>
-                                            One
-                                        </option>
-                                        <option value="Two" {{ old('business_category') == 'Two' ? 'selected' : '' }}>
-                                            Two
-                                        </option>
-                                        <option value="Three"{{ old('business_category') == 'Three' ? 'selected' : '' }}>
-                                            Three</option>
-                                    </select>
-                                    @error('business_category')
+                                    <input type="text" class="form-control @error('founder_state') is-invalid @enderror" name="founder_state" value="{{ old('founder_state') }}">
+                                    @error('founder_state')
                                         <span class="text-danger mt-2">{{ $message }}</span>
                                     @enderror
                                 </div>

@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Models\Admin\Category;
+use App\Models\DeliveryOption;
 use App\Models\Admin\ProductType;
 use App\Models\Admin\ShippingType;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\DeliveryOption as AdminDeliveryOption;
-use App\Models\DeliveryOption;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Admin\ProductSpecificationGeneral;
+use App\Models\Admin\DeliveryOption as AdminDeliveryOption;
 
 class ProductCotroller extends Controller
 {
@@ -54,6 +55,8 @@ class ProductCotroller extends Controller
     public function store(Request $request)
     {
 
+        // return $request->all();
+
         $validate = Validator::make($request->all(), [
             'product_name' => 'required',
             'product_description' => 'required',
@@ -69,6 +72,7 @@ class ProductCotroller extends Controller
             'category_id' => 'required',
             'delivery_option_id' => 'required',
             'product_image' => 'required',
+
 
         ]);
         if ($validate->fails()) {
@@ -110,6 +114,44 @@ class ProductCotroller extends Controller
             $product->categories()->sync($request->category_id);
             $product->deliveryOption()->sync($request->delivery_option_id);
             $product->shippingType()->sync($request->shipping_type_id);
+            if($product->save()){
+                $spacification = new ProductSpecificationGeneral();
+                $spacification->product_id = $product->id;
+                $spacification->model_series_name = $request->model_series_name;
+                $spacification->model_number = $request->model_number;
+                $spacification->primary_meterial = $request->primary_meterial;
+                $spacification->primary_meterial_subType = $request->primary_meterial_subType;
+                $spacification->delivery_condition = $request->delivery_condition;
+                $spacification->suitable_for = $request->suitable_for;
+                $spacification->compatible_laptop_size = $request->compatible_laptop_size;
+                $spacification->foldable = $request->foldable;
+                $spacification->adjustable_height = $request->adjustable_height;
+                $spacification->width = $request->width;
+                $spacification->height = $request->height;
+                $spacification->depth = $request->depth;
+                $spacification->weight = $request->weight;
+                if($request->hasFile('first_image'))
+                {
+                    $path = asset('storage/' . $request->first_image->store('product'));
+                    $spacification->first_image = $path;
+                }
+                if($request->hasFile('second_image'))
+                {
+                    $path = asset('storage/' . $request->second_image->store('product'));
+                    $spacification->first_image = $path;
+                }
+                if($request->hasFile('third_image'))
+                {
+                    $path = asset('storage/' . $request->third_image->store('product'));
+                    $spacification->first_image = $path;
+                }
+
+                $spacification->first_description = $request->first_description;
+                $spacification->second_description = $request->second_description;
+                $spacification->third_description = $request->third_description;
+                $spacification->save();
+
+            }
             if (isset($request->vendorSide))
                 return redirect()->route('product_management')->with('success', 'Product Added Successfully');
             else
@@ -136,7 +178,7 @@ class ProductCotroller extends Controller
      */
     public function edit($id)
     {
-        $product = Product::with('categories', 'productType', 'deliveryOption', 'shippingType', 'user')->find($id);
+        $product = Product::with('categories', 'productType', 'deliveryOption', 'shippingType', 'user' , 'spacificationgeneral')->find($id);
         $categories = Category::all();
         $productType = ProductType::all();
         $delivoryOption = AdminDeliveryOption::all();
@@ -169,7 +211,7 @@ class ProductCotroller extends Controller
             'quantity' => 'required',
             'serial_number' => 'required',
             'shipping_charge' => 'required|numeric',
-            
+
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate)->withInput()->with('error', 'Product Added Failed');
@@ -210,6 +252,46 @@ class ProductCotroller extends Controller
         $product->deliveryOption()->sync($request->delivery_option_id);
         // $product->productType()->sync($request->product_type_id);
         $product->shippingType()->sync($request->shipping_type_id);
+        if($product->save()){
+            $spacification =  ProductSpecificationGeneral::where('product_id', $id)->first();
+            $spacification->product_id = $product->id;
+            $spacification->model_series_name = $request->model_series_name;
+            $spacification->model_number = $request->model_number;
+            $spacification->primary_meterial = $request->primary_meterial;
+            $spacification->primary_meterial_subType = $request->primary_meterial_subType;
+            $spacification->delivery_condition = $request->delivery_condition;
+            $spacification->suitable_for = $request->suitable_for;
+            $spacification->compatible_laptop_size = $request->compatible_laptop_size;
+            $spacification->foldable = $request->foldable;
+            $spacification->adjustable_height = $request->adjustable_height;
+            $spacification->width = $request->width;
+            $spacification->height = $request->height;
+            $spacification->depth = $request->depth;
+            $spacification->weight = $request->weight;
+            if($request->hasFile('first_image'))
+            {
+                $path = asset('storage/' . $request->first_image->store('product'));
+                $spacification->first_image = $path;
+            }
+            if($request->hasFile('second_image'))
+            {
+                $path = asset('storage/' . $request->second_image->store('product'));
+                $spacification->second_image = $path;
+            }
+            if($request->hasFile('third_image'))
+            {
+                $path = asset('storage/' . $request->third_image->store('product'));
+                $spacification->third_image = $path;
+            }
+
+            $spacification->first_description = $request->first_description;
+            $spacification->second_description = $request->second_description;
+            $spacification->third_description = $request->third_description;
+            $spacification->update();
+
+        }
+
+
         return redirect()->route('product.index')->with('success', 'Product Added Successfully');
         }
     }

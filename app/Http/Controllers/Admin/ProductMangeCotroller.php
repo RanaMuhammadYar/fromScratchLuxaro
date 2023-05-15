@@ -7,6 +7,8 @@ use App\Models\Admin\Banner;
 use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Models\Admin\Category;
+use App\Models\MerchantApplication;
+use Illuminate\Console\Application;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SelectProjectBenefits;
@@ -62,7 +64,8 @@ class ProductMangeCotroller extends Controller
         $productsdesc = Product::with('ratings', 'categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'desc')->paginate(15);
         $productsasc = Product::with('ratings', 'categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('status', 'Active')->orderby('id', 'asc')->paginate(15);
         $mayyoulike = Product::with('ratings', 'categories', 'productType', 'deliveryOption', 'shippingType', 'user')->where('status', 'Active')->inRandomOrder()->paginate(15);
-        return view('frontend.all-page.product_detail', compact('product', 'id', 'slug', 'productsdesc', 'productsasc', 'mayyoulike'));
+        $suits = MerchantApplication::all();
+        return view('frontend.all-page.product_detail', compact('product', 'id', 'slug', 'productsdesc', 'productsasc', 'mayyoulike' , 'suits'));
     }
 
 
@@ -71,43 +74,42 @@ class ProductMangeCotroller extends Controller
 
 
         if (Auth::check()) {
-            $orderallready = Cart::where('product_id', $request->product_id)->where('status', 'Pending')->where('user_id', Auth::user()->id)->count();
-            // $orderallready = \App\Models\Admin\Cart::with('product')
-            //     ->where(function ($query) {
-            //         $query
-            //             ->where('status', 'pending')
-            //             ->where('user_id', Auth::id())
-            //             ->orWhere(function ($query) {
-            //                 $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
-            //             });
-            //     })
-            //     ->count();
-        } else {
-            // $orderallready = \App\Models\Admin\Cart::with('product')
-            //     ->where(function ($query) {
-            //         $query
-            //             ->where('status', 'pending')
-            //             ->where('user_id', Auth::id())
-            //             ->orWhere(function ($query) {
-            //                 $query->where('status', 'pending')->where('temp_id', session()->get('temp_id'));
-            //             });
-            //     })
-            //     ->count();
 
-            $orderallready = Cart::where('product_id', $request->product_id)->where('status', 'Pending')->where('temp_id', session()->get('temp_id'))->count();
+            $orderallready = Cart::where('product_id', $request->product_id)->where('status', 'Pending')->where('user_id', Auth::user()->id)->first();
+            $quantity = 0;
+            if (isset($orderallready->quantity)) {
+                $quantity = $orderallready->quantity;
+            }
+        } else {
+            $orderallready = Cart::where('product_id', $request->product_id)->where('status', 'Pending')->where('temp_id', session()->get('temp_id'))->first();
+            $quantity = 0;
+            if (isset($orderallready->quantity)) {
+                if (isset($orderallready->quantity)) {
+                    $quantity = $orderallready->quantity;
+                }
+            }
         }
-        if ($orderallready > 0) {
+
+
+
+        if ($quantity >=  $request->quantity) {
             return response()->json(['success' => 'Product Already Added To Cart.']);
         } else {
             if (Auth::check()) {
-                $cart = new Cart();
+
+                if (isset($orderallready->quantity)) {
+                    $cart =  Cart::find($orderallready->id);
+                    $success = 'Product updated To Cart Successfully';
+                } else {
+                    $cart = new Cart();
+                    $success = 'Product Added To Cart Successfully.';
+                }
                 $cart->user_id = Auth::user()->id;
                 $cart->product_id = $request->product_id;
                 $cart->quantity = $request->quantity;
                 $cart->total_price = $request->total;
                 $cart->status = 'Pending';
                 $cart->save();
-                // $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
                 $product = Product::where('id', $request->product_id)->first();
                 $total = \App\Models\Admin\Cart::with('product')
                     ->where(function ($query) {
@@ -130,14 +132,20 @@ class ProductMangeCotroller extends Controller
                             });
                     })
                     ->count();
-                    $selectBenefit = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::user()->id)->where('status','pending')->count();
+                $selectBenefit = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::user()->id)->where('status', 'pending')->count();
 
-                return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => Auth::user()->id, 'total' => $total, 'count' => $count + $selectBenefit, 'id' =>  $cart->id,'product'=>$product]);
+                return response()->json(['success' =>  $success , 'cart' => $request->all(), 'temp_id' => Auth::user()->id, 'total' => $total, 'count' => $count + $selectBenefit, 'id' =>  $cart->id, 'product' => $product]);
             } else {
                 $product = Product::where('id', $request->product_id)->first();
                 if (session()->has('temp_id')) {
                     $temp_id = session()->get('temp_id');
-                    $cart = new Cart();
+                    if (isset($orderallready->quantity)) {
+                        $cart =  Cart::find($orderallready->id);
+                        $success = 'Product updated To Cart Successfully';
+                    } else {
+                        $cart = new Cart();
+                        $success = 'Product Added To Cart Successfully.';
+                    }
                     $cart->temp_id = $temp_id;
                     $cart->product_id = $request->product_id;
                     $cart->quantity = $request->quantity;
@@ -171,7 +179,7 @@ class ProductMangeCotroller extends Controller
                                 });
                         })
                         ->count();
-                    return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id ,'product'=>$product]);
+                    return response()->json(['success' =>  $success , 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id, 'product' => $product]);
                 } else {
                     $temp_id = random_int(1000, 9999);
                     $cart = new Cart();
@@ -206,9 +214,10 @@ class ProductMangeCotroller extends Controller
                         })
                         ->count();
                     // $count = Cart::where('temp_id', $temp_id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
+                    $product = Product::where('id', $request->product_id)->first();
 
 
-                    return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id]);
+                    return response()->json(['success' => 'Product Added To Cart Successfully.', 'cart' => $request->all(), 'temp_id' => $temp_id, 'total' => $total, 'count' => $count, 'id' =>  $cart->id, 'product' => $product]);
                 }
             }
         }
@@ -243,7 +252,7 @@ class ProductMangeCotroller extends Controller
                         });
                 })
                 ->count();
-                $selectBenefit = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::user()->id)->where('status','pending')->count();
+            $selectBenefit = SelectProjectBenefits::with('project_benefit')->where('user_id', Auth::user()->id)->where('status', 'pending')->count();
             // $total = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->sum('total_price');
             // $count = Cart::where('user_id', Auth::user()->id)->where('status', 'Pending')->orwhere('temp_id', session()->get('temp_id'))->count();
             return response()->json(['success' => 'Product Deleted From Cart Successfully.', 'total' => $total, 'count' => $count +  $selectBenefit]);
@@ -298,7 +307,6 @@ class ProductMangeCotroller extends Controller
         $productType->product_status_type = "Featured";
         $productType->save();
         return redirect()->back()->with('status', 'Product Type Added Successfully.');
-
     }
 
     public function productTypenormal($id)

@@ -72,6 +72,18 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="select-products">Project Category</label>
+                                                <select class="form-select mb-3 @error('project_category')
+                                                is-invalid @enderror" aria-label="Default select example"
+                                                    id="select-products" name="project_category">
+                                                    <option selected value="">-Select-</option>
+                                                    <option value="1" {{ $project->project_category == '1' ? 'selected' : '' }} >One</option>
+                                                    <option value="2" {{ $project->project_category == '2' ? 'selected' : '' }} >Two</option>
+                                                    <option value="3" {{ $project->project_category == '3' ? 'selected' : '' }} >Three</option>
+                                                </select>
+                                            </div>
+
                                             <div class="form-group mb-3">
                                                 <label for="city_tag">Tags</label>
                                                 <input type="text"
@@ -134,27 +146,27 @@
                                                 @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <label for="select-products">Project Category</label>
+                                                <label for="select-products">Project End Method</label>
                                                 <select
-                                                    class="form-select mb-3 @error('project_category')
+                                                    class="form-select mb-3 @error('project_end_method')
                                                 is-invalid @enderror"
                                                     aria-label="Default select example" id="select-products"
-                                                    name="project_category">
+                                                    name="project_end_method">
                                                     <option value="" selected>-Select-</option>
                                                     <option
-                                                        value="Target Goal"{{ $project->project_category == 'Target Goal' ? 'selected' : '' }}>
+                                                        value="Target Goal"{{ $project->project_end_method == 'Target Goal' ? 'selected' : '' }}>
                                                         Target Goal</option>
                                                     <option value="Target Date"
-                                                        {{ $project->project_category == 'Target Date' ? 'selected' : '' }}>
+                                                        {{ $project->project_end_method == 'Target Date' ? 'selected' : '' }}>
                                                         Target Date</option>
                                                     <option value="Target Goal & Date"
-                                                        {{ $project->project_category == 'Target Goal & Date' ? 'selected' : '' }}>
+                                                        {{ $project->project_end_method == 'Target Goal & Date' ? 'selected' : '' }}>
                                                         Target Goal & Date</option>
                                                     <option value="Campaign Never Ends"
-                                                        {{ $project->project_category == 'Campaign Never Ends' ? 'selected' : '' }}>
+                                                        {{ $project->project_end_method == 'Campaign Never Ends' ? 'selected' : '' }}>
                                                         Campaign Never Ends</option>
                                                     <option value="Featured"
-                                                        {{ $project->project_category == 'Featured' ? 'selected' : '' }}>
+                                                        {{ $project->project_end_method == 'Featured' ? 'selected' : '' }}>
                                                         Featured</option>
                                                 </select>
                                                 @error('project_category')
@@ -491,24 +503,17 @@
                                                 @enderror
                                             </div>
                                             <div class="col-12 col-md-3 mb-3 mb-md-0">
-                                                <label for="select-products">Project Category</label>
-                                                <select
-                                                    class="form-select mb-3 @error('business_category')
-                                                is-invalid @enderror"
-                                                    aria-label="Default select example" id="select-products"
-                                                    name="business_category">
-                                                    <option selected value="">-Select-</option>
-                                                    <option value="1"
-                                                        {{ $project->FounderDetail->business_category == 1 ? 'selected' : '' }}>
-                                                        One</option>
-                                                    <option value="2"
-                                                        {{ $project->FounderDetail->business_category == 2 ? 'selected' : '' }}>
-                                                        Two</option>
-                                                    <option value="3"
-                                                        {{ $project->FounderDetail->business_category == 3 ? 'selected' : '' }}>
-                                                        Three
-                                                    </option>
-                                                </select>
+                                                <label for="select-products">State</label>
+                                                <input type="text" name="founder_state" class="form-control @error('founder_state')
+                                                is-invalid @enderror" value="{{ $project->FounderDetail->founder_state }}">
+                                                @error('founder_state')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+
+
+
                                                 @error('business_category')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

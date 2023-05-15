@@ -78,7 +78,8 @@ class ProjectResourceController extends Controller
             'ein' => 'required',
             'deposit_bank_account' => 'required',
             'credit_cart_number' => 'required',
-            'business_category' => 'required',
+            'founder_state' => 'required',
+            'project_end_method' => 'required',
 
         ]);
 
@@ -110,6 +111,7 @@ class ProjectResourceController extends Controller
             $project->recommended_pledge_amount = $request->recommended_pledge_amount;
             $project->location = $request->location;
             $project->description = $request->description;
+            $project->project_end_method = $request->project_end_method;
             $project->user_id = auth()->user()->id;
             $project->save();
             $tags = explode(",", $request->tags);
@@ -136,7 +138,7 @@ class ProjectResourceController extends Controller
                     $projectbusiness->project_id = $project->id;
                     $projectbusiness->business_address = $request->business_address;
                     $projectbusiness->city = $request->city;
-                    $projectbusiness->business_category = $request->business_category;
+                    $projectbusiness->founder_state = $request->founder_state;
                     $projectbusiness->zip_code = $request->zip_code;
                     $projectbusiness->email = $request->email;
                     $projectbusiness->website = $request->website;
@@ -216,6 +218,7 @@ class ProjectResourceController extends Controller
         $project->recommended_pledge_amount = $request->recommended_pledge_amount;
         $project->location = $request->location;
         $project->description = $request->description;
+        $project->project_end_method = $request->project_end_method;
         $project->user_id = auth()->user()->id;
         $project->save();
         $tags = explode(",", $request->tags);
@@ -245,7 +248,7 @@ class ProjectResourceController extends Controller
             $projectbusiness->project_id = $project->id;
             $projectbusiness->business_address = $request->business_address;
             $projectbusiness->city = $request->city;
-            $projectbusiness->business_category = $request->business_category;
+            $projectbusiness->founder_state = $request->founder_state;
             $projectbusiness->zip_code = $request->zip_code;
             $projectbusiness->email = $request->email;
             $projectbusiness->website = $request->website;

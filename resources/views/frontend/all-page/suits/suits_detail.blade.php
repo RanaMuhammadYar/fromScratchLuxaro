@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     @empty
-                        
+
                     <div>
                     <p>
                         No data found
@@ -99,7 +99,7 @@
             <!-- <div class="merchant-suite-section">
                                 <div class="container">
                                     <div class="owner-section mb-5 pb-lg-3">
-                                    
+
                                         <h3 class="mb-1">[Featured Product Name]</h3>
                                         <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque assumenda magni odio expedita,
                                             tempore officiis culpa quia placeat nostrum illum
@@ -173,7 +173,7 @@
                                             onclick="addToCart('{{ $productsassendings->id }}', '{{ $productsassendings->product_name }}', '{{ $productsassendings->product_price }}')"><i
                                                 class="fa fa-shopping-basket"></i>
                                         </button>
-                                        <input type="hidden" name="" value="1" class="addOrRemove">
+                                        <input type="hidden" name="" value="1" class="addOrRemove{{ $productsassendings->id }}">
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +275,7 @@
                         <p>
                             No Products Found
                         </p>
-                            
+
                         @endforelse
                     </div>
                     <div class="nationalShopFilter">
@@ -299,7 +299,7 @@
 
     <script>
         $(document).ready(function () {
-            $('.recommendedfilter').change(function (e) { 
+            $('.recommendedfilter').change(function (e) {
                 e.preventDefault();
                 var filter = $(this).val();
                 var url = "{{ route('recommendedFilters') }}";
@@ -346,7 +346,7 @@
                         });
                     }
                 });
-                
+
             });
         });
     </script>

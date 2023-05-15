@@ -101,6 +101,28 @@
                 </li>
             </ul>
         </li>
+
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bi bi-gear "></i>
+                <div data-i18n="Layouts">Orders</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('order-invoice/*') || Request::is('order-show') ? 'active' : '' }}">
+                    <a href="{{ route('order.show') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-collection"></i>
+                        <div data-i18n="Basic">All Orders</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('my-order-invoice/*') || Request::is('my-order') ? 'active' : '' }}">
+                    <a href="{{ route('order.myorder') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-collection"></i>
+                        <div data-i18n="Basic">My Orders</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <!-- Cards -->
         <li class="menu-item {{ Request::is('all-merchant') ? 'active' : '' }}">
             <a href="{{ route('allVendor') }}" class="menu-link">
@@ -109,21 +131,6 @@
                 <div data-i18n="Basic">Murchant</div>
             </a>
         </li>
-
-        <li class="menu-item {{ Request::is('order-invoice/*') || Request::is('order-show') ? 'active' : '' }}">
-            <a href="{{ route('order.show') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">All Orders</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ Request::is('my-order-invoice/*') || Request::is('my-order') ? 'active' : '' }}">
-            <a href="{{ route('order.myorder') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">My Orders</div>
-            </a>
-        </li>
-
 
         <li class="menu-item {{ Request::is('banner') ? 'active' : '' }}">
             <a href="{{ route('banner.index') }}" class="menu-link">
@@ -138,11 +145,22 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Request::is('admin/contact-us')  ? 'active' : '' }}">
+            <a href="{{ route('adminContactUs') }}" class="menu-link">
+                <i class="menu-icon tf-icons bi bi-boxes"></i>
+                <div data-i18n="Basic">Contact Us </div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::is('admin/about-us')  ? 'active' : '' }}">
+            <a href="{{ route('about-us.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bi bi-boxes"></i>
+                <div data-i18n="Basic">About Us</div>
+            </a>
+        </li>
+
         <li class="menu-item menu-link mt-3">
             <div data-i18n="Basic" style="font-size: 12px;">Goldevine Setup</div>
         </li>
-
-
 
         <li class="menu-item {{ Request::is('admin-goudevine-project/create') || Request::is('admin-goudevine-project') || Request::is('admin-goudevine-project/*/edit') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -166,6 +184,40 @@
                     </a>
                 </li>
             </ul>
+        </li>
+        <li class="menu-item {{ Request::is('admin/contact-us')  ? 'active' : '' }}">
+            <a href="{{ route('adminContactUs') }}" class="menu-link">
+                <i class="menu-icon tf-icons bi bi-boxes"></i>
+                <div data-i18n="Basic">Contact Us </div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ Request::is('admin/goldevine-about-us')  ? 'active' : '' }}">
+            <a href="{{ route('goldevine-about-us.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bi bi-boxes"></i>
+                <div data-i18n="Basic">About Goldevine</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ Request::is('admin/goldevine-about-us')  ? 'active' : '' }}">
+            <a href="{{ route('learn-about-tribrid.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bi bi-boxes"></i>
+                <div data-i18n="Basic">Learn About the Tribrid</div>
+            </a>
+        </li>
+
+
+        <li class="menu-item {{ Request::is('admin/learn-about-gold')  ? 'active' : '' }}">
+            <a href="{{ route('learn-about-gold.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bi bi-boxes"></i>
+                <div data-i18n="Basic">Learn About GOld</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::is('goldevine/goldevine-rule')  ? 'active' : '' }}">
+            <a href="{{ route('goldevine-rule.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bi bi-boxes"></i>
+                <div data-i18n="Basic">Golden Rules</div>
+            </a>
         </li>
 
         {{-- <li

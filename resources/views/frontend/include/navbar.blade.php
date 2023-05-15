@@ -2,10 +2,6 @@
     #header {
         padding-bottom: 70px;
     }
-
-
-
-
 </style>
 <header id="header">
     <div class="fixed-top">
@@ -58,6 +54,26 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="" style="font: 10px !important;">
+                            <div class="dropdown">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button"
+                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Shop Projects
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"  style="overflow-y: scroll">
+                                    <li><a class="dropdown-item" href="{{ route('goldEvine') }}">Home</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('contactUs') }}">Contact Us</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('goldevineAboutUs') }}">About Goldevine</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('faqs') }}">FAQs</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('forums') }}">Forums</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('goldevineContactUs') }}">Learn About the Tribrid</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('learnaboutgoldevine') }}">Learn About Gold</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('goldevineRule') }}">Golden Rules</a></li>
+                                    <li><a class="dropdown-item" href="#">Support</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
                         @auth
                             <div class="user-info">
                                 <a href="javascript:void" id="dropdownMenuButton2" data-bs-toggle="dropdown"
@@ -65,7 +81,7 @@
                                     <i
                                         class="fa fa-chevron-down me-2"></i>{{ isset(auth()->user()->userDetails) ? auth()->user()->userDetails->name : '' }}
                                     <img src="{{ isset(auth()->user()->userDetails->user_profile_image) ? auth()->user()->userDetails->user_profile_image : '' }}"
-                                        onerror="this.src='{{ asset('images/avatar.png') }}'"  alt=""
+                                        onerror="this.src='{{ asset('images/avatar.png') }}'" alt=""
                                         style="border-radius: 50%" width="25px:">
                                     {{-- <i class="fa fa-user-circle ms-1"
                                     aria-hidden="true"></i> --}}
@@ -420,6 +436,22 @@
                         <li><a href="{{ route('allProducts') }}">products</a></li>
                         <li><a href="{{ route('goldEvine') }}">projects</a></li>
                         <li><a href="javascript:void">professionals</a></li>
+                        <div class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle" href="#" role="button"
+                                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                Menu
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('home') }}">Home</a></li>
+                                <li><a class="dropdown-item" href="{{ route('luxaurocontactUs') }}">Contact Us</a></li>
+                                <li><a class="dropdown-item" href="{{ route('aboutUs') }}">About Luxauro</a></li>
+                                <li><a class="dropdown-item" href="{{ route('faqs') }}">FAQs</a></li>
+                                <li><a class="dropdown-item" href="{{ route('forums') }}">Forums</a></li>
+                                <li><a class="dropdown-item" href="#">Learn About the Tribrid</a></li>
+                                <li><a class="dropdown-item" href="#">Support</a></li>
+
+                            </ul>
+                        </div>
                     </ul>
                     <ul class="list-unstyled m-0 p-0 d-md-flex justify-content-end">
                         @if (Auth::check())

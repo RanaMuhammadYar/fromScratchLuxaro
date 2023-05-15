@@ -17,26 +17,56 @@
             <div class="container">
                 <div class="col-md-8 col-lg-6 mx-auto">
                     <h2 class="pb-2">Lorem ipsum is simply dummy text</h2>
-                    <form>
+                    <form action="{{ route('contactUsStore') }}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" value="Goldevine" name="contact_us_type">
+                        @csrf
                         <div class="row gx-2">
                             <div class="col-12 col-md-6">
-                                <input type="text" placeholder="First Name" class="form-control mb-3 p-2"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="text" placeholder="First Name" class="form-control mb-3 p-2 @error('first_name')is-invalid @enderror"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp" name="first_name" value="{{ old('first_name') }}">
+                                    @error('first_name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                             </div>
                             <div class="col-12 col-md-6">
-                                <input type="text" placeholder="Last Name" class="form-control mb-3 p-2"
-                                    id="exampleInputPassword1">
+                                <input type="text" placeholder="Last Name" class="form-control mb-3 p-2 @error('last_name')is-invalid @enderror "
+                                    id="exampleInputPassword1" name="last_name" value="{{ old('last_name') }}">
+
+                                    @error('last_name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+
                             </div>
                             <div class="col-12 col-md-6">
-                                <input type="email" placeholder="Email Address" class="form-control mb-3 p-2"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="email" placeholder="Email Address" class="form-control mb-3 p-2 @error('email')is-invalid @enderror"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="{{ old('email') }}">
+                                    @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                             </div>
                             <div class="col-12 col-md-6">
-                                <input type="number" placeholder="Phone Number" class="form-control mb-3 p-2"
-                                    id="exampleInputPassword1">
+                                <input type="number" placeholder="Phone Number" class="form-control mb-3 p-2 @error('phone_number')is-invalid @enderror"
+                                    id="exampleInputPassword1" name="phone_number" value="{{ old('phone_number') }}">
+                                    @error('phone_number')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                             </div>
                         </div>
-                        <textarea class="form-control mb-4" placeholder="Message..." id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control mb-4 @error('message')is-invalid @enderror" placeholder="Message..." id="exampleFormControlTextarea1" rows="3" name="message" >{{ old('message') }}</textarea>
+
+                        @error('message')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                         <div class="d-flex justify-content-center align-items-center">
                             <button type="submit" class="btn btn-submit py-2 px-4">SUBMIT</button>
                         </div>
@@ -44,9 +74,6 @@
 
                 </div>
             </div>
-        </div>
-        <div class="street-img">
-            <img src="{{ asset('images/img1.png') }}" class="img-fluid">
         </div>
     </div>
 @endsection

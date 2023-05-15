@@ -61,7 +61,7 @@
                                             href="{{ route('productDetails', ['id' => $product->id, 'slug' => Str::slug($product->product_name)]) }}">
                                             <div class="img-holder">
                                                 <img src="{{ $product->image }}"
-                                                    onerror="this.src'{{ asset('images/default.png') }}'" class="img-fluid">
+                                                    onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
                                             </div>
                                         </a>
                                         <div class="txt-holder">
@@ -95,7 +95,7 @@
                                                         class="fa fa-shopping-basket"></i>
 
                                                 </button>
-                                                <input type="hidden" name="" value="1" class="addOrRemove">
+                                                <input type="hidden" name="" value="1" class="addOrRemove{{ $product->id }}">
                                             </div>
                                         </div>
                                     </div>

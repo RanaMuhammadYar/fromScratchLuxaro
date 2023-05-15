@@ -127,26 +127,27 @@ class CartController extends Controller
         $goldevineorder->payment_status = 'Pending';
         $goldevineorder->payment_method = 'Cash On Delivery';
         $goldevineorder->save();
-        foreach ($request->benefit_id as $key => $cart_id) {
-            $goldevineOrderDenefit = new GoldevineOrderDenefit();
-            $goldevineOrderDenefit->goldevine_order_id = $goldevineorder->id;
-            $goldevineOrderDenefit->select_project_benefits_id = $request->select_project_benefits_id[$key];
-            $goldevineOrderDenefit->project_id = $request->project_id[$key];
-            $goldevineOrderDenefit->benefit_id = $request->benefit_id[$key];
-            $goldevineOrderDenefit->project_user_id = $request->project_user_id[$key];
-            $goldevineOrderDenefit->quantity = $request->quantity[$key];
-            $goldevineOrderDenefit->price = $request->quantity[$key] * $request->price[$key];
-            $goldevineOrderDenefit->save();
+        if(isset($request->benefit_id)){
+
+            foreach ($request->benefit_id as $key => $cart_id) {
+                $goldevineOrderDenefit = new GoldevineOrderDenefit();
+                $goldevineOrderDenefit->goldevine_order_id = $goldevineorder->id;
+                $goldevineOrderDenefit->select_project_benefits_id = $request->select_project_benefits_id[$key];
+                $goldevineOrderDenefit->project_id = $request->project_id[$key];
+                $goldevineOrderDenefit->benefit_id = $request->benefit_id[$key];
+                $goldevineOrderDenefit->project_user_id = $request->project_user_id[$key];
+                $goldevineOrderDenefit->quantity = $request->quantity[$key];
+                $goldevineOrderDenefit->price = $request->quantity[$key] * $request->price[$key];
+                $goldevineOrderDenefit->save();
+            }
         }
-
-        foreach ($request->select_project_benefits_id as $cart_id) {
-            $cart = SelectProjectBenefits::find($cart_id);
-            $cart->status = 'Order Placed';
-            $cart->save();
+        if(isset($request->select_project_benefits_id)){
+            foreach ($request->select_project_benefits_id as $cart_id) {
+                $cart = SelectProjectBenefits::find($cart_id);
+                $cart->status = 'Order Placed';
+                $cart->save();
+            }
         }
-
-        
-
         return redirect()->route('home')->with(['success' => 'Order Placed Successfully.']);
     }
 }

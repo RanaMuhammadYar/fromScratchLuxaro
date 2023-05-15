@@ -191,26 +191,25 @@
         $('.GMGSidebarbtn').addClass('show');
     });
 
-    function increment() {
-        var value = $('.addOrRemove').val();
+    function increment(id) {
+        var value = $('.addOrRemove'+id).val();
         value = isNaN(value) ? 0 : value;
         value++;
-        $('.addOrRemove').val(value);
+        $('.addOrRemove'+id).val(value);
     }
 
-    function decrement() {
-        var value = $('.addOrRemove').val();
+    function decrement(id) {
+        var value = $('.addOrRemove'+id).val();
         value = isNaN(value) ? 0 : value;
         value < 1 ? value = 1 : '';
         if (value > 1) {
             value--;
         }
-        $('.addOrRemove').val(value);
+        $('.addOrRemove'+id).val(value);
     }
 
     function addToCart(product_id, name, price) {
-        var quantity = $('.addOrRemove').val();
-
+        var quantity = $('.addOrRemove'+product_id).val();
         var total = price * quantity;
         $.ajax({
             type: "GET",
@@ -236,14 +235,16 @@
                         button: "Ok",
 
                     });
-                } else {
+                } else if (response.success == 'Product updated To Cart Successfully') {
+                    console.log(response);
                     swal({
                         title: "Success!",
                         text: response.success,
                         icon: "success",
                         button: "Ok",
                     });
-                    $('.catdata').append('<div class="row destroy' + response.id +
+                    $('.destroy' + response.id).html('');
+                    $('.destroy' + response.id).html('<div class="row destroy' + response.id +
                         ' py-1"> <div class="col-1 px-1"> <span class=""> <img src="' + response.product
                         .image +
                         '" height="50px" width="50px" alt=""> </span> </div><div class="col-4 px-1"> <span>' +
@@ -256,25 +257,39 @@
                         response.cart.quantity +
                         '</span> </div><div class="col-1 px-1"> <span>=</span> </div><div class="col-1 px-1"> <span class="">$' +
                         response.cart.price * response.cart.quantity + '</span> </div></div>');
-                    // $('.catdata').append(
-                    //     '<div class="row destroy' + response.id +
-                    //     '"><div class="col-1 px-1"><span class="mx-2"><img src="' +
-                    //     response.product.image+
-                    //     '" height="50px"width="50px" alt=""></span><div class="col-2 px-1">  <span>' +
-                    //     response.cart.name +
-                    //     '</span></div></div><div class="col-1 px-1"><span><i class="fa fa-times" aria-hidden="true" onclick="orderdestroy(' +
-                    //     response.id +
-                    //     ')"style="cursor: pointer;"></i></span></div><div class="col-3 px-1"><span>' +
-                    //     response.cart.quantity +
-                    //     '</span></div><div class="col-3 px-1"><span class="d-block">=$' + response.cart
-                    //     .price * response.cart.quantity + '</span></div></div>');
                     $('.totalprice').html('');
                     $('.totalprice').append(
                         '<div class="row px-1"> <div class="col-9"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $' +
                         response.total + '</span> </div></div>');
-                    // $('.totalprice').append(
-                    //     '<div class="row px-1"><div class="col-8"></div><div class="col-3"><span class="mx-1">Total=$' +
-                    //     response.total + '</span></div><div class="col-1"></div></div>');
+                    $('.CartCount').html('');
+                    $('.CartCount').append(response.count);
+                } else {
+                    console.log(response);
+                    swal({
+                        title: "Success!",
+                        text: response.success,
+                        icon: "success",
+                        button: "Ok",
+                    });
+                    $('.catdata').append('<div class="row destroy' + response.id +
+                        ' py-1"> <div class="col-1 px-1"> <span class=""> <img src="' + response
+                        .product
+                        .image +
+                        '" height="50px" width="50px" alt=""> </span> </div><div class="col-4 px-1"> <span>' +
+                        response.cart.name +
+                        '</span> </div><div class="col-1"> </div><div class="col-2 px-1"> <span>$' +
+                        response.product.product_price +
+                        '</span> </div><div class="col-1 px-1"> <span> <i class="fa fa-times"aria-hidden="true" onclick="orderdestroy(' +
+                        response.id +
+                        ')" style="cursor: pointer;"></i></span> </div><div class="col-1 px-1"> <span>' +
+                        response.cart.quantity +
+                        '</span> </div><div class="col-1 px-1"> <span>=</span> </div><div class="col-1 px-1"> <span class="">$' +
+                        response.cart.price * response.cart.quantity + '</span> </div></div>');
+
+                    $('.totalprice').html('');
+                    $('.totalprice').append(
+                        '<div class="row px-1"> <div class="col-9"></div><div class="col-1"> <span> Total </span> </div><div class="col-1"> <span>=</span> </div><div class="col-1"> <span class="mx-1"> $' +
+                        response.total + '</span> </div></div>');
                     $('.CartCount').html('');
                     $('.CartCount').append(response.count);
                 }
@@ -299,7 +314,7 @@
             },
             dataType: "json",
             success: function(response) {
-                $('.destroy' + destroy_id + '').html('');
+                $('.destroy' + destroy_id).html('');
                 $('.CartCount').html('');
                 $('.CartCount').append(response.count);
                 $('.totalprice').html('');

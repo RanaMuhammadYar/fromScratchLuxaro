@@ -26,7 +26,7 @@
                 <div class="col-12 col-md-4 gx-0 gx-md-5">
                     @include('frontend.include.sidebar')
                 </div>
-                <div class="col-12 col-md-8 gx-0 gx-md-5">
+                <div class="col-12 col-md-8 gx-0 gx-md-5 pt-3">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active me-3" id="pills-profile-tab" data-bs-toggle="pill"
@@ -206,6 +206,252 @@
                                             </div>
                                         </div>
                                         <div class="row gx-2 align-items-baseline">
+                                            <div class="col-12 col-md-8 mb-3">
+                                                <label
+                                                    class="uploadFile border rounded @error('charter_agreement') is-invalid @enderror">
+                                                    <i class="fa fa-cloud-upload upload-icon-account-1"
+                                                        aria-hidden="true"></i>
+                                                    <span class="filename">Upload charter agreement</span>
+                                                    <input type="file" class="inputfile form-control"
+                                                        name="charter_agreement[]" multiple>
+                                                    @error('charter_agreement')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </label>
+                                            </div>
+                                            <h5 class="mb-2">Specifications General</h5>
+                                            <div class="row">
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Model
+                                                            Series Name </label>
+                                                        <input type="text" name="model_series_name"
+                                                            class="form-control">
+                                                        @if ($errors->has('model_series_name'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('model_series_name') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Model
+                                                            Number </label>
+                                                        <input type="text" name="model_number" class="form-control">
+                                                        @if ($errors->has('model_number'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('model_number') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Primary
+                                                            Meterial</label>
+                                                        <input type="text" name="primary_meterial"
+                                                            class="form-control">
+                                                        @if ($errors->has('primary_meterial'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('primary_meterial') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Primary
+                                                            Meterial SubType</label>
+                                                        <input type="text" name="primary_meterial_subType"
+                                                            class="form-control">
+                                                        @if ($errors->has('primary_meterial_subType'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('primary_meterial_subType') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Delivery
+                                                            Condition </label>
+                                                        <input type="text" name="delivery_condition"
+                                                            class="form-control">
+                                                        @if ($errors->has('delivery_condition'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('delivery_condition') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Suitable
+                                                            For</label>
+                                                        <input type="text" name="suitable_for" class="form-control">
+                                                        @if ($errors->has('suitable_for'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('suitable_for') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1"
+                                                            class="form-label">Compatible Laptop Size</label>
+                                                        <input type="text" name="compatible_laptop_size"
+                                                            class="form-control">
+                                                        @if ($errors->has('compatible_laptop_size'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('compatible_laptop_size') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1"
+                                                            class="form-label">Foldable</label>
+                                                        <input type="text" name="foldable" class="form-control">
+                                                        @if ($errors->has('foldable'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('foldable') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1"
+                                                            class="form-label">Adjustable Height</label>
+                                                        <input type="text" name="adjustable_height"
+                                                            class="form-control" multiple>
+                                                        @if ($errors->has('adjustable_height'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('adjustable_height') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <h5 class="mb-3">Demensions</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1"
+                                                            class="form-label">Width</label>
+                                                        <input type="text" name="width" class="form-control">
+                                                        @if ($errors->has('width'))
+                                                            <span class="text-danger">{{ $errors->first('width') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1"
+                                                            class="form-label">Height</label>
+                                                        <input type="text" name="height" class="form-control">
+                                                        @if ($errors->has('height'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('height') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1"
+                                                            class="form-label">Depth</label>
+                                                        <input type="text" name="depth" class="form-control">
+                                                        @if ($errors->has('depth'))
+                                                            <span class="text-danger">{{ $errors->first('depth') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1"
+                                                            class="form-label">Weight</label>
+                                                        <input type="text" name="weight" class="form-control">
+                                                        @if ($errors->has('weight'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('weight') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">First
+                                                            Image </label>
+                                                        <input type="file" name="first_image" class="form-control">
+                                                        @if ($errors->has('first_image'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('first_image') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">first
+                                                            Description</label>
+                                                        <input type="text" name="first_description"
+                                                            class="form-control" multiple>
+                                                        @if ($errors->has('first_description'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('first_description') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Second
+                                                            Image </label>
+                                                        <input type="file" name="second_image" class="form-control"
+                                                            multiple>
+                                                        @if ($errors->has('second_image'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('second_image') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Second
+                                                            Description</label>
+                                                        <input type="text" name="second_description"
+                                                            class="form-control" multiple>
+                                                        @if ($errors->has('second_description'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('second_description') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Third
+                                                            image </label>
+                                                        <input type="file" name="third_image" class="form-control"
+                                                            multiple>
+                                                        @if ($errors->has('third_image'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('third_image') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-12">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Third
+                                                            description</label>
+                                                        <input type="text" name="third_description"
+                                                            class="form-control" multiple>
+                                                        @if ($errors->has('third_description'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('third_description') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-12 col-md-4">
                                                 <div class="input-type-check d-flex flex-wrap">
                                                     <div class="form-check">
@@ -223,21 +469,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-12 col-md-8 mb-3">
-                                                <label
-                                                    class="uploadFile border rounded @error('charter_agreement') is-invalid @enderror">
-                                                    <i class="fa fa-cloud-upload upload-icon-account-1"
-                                                        aria-hidden="true"></i>
-                                                    <span class="filename">Upload charter agreement</span>
-                                                    <input type="file" class="inputfile form-control"
-                                                        name="charter_agreement[]" multiple>
-                                                    @error('charter_agreement')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </label>
                                             </div>
 
                                         </div>

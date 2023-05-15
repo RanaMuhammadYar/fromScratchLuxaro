@@ -40,10 +40,12 @@
                             @foreach ($charters as $charter)
                             <div class="col-md-auto col-12">
                                 <div class="product-item">
-                                    <div class="img-holder">
-                                        <!-- <img src="{{ asset('frontend/images/product-img.png') }}" class="img-fluid"> -->
-                                        <img src="{{ $charter->thumbnail_img }}" onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
-                                    </div>
+                                    <a href="{{route('charter_detail',['id'=>$charter->id])}}">
+                                        <div class="img-holder">
+                                            <!-- <img src="{{ asset('frontend/images/product-img.png') }}" class="img-fluid"> -->
+                                            <img src="{{ $charter->thumbnail_img }}" onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid">
+                                        </div>
+                                    </a>
                                     <div class="txt-holder">
                                         <div class="d-flex justify-content-between mb-3">
                                             <div>
@@ -206,9 +208,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="street-img">
-        <img src="{{asset('frontend/images/img1.png')}}" class="img-fluid">
     </div>
 </div>
 @endsection

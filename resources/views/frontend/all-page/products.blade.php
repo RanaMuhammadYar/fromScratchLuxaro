@@ -33,6 +33,9 @@
             </div>
         </div>
     </form>
+@php
+    // session()->forget('temp_id');
+@endphp
     <div class="product-section mb-4 mt-5 pt-2">
         <div class="container">
             <div class="product-header d-flex flex-column flex-lg-row justify-content-between mb-4">
@@ -360,6 +363,7 @@
                                             onclick="addToCart('{{ $ownluxauro->id }}', '{{ $ownluxauro->product_name }}', '{{ $ownluxauro->product_price }}')"><i
                                                 class="fa fa-shopping-basket"></i>
                                         </button>
+                                        <input type="hidden" value="1" class="addOrRemove{{ $ownluxauro->id }}">
                                     </div>
                                 </div>
                             </div>
@@ -392,8 +396,8 @@
                             <div class="form-field d-flex flex-fill">
                                 <select class="flex-fill border-0 bg-transparent" onchange="appendCharters(this)">
                                     <option>OrderBy</option>
-                                    <option value="asc">price(max)</option>
-                                    <option value="desc">price(min)</option>
+                                    <option value="asc">price(min)</option>
+                                    <option value="desc">price(max)</option>
                                 </select>
                             </div>
                         </div>
@@ -523,7 +527,7 @@
                                             onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
                                                 class="fa fa-shopping-basket"></i>
                                         </button>
-                                        <input type="hidden" name="" value="1" class="addOrRemove">
+                                        <input type="hidden" name="" value="1" class="addOrRemove{{ $product->id  }}">
                                     </div>
                                 </div>
                             </div>
@@ -604,6 +608,7 @@
                                                         onclick="addToCart('{{ $luxauroLibrary->id }}', '{{ $luxauroLibrary->product_name }}', '{{ $luxauroLibrary->product_price }}')"><i
                                                             class="fa fa-shopping-basket"></i>
                                                     </button>
+                                                    <input type="hidden" name="" value="1" class="addOrRemove{{ $luxauroLibrary->id  }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -699,6 +704,7 @@
                                                         onclick="addToCart('{{ $luxauroLibrary->id }}', '{{ $luxauroLibrary->product_name }}', '{{ $luxauroLibrary->product_price }}')"><i
                                                             class="fa fa-shopping-basket"></i>
                                                     </button>
+                                                    <input type="hidden" name="" value="1" class="addOrRemove{{ $luxauroLibrary->id  }}">
                                                 </div>
                                             </div>
                                         </div>

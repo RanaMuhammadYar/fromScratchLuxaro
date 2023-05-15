@@ -1,23 +1,29 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\HomeSliderController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ProductCotroller;
 use App\Http\Controllers\Admin\WebsiteController;
+use App\Http\Controllers\GoldevineRuleController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductTypeCotroller;
+use App\Http\Controllers\GoldevineAboutUsController;
 use App\Http\Controllers\Admin\ProductMangeCotroller;
 use App\Http\Controllers\Admin\ShippingTypeCotroller;
+use App\Http\Controllers\LearnAboutTribridController;
 use App\Http\Controllers\Admin\DelivoryOptionCotroller;
+use App\Http\Controllers\LearnAboutGoldevineController;
 use App\Http\Controllers\Admin\BusinessSettingsController;
 use App\Http\Controllers\Admin\Goldevine\GoldevineMageController;
 use App\Http\Controllers\Admin\Goldevine\ProjectResourceController;
-use App\Http\Controllers\HomeSliderController;
 
 Route::get('admin-dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -132,3 +138,13 @@ Route::get('product-detail/{id}/{slug}', [ProductMangeCotroller::class, 'product
 
 Route::get('merchant/my-order', [OrderController::class, 'merchantMyOrders'])->name('merchant.myOrders');
 Route::get('merchant/my-order-invoice/{id}', [OrderController::class, 'merchantMyOrderInvoice'])->name('merchant.myOrder.invoice');
+
+Route::get('admin/contact-us', [UserController::class, 'adminContactUs'])->name('adminContactUs');
+
+Route::get('admin/goldeive/contact-us', [UserController::class, 'admingoldevineContactUs'])->name('admingoldevineContactUs');
+
+Route::resource('admin/about-us', AboutUsController::class);
+Route::resource('admin/goldevine-about-us', GoldevineAboutUsController::class);
+Route::resource('admin/learn-about-gold', LearnAboutGoldevineController::class);
+Route::resource('admin/learn-about-tribrid', LearnAboutTribridController::class);
+Route::resource('admin/goldevine-rule', GoldevineRuleController::class);

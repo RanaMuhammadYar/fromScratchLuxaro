@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\Models\AboutUs;
 use App\Models\Charter;
+use App\Models\ContactUs;
 use App\Models\Vendor\City;
 use App\Models\Vendor\State;
 use Illuminate\Http\Request;
@@ -15,12 +17,14 @@ use App\Models\MerchantApplication;
 use App\Models\Admin\DeliveryOption;
 use App\Models\Admin\Goldevine\Project;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Admin\Product as AdminProduct;
 
 class UserController extends Controller
-{
+{   
     public function index(Request $request)
     {
+        Session::put('url.intended', url()->current());
         $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->limit(15)->get();
         $ownluxauros = Product::with('user')->where('status', 'Active')->limit(15)->get();
         $nationalshops = MerchantApplication::where('status', 'Active')->limit(15)->get();
@@ -224,9 +228,43 @@ class UserController extends Controller
     {
         return view('frontend.contactUs.index');
     }
+
+    public function contactUsStore(Request $requst)
+    {
+        // return $requst->collect();
+        // return $requst->all();
+        $validation = Validator::make($requst->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'message' => 'required',
+        ]);
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation->errors());
+        } else {
+            $contact = new ContactUs();
+            $contact->first_name = $requst->first_name;
+            $contact->last_name = $requst->last_name;
+            $contact->email = $requst->email;
+            $contact->phone_number = $requst->phone_number;
+            $contact->message = $requst->message;
+            $contact->contact_us_type = $requst->contact_us_type;
+            $contact->save();
+            return redirect()->back()->with('success', 'Your message has been sent successfully');
+        }
+    }
+
+
+    public function adminContactUs()
+    {
+        $contacts = ContactUs::where('contact_us_type', 'Luxauro')->get();
+        return view('frontend.admin.contact_us.index', compact('contacts'));
+    }
     public function aboutUs()
     {
-        return view('frontend.about_us');
+        $about = AboutUs::where('about_us_type','Luxauro')->first();
+        return view('frontend.about_us', compact('about'));
     }
 
     public function login()
@@ -276,14 +314,14 @@ class UserController extends Controller
 
     public function forumFilter(Request $request)
     {
-        
+
         if ($request->searchFilter == null) {
             $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->paginate(20);
             $html = view('frontend.all-page.search.luxaurolibraryfilter', compact('luxauroLibrarys'))->render();
             return $html;
         } elseif ($request->searchFilter == 'min') {
             $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->orderBy('product_price', 'desc')->paginate(20);
-            $html = view('frontend.all-page.search.luxaurolibraryfilter',compact('luxauroLibrarys'))->render();
+            $html = view('frontend.all-page.search.luxaurolibraryfilter', compact('luxauroLibrarys'))->render();
             return $html;
         } else {
             $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->orderBy('product_price', 'asc')->paginate(20);
@@ -300,24 +338,22 @@ class UserController extends Controller
             return $html;
         } elseif ($request->searchFilter == 'min') {
             $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->orderBy('product_price', 'desc')->paginate(20);
-            $html = view('frontend.all-page.search.luxaurostreetfilter',compact('luxauroLibrarys'))->render();
+            $html = view('frontend.all-page.search.luxaurostreetfilter', compact('luxauroLibrarys'))->render();
             return $html;
         } else {
             $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->orderBy('product_price', 'asc')->paginate(20);
             $html = view('frontend.all-page.search.luxaurostreetfilter', compact('luxauroLibrarys'))->render();
             return $html;
         }
-
     }
 
     function nationalShop(Request $request)
     {
         // return $request->nationalShop;
-        if($request->nationalShop == 'AZ')
-        {
-            $nationalshops = MerchantApplication::orderBy('business_name','asc')->where('status', 'Active')->paginate(20);
-        }else{
-            $nationalshops = MerchantApplication::orderBy('business_name','desc')->where('status', 'Active')->paginate(20);
+        if ($request->nationalShop == 'AZ') {
+            $nationalshops = MerchantApplication::orderBy('business_name', 'asc')->where('status', 'Active')->paginate(20);
+        } else {
+            $nationalshops = MerchantApplication::orderBy('business_name', 'desc')->where('status', 'Active')->paginate(20);
         }
         $html = view('frontend.all-page.search.nationalshopfilter', compact('nationalshops'))->render();
         return $html;
@@ -333,12 +369,22 @@ class UserController extends Controller
             return $html;
         } elseif ($request->filter == 'max') {
             $productsassending = Product::where('status', 'Active')->orderBy('product_price', 'desc')->paginate(10);
-            $html = view('frontend.all-page.search.recommendedfilter',compact('productsassending'))->render();
+            $html = view('frontend.all-page.search.recommendedfilter', compact('productsassending'))->render();
             return $html;
         } else {
             $productsassending = Product::where('status', 'Active')->orderBy('product_price', 'asc')->paginate(10);
             $html = view('frontend.all-page.search.recommendedfilter', compact('productsassending'))->render();
             return $html;
         }
+    }
+
+    public function goldMetal()
+    {
+        return view('frontend.all-page.goldmetal.index');
+    }
+    public function admingoldevineContactUs()
+    {
+        $contacts = ContactUs::where('contact_us_type', 'Goldevine')->get();
+        return view('frontend.admin.contact_us.index', compact('contacts'));
     }
 }
