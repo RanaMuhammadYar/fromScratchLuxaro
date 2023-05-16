@@ -21,12 +21,12 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Admin\Product as AdminProduct;
 
 class UserController extends Controller
-{   
+{
     public function index(Request $request)
     {
         Session::put('url.intended', url()->current());
         $luxauroLibrarys = AdminProduct::with('user', 'categories')->where('status', 'Active')->limit(15)->get();
-        $ownluxauros = Product::with('user')->where('status', 'Active')->limit(15)->get();
+        $ownluxauros = Product::with('user',)->where('status', 'Active')->limit(15)->get();
         $nationalshops = MerchantApplication::where('status', 'Active')->limit(15)->get();
         $search = $request->input('search');
         $categories = Category::where('title', 'LIKE', '%' . $search . '%')->get();
@@ -51,13 +51,8 @@ class UserController extends Controller
         $cat_id = substr($request->price_filter, -1);
         $orderby = substr($request->price_filter, 0, -1);
         $categories = Category::where('id', $cat_id)->first();
-        // $products = AdminProduct::where('category_id',$cat_id)
-        //                           ->orderBy('product_price',$orderby)
-        //                           ->limit(6)
-        //                           ->get();
         $cat = Category::where('id', $cat_id)->first();
         $products = $cat->products()->where('status', 'Active')->orderBy('product_price', $orderby)->get();
-        // dd($products->get());
 
         $html = view('frontend.all-page.append_products', ['products' => $products])->render();
         return $html;
@@ -380,7 +375,7 @@ class UserController extends Controller
 
     public function goldMetal()
     {
-        return view('frontend.all-page.goldmetal.index');
+        return view('frontend.goldmetal.index');
     }
     public function admingoldevineContactUs()
     {

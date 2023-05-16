@@ -9,34 +9,54 @@
                 <div class="container">
                     <div class="slider-wrap ">
                         @foreach ($allprojects as $allproject)
-                                <a class="item" href="{{ route('projectDetail', ['id' => $allproject->id, 'slug' => $allproject->slug]) }}" style="color: white">
-                                    <img src="{{ $allproject->feature_image }}"
-                                        onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid"
-                                        alt="">
-                                    <div class="card-item-text">
-                                        <div class="txt-holder">
-                                            <strong
-                                                class="title text-center d-block mb-2">{{ Str::words($allproject->title, 7, '...') }}</strong>
-                                            <div class="progress rounded-0 mb-1">
-                                                <div class="progress-bar rounded-0" role="progressbar"
-                                                    style="width: {{ persentage($allproject->id) }}%" aria-valuenow="75"
-                                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <span>$ {{ number_format(totalamout($allproject->id)) }} raised</span>
-                                                <span>{{ persentage($allproject->id) }}%</span>
-                                            </div>
-                                            <p class="mb-2">{{ number_format(donation($allproject->id)) }} donations</p>
-                                            <p class="m-0">{!! Str::limit($allproject->short_description, 70, ' ...') !!}</p>
+                            <a class="item"
+                                href="{{ route('projectDetail', ['id' => $allproject->id, 'slug' => $allproject->slug]) }}"
+                                style="color: white">
+                                <img src="{{ $allproject->feature_image }}"
+                                    onerror="this.src='{{ asset('images/default.png') }}'" class="img-fluid" alt="">
+                                <div class="card-item-text">
+                                    <div class="txt-holder">
+                                        <strong
+                                            class="title text-center d-block mb-2">{{ Str::words($allproject->title, 7, '...') }}</strong>
+                                        <div class="progress rounded-0 mb-1">
+                                            <div class="progress-bar rounded-0" role="progressbar"
+                                                style="width: {{ persentage($allproject->id) }}%" aria-valuenow="75"
+                                                aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>$ {{ number_format(totalamout($allproject->id)) }} raised</span>
+                                            <span>{{ persentage($allproject->id) }}%</span>
+                                        </div>
+                                        <p class="mb-2">{{ number_format(donation($allproject->id)) }} donations</p>
+                                        <p class="m-0">{!! Str::limit($allproject->short_description, 70, ' ...') !!}</p>
                                     </div>
-                                </a>
-
+                                </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
+
+
             </div>
+            <form class="page-form mx-auto mb-5 mt-5 pt-5" action="{{ route('projectsearch') }}" method="post"
+                enctype="multipart/form-data">
+                @csrf
+                <div class="page-form-holder d-flex">
+                    <select class="form-control select-control border-0 rounded- flex-fill" name="searchFilter">
+                        <option value="">Order by </option>
+                        <option value="max">Funding Goal(max)</option>
+                        <option value="min">Funding Goal(min)</option>
+                    </select>
+                    <div class="form-field d-flex flex-fill">
+                        <input type="search" placeholder="Search..." class="border-0 bg-transparent flex-fill"
+                            name="search">
+                        <button type="submit" class="bg-transparent border-0 flex-fill"><i
+                                class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
         </div>
+
     </div>
 
     <div class="product-section project-page-mockup mb-4 pb-lg-3">

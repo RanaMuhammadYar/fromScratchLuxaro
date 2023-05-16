@@ -57,9 +57,20 @@ class ProjectManageController extends Controller
 
     public function projectsearch(Request $request)
     {
-        $search = $request->search;
-        $projectsearches = Project::where('title', 'LIKE', "%{$search}%")->where('status', 'Active')->paginate(15);
-        return view('frontend.all-page.search.goldevinesearch', compact('projectsearches'));
+        if ($request->searchFilter == 'min' ) {
+            $search = $request->search;
+            $projectsearches = Project::orderBy('project_funding_goal', 'asc')->where('title', 'LIKE', "%{$search}%")->where('status', 'Active')->paginate(15);
+            return view('frontend.all-page.search.goldevinesearch', compact('projectsearches'));
+        } elseif ($request->searchFilter == 'max' ) {
+            $search = $request->search;
+            $projectsearches = Project::orderBy('project_funding_goal', 'DESC')->where('title', 'LIKE', "%{$search}%")->where('status', 'Active')->paginate(15);
+            return view('frontend.all-page.search.goldevinesearch', compact('projectsearches'));
+        } else {
+
+            $search = $request->search;
+            $projectsearches = Project::where('title', 'LIKE', "%{$search}%")->where('status', 'Active')->paginate(15);
+            return view('frontend.all-page.search.goldevinesearch', compact('projectsearches'));
+        }
     }
 
     public function create()
@@ -581,9 +592,9 @@ class ProjectManageController extends Controller
                     });
             })
             ->count();
-            $cartorders = $cartorders + projectaddTocartCount();
+        $cartorders = $cartorders + projectaddTocartCount();
 
-        return response()->json(['success' => 'Added to cart successfully!', 'benefit' => $benefit, 'totalgoldenvine' => $totalgoldenvine, 'goldenvine' => $goldenvine , 'cartorders' => $cartorders]);
+        return response()->json(['success' => 'Added to cart successfully!', 'benefit' => $benefit, 'totalgoldenvine' => $totalgoldenvine, 'goldenvine' => $goldenvine, 'cartorders' => $cartorders]);
     }
 
     public function removeGoldevineproject(Request $request)
