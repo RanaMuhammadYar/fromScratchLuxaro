@@ -244,8 +244,7 @@
                                                     </div>
                                                     <div class="col-1 px-1">
                                                         <span> <i class="fa fa-times"aria-hidden="true"
-                                                                onclick="orderdestroy({{ $cartorder->id }})"
-                                                                style="cursor: pointer;"></i></span>
+                                                            ></i></span>
                                                     </div>
                                                     <div class="col-1 px-1">
                                                         <span>{{ $cartorder->quantity }}</span>

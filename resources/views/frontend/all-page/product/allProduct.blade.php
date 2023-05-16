@@ -7,7 +7,7 @@
         <div class="product-page-section">
             <div class="col-12 col-md-10 mx-auto">
                 <div class="product-section mb-5 pb-lg-3">
-                    <div class="container">
+                    <div class="container mt-3">
                         <div class="d-md-flex justify-content-between align-items-center flex-wrap mb-3">
                             <div class="mb-3 mb-md-0">
                                 <ol class="breadcrumb mb-1">
@@ -16,9 +16,22 @@
                                     </li>
                                 </ol>
                             </div>
+                            <div class="mb-3 mb-md-0">
+                                <h2 style="font-size: 20px;">Search results - {{ count($products) }} </h2>
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <label>Result per page</label>
+                                    <select id="pagination" onchange="changePagination(this.value)" class="form-select ms-3"
+                                        aria-label="Default select example" style="width: 75px;">
+                                        <option value="" selected>-Select-</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <form class="page-form mx-auto mb-5 mt-5 pt-5 py-5" action="{{ route('searchFilters') }}" method="post"
-                            enctype="multipart/form-data">
+                        <form class="page-form mx-auto mb-5 mt-5 pt-5 py-5" action="{{ route('searchFilters') }}"
+                            method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="page-form-holder d-flex">
                                 <select class="form-control select-control border-0 rounded- flex-fill" name="searchFilter">
@@ -78,7 +91,8 @@
                                                         onclick="addToCart('{{ $product->id }}', '{{ $product->product_name }}', '{{ $product->product_price }}')"><i
                                                             class="fa fa-shopping-basket"></i></button>
                                                 </div>
-                                                <input type="hidden" name="" value="1" class="addOrRemove{{ $product->id  }}">
+                                                <input type="hidden" name="" value="1"
+                                                    class="addOrRemove{{ $product->id }}">
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +177,8 @@
                                                             onclick="addToCart('{{ $productassending->id }}', '{{ $productassending->product_name }}', '{{ $productassending->product_price }}')"><i
                                                                 class="fa fa-shopping-basket"></i></button>
                                                     </div>
-                                                    <input type="hidden" name="" value="1" class="addOrRemove{{ $productassending->id  }}">
+                                                    <input type="hidden" name="" value="1"
+                                                        class="addOrRemove{{ $productassending->id }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -234,7 +249,8 @@
                                                         <button class="btn bg-dark text-white py-1 px-2"
                                                             onclick="addToCart('{{ $productdesending->id }}', '{{ $productdesending->product_name }}', '{{ $productdesending->product_price }}')"><i
                                                                 class="fa fa-shopping-basket"></i></button>
-                                                                <input type="hidden" name="" value="1" class="addOrRemove{{ $productdesending->id  }}">
+                                                        <input type="hidden" name="" value="1"
+                                                            class="addOrRemove{{ $productdesending->id }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,4 +274,11 @@
                 </div>
             </div>
         </div>
+
+        <!-- JavaScript to handle pagination change -->
+        <script>
+            function changePagination(value) {
+                window.location.href = "{{ route('allProducts') }}?perPage=" + value;
+            }
+        </script>
     @endsection

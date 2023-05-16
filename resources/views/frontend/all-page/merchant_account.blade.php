@@ -55,11 +55,11 @@
                                                 <input type="file"
                                                     class="inputfile form-control @error('business_logo') is-invalid @enderror"
                                                     name="business_logo">
-                                                    @error('business_logo')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                @error('business_logo')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </label>
                                         </div>
                                         <div class="mb-3">
@@ -69,11 +69,11 @@
                                                 <input type="file"
                                                     class="inputfile form-control @error('store_header') is-invalid @enderror"
                                                     name="store_header">
-                                                    @error('store_header')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                @error('store_header')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </label>
                                         </div>
                                         <div class="mb-3">
@@ -90,7 +90,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="">Country</label>
-                                            <select class="form-select @error('country_id') is-invalid @enderror " id="country_id" name="country_id">
+                                            <select class="form-select @error('country_id') is-invalid @enderror "
+                                                id="country_id" name="country_id">
                                                 <option value="" selected>-Select-</option>
                                                 @foreach ($countries as $country)
                                                     <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -105,7 +106,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="">State</label>
-                                            <select name="state_id" id="state-id" class="form-control @error('state_id') is-invalid @enderror">
+                                            <select name="state_id" id="state-id"
+                                                class="form-control @error('state_id') is-invalid @enderror">
                                                 <option value="">Select State</option>
                                             </select>
                                             @error('state_id')
@@ -116,7 +118,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="">State</label>
-                                            <select name="city_id" id="city-id" class="form-control @error('city_id') is-invalid @enderror">
+                                            <select name="city_id" id="city-id"
+                                                class="form-control @error('city_id') is-invalid @enderror">
                                                 <option value="">Select State</option>
                                             </select>
 
@@ -129,7 +132,9 @@
                                         </div>
                                         <div class=" mb-3 ">
                                             <label for="" class="form-label mb-0">Zip Code</label>
-                                            <input type="number" class="form-control @error('zip_code') is-invalid @enderror" name="zip_code" value="{{ old('zip_code') }}">
+                                            <input type="number"
+                                                class="form-control @error('zip_code') is-invalid @enderror"
+                                                name="zip_code" value="{{ old('zip_code') }}">
                                             <div class="pincel"></div>
                                             @error('zip_code')
                                                 <span class="invalid-feedback" role="alert">
@@ -140,7 +145,9 @@
 
                                         <div class="mb-3">
                                             <label for="" class="form-label mb-0">Business Email</label>
-                                            <input type="email" class="form-control @error('business_email') is-invalid @enderror" name="business_email" value="{{ old('business_email') }}">
+                                            <input type="email"
+                                                class="form-control @error('business_email') is-invalid @enderror"
+                                                name="business_email" value="{{ old('business_email') }}">
                                             <div class="pincel"></div>
 
                                             @error('business_email')
@@ -152,7 +159,9 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label mb-0">Business Website</label>
-                                            <input type="text" class="form-control @error('business_website') is-invalid @enderror" name="business_website" value="{{ old('business_website') }}">
+                                            <input type="text"
+                                                class="form-control @error('business_website') is-invalid @enderror"
+                                                name="business_website" value="{{ old('business_website') }}">
                                             <div class="pincel"></div>
 
                                             @error('business_website')
@@ -163,8 +172,10 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label mb-0">Business Phone</label>
-                                            <input type="number" class="form-control @error('phone_number') is-invalid @enderror" placeholder="xxx-xxx-xxxx"
-                                                name="phone_number" value="{{ old('phone_number') }}">
+                                            <input type="number"
+                                                class="form-control @error('phone_number') is-invalid @enderror"
+                                                placeholder="xxx-xxx-xxxx" name="phone_number"
+                                                value="{{ old('phone_number') }}">
                                             <div class="pincel"></div>
 
                                             @error('phone_number')
@@ -176,8 +187,9 @@
                                         <div class="row gx-3 mb-0 mb-md-3">
                                             <div class="col-12 col-md-6 mb-3 mb-md-0">
                                                 <label for="" class="form-label mb-0">EIN / TIN</label>
-                                                <input type="number" class="form-control @error('ein') is-invalid @enderror" placeholder="xx-xxxxxxx"
-                                                    name="ein" value="{{ old('ein') }}">
+                                                <input type="number"
+                                                    class="form-control @error('ein') is-invalid @enderror"
+                                                    placeholder="xx-xxxxxxx" name="ein" value="{{ old('ein') }}">
                                                 <div class="pincel"></div>
 
                                                 @error('ein')
@@ -188,7 +200,9 @@
                                             </div>
                                             <div class="col-12 col-md-6 mb-3 mb-md-0">
                                                 <label for="" class="form-label mb-0">Bank Account Number</label>
-                                                <input type="number" class="form-control @error('bank_account_number') is-invalid @enderror" name="bank_account_number" value="{{ old('bank_account_number') }}">
+                                                <input type="number"
+                                                    class="form-control @error('bank_account_number') is-invalid @enderror"
+                                                    name="bank_account_number" value="{{ old('bank_account_number') }}">
                                                 <div class="pincel"></div>
 
                                                 @error('bank_account_number')
@@ -198,9 +212,22 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                Check here to open a Luxauro Suite (Store) <button type="button"
+                                                    class="question-mark ms-1" data-toggle="tooltip" data-placement="top"
+                                                    title="Uncheking this will allow you to sell up 7 products without an application fee (see Terms & Condition).">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                </button>
+                                            </label>
+                                        </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label mb-0">Credit Card Number</label>
-                                            <input type="number" class="form-control @error('credit_card_number') is-invalid @enderror" name="credit_card_number" value="{{ old('credit_card_number') }}">
+                                            <input type="number"
+                                                class="form-control @error('credit_card_number') is-invalid @enderror"
+                                                name="credit_card_number" value="{{ old('credit_card_number') }}">
                                             <div class="pincel"></div>
 
                                             @error('credit_card_number')
@@ -219,7 +246,8 @@
 
                                     <div class="form-outline mb-3">
                                         <label for="" class="form-label mb-0">Description / About Us</label>
-                                        <textarea class="form-control @error('description_about_us') is-invalid @enderror" id="textAreaExample6" rows="2" name="description_about_us">{{ old('description_about_ud') }}</textarea>
+                                        <textarea class="form-control @error('description_about_us') is-invalid @enderror" id="textAreaExample6"
+                                            rows="2" name="description_about_us">{{ old('description_about_ud') }}</textarea>
 
                                         @error('description_about_us')
                                             <span class="invalid-feedback" role="alert">
@@ -229,7 +257,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="">What kind of business do you run?</label>
-                                        <select class="form-select @error('business_run') is-invalid @enderror" name="business_run">
+                                        <select class="form-select @error('business_run') is-invalid @enderror"
+                                            name="business_run">
                                             <option value="">-Select-</option>
                                             <option value="business 1">business 1</option>
                                             <option value="business 2">business 2</option>
@@ -246,9 +275,12 @@
                                         <div class="input-type-check d-flex flex-wrap">
                                             @foreach ($delivery_options as $delivery_option)
                                                 <div class="form-check">
-                                                    <input class="form-check-input @error('delivery_id') is-invalid @enderror " type="radio" name="delivery_id"
+                                                    <input
+                                                        class="form-check-input @error('delivery_id') is-invalid @enderror "
+                                                        type="radio" name="delivery_id"
                                                         value="{{ $delivery_option->id }}"
-                                                        id="delivery_{{ $delivery_option->id }}" {{$delivery_option->id == old('delivery_id') ? 'checked' : '' }}  >
+                                                        id="delivery_{{ $delivery_option->id }}"
+                                                        {{ $delivery_option->id == old('delivery_id') ? 'checked' : '' }}>
                                                     <label class="form-check-label"
                                                         for="delivery_{{ $delivery_option->id }}">
                                                         {{ $delivery_option->name }}
@@ -312,7 +344,8 @@
                                             <div class="form-outline mb-3">
                                                 <label for="" class="form-label mb-0">Introduce The Owners
                                                     <span class="optional">Optional</span></label>
-                                                <textarea class="form-control @error('owner_introduce') is-invalid @enderror" id="textAreaExample6" rows="2" name="owner_introduce">{{ old('owner_introduce') }}</textarea>
+                                                <textarea class="form-control @error('owner_introduce') is-invalid @enderror" id="textAreaExample6" rows="2"
+                                                    name="owner_introduce">{{ old('owner_introduce') }}</textarea>
 
                                                 @error('owner_introduce')
                                                     <span class="invalid-feedback" role="alert">

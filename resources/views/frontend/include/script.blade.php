@@ -226,7 +226,7 @@
             },
             dataType: "json",
             success: function(response) {
-                console.log(response);
+
                 if (response.success == 'Product Already Added To Cart.') {
                     swal({
                         title: "Error!",
@@ -236,7 +236,7 @@
 
                     });
                 } else if (response.success == 'Product updated To Cart Successfully') {
-                    console.log(response);
+
                     swal({
                         title: "Success!",
                         text: response.success,
@@ -251,9 +251,7 @@
                         response.cart.name +
                         '</span> </div><div class="col-1"> </div><div class="col-2 px-1"> <span>$' +
                         response.product.product_price +
-                        '</span> </div><div class="col-1 px-1"> <span> <i class="fa fa-times"aria-hidden="true" onclick="orderdestroy(' +
-                        response.id +
-                        ')" style="cursor: pointer;"></i></span> </div><div class="col-1 px-1"> <span>' +
+                        '</span> </div><div class="col-1 px-1"> <span> <i class="fa fa-times"aria-hidden="true"></i></span> </div><div class="col-1 px-1"> <span>' +
                         response.cart.quantity +
                         '</span> </div><div class="col-1 px-1"> <span>=</span> </div><div class="col-1 px-1"> <span class="">$' +
                         response.cart.price * response.cart.quantity + '</span> </div></div>');
@@ -279,9 +277,7 @@
                         response.cart.name +
                         '</span> </div><div class="col-1"> </div><div class="col-2 px-1"> <span>$' +
                         response.product.product_price +
-                        '</span> </div><div class="col-1 px-1"> <span> <i class="fa fa-times"aria-hidden="true" onclick="orderdestroy(' +
-                        response.id +
-                        ')" style="cursor: pointer;"></i></span> </div><div class="col-1 px-1"> <span>' +
+                        '</span> </div><div class="col-1 px-1"> <span> <i class="fa fa-times"aria-hidden="true" ></i></span> </div><div class="col-1 px-1"> <span>' +
                         response.cart.quantity +
                         '</span> </div><div class="col-1 px-1"> <span>=</span> </div><div class="col-1 px-1"> <span class="">$' +
                         response.cart.price * response.cart.quantity + '</span> </div></div>');

@@ -134,7 +134,7 @@ Route::get('goldevine/about-us',[PageController::class,'goldevineAboutUs'])->nam
 
 Route::get('goldevine/learn-about-goldevine',[PageController::class,'learnaboutgoldevine'])->name('learnaboutgoldevine');
 
-Route::get('goldevine-rule',[PageController::class,'goldevineRule'])->name('goldevineRule');    
+Route::get('goldevine-rule',[PageController::class,'goldevineRule'])->name('goldevineRule');
 
 Route::get('goldevine/learn-about-the-tribrid',[PageController::class,'tribridContactUs'])->name('goldevineContactUs');
 Route::get('national-shop',[UserController::class,'nationalShop'])->name('nationalShop');

@@ -29,13 +29,16 @@ class ProductController extends Controller
         return view('frontend.all-page.search.index', compact('products'));
     }
 
-    public function allProducts()
+    public function allProducts(Request $request)
     {
-        $products = Product::where('status', 'Active')->paginate(20);
+        $perPage = $request->input('perPage', 20);
+        $products = Product::where('status', 'Active')->paginate($perPage);
         $productsassending = Product::where('status', 'Active')->orderBy('id', 'asc')->paginate(20);
         $productsdesending = Product::where('status', 'Active')->orderBy('id', 'desc')->paginate(20);
         return view('frontend.all-page.product.allProduct', compact('products','productsassending', 'productsdesending'));
     }
+
+
     public function ownLuxaurofilter(Request $request)
     {
         if($request->ownluxauro == 'min'){
