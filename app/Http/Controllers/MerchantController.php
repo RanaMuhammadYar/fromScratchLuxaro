@@ -34,7 +34,7 @@ class MerchantController extends Controller
     }
     public function merchantAccountSecondStep(Request $request)
     {
-       
+
         $validation = Validator::make($request->all(), [
             'business_name' => 'required',
             'business_address' => 'required',
@@ -55,6 +55,8 @@ class MerchantController extends Controller
             'business_logo' => 'required',
             'store_header' => 'required',
             'team_memeber_image' => 'required',
+            'open_store'=> 'required',
+            'ssn_tin' => 'required',
 
         ]);
         if ($validation->fails()) {
@@ -90,6 +92,8 @@ class MerchantController extends Controller
                 $merchant->philosophy = $request->philosophy;
                 $merchant->status = 'Pending';
                 $merchant->user_id = auth()->user()->id;
+                $merchant->ssn_tin = $request->ssn_tin;
+                $merchant->open_store = $request->open_store;
 
                 if ($request->hasFile('business_logo')) {
                     $path = asset('storage/' . $request->file('business_logo')->store('public/merchant_logo'));
@@ -108,23 +112,6 @@ class MerchantController extends Controller
                     $path = asset('storage/' . $request->file('owner_image')->store('public/merchant_header'));
                     $merchant->owner_image = $path;
                 }
-                // if ($request->hasFile('owner_image')) {
-                //     foreach ($request->owner_image as $file) {
-                //         if ($file) {
-                //             $path = asset('storage/' . $file->store('public/merchant_owner'));
-                //             $owner_images[] = $path;
-                //         }
-                //     }
-                //     $merchant->owner_image = json_encode($owner_images);
-                // }
-                // if ($request->hasFile('team_memeber_image')) {
-                //     $team_memeber_image = [];
-                //     foreach ($request->team_memeber_image as $key => $value) {
-                //         $path = asset('storage/' . $request->file('team_memeber_image')[$key]->store('public/merchant_team_member'));
-                //         array_push($team_memeber_image, $path);
-                //     }
-                //     $merchant->team_memeber_image = json_encode($team_memeber_image);
-                // }
                 $merchant->save();
                 return redirect()->back()->with('success', 'Your application has been submitted successfully');
             }

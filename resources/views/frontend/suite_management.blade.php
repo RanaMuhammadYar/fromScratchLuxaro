@@ -49,7 +49,7 @@
                                                 <div class="circle-images">
                                                     <img class="profile-pic-logo img-fluid"
                                                         src="{{ $suite->business_logo }}" width="100px;"
-                                                        onerror="this.src='{{ asset('images/users.jfif') }}'"  >
+                                                        onerror="this.src='{{ asset('images/users.jfif') }}'">
 
                                                 </div>
                                                 <div class="p-image business-logo-icon">
@@ -109,7 +109,15 @@
 
                                         </div>
                                         <div class="business-address business-section mb-3">
-                                            <div class="d-inline-block mb-2" style="color: #6a6969;">EIN / TIN<div
+                                            <div class="d-inline-block mb-2" style="color: #6a6969;">SSN / TIN<div
+                                                    class="pincel ssn-tin"></div>
+                                            </div>
+                                            <input type="text" class="ms-2 text-ssn fw-bold d-block border-0"
+                                                name="ssn_tin" value="{{ $suite->ssn_tin }}" disabled>
+                                        </div>
+
+                                        <div class="business-address business-section mb-3">
+                                            <div class="d-inline-block mb-2" style="color: #6a6969;">EIN <div
                                                     class="pincel ein-tin"></div>
                                             </div>
                                             <input type="text" class="ms-2 text-ein fw-bold d-block border-0"
@@ -123,6 +131,22 @@
                                                 name="bank_account_number" value="{{ $suite->bank_account_number }}"
                                                 disabled>
                                         </div>
+
+
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox"
+                                                id="defaultCheck1" value="1" name="open_store" {{  $suite->open_store == 1 ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                Check here to open a Luxauro Suite (Store) <button type="button"
+                                                    class="question-mark ms-1" data-toggle="tooltip" data-placement="top"
+                                                    title="Uncheking this will allow you to sell up 7 products without an application fee (see Terms & Condition).">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                </button>
+                                            </label>
+                                        </div>
+
+
+
                                         <div class="business-address business-section mb-3">
                                             <div class="d-inline-block mb-2" style="color: #6a6969;">Credit Card Number
                                                 <div class="pincel credit-account"></div>
@@ -159,7 +183,13 @@
                                         </select>
                                     </div>
                                     <div class="input-groups mb-3">
-                                        <label>Where do you offer to deliver your product?</label>
+                                        <label>Where do you offer to deliver your product?
+                                            <button type="button" class="question-mark ms-1" data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="How far are You willing to ship your products">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                        </button>
+                                        </label>
                                         <div class="input-type-check d-flex flex-wrap">
                                             @foreach ($delivory_options as $delivory_option)
                                                 <div class="form-check">
@@ -518,6 +548,19 @@
                     $textEdit.prop('disabled', true);
                 }
             });
+
+            $('.ssn-tin').on('click', function() {
+                var $textEdit = $('.text-ssn');
+                if ($textEdit.prop('disabled')) {
+                    $textEdit.prop('disabled', false).focus();
+                    var val = $textEdit.val();
+                    $textEdit.val('').val(val);
+                } else {
+                    $textEdit.prop('disabled', true);
+                }
+            });
+
+
 
             $('.bank-account').on('click', function() {
                 var $textEdit = $('.text-bank-account');

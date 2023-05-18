@@ -186,7 +186,19 @@
                                         </div>
                                         <div class="row gx-3 mb-0 mb-md-3">
                                             <div class="col-12 col-md-6 mb-3 mb-md-0">
-                                                <label for="" class="form-label mb-0">EIN / TIN</label>
+                                                <label for="" class="form-label mb-0">SSN / TIN</label>
+                                                <input type="number"
+                                                    class="form-control @error('ssn_tin') is-invalid @enderror"
+                                                    placeholder="xx-xxxxxxx" name="ssn_tin" value="{{ old('ssn_tin') }}">
+                                                <div class="pincel"></div>
+                                                @error('ssn_tin')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-12 col-md-6 mb-3 mb-md-0">
+                                                <label for="" class="form-label mb-0">EIN</label>
                                                 <input type="number"
                                                     class="form-control @error('ein') is-invalid @enderror"
                                                     placeholder="xx-xxxxxxx" name="ein" value="{{ old('ein') }}">
@@ -213,8 +225,8 @@
                                             </div>
                                         </div>
                                         <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="defaultCheck1">
+                                            <input class="form-check-input checkIfCheck" type="checkbox"
+                                                id="defaultCheck1" value="1" name="open_store">
                                             <label class="form-check-label" for="defaultCheck1">
                                                 Check here to open a Luxauro Suite (Store) <button type="button"
                                                     class="question-mark ms-1" data-toggle="tooltip" data-placement="top"
@@ -237,8 +249,8 @@
                                             @enderror
                                         </div>
                                         <a href="" class="btn btn-primary text-uppercase text-white">Cancel</a>
-                                        <button type="button" class="btn btn-primary text-uppercase"
-                                            onclick="nextbtn()">Next</button>
+                                        <button type="button" class="btn btn-primary text-uppercase checkIfCheckOrNot"
+                                            onclick="nextbtn()" disabled>Next</button>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel"
@@ -271,7 +283,13 @@
                                         @enderror
                                     </div>
                                     <div class="input-groups mb-3">
-                                        <label>Where do you offer to deliver your product?</label>
+                                        <label>Where do you offer to deliver your product?
+                                            <button type="button" class="question-mark ms-1" data-toggle="tooltip"
+                                                data-placement="top"
+                                                title="How far are You willing to ship your products">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                            </button>
+                                        </label>
                                         <div class="input-type-check d-flex flex-wrap">
                                             @foreach ($delivery_options as $delivery_option)
                                                 <div class="form-check">
@@ -578,5 +596,16 @@
         function removeTeamMemeber(id) {
             $('.addteam' + id).remove();
         }
+
+        // checked radio button
+        $(document).ready(function() {
+            $('input[type="checkbox"]').click(function() {
+                if ($(this).is(":checked")) {
+                    $('.checkIfCheckOrNot').prop('disabled', false);
+                }else{
+                    $('.checkIfCheckOrNot').prop('disabled', true);
+                }
+            });
+        });
     </script>
 @endsection
