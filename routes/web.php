@@ -25,7 +25,7 @@ use App\Http\Controllers\vendor\Chatify\MessagesController;
 */
 
 
-// Hello brother kesay hin ap
+
 
 
 // Route::get('/', function () {
@@ -33,14 +33,6 @@ use App\Http\Controllers\vendor\Chatify\MessagesController;
 // });
 
 
-// app()->bind('test', function () {
-//     return "";
-// });
-
-
-// Route::get('/provide', function () {
-//     dd(app());
-// });
 
 Route::get('storage-link', function () {
     Artisan::call('config:cache');
